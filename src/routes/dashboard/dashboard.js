@@ -3,15 +3,16 @@ import './dashboard.css';
 
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import Menu from "../../components/menu/menu";
+import Main from "../../components/main/main";
 
 
 class Dashboard extends Component {
+
   render() {
     return (
       <div>
         <Header/>
-        <Menu/>
+        <Main/>
         <Footer/>
         <h1>Dashboard</h1>
        

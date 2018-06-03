@@ -5,19 +5,18 @@ import './menu.css'
 export default class Menu extends Component {
     render() {
         return (
-            <div>
-                <h2>Menu/Lista podstron do obrobienia</h2>
+            <div className="site-menu">
                 <ul>
-                    <li><Link to="/search">Szukaj</Link></li>
-                    <li><Link to="/dashboard">Dashborad</Link></li>
-                    <li><Link to="/yourPlaylists">Twoje playlisty</Link></li>
-                    <li><Link to="/signIn">Zaloguj</Link></li>
-                    <li><Link to="/signUp">Zarejestruj</Link></li>
-                    <li><Link to="/results">Wyniki wyszukiwania</Link></li>
-                    <li><Link to="/playlist">Playlsita -nazwa</Link></li>
-                    <li><Link to="/chat">Chat</Link></li>
-                    <li><Link to="/player">Player</Link></li>
-                    <li><Link to="/notFound">404</Link></li>
+                    <li><Link className="menu-link" to="/search">Szukaj</Link></li>
+                    <li><Link className="menu-link" to="/dashboard">Dashborad</Link></li>
+                    <li><Link className="menu-link" to="/yourPlaylists">Twoje playlisty</Link></li>
+                    <li><Link className="menu-link" to="/signIn">Zaloguj</Link></li>
+                    <li><Link className="menu-link" to="/signUp">Zarejestruj</Link></li>
+                    <li><Link className="menu-link" to="/results">Wyniki wyszukiwania</Link></li>
+                    <li><Link className="menu-link" to="/playlist">Playlsita -nazwa</Link></li>
+                    <li><Link className="menu-link" to="/chat">Chat</Link></li>
+                    <li><Link className="menu-link" to="/player">Player</Link></li>
+                    <li><Link className="menu-link" to="/notFound">404</Link></li>
                 </ul>
             </div>
         );

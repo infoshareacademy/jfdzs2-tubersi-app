@@ -3,15 +3,16 @@ import './App.css';
 
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
-import Menu from "./components/menu/menu";
+import Main from "./components/main/main";
 
 
 class App extends Component {
+
   render() {
     return (
       <div>
         <Header/>
-        <Menu/>
+        <Main/>
         <Footer/> 
       </div>
     );

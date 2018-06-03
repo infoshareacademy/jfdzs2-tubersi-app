@@ -1,0 +1,11 @@
+.main-background{
+  
+    background-image: url("../../images/background.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-image: no-repeat;
+    height: 200vh;
+    background-size: cover;
+
+}
+ 

@@ -3,7 +3,7 @@ import './yourPlaylists.css';
 
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import Menu from "../../components/menu/menu";
+import Main from "../../components/main/main";
 
 
 class YourPlaylists extends Component {
@@ -11,7 +11,7 @@ class YourPlaylists extends Component {
     return (
       <div>
         <Header/>
-        <Menu/>
+        <Main/>
         <Footer/>
         <h1>Lista playlist</h1>
        

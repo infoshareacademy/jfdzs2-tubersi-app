@@ -3,16 +3,5 @@ html,body {
   font-family:'Source Sans Pro', sans-serif;
   margin:0;
   padding:0;
-  
-
-}
-
-
-#root{
-
-  background-image: url("./images/background.jpg");
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
-  height: 100vh; 
+  height: 100%;
 }

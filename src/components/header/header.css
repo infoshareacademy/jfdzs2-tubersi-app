@@ -1,0 +1,68 @@
+.header{
+    height: 100px;
+    background: #2D2E32;
+    display: flex; 
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.navbar-text{
+    font-size: 1.6em;
+    font-weight: bold;
+    text-decoration: none;
+    color: whitesmoke;
+    /* text-transform: uppercase; */
+}
+
+.hamburger{
+    margin-left: 10px;
+    width: 48px;
+    height: 35px;
+    border: 0;
+    border-top: 5px solid white;
+    background: transparent;
+    position: relative;
+    transition: 0.3s transform linear;
+}
+
+.hamburger::before, .hamburger::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-top: 5px solid white;
+    transform: translateY(10px);
+   
+}
+
+.hamburger::after{
+    transform: translateY(25px);
+    transition: 0.3s transform linear;
+}
+
+.hamburger:focus{
+    transform: rotate(45deg) translateY(5px);
+    border: none;
+}
+
+.hamburger:focus::after{
+    transform: rotate(-90deg) translateX(-10px);
+}
+
+
+.brand-logo{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+}
+
+.logo-img {
+    margin-right: 10px;
+    width: 70px;
+}
+

@@ -4,7 +4,7 @@ import './signUp.css';
 
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import Menu from "../../components/menu/menu";
+import Main from "../../components/main/main";
 
 
 class SignUp extends Component {
@@ -12,7 +12,7 @@ class SignUp extends Component {
     return (
       <div>
         <Header/>
-        <Menu/>
+        <Main/>
         <Footer/>
         <h1>SignUp</h1>
        
