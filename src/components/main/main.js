@@ -6,8 +6,9 @@ import Menu from "../menu/menu";
 export default class Main extends Component {
     render() {
         return (
-            <div className="main-background">
+            <div>
                 <Menu/>
+                
             </div>
         );
     }
