@@ -1,24 +1,29 @@
-import React, { Component } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import './search.css';
 
 
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import Main from "../../components/main/main";
+import Menu from "../../components/menu/menu";
 
 
-class Search extends Component {
+class Search extends PureComponent {
   render() {
     return (
-      <div>
+      <Fragment>
         <Header/>
-        <Main/>
+          <Fragment>
+              <Menu/>
+              <main>
+                <h1>Szukaj</h1>
+              </main>
+              
+          </Fragment>
         <Footer/>
-        <h1>Search</h1>
-       
-      </div>
+      </Fragment>
     );
   }
 }
+
 
 export default Search;

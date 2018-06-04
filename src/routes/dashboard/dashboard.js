@@ -1,24 +1,28 @@
-import React, { Component } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import './dashboard.css';
 
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import Main from "../../components/main/main";
+import Menu from "../../components/menu/menu";
 
 
-class Dashboard extends Component {
-
+class Dashboard extends PureComponent {
   render() {
     return (
-      <div>
+      <Fragment>
         <Header/>
-        <Main/>
+          <Fragment>
+              <Menu/>
+              <main>
+                <h1>Wykresy</h1>
+              </main>
+              
+          </Fragment>
         <Footer/>
-        <h1>Dashboard</h1>
-       
-      </div>
+      </Fragment>
     );
   }
 }
+
 
 export default Dashboard;

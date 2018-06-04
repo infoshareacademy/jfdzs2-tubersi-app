@@ -1,22 +1,26 @@
-import React, { Component } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import './playlist.css';
 
 
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import Main from "../../components/main/main";
+import Menu from "../../components/menu/menu";
 
 
-class Playlist extends Component {
+class Playlist extends PureComponent {
   render() {
     return (
-      <div>
+      <Fragment>
         <Header/>
-        <Main/>
+          <Fragment>
+              <Menu/>
+              <main>
+                <h1>Playlista pojedyncza</h1>
+              </main>
+              
+          </Fragment>
         <Footer/>
-        <h1>Playlist</h1>
-       
-      </div>
+      </Fragment>
     );
   }
 }

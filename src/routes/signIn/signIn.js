@@ -1,24 +1,29 @@
-import React, { Component } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import './signIn.css';
 
 
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import Main from "../../components/main/main";
+import Menu from "../../components/menu/menu";
 
 
-class SignIn extends Component {
+class SignIn extends PureComponent {
   render() {
     return (
-      <div>
+      <Fragment>
         <Header/>
-        <Main/>
+          <Fragment>
+              <Menu/>
+              <main>
+                <h1>Chat</h1>
+              </main>
+              
+          </Fragment>
         <Footer/>
-        <h1>SignIn</h1>
-       
-      </div>
+      </Fragment>
     );
   }
 }
+
 
 export default SignIn;

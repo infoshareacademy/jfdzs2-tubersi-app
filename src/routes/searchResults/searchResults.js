@@ -1,21 +1,26 @@
-import React, { Component } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import './searchResults.css';
 
 
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import Main from "../../components/main/main";
+import Menu from "../../components/menu/menu";
 
-class SearchResults extends Component {
+
+class SearchResults extends PureComponent {
   render() {
     return (
-      <div>
+      <Fragment>
         <Header/>
-        <Main/>
+          <Fragment>
+              <Menu/>
+              <main>
+                <h1>Wyniki wyszukiwania...</h1>
+              </main>
+              
+          </Fragment>
         <Footer/>
-        <h1>Search Results</h1>
-       
-      </div>
+      </Fragment>
     );
   }
 }

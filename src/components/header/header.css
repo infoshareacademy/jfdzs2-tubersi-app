@@ -4,9 +4,7 @@
     display: flex; 
     justify-content: space-around;
     align-items: center;
-
 }
-
 .navbar-text{
     font-size: 1.6em;
     font-weight: bold;
@@ -15,7 +13,7 @@
     /* text-transform: uppercase; */
 }
 
-.hamburger{
+.btn-toggle{
     margin-left: 10px;
     width: 48px;
     height: 35px;
@@ -26,7 +24,7 @@
     transition: 0.3s transform linear;
 }
 
-.hamburger::before, .hamburger::after {
+.btn-toggle::before, .btn-toggle::after {
     position: absolute;
     content: '';
     top: 0;
@@ -37,28 +35,25 @@
    
 }
 
-.hamburger::after{
+.btn-toggle::after{
     transform: translateY(25px);
     transition: 0.3s transform linear;
 }
 
-.hamburger:focus{
+.btn-toggle:focus{
     transform: rotate(45deg) translateY(5px);
     border: none;
 }
 
-.hamburger:focus::after{
+.btn-toggle:focus::after{
     transform: rotate(-90deg) translateX(-10px);
 }
 
-
 .brand-logo{
-   
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-
 }
 
 .logo-img {

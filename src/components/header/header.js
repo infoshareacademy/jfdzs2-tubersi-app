@@ -12,7 +12,7 @@ export default class Header extends Component {
         return (
             <div className="header">
 
-                <button className="hamburger"></button>
+                <button className="btn-toggle"></button>
 
                 <Link className="brand-logo" to="/">
                     <img src={Logo} alt="logo" className="logo-img"/>

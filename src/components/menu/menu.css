@@ -1,8 +1,8 @@
 .site-menu{
+    float: left;
     display: flex;
     box-sizing: border-box;
-    left: 0px;
-    width: 300px;
+    width: 20%;
     height: 200vh;
     background: #2D2E32;
 }
@@ -45,11 +45,14 @@
     color: #f5f5f5;
 }
 
-.site-menu li:hover{
+.site-menu li:hover {
     opacity: 0.9;
     background: #f5f5f5;
+  
 }
 
-.menu-link:hover{
+.site-menu li:hover .menu-link {
+    opacity: 0.9;
+    background: #f5f5f5;
     color: #2D2E32;
-} 
+}
