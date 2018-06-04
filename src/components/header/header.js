@@ -20,13 +20,10 @@ export default class Header extends Component {
                     </p>
                 </Link>
 
-                <span className="navbar-text">Nazwa podstrony</span>
-
-                <span>
-                    <Link className="navbar-text" to="/signIn">Zaloguj | </Link>
-                    
-                    <Link className="navbar-text" to="/">Wyloguj</Link>
-              </span>
+                <span> 
+                    <Link className="navbar-text" to="/">Zaloguj</Link>
+                   
+                 </span>
                 
             </div>
         );

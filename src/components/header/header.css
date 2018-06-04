@@ -2,10 +2,12 @@
     height: 100px;
     background: #2D2E32;
     display: flex; 
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+   
 }
 .navbar-text{
+    margin-right: 10px;
     font-size: 1.6em;
     font-weight: bold;
     text-decoration: none;
@@ -40,12 +42,12 @@
     transition: 0.3s transform linear;
 }
 
-.btn-toggle:focus{
+.btn-toggle:hover{
     transform: rotate(45deg) translateY(5px);
     border: none;
 }
 
-.btn-toggle:focus::after{
+.btn-toggle:hover::after{
     transform: rotate(-90deg) translateX(-10px);
 }
 
@@ -60,4 +62,5 @@
     margin-right: 10px;
     width: 70px;
 }
+
 
