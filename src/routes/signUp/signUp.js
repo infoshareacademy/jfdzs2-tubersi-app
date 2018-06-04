@@ -1,10 +1,11 @@
 import React, { PureComponent, Fragment} from 'react';
 import './signUp.css';
+import '../../main.css'
 
 
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import Menu from "../../components/menu/menu";
+// import Menu from "../../components/menu/menu";
 
 
 class SignUp extends PureComponent {
@@ -13,9 +14,15 @@ class SignUp extends PureComponent {
       <Fragment>
         <Header/>
           <Fragment>
-              <Menu/>
+             
               <main>
-                <h1>Chat</h1>
+                <h1 className="page-title">Witaj Tubersie!</h1>
+                
+                <div className="box-sign-up">
+                            dssdso
+                </div>
+
+                
               </main>
               
           </Fragment>
