@@ -1,18 +1,17 @@
 
-.page-title{
+.page-title, h2{
     margin-right: 10px;
     font-size: 3em;
-    font-weight: bold;
+
     text-decoration: none;
     color: whitesmoke;
     text-align: center;
 
 }
 
-
 .box-sign-up{
-    width: 40%;
-    height: 500px;
+    width: 35%;
+    height: 600px;
     margin: auto;
     margin-bottom: 20px;
     background: #2D2E32;
@@ -27,4 +26,67 @@
     box-shadow: 14px -5px 5px 0px rgba(0,0,0,0.75);
     opacity: 0.9;
     border-radius: 10px;
+
+    text-align: center;
+    vertical-align: middle;
+
+}
+
+input{
+    align-content: center;
+    /* width: 330px; */
+    width: 80%;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.input-submit{
+    /* width: 370px; */
+    width: 86%;
+    background:whitesmoke;
+    
+}
+
+input.input-submit{
+    color: #2D2E32;
+    font-size: 1.4em;
+    font-weight: solid;
+}
+
+button{
+    color: #2D2E32;
+    font-size: 1.4em;
+    font-weight: solid;
+    width: 86%;
+    align-content: center;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .box-sign-up{
+        width: 90%;
+        height: 600px;
+    }
+}
+
+
+@media only screen and (min-width: 600px) and (max-width: 800px){
+    .box-sign-up{
+        width: 60%;
+        height: 600px;
+    }
+}
+
+@media only screen and (min-width: 800px){
+    .box-sign-up{
+        width: 50%;
+        height: 600px;
+    }
 }
