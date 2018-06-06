@@ -1,10 +1,10 @@
 import React, { PureComponent, Fragment } from 'react';
 import './signIn.css';
+import '../signUp/signUp.css';
 
 
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import Menu from "../../components/menu/menu";
 
 
 class SignIn extends PureComponent {
@@ -13,9 +13,18 @@ class SignIn extends PureComponent {
       <Fragment>
         <Header/>
           <Fragment>
-              <Menu/>
+             
               <main>
-                <h1>Chat</h1>
+                <h1 className="page-title">Witaj Tubersie!</h1>
+                
+                <div className="box-sign-in animated zoomIn">
+                  <form action="/dashboard">
+                      <h2>Zaloguj się</h2>
+                      <input type="text" name="Name" placeholder="Podaj login" required />
+                      <input type="password" name="password" placeholder="Podaj hasło"  required />
+                      <input className="input-submit" type="submit" value="Zaloguj"/> 
+                  </form> 
+                </div>
               </main>
               
           </Fragment>

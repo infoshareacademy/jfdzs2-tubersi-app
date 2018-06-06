@@ -1,11 +1,11 @@
 import React, { PureComponent, Fragment} from 'react';
+import { Link } from 'react-router-dom';
 import './signUp.css';
 import '../../main.css'
 
-
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-// import Menu from "../../components/menu/menu";
+
 
 
 class SignUp extends PureComponent {
@@ -16,7 +16,7 @@ class SignUp extends PureComponent {
           <Fragment>
              
               <main>
-                <h1 className="page-title">Witaj Tubersie</h1>
+                <h1 className="page-title">Witaj Tubersie !</h1>
                 
                 <div className="box-sign-up animated zoomIn">
                   <form action="/dashboard">
@@ -25,9 +25,10 @@ class SignUp extends PureComponent {
                       <input type="email" name="email" placeholder="Adres mailowy" required />
                       <input type="password" name="password" placeholder="Hasło"  required />
                       <input className="input-submit" type="submit" value="Zarejestruj się"/> 
+                 
+                      <Link to='/signIn'><button className="">Mam już konto</button></Link>
                   </form> 
 
-                  <button className="">Zaloguj się</button>
                 </div>
               </main>
               
