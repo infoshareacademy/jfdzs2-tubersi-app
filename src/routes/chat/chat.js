@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import './chat.css';
 
 
@@ -10,17 +10,20 @@ import Menu from "../../components/menu/menu";
 class Chat extends PureComponent {
   render() {
     return (
-      <Fragment>
+      <div>
         <Header/>
-          <Fragment>
+          <div className="container-fluid">
+            <div className="row">
               <Menu/>
-              <div className="main">
-                <h1>Chdsfsdfdsdat</h1>
+            
+              <div className="col-md-9">
+              Obrabiany komponent
               </div>
-              
-          </Fragment>
-        <Footer/>
-      </Fragment>
+                  
+              </div>
+          </div>
+        <Footer/> 
+      </div>
     );
   }
 }

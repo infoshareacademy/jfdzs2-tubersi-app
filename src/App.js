@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import './App.css';
 
 import Footer from "./components/footer/footer";
@@ -12,7 +12,16 @@ class App extends Component {
     return (
       <div>
         <Header/>
-        <Menu/>
+          <div className="container-fluid">
+            <div className="row">
+              <Menu/>
+            
+              <div className="col-md-9">
+              Obrabiany komponent
+              </div>
+                  
+              </div>
+          </div>
         <Footer/> 
       </div>
     );

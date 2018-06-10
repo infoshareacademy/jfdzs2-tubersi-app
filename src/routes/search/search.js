@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent} from 'react';
 import './search.css';
 
 
@@ -10,17 +10,20 @@ import Menu from "../../components/menu/menu";
 class Search extends PureComponent {
   render() {
     return (
-      <Fragment>
+      <div>
         <Header/>
-          <Fragment>
+          <div className="container-fluid">
+            <div className="row">
               <Menu/>
-              <main>
-                <h1>Szukaj</h1>
-              </main>
-              
-          </Fragment>
-        <Footer/>
-      </Fragment>
+            
+              <div className="col-md-9">
+              Obrabiany komponent
+              </div>
+                  
+              </div>
+          </div>
+        <Footer/> 
+      </div>
     );
   }
 }

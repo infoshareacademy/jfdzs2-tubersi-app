@@ -1,54 +1,12 @@
 .header{
-    height: 100px;
+    height: 70px;
     background: #2D2E32;
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
-   
 }
+
 .navbar-text{
-    margin-right: 10px;
     font-size: 1.6em;
-    font-weight: bold;
-    text-decoration: none;
+    font-weight: bold;  
     color: whitesmoke;
-    /* text-transform: uppercase; */
-}
-
-.btn-toggle{
-    margin-left: 10px;
-    width: 48px;
-    height: 35px;
-    border: 0;
-    border-top: 5px solid white;
-    background: transparent;
-    position: relative;
-    transition: 0.3s transform linear;
-}
-
-.btn-toggle::before, .btn-toggle::after {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 0;
-    width: 100%;
-    border-top: 5px solid white;
-    transform: translateY(10px);
-   
-}
-
-.btn-toggle::after{
-    transform: translateY(25px);
-    transition: 0.3s transform linear;
-}
-
-.btn-toggle:hover{
-    transform: rotate(45deg) translateY(5px);
-    border: none;
-}
-
-.btn-toggle:hover::after{
-    transform: rotate(-90deg) translateX(-10px);
 }
 
 .brand-logo{
@@ -59,8 +17,9 @@
 }
 
 .logo-img {
-    margin-right: 10px;
+    margin-right: 5px;
     width: 70px;
+
 }
 
 
