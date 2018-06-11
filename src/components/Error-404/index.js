@@ -21,6 +21,26 @@ export default class Error404 extends Component {
                         />
                         <button className="error-button-search col-xs-12 col-sm-2">Szukaj</button>
                     </div>
+                    <div className="error-help col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                        <p className="error-suggestion col-xs-3">
+                            Kontakt
+                        </p>
+                        <span className="error-suggestion-space col-xs-1">
+                            --
+                        </span>
+                        <p className="error-suggestion col-xs-3">
+                            Tubersi Status
+                        </p>
+                        <span className="error-suggestion-space col-xs-1">
+                            --
+                        </span>
+                        <p className="error-suggestion col-xs-3">
+                            @tubersi
+                        </p>
+                    </div>
+                    <div className="error-icon">
+                        <img src={require('../../Images/Youtube-icon-64-64.png')}/>
+                    </div>
                 </div>
     }
 }

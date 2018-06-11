@@ -44,6 +44,29 @@
     margin-top: 10px;
   }
 
+  .error-help {
+    margin-top: 50px;
+  }
+  
+  .error-suggestion {
+    color: white;
+    text-align: center;
+  }
+
+  .error-suggestion-space {
+    color: gray;
+    letter-spacing: -1px;
+  }
+
+  .error-icon {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    float: left;
+    text-align: center;
+    margin-top: 50px;
+  }
+
   @media only screen and (min-width: 768px) {
     .error-input-search {
       height: 35px;
