@@ -4,9 +4,20 @@ import { Link } from 'react-router-dom';
 import './header.css'
 import Logo from '../../images/logo_wektor.svg';
 
+import fire from '../../config/fire';
+
 
 
 export default class Header extends Component {
+    constructor(props){
+        super(props)
+        this.signout = this.signout.bind(this);
+    }
+
+    signout(){
+        fire.auth().signOut()
+    }
+
     
     render() {
         return (
@@ -22,7 +33,9 @@ export default class Header extends Component {
                             </p>
                          </Link></div>
                     <div class="col-xs-4 col-md-2">
-                        <Link className="navbar-text" to="/">Zaloguj/Wyloguj</Link>
+                    
+                        <p className="navbar-text" onClick={this.signout}>Wyloguj</p>
+                    
                     </div>
                 
                 </div>
