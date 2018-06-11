@@ -3,7 +3,6 @@
   position: relative;
     width: 100%;
     overflow: hidden;
-    text-align: center;
     background-color: rgb(45, 46, 50);
     height: 100vh;
 }
@@ -14,13 +13,46 @@
     margin: auto;
     perspective: 25px;
     height: 250px;
+    text-align: center;
 
 }
   .error-message {
     position: relative;
   }
 
+  .error-content {
+    margin-top: 50px;
+  }
+
   .error-help-text {
     color: white;
-    text-align: left;
+    font-weight: 600;
   }
+
+  .error-input-search {
+    border-radius: 2px;
+    border: unset;
+    font-size: 15px;
+    height: 35px;
+  }
+
+  .error-button-search {
+    height: 35px;
+    font-size: 15px;
+    border: unset;
+    border-radius: 2px;
+    margin-top: 10px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .error-input-search {
+      height: 35px;
+      margin-top: 2.5px;
+    }
+  
+    .error-button-search {
+      height: 40px;
+      margin-left: 5px;
+      margin-top: 0px;
+    }
+}

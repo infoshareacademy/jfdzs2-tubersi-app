@@ -12,11 +12,14 @@ export default class Error404 extends Component {
                              alt="error-message"
                         />
                     </div>
-                    <div className="error-content col-xs-10 col-xs-offset-1">
-                        <p className="error-help-text">Znajdź szukaną podstronę, kawałku, lub playlistę na Tubersi</p>
-                        <label>Name</label>
-                        <input type="text" name="name"/>
-                        <span>Enter your full name here</span>
+                    <div className="error-content col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+                        <p className="error-help-text">
+                            Znajdź szukaną podstronę, kawałku, lub playlistę na Tubersi:
+                        </p>
+                        <input className="error-input-search col-xs-12 col-sm-8"
+                               placeholder="Szukaj..."
+                        />
+                        <button className="error-button-search col-xs-12 col-sm-2">Szukaj</button>
                     </div>
                 </div>
     }
