@@ -27,7 +27,9 @@ export default class Error404 extends Component {
                         <input className="error-content-input-search col-xs-12 col-sm-8"
                                placeholder="Szukaj..."
                         />
-                        <button className="error-content-button-search col-xs-12 col-sm-2">Szukaj</button>
+                        <button className="error-content-button-search col-xs-12 col-sm-2">
+                            Szukaj
+                        </button>
                     </div>
                     <div className="error-content-help col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                         <p className="error-content-help-suggestion col-xs-12 col-sm-2">
@@ -51,7 +53,9 @@ export default class Error404 extends Component {
                              src={require('../../Images/Youtube-icon-64-64.png')}
                              alt="error-icon"
                         />
-                        <p className="error-icon-text">Strona Główna</p>
+                        <p className="error-icon-text">
+                            Strona Główna
+                        </p>
                     </div>
                 </div>
     }
