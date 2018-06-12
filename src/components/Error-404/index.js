@@ -47,9 +47,11 @@ export default class Error404 extends Component {
                         </p>
                     </div>
                     <div className="error-icon">
-                        <img src={require('../../Images/Youtube-icon-64-64.png')}
+                        <img className="error-icon-image"
+                             src={require('../../Images/Youtube-icon-64-64.png')}
                              alt="error-icon"
                         />
+                        <p className="error-icon-text">Strona Główna</p>
                     </div>
                 </div>
     }

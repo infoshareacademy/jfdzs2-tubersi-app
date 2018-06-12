@@ -52,6 +52,7 @@
 
 .error-content-help-text {
     color: white;
+    text-align: center;
 }
 
 .error-content-input-search {
@@ -100,8 +101,22 @@
     margin-top: 50px;
 }
 
-.error-icon:hover {
+.error-icon-image {
+  opacity: 0.7;
+  transition: 0.5s;
+}
+
+.error-icon-text {
+  color: white;
+  opacity: 0.7;
+  transition: 0.5s;
+}
+
+.error-icon-image:hover, 
+.error-icon-text:hover {
   cursor: pointer;
+  opacity: 1;
+  transition: 0.5s;
 }
 
 @media only screen and (min-width: 768px) {
@@ -111,6 +126,10 @@
 
   .error-content {
     margin-top: 50px;
+  }
+
+  .error-content-help-text {
+    text-align: left;
   }
 
   .error-content-input-search {
