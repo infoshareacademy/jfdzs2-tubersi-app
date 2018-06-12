@@ -29,14 +29,16 @@
   transform: matrix(1.15157, 0, 0, 1.15157, 0, 5);
 }
 
+.error-title-contain-text-image {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
 .error-title-contain-text-404 {
   font-size: 40px;
   font-weight: 900;
-}
-
-.error-title-contain-text-404-warning {
-  font-size: 30px;
-  margin-right: 10px;
+  color: rgb(254, 0, 0);
 }
 
 .error-title-contain-text-alert {
@@ -120,6 +122,12 @@
       height: 40px;
       margin-left: 5px;
       margin-top: 0px;
+  }
+
+  .error-title-contain-text-image {
+    width: 100px;
+    height: 70px;
+    margin-bottom: 15px;
   }
 
   .error-title-contain-text-404 {

@@ -9,7 +9,10 @@ export default class Error404 extends Component {
                     <div className="error-title">
                         <div className="error-title-contain">
                             <p className="error-title-contain-text-404">
-                                <span className="error-title-contain-text-404-warning glyphicon glyphicon-warning-sign"></span>
+                                <img className="error-title-contain-text-image"
+                                     src={require('../../Images/Error-404.jpg')}
+                                     alt="error-404"
+                                />
                                 ERROR 404
                             </p>
                             <p className="error-title-contain-text-alert">
