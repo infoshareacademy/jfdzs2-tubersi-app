@@ -4,78 +4,135 @@
     width: 100%;
     overflow: hidden;
     background-color: rgb(45, 46, 50);
-    height: 100vh;
+    height: 1000px;
+    font-family: 'Lato', sans-serif;
 }
 
 .error-title {
     position: relative;
-    line-height: 250px;
     margin: auto;
     perspective: 25px;
     height: 250px;
     text-align: center;
-
 }
-  .error-message {
-    position: relative;
-  }
 
-  .error-content {
-    margin-top: 50px;
-  }
+.error-title-contain {
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: 60%;
+  background-color: white;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+  transform: matrix(1.15157, 0, 0, 1.15157, 0, 5);
+}
 
-  .error-help-text {
+.error-title-contain-text-404 {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.error-title-contain-text-404-warning {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.error-title-contain-text-alert {
+  font-size: 15px;
+  text-transform: uppercase; 
+}
+
+.error-content {
+    margin-top: 20px;
+}
+
+.error-content-help-text {
     color: white;
-    font-weight: 600;
-  }
+}
 
-  .error-input-search {
+.error-content-input-search {
     border-radius: 2px;
     border: unset;
     font-size: 15px;
     height: 35px;
-  }
+}
 
-  .error-button-search {
+.error-content-button-search {
     height: 35px;
     font-size: 15px;
     border: unset;
     border-radius: 2px;
     margin-top: 10px;
-  }
+}
 
-  .error-help {
+.error-content-help {
     margin-top: 50px;
-  }
+}
   
-  .error-suggestion {
+.error-content-help-suggestion {
     color: white;
     text-align: center;
-  }
+    opacity: 0.7;
+    transition: 0.5s;
+}
 
-  .error-suggestion-space {
+.error-content-help-suggestion:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.error-content-help-suggestion-space {
     color: gray;
     letter-spacing: -1px;
-  }
+    text-align: center;
+}
 
-  .error-icon {
+.error-icon {
     position: relative;
     width: 100%;
     height: 50px;
     float: left;
     text-align: center;
     margin-top: 50px;
+}
+
+.error-icon:hover {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  .error-title-contain {
+    height: 80%;
   }
 
-  @media only screen and (min-width: 768px) {
-    .error-input-search {
+  .error-content {
+    margin-top: 50px;
+  }
+
+  .error-content-input-search {
       height: 35px;
       margin-top: 2.5px;
-    }
+  }
   
-    .error-button-search {
+  .error-content-button-search {
       height: 40px;
       margin-left: 5px;
       margin-top: 0px;
-    }
+  }
+
+  .error-title-contain-text-404 {
+    font-size: 70px;
+    font-weight: 900;
+  }
+
+  .error-title-contain-text-404-warning {
+    font-size: 50px;
+  }
+  
+  .error-title-contain-text-alert {
+    font-size: 25px;
+    text-transform: uppercase; 
+  }
 }
