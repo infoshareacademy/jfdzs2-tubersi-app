@@ -2,8 +2,10 @@ import React, { Component} from 'react';
 import './App.css';
 
 import Dashborad from "./routes/dashboard/dashboard";
-import SignIn from "./routes/signIn/signIn";
+
 import fire from "./config/fire";
+
+import SignUp from "./routes/signUp/signUp";
 
 
 class App extends Component {
@@ -34,7 +36,7 @@ class App extends Component {
     
           <div className="container-fluid">
             <div className="row">             
-             {this.state.user ? (<Dashborad/>) : (<SignIn/>)}
+             {this.state.user ? (<Dashborad/>) : (<SignUp/>)}
             </div>
           </div>
    

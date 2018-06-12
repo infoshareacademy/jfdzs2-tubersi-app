@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-
+import { Link } from 'react-router-dom';
 import fire from '../../config/fire';
 
 import './signIn.css';
@@ -10,7 +10,7 @@ class SignIn extends PureComponent {
     super(props);
       this.signin = this.signin.bind(this);
       this.handleChange = this.handleChange.bind(this);
-      this.signup = this.signup.bind(this);
+    
       this.state ={
         email: '',
         password: ''
@@ -29,14 +29,7 @@ class SignIn extends PureComponent {
       });
   }
 
-  signup(e){
-    e.preventDefault();
-    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-    }).then((u)=>{console.log(u)})
-    .catch((error) => {
-        console.log(error);
-      })
-  }
+
 
   render() {
     return (
@@ -70,9 +63,9 @@ class SignIn extends PureComponent {
             className="input-submit">
             Zaloguj</button>
 
-            <button
-            onClick={this.signup}>
-            Zarejestruj się</button>
+            <Link to='/signUp'>
+                <button className="">Powrót do rejestacji</button></Link>
+          
             </form> 
           </div>
          </div>
