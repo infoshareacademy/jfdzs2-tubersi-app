@@ -10,7 +10,7 @@ export default class Error404 extends Component {
                         <div className="error-title-contain">
                             <p className="error-title-contain-text-404">
                                 <img className="error-title-contain-text-image"
-                                     src={require('../../Images/Error-404.jpg')}
+                                     src={require('../../Images/Error-404.gif')}
                                      alt="error-404"
                                 />
                                 ERROR 404
@@ -49,13 +49,15 @@ export default class Error404 extends Component {
                         </p>
                     </div>
                     <div className="error-icon">
-                        <img className="error-icon-image"
-                             src={require('../../Images/Youtube-icon-64-64.png')}
-                             alt="error-icon"
-                        />
-                        <p className="error-icon-text">
-                            Strona Główna
-                        </p>
+                        <div className="error-icon-contain">
+                            <img className="error-contain-icon-image"
+                                 src={require('../../Images/Youtube-icon-64-64.png')}
+                                 alt="error-icon"
+                            />
+                            <p className="error-icon-contain-text">
+                                Strona Główna
+                            </p>
+                        </div>
                     </div>
                 </div>
     }
