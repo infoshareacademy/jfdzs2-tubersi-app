@@ -23,8 +23,10 @@ class SignIn extends PureComponent {
 
   signin(e) {
     e.preventDefault();
-    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-    }).catch((error) => {
+    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+    .then((u)=>{})
+    .then((u)=>{window.location="/"})
+    .catch((error) => {
         console.log(error);
       });
   }
@@ -57,11 +59,14 @@ class SignIn extends PureComponent {
             placeholder="Podaj hasło"  
             />
 
+
             <button 
             onClick={this.signin}
             type="submit"
-            className="input-submit">
+            className="input-submit"
+            >
             Zaloguj</button>
+           
 
             <Link to='/signUp'>
                 <button className="">Powrót do rejestacji</button></Link>

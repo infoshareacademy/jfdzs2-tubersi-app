@@ -1,10 +1,7 @@
 import React, { Component} from 'react';
 import './App.css';
-
 import Dashborad from "./routes/dashboard/dashboard";
-
 import fire from "./config/fire";
-
 import SignUp from "./routes/signUp/signUp";
 
 

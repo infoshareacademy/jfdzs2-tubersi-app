@@ -41,7 +41,7 @@ class SignUp extends PureComponent {
           <div className="col-md-6 col-md-offset-3">
           <h1 className="page-title">Witaj Tubersie !</h1>  
           <div className="box-sign-up animated zoomIn">
-              <form >
+              <form action="/">
                 <h2>Zarejestruj się</h2>
                 <input 
                 value={this.state.email}
