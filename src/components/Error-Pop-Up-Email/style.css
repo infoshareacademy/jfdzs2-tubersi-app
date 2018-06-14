@@ -1,8 +1,125 @@
+/* First Mobile */
+
 .error-pop-up {
     position: fixed;
     height: 100%;
     width: 100%;
     background-color: black;
-    opacity: 0.5;
+    opacity: 0.4;
     z-index: 1;
 }
+
+.error-pop-up-contain {
+    width: 80%;
+    left: 10%;
+    right: 10%;
+    top: 10%;
+    position: fixed;
+    height: 80%;
+    background-color: #2D2E32;
+    box-shadow: 14px -5px 5px 0px rgba(0,0,0,0.75);
+    z-index: 2;
+    border-radius: 15px;
+}
+
+.error-pop-up-contain-exit {
+    color: white;
+    position: absolute;
+    right: 5%;
+    margin-top: 2%;
+    font-size: 25px;
+    padding: 5px;
+}
+
+.error-pop-up-contain-exit:hover {
+    cursor: pointer;
+}
+
+.error-pop-up-contain-form {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
+}
+
+.error-pop-up-contain-form-title {
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.error-pop-up-contain-form-text {
+    color: white;
+    font-size: 15px;
+    margin-top: 8%;
+    margin-bottom: 8%;
+    text-align: center;
+}
+
+.error-pop-up-contain-form-input {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 5px;
+    border: unset;
+    height: 8%;
+    padding: 5px;
+}
+
+.error-pop-up-contain-form-textarea {
+    width: 80%;
+    border: unset;
+    resize: none;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.error-pop-up-contain-form-submit {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
+    border: unset;
+    height: 10%;
+    border-radius: 15px;
+    background-color: rgb(206, 204, 206);
+}
+
+@media only screen and (min-width: 1024px) {
+    .error-pop-up-contain {
+        width: 800px;
+        height: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .error-pop-up-contain-form {      
+        width: 600px;
+        height: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10%;
+    }
+
+    .error-pop-up-contain-form-title {
+      font-size: 25px;
+    }
+    
+    .error-pop-up-contain-form-text {
+        font-size: 20px;
+        margin-top: 25px;
+        margin-bottom: 25px;        
+    }
+    
+    .error-pop-up-contain-form-submit {
+        margin-top: 100px;
+        width: 40%;
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+  }

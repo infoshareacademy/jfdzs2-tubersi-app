@@ -19,7 +19,9 @@ export default class Error404 extends Component {
         return  <div className="error">
                     {this.state.popUpVisible ?
                         <FadeIn>
-                            <ErrorPopUpEmail/>
+                            <ErrorPopUpEmail
+                                setVisiblePopUp = 
+                                    {this.setVisiblePopUp}/>
                         </FadeIn>
                         :null
                     }
