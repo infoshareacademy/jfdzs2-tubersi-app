@@ -1,11 +1,29 @@
+import React, { Component } from 'react';
+import FadeIn from 'react-fade-in';
+
+import ErrorPopUpEmail from '../Error-Pop-Up-Email';
+
 import './style.css';
 
-import React, { Component } from 'react';
-
 export default class Error404 extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            popUpVisible: false,
+        }
+    }
+
+    setVisiblePopUp = () => {this.setState({popUpVisible: !this.state.popUpVisible});};
 
     render() {
         return  <div className="error">
+                    {this.state.popUpVisible ?
+                        <FadeIn>
+                            <ErrorPopUpEmail/>
+                        </FadeIn>
+                        :null
+                    }
+                    
                     <div className="error-title">
                         <div className="error-title-contain">
                             <p className="error-title-contain-text-404">
@@ -44,7 +62,9 @@ export default class Error404 extends Component {
                         <span className="error-content-help-suggestion-space col-xs-12 col-sm-3">
                             ---------------
                         </span>
-                        <p className="error-content-help-suggestion col-xs-12 col-sm-2">
+                        <p className="error-content-help-suggestion col-xs-12 col-sm-2"
+                           onClick={this.setVisiblePopUp} 
+                        >
                             @tubersi
                         </p>
                     </div>
@@ -59,6 +79,7 @@ export default class Error404 extends Component {
                             </p>
                         </div>
                     </div>
+                    <div className="pop"></div>
                 </div>
     }
 }
