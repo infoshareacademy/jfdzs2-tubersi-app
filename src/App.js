@@ -1,9 +1,6 @@
 import React, { Component} from 'react';
 import './App.css';
 
-import Footer from "./components/footer/footer";
-import Header from "./components/header/header";
-import Menu from "./components/menu/menu";
 
 
 class App extends Component {
@@ -11,18 +8,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header/>
-          <div className="container-fluid">
-            <div className="row">
-              <Menu/>
-            
-              <div className="col-md-9">
-              Obrabiany komponent
-              </div>
-                  
-              </div>
-          </div>
-        <Footer/> 
+        <h1>App</h1>
       </div>
     );
   }

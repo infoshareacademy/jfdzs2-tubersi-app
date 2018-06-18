@@ -10,23 +10,15 @@ export default class Header extends Component {
     
     render() {
         return (
-            <div className="container-fluid header">
-                <div className="row">
-                    <div class="col-xs-2 col-md-2">
-                      <p className="navbar-text">Menu</p>
-                    </div>
-                    <div class="col-xs-6 col-md-8">
-                        <Link className="brand-logo" to="/">
-                            <img src={Logo} alt="logo" className="logo-img"/>
-                            <p className="navbar-text" href="">Tubersi
-                            </p>
-                         </Link></div>
-                    <div class="col-xs-4 col-md-2">
-                        <Link className="navbar-text" to="/">Zaloguj/Wyloguj</Link>
-                    </div>
-                
-                </div>
-            </div>
+
+            <nav class="navbar">
+
+                <img src={Logo} alt="logo" className="logo-img"/>       
+                <Link className="navbar-left text" to="/">Tubersi</Link>
+                <Link to="/" className="btn btn-default navbar-btn"><i class="fas fa-sign-out-alt"></i> Wyloguj </Link>
+
+            </nav>
+            
         );
     }
 }
