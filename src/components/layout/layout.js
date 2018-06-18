@@ -27,28 +27,24 @@ class Layout extends PureComponent {
     return (
         <BrowserRouter>
         <Fragment>
-        <Header/>
-          <div className="container-fluid">
-            <div className="row">
-              <Menu/>
-            
-              <div className="col-md-10">
-                    <Switch>
-                        <Route exact path="/" component={App} />
-                        <Route path="/chat" component={Chat} />
-                        <Route exact path="/dashboard" component={Dashborad} />
-                        <Route path="/player" component={Player} />
-                        <Route path="/playlist" component={Playlist} />
-                        <Route path="/search" component={Search} />
-                        <Route path="/results" component={SearchResults} />
-                        <Route path="/signIn" component={SignIn} />
-                        <Route path="/signUp" component={SignUp} />
-                        <Route path="/yourPlaylists" component={YourPlaylists} />
-                        <Route component={NotFound}/>
-                    </Switch>
-                </div>
-              </div>
+          <Header/>
+          <Menu/>
+          <div className="layout">
+            <Switch>
+              <Route exact path="/" component={App} />
+              <Route path="/chat" component={Chat} />
+              <Route exact path="/dashboard" component={Dashborad} />
+              <Route path="/player" component={Player} />
+              <Route path="/playlist" component={Playlist} />
+              <Route path="/search" component={Search} />
+              <Route path="/results" component={SearchResults} />
+              <Route path="/signIn" component={SignIn} />
+              <Route path="/signUp" component={SignUp} />
+              <Route path="/yourPlaylists" component={YourPlaylists} />
+              <Route component={NotFound}/>
+            </Switch>
           </div>
+         
         <Footer/> 
       </Fragment>
       </BrowserRouter>
