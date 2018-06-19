@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "gmail-send": "^1.2.14",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-fade-in": "^0.1.6",
