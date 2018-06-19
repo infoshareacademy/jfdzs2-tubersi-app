@@ -3,6 +3,10 @@
     background: #2D2E32;
     border: none;
     margin-bottom: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
 }
 
 .navbar-btn{

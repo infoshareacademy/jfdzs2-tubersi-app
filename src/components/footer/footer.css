@@ -1,9 +1,10 @@
 .copyright {
     padding: 5px 0;
     background: #2D2E32;    
-    position:absolute;
     bottom:0;
     width:100%;
+    position: fixed;
+    z-index: 1;
 
 }
 
