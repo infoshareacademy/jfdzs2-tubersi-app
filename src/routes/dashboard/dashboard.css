@@ -1,4 +1,14 @@
 .content{
     padding: 15px;
+    text-align: center;
+    font-weight: bold;
 }
 
+.chartbackground{
+    display: inline-block;
+    padding: 20px;
+    height: auto;
+    width: 40%;
+    background: whitesmoke;
+    opacity: 0.85;
+}
