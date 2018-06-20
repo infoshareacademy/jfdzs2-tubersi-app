@@ -6,6 +6,9 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 // const RADIAN = Math.PI / 180;
 
+// var apiHost = "https://tubersi-score-game.firebaseio.com";
+// nie mam dostępu!
+
 class Dashboard extends PureComponent {
 
     data = [
@@ -23,6 +26,10 @@ class Dashboard extends PureComponent {
         {name: 'Group C', value: 300}, {name: 'Group D', value: 200}
         ];
 
+    componentDidMount(){
+
+    }
+
     render() {
     return (
       <div className="content container-fluid">
@@ -30,8 +37,8 @@ class Dashboard extends PureComponent {
         <div className="col-xs-12">
           <h1>dashboard</h1>
           <p>lorem ibsum ble bl ble ble</p>
-            <div className="chartbackground">
-                <LineChart width={600} height={300} data={this.data}
+            <div className="chartbackground col-xs-12 col-md-5 col-md-offset-2">
+                <LineChart width={500} height={300} data={this.data}
                            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                     <XAxis dataKey="name"/>
                     <YAxis/>
@@ -42,8 +49,8 @@ class Dashboard extends PureComponent {
                     <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
                 </LineChart>
             </div>
-            <div className="chartbackground">
-                <BarChart width={600} height={300} data={this.data}
+            <div className="chartbackground col-xs-12 col-md-5">
+                <BarChart width={500} height={300} data={this.data}
                           margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <XAxis dataKey="name"/>
@@ -54,15 +61,14 @@ class Dashboard extends PureComponent {
                     <Bar dataKey="uv" fill="#82ca9d" />
                 </BarChart>
             </div>
-            <div className="chartbackground">
-                <PieChart width={800} height={400} onMouseEnter={this.onPieEnter} >
+            <div className="chartbackground col-xs-12 col-md-5 col-md-offset-2">
+                <PieChart width={500} height={300} onMouseEnter={this.onPieEnter} >
                     <Pie
                         data={this.data2}
-                        cx={120}
-                        cy={200}
-                        outerRadius={80}
+                        cx={250}
+                        cy={110}
+                        outerRadius={100}
                         fill="#8884d8"
-                        paddingAngle={5}
                         label
                     >
                         {
@@ -71,8 +77,8 @@ class Dashboard extends PureComponent {
                     </Pie>
                 </PieChart>
             </div>
-            <div className="chartbackground">
-                <AreaChart width={600} height={400} data={this.data}
+            <div className="chartbackground col-xs-12 col-md-5">
+                <AreaChart width={500} height={300} data={this.data}
                            margin={{top: 10, right: 30, left: 0, bottom: 0}}>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <XAxis dataKey="name"/>
