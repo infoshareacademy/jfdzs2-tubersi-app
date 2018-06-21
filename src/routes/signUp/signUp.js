@@ -3,16 +3,11 @@ import { Link } from 'react-router-dom';
 import './signUp.css';
 
 
-import Footer from "../../components/footer/footer";
-import Header from "../../components/header/header";
-
 
 
 class SignUp extends PureComponent {
   render() {
     return (
-    <div>
-      <Header/>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
@@ -27,14 +22,9 @@ class SignUp extends PureComponent {
                         <Link to='/signIn'><button className="">Mam już konto</button></Link>
                     </form>
               </div>
-
             </div>
           </div>
         </div>
-      <Footer/> 
-    </div>
-
-     
     );
   }
 }
