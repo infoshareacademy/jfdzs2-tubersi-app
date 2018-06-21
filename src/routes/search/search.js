@@ -2,27 +2,17 @@ import React, { PureComponent} from 'react';
 import './search.css';
 
 
-import Footer from "../../components/footer/footer";
-import Header from "../../components/header/header";
-import Menu from "../../components/menu/menu";
-
 
 class Search extends PureComponent {
   render() {
     return (
-      <div>
-        <Header/>
-          <div className="container-fluid">
-            <div className="row">
-              <Menu/>
-            
-              <div className="col-md-9">
-              Obrabiany komponent
-              </div>
-                  
-              </div>
+      <div className="content container-fluid">
+        <div className="row">
+          <div className="col-xs-12">
+            <h1>Szukaj</h1>
+            <p>lorem ibsum ble bl ble ble</p>
           </div>
-        <Footer/> 
+        </div>
       </div>
     );
   }

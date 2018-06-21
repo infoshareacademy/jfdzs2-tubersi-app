@@ -1,9 +1,12 @@
 import React, { Component} from 'react';
 import './App.css';
-import Dashborad from "./routes/dashboard/dashboard";
+import Layout from "./components/layout/layout"
+
 import fire from "./config/fire";
 import SignUp from "./routes/signUp/signUp";
 
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import SignIn from './routes/signIn/signIn';
 
 class App extends Component {
    constructor(props){
@@ -30,12 +33,19 @@ class App extends Component {
 
   render() {
     return (
-    
+        <BrowserRouter>
           <div className="container-fluid">
-            <div className="row">             
-             {this.state.user ? (<Dashborad/>) : (<SignUp/>)}
+            <div className="row">
+          
+            <Switch>
+            <Route path="/signIn" component={SignIn}/>
+            {this.state.user ? (<Layout/>) : (<SignUp/>)}
+            <Route path="/signUp" component={SignUp}/>
+            </Switch>            
             </div>
           </div>
+        </BrowserRouter>
+        
    
     );
   }

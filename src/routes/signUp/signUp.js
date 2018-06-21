@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import './signUp.css';
-import Footer from '../../components/footer/footer';
+
 
 import fire from '../../config/fire';
 
@@ -71,7 +71,7 @@ class SignUp extends PureComponent {
         </div>
       </div>
     </div>
-    <Footer/>
+   
 
       </Fragment>
    

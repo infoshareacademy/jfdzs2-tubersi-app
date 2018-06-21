@@ -1,25 +1,46 @@
-.header{
-    height: 70px;
+.navbar{
+    height: 55px;
     background: #2D2E32;
+    border: none;
+    margin-bottom: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
 }
 
-.navbar-text{
-    font-size: 1.6em;
-    font-weight: bold;  
-    color: whitesmoke;
-}
-
-.brand-logo{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
+.navbar-btn{
+    margin: 8px;
+    width: 150px;
+    float: right;
+    font-size: 18px;
 }
 
 .logo-img {
-    margin-right: 5px;
-    width: 70px;
+    margin: 12px 0 12px 12px;
+    width: 42px;
+    float: left;
 
+}
+
+.text{
+    color: whitesmoke;
+    display: inline-block;
+    padding: 8px;
+    margin-bottom: 0;
+    font-size: 26px;
+    font-weight: 400;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+
+.text:hover{
+    text-decoration: none;
+    color:whitesmoke;
 }
 
 
