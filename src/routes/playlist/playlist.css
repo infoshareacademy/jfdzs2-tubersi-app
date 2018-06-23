@@ -1,3 +1,51 @@
 .content{
-    padding: 15px;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.playlist-item{
+    background: #DCDCDC;
+    margin: 30px;
+    padding: 30px;
+    border-radius: 10px; 
+    border: 3px solid #2D2E32;
+}
+
+.playlist-buttons{
+    background: #DCDCDC;
+    margin: 30px;
+    padding: 30px;
+    border-radius: 10px; 
+    border: 3px solid #2D2E32;
+}
+
+.btn-playlist{
+    width: 45%;
+    font-size: 25px;
+    border: 2px solid #2D2E32;
+    background: #DCDCDC;
+}
+
+.btn-playlist-item{
+    width: 30%;
+    font-size: 25px;
+    border: 2px solid #2D2E32;
+    background: #DCDCDC;
+}
+
+.btn{
+    font-size: 18px;
+    letter-spacing: 0.10em;
+    font-weight: 400;
+}
+
+.fab .fas{
+    margin-right: 5px;
+    font-size: 30px;
+
+}
+
+iframe{
+    border: 0;
 }
