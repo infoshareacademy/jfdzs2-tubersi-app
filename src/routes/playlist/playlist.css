@@ -47,7 +47,7 @@ iframe{
 }
 
 .playlist-item-video{
-    max-height: 500px;
+    max-height: 600px;
 }
 
 @media only screen and (max-width: 1000px) {

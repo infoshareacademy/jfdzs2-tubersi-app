@@ -1,3 +1,29 @@
-.content{
-    padding: 15px;
+.content-search{
+    text-align: center;
+    margin-bottom: 40px;
+   
+
+}
+
+.input-search{
+    width: 70%;
+}
+
+.btn-search{
+    width: 30%;
+}
+
+.search{
+    background: #DCDCDC;
+    margin: 30px;
+    padding: 30px;
+    border-radius: 10px; 
+    border: 3px solid #2D2E32;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .btn-search{
+        width: 70%;
+    }
 }
