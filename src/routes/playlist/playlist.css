@@ -1,7 +1,6 @@
 .content{
     text-align: center;
     margin-bottom: 40px;
-
 }
 
 .playlist-item{
@@ -24,30 +23,31 @@
     width: 45%;
     font-size: 25px;
     border: 2px solid #2D2E32;
-    /* background: #DCDCDC; */
 }
 
 .btn-playlist-item{
-    width: 30%;
+    width: 90%;
     font-size: 25px;
     border: 2px solid #2D2E32;
-    /* background: #DCDCDC; */
 }
 
 .btn{
+
     font-size: 18px;
     letter-spacing: 0.10em;
-    /* font-weight:500; */
 }
 
-.fab .fas{
+.fab, .fas, .far{
     margin-right: 5px;
-    font-size: 30px;
-
+    font-size: 20px;
 }
 
 iframe{
     border: 0;
+}
+
+.playlist-item-video{
+    max-height: 500px;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -59,3 +59,5 @@ iframe{
         width: 80%;
     }
 }
+
+

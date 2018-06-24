@@ -10,31 +10,24 @@ class Playlist extends PureComponent {
           <div className="col-xs-12" className="playlist">
             <h1>Playlista</h1>
 
-            <div className="playlist-item">
-              <div class="embed-responsive embed-responsive-16by9">
+            <div className="row playlist-item animated bounceInRight">
+            <div className="col-md-6 playlist-item-video">
+              <div className=" embed-responsive embed-responsive-4by3">
                   <iframe 
                     class="embed-responsive-item" 
                     src="https://www.youtube.com/embed/Ur_tXqaNXOI"></iframe>
               </div>
-              <button 
-                type="button" 
-                className="btn btn-default btn-lg btn-playlist-item">
-                <i class="fas fa-trash-alt"></i>Usuń z playlisty
-              </button>
-           </div>
-            
-            <div className="playlist-item">
-              <div class="embed-responsive embed-responsive-16by9">
-                  <iframe 
-                  class="embed-responsive-item" 
-                  src="https://www.youtube.com/embed/Ur_tXqaNXOI"></iframe>
-              </div>
-              <button 
-                type="button" 
-                className="btn btn-default btn-lg btn-playlist-item">
-                <i class="fas fa-trash-alt"></i>Usuń z playlisty
-              </button>
             </div>
+              <div className="col-md-6">
+                <button 
+                  type="button" 
+                  className="btn btn-default btn-lg btn-playlist-item">
+                  <i class="fas fa-trash-alt"></i>Usuń z playlisty
+                </button>
+              </div>
+            
+           </div>
+           
 
          
             <div className="playlist-buttons">
