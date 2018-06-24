@@ -37,7 +37,7 @@ class Dashboard extends PureComponent {
         <div className="col-xs-12">
           <h1>dashboard</h1>
           <p>lorem ibsum ble bl ble ble</p>
-            <div className="chartbackground col-xs-12 col-md-5 col-md-offset-2">
+            <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
                 <LineChart width={500} height={300} data={this.data}
                            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                     <XAxis dataKey="name"/>
@@ -49,7 +49,7 @@ class Dashboard extends PureComponent {
                     <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
                 </LineChart>
             </div>
-            <div className="chartbackground col-xs-12 col-md-5">
+            <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
                 <BarChart width={500} height={300} data={this.data}
                           margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                     <CartesianGrid strokeDasharray="3 3"/>
@@ -61,7 +61,7 @@ class Dashboard extends PureComponent {
                     <Bar dataKey="uv" fill="#82ca9d" />
                 </BarChart>
             </div>
-            <div className="chartbackground col-xs-12 col-md-5 col-md-offset-2">
+            <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
                 <PieChart width={500} height={300} onMouseEnter={this.onPieEnter} >
                     <Pie
                         data={this.data2}
@@ -77,7 +77,7 @@ class Dashboard extends PureComponent {
                     </Pie>
                 </PieChart>
             </div>
-            <div className="chartbackground col-xs-12 col-md-5">
+            <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
                 <AreaChart width={500} height={300} data={this.data}
                            margin={{top: 10, right: 30, left: 0, bottom: 0}}>
                     <CartesianGrid strokeDasharray="3 3"/>
