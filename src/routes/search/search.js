@@ -6,18 +6,21 @@ import './search.css';
 class Search extends PureComponent {
   render() {
     return (
-      <div className="content-search container-fluid">
+      <div className="content container-fluid">
       <div className="row">
-        <div className="col-xs-12 col-md-push-2 col-md-8" >
+        <div className="col-md-push-2 col-md-8">
+
           <h1>Rozpocznij wyszukiwanie</h1>
-          <form>
-            <input placeholder="Wpisz czego szukasz?" className="input-search animated bounceInRight"/>
-            <button className="btn btn-default btn-lg btn-search animated bounceInRight">Szukaj</button>
-          </form> 
-        
-         </div>
+            <input placeholder="Wpisz czego szukasz?"/>
+            <button type="button" className="btn btn-default btn-lg">
+            <i className="fab fa-youtube"></i>Szukaj
+            </button> 
+        </div>
       </div>
-      </div>
+    </div>
+
+
+     
     );
   }
 }
