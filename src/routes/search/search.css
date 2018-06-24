@@ -2,6 +2,12 @@
     padding: 15px;
 }
 
+h1{
+    font-size: 2em;
+    text-decoration: none;
+    color: whitesmoke;
+    text-align: center;
+}
 .search{
     background: #DCDCDC;
     margin: 30px;
