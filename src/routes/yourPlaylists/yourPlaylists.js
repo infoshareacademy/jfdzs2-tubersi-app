@@ -5,43 +5,48 @@ import './yourPlaylists.css';
 class YourPlaylists extends PureComponent {
   render() {
     return (
-      <div className="content container-fluid">
+      <div className="content-playlists">
         <div className="row">
-          <div className="col-xs-12">
-            <h1>Lista wszystkich playlist</h1>
-            <div className="playlist-item animated bounceIn">
-              <p>Nazwa playlisty nr 1</p>
-              <p>
-                <button type="button" className="btn btn-default btn-lg btn-playlists">
-                  <i className="fab fa-youtube"></i>Przejdź do playlisty
-                </button>
-                <button type="button" className="btn btn-default btn-lg btn-playlists">
-                  <i class="fas fa-share-alt"></i>Udostepnij playlistę
-                </button>
-                <button type="button" className="btn btn-default btn-lg btn-playlists">
-                  <i className="fas fa-trash-alt"></i>Usuń playlistę
-                </button>
-              </p>
+        <h1>Nazwa playlisty</h1>
+          <div className="col-xs-12 col-md-6">
+            <div className="playlists-item animated bounceIn">
+              <div className="playlists-item-box">
+                  <div className="playlists-buttons-hover">
+                  <h3 className="playlists-title">Nazwa playlisty nr 1</h3>
+                  <button type="button" className="btn btn-default btn-playlists">
+                    <i className="fab fa-youtube"></i>Przejdź
+                  </button>
+                  <button type="button" className="btn btn-default btn-playlists">
+                    <i class="fas fa-share-alt"></i>Udostepnij
+                  </button>
+                  <button type="button" className="btn btn-default btn-playlists">
+                    <i className="fas fa-trash-alt"></i>Usuń
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <div className="playlist-item animated bounceIn">
-              <p>Nazwa playlisty nr 2</p>
-              <p>
-                <button type="button" className="btn btn-default btn-lg btn-playlists">
-                  <i className="fab fa-youtube"></i>Przejdź do playlisty 
-                </button>
-                <button type="button" className="btn btn-default btn-lg btn-playlists">
-                  <i class="fas fa-share-alt"></i>Udostepnij
-                </button>
-                <button type="button" className="btn btn-default btn-lg btn-playlists">
-                  <i className="fas fa-trash-alt"></i>Usuń
-                </button>
-              </p>
+          <div className="col-xs-12 col-md-6">
+            <div className="playlists-item animated bounceIn">
+              <div className="playlists-item-box">
+                  <div className="playlists-buttons-hover">
+                  <h3 className="playlists-title">Nazwa playlisty nr 1</h3>
+                  <button type="button" className="btn btn-default btn-playlists">
+                    <i className="fab fa-youtube"></i>Przejdź
+                  </button>
+                  <button type="button" className="btn btn-default btn-playlists">
+                    <i class="fas fa-share-alt"></i>Udostepnij
+                  </button>
+                  <button type="button" className="btn btn-default btn-playlists">
+                    <i className="fas fa-trash-alt"></i>Usuń
+                  </button>
+                </div>
+              </div>
             </div>
-
-
           </div>
         </div>
+  
       </div>
     );
   }
