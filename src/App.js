@@ -1,6 +1,10 @@
 import React, { Component} from 'react';
 import './App.css';
 
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import SignIn from './routes/signIn/signIn';
+import SignUp from "./routes/signUp/signUp";
+import Layout from './components/layout/layout';
 
 
 
@@ -8,14 +12,17 @@ class App extends Component {
 
   render() {
     return (
-        <div className="content container-fluid">
-          <div className="row">
-            <div className="col-xs-12">
-              <h1>App</h1>
-              <p>lorem ibsum ble bl ble ble</p>
-            </div>
-          </div>
+      <BrowserRouter>
+      <div className="container-fluid">
+        <div className="row">
+        <Switch>
+        <Route exact path="/" component={Layout} />
+        <Route path="/signIn" component={SignIn}/>
+        <Route path="/signUp" component={SignUp}/>
+        </Switch>            
         </div>
+      </div>
+    </BrowserRouter>
     );
   }
 }
