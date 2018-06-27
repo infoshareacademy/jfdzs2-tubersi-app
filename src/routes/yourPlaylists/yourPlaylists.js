@@ -9,9 +9,9 @@ class YourPlaylists extends PureComponent {
         <div className="row">
         <h1>Nazwa playlisty</h1>
           <div className="col-xs-12 col-md-6">
-            <div className="playlists-item animated bounceIn">
+            <div className="playlists-item animated zoomIn">
               <div className="playlists-item-box">
-                  <div className="playlists-buttons-hover">
+                  <div className="playlists-buttons-hover animated fadeIn">
                   <h3 className="playlists-title">Nazwa playlisty nr 1</h3>
                   <button type="button" className="btn btn-default btn-playlists">
                     <i className="fab fa-youtube"></i>Przejdź
@@ -28,9 +28,9 @@ class YourPlaylists extends PureComponent {
           </div>
 
           <div className="col-xs-12 col-md-6">
-            <div className="playlists-item animated bounceIn">
+            <div className="playlists-item animated zoomIn">
               <div className="playlists-item-box">
-                  <div className="playlists-buttons-hover">
+                  <div className="playlists-buttons-hover animated fadeIn">
                   <h3 className="playlists-title">Nazwa playlisty nr 1</h3>
                   <button type="button" className="btn btn-default btn-playlists">
                     <i className="fab fa-youtube"></i>Przejdź
