@@ -1,11 +1,9 @@
 import React, { PureComponent, Fragment} from 'react';
-import './layout.css';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Footer from "../footer/footer";
 import Header from "../header/header";
 import Menu from "../menu/menu";
-
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Chat from '../../routes/chat/chat';
 import Dashborad from '../../routes/dashboard/dashboard';
@@ -14,8 +12,8 @@ import Playlist from '../../routes/playlist/playlist';
 import Search from '../../routes/search/search';
 import SearchResults from '../../routes/searchResults/searchResults';
 import YourPlaylists from '../../routes/yourPlaylists/yourPlaylists';
-import NotFound from '../../routes/notFound/notFound';
 
+import './layout.css';
 
 class Layout extends PureComponent {
   render() {
@@ -26,18 +24,16 @@ class Layout extends PureComponent {
           <Menu/>
           <div className="layout">
             <Switch>
-              <Route exact path="/" component={Dashborad} />
+              <Route exact path="/dashboard" component={Dashborad} />
               <Route path="/chat" component={Chat} />
               <Route path="/player" component={Player} />
               <Route path="/playlist" component={Playlist} />
               <Route path="/search" component={Search} />
               <Route path="/results" component={SearchResults} />
               <Route path="/yourPlaylists" component={YourPlaylists} />
-              <Route component={NotFound}/>
             </Switch>
-          </div>
-         
-        <Footer/> 
+          </div> 
+        <Footer/>
       </Fragment>
       </BrowserRouter>
     );

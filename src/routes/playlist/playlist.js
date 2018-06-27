@@ -22,7 +22,7 @@ class Playlist extends PureComponent {
               <div className="col-md-12">
                 <div className="playlist-item animated bounceInRight">
                   <div className="embed-responsive embed-responsive-4by3">
-                      <iframe 
+                      <iframe
                         src="https://www.youtube.com/embed/qGRt_t24jjI"></iframe>
                   </div>
                   <button 

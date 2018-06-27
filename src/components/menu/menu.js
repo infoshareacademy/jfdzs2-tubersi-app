@@ -15,7 +15,6 @@ export default class Menu extends Component {
                     {/* Linki ktrore nie beda finalnie wywietlane w menu */}
                     <Link className="menu-link" to="/results"><li><span>Wynik wyszukiwania</span></li></Link>
                     <Link className="menu-link" to="/player"><li><span>Player</span></li></Link>
-                    <Link className="menu-link" to="/notFound"><li><span>404</span></li></Link>
                 </ul> 
             </div>
         );

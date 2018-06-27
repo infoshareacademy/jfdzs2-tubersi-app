@@ -9,7 +9,7 @@ class SearchResults extends PureComponent {
     return (
       <div className="content container-fluid">
         <div className="row">
-          <div className="col-xs-12" className="playlist">
+          <div className="col-xs-12 playlist">
             <h1>Wyniki wyszukiwania</h1>
 
             <div className="row playlist-item animated bounceInRight">
