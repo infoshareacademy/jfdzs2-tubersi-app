@@ -12,17 +12,18 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      // <BrowserRouter>
       <div className="container-fluid">
         <div className="row">
-        <Switch>
-        <Route exact path="/" component={Layout} />
-        <Route path="/signIn" component={SignIn}/>
-        <Route path="/signUp" component={SignUp}/>
-        </Switch>            
+        {/* <Switch> */}
+          <Layout/>
+        {/* <Route exact path="/" component={Layout} /> */}
+        {/* <Route path="/signIn" component={SignIn}/>
+        <Route path="/signUp" component={SignUp}/> */}
+        {/* </Switch>             */}
         </div>
       </div>
-    </BrowserRouter>
+    // </BrowserRouter>
     );
   }
 }

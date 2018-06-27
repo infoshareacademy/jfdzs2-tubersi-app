@@ -6,7 +6,7 @@ import './search.css';
 class Search extends PureComponent {
   render() {
     return (
-      <div className="content container-fluid animated bounceIn">
+      <div className="content container-fluid ">
       <div className="row">
         <div className="col-md-push-2 col-md-8">
 
