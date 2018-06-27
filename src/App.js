@@ -49,11 +49,12 @@ class App extends Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <BrowserRouter>
+      // <Provider store={store}>
+      //   <BrowserRouter>
           <div className="container-fluid">
             <div className="row">
-              <Switch>
+            <Layout/>
+               {/* <Switch>
                 <Route exact path="/" component={SignUp} /> 
                 <Route path="/signIn" component={SignIn}/>
                 {statusLogin ?
@@ -61,11 +62,11 @@ class App extends Component {
                   :null
                 }
                 <Route path='*' exact={true} component={NotFound} />
-              </Switch>
+              </Switch>  */}
             </div>
           </div>
-      </BrowserRouter>
-    </Provider>
+      /* </BrowserRouter>
+    </Provider> */
     );
   }
 }

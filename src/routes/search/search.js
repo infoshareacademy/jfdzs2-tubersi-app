@@ -1,29 +1,84 @@
-import React, { PureComponent} from 'react';
+import React, { PureComponent, Fragment} from 'react';
 import './search.css';
 
+const API = 'AIzaSyBkYpYX86eK2MmpEYTvcvB8Oth1Qfiwxjc'
+const maxResults = 10;
+const resolution ='high'
+const type = 'video'
 
+export default class Search extends PureComponent {
+    constructor(props){
+        super(props);
+      
 
-class Search extends PureComponent {
-  render() {
-    return (
-      <div className="content container-fluid ">
-      <div className="row">
-        <div className="col-md-push-2 col-md-8">
+        this.state = {
+            resultYoutube: [],
+            searchTitle: ''
 
-          <h1>Rozpocznij wyszukiwanie</h1>
-            <input placeholder="Wpisz czego szukasz?"/>
-            <button type="button" className="btn btn-default btn-lg">
-            <i className="fab fa-youtube"></i>Szukaj
-            </button> 
-        </div>
-      </div>
-    </div>
+        };
 
+        this.clicked = this.clicked.bind(this);
+    }
 
-     
-    );
+handleChange = (event) => {
+      this.setState({
+        searchTitle: event.target.value
+      })
   }
+    
+clicked(){
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&part=snippet&maxResults=${maxResults}&q=${this.state.searchTitle}&type=${type}&${type}Definition=${resolution}`)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        // console.log(responseJson);
+        const resultYoutube = responseJson.items.map(obj => "https://www.youtube.com/embed/"+obj.id.videoId);
+        this.setState({resultYoutube});
+        // console.log(this.state.resultYoutube);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }
+    
+    render() {
+        // console.log(finalURL);
+
+
+        return (
+        <Fragment>
+           <div className="content">
+                <input 
+                value={this.state.searchTitle}
+                onChange={this.handleChange}
+                type="text" 
+                name="text" 
+                placeholder="Wpisz czego szukasz" 
+                />
+                <button onClick={this.clicked} className="btn">Szukaj</button>
+
+
+                {this.state.resultYoutube.map((link, i)=>{
+                    // console.log(link);
+                    var frame = <div key={i}><iframe width="560" height="315" src={link} frameBorder="10" allowFullScreen></iframe></div>
+                    return frame;
+                  })
+                }
+
+                {this.frame}
+                
+
+            <div className="">
+                <h1>Youtube</h1>
+
+            
+            </div>
+
+            </div>
+
+
+
+        </Fragment>
+          
+        );
+    }
 }
-
-
-export default Search;
