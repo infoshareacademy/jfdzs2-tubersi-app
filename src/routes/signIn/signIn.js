@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'; 
+
+import fire from '../../config/index.js';
+
 import './signIn.css';
 import '../signUp/signUp.css';
-
 
 class SignIn extends PureComponent {
   constructor(props){
@@ -15,20 +18,22 @@ class SignIn extends PureComponent {
       };
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value});
   }
 
- /* signin(e) {
+  tryLogin = (e) => {
     e.preventDefault();
     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-    .then((u)=>{})
-    .then((u)=>{window.location="/"})
+    .then({})
+    .then((u)=>{
+      this.props.changeStatus();
+    })
     .catch((error) => {
         console.log(error);
       });
   }
-*/
+
   render() {
     return (
               <div className="container-fluid">
@@ -36,29 +41,27 @@ class SignIn extends PureComponent {
                   <div className="col-md-6 col-md-offset-3">
                     <h1 className="page-title">Witaj Tubersie!</h1>
                     <div className="box-sign-in animated zoomIn">
-                      <form action="/dashboard">
-                          <h2>Zaloguj się</h2>
-                          <input type="text" 
-                                 name="Name" 
-                                 placeholder="Podaj login" 
-                                 required
-                                 value={this.state.email}
-                                 onChange={this.handleChange} 
+                        <h2>Zaloguj się</h2>
+                        <input type="text" 
+                               name="email" 
+                               placeholder="Podaj login lub email" 
+                               required
+                               value={this.state.email}
+                               onChange={this.handleChange} 
                           />
-                          <input type="password" 
-                                 name="password" 
-                                 placeholder="Podaj hasło"  
-                                 required 
-                                 valute={this.state.password}
-                                 onChange={this.handleChange}
+                        <input type="password" 
+                               name="password" 
+                               placeholder="Podaj hasło"  
+                               required 
+                               valute={this.state.password}
+                               onChange={this.handleChange}
                           />
-                          <input className="input-submit" 
-                                 type="submit" 
-                                 value="Zaloguj"
-                                 onClick={this.signin}
+                        <input className="input-submit" 
+                               type="submit" 
+                               value="Zaloguj"
+                               onClick={this.tryLogin}
                           /> 
-                          <Link to='/signUp'><button className="">Wroc</button></Link>
-                      </form> 
+                        <Link to='/'><button className="">Wroc</button></Link>
                     </div>
                   </div>
                 </div>
@@ -66,6 +69,16 @@ class SignIn extends PureComponent {
     );
   }
 }
+const mapStateToProps = status => {
+  return {
+      status,
+  };
+};
 
+const mapDispatchToProps = dispatch => {
+  return {
+      changeStatus: () => dispatch({ type: 'ONLINE'}),
+  };
+};
 
-export default SignIn;
+export default connect (mapStateToProps,mapDispatchToProps)(SignIn);
