@@ -47,15 +47,21 @@ clicked(){
         return (
         <Fragment>
            <div className="content">
-                <input 
-                value={this.state.searchTitle}
-                onChange={this.handleChange}
-                type="text" 
-                name="text" 
-                placeholder="Wpisz czego szukasz" 
-                />
-                <button onClick={this.clicked} className="btn">Szukaj</button>
-
+               <div class="row">
+                   <div className="input-group input-group-lg col-xs-8 col-xs-offset-2">
+                        <input
+                            className="form-control"
+                            value={this.state.searchTitle}
+                            onChange={this.handleChange}
+                            type="text"
+                            name="text"
+                            placeholder="Szukaj"
+                        />
+                        <span className="input-group-btn">
+                            <button onClick={this.clicked} className="btn btn-default glyphicon glyphicon-search" type="button"></button>
+                        </span>
+                   </div>
+               </div>
 
                 {this.state.resultYoutube.map((link, i)=>{
                     // console.log(link);
@@ -65,9 +71,9 @@ clicked(){
                 }
 
                 {this.frame}
-                
 
-            <div className="">
+
+               <div className="">
                 <h1>Youtube</h1>
 
             
