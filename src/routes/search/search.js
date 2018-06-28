@@ -1,20 +1,19 @@
 import React, { PureComponent, Fragment} from 'react';
 import './search.css';
+// import '../playlist/playlist.css';
 
 const API = 'AIzaSyBkYpYX86eK2MmpEYTvcvB8Oth1Qfiwxjc'
-const maxResults = 10;
+const maxResults = 9;
 const resolution ='high'
 const type = 'video'
 
 export default class Search extends PureComponent {
     constructor(props){
         super(props);
-      
 
         this.state = {
             resultYoutube: [],
             searchTitle: ''
-
         };
 
         this.clicked = this.clicked.bind(this);
@@ -41,13 +40,10 @@ clicked(){
     }
     
     render() {
-        // console.log(finalURL);
-
-
         return (
         <Fragment>
            <div className="content">
-               <div class="row">
+               <div className="row">
                    <div className="input-group input-group-lg col-xs-8 col-xs-offset-2">
                         <input
                             className="form-control"
@@ -63,26 +59,35 @@ clicked(){
                    </div>
                </div>
 
-                {this.state.resultYoutube.map((link, i)=>{
-                    // console.log(link);
-                    var frame = <div key={i}><iframe width="560" height="315" src={link} frameBorder="10" allowFullScreen></iframe></div>
-                    return frame;
-                  })
-                }
+               <div className="row">
+
+               {this.state.resultYoutube.map((link, i)=>{
+                        var frame =
+                            <div key={1} className="col-sm-6 col-md-4">
+                                <div className="row">
+                                <div className="col-md-12">
+                                    <div className="playlist-item animated bounceInRight">
+                                    <div className="embed-responsive embed-responsive-4by3">
+                                        <iframe width="560" height="315" src={link} frameBorder="10" allowFullScreen></iframe>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="btn btn-default btn-playlist">
+                                        <i class="fas fa-plus"></i>Dodaj
+                                    </button>
+
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        return frame;
+                    })
+                    }
 
                 {this.frame}
 
-
-               <div className="">
-                <h1>Youtube</h1>
-
-            
+                </div>
             </div>
-
-            </div>
-
-
-
         </Fragment>
           
         );

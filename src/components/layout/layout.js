@@ -10,7 +10,6 @@ import Dashborad from '../../routes/dashboard/dashboard';
 import Player from '../../routes/player/player';
 import Playlist from '../../routes/playlist/playlist';
 import Search from '../../routes/search/search';
-import SearchResults from '../../routes/searchResults/searchResults';
 import YourPlaylists from '../../routes/yourPlaylists/yourPlaylists';
 
 import './layout.css';
@@ -29,7 +28,6 @@ class Layout extends PureComponent {
               <Route path="/player" component={Player} />
               <Route path="/playlist" component={Playlist} />
               <Route path="/search" component={Search} />
-              <Route path="/results" component={SearchResults} />
               <Route path="/yourPlaylists" component={YourPlaylists} />
             </Switch>
           </div> 
