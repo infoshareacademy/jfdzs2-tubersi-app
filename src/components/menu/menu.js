@@ -3,13 +3,20 @@ import { Link } from 'react-router-dom';
 import './menu.css'
 
 export default class Menu extends Component {
-  
     
 
-
     render() {
+    
+        var visibility = "menu";
+        
+        if (this.props.menuVisibility){
+            visibility = "menu menu-mobile"        
+        }
+
         return (
-            <div className="menu menu-mobile">
+            <div 
+            onClick={this.props.handleClick}
+                className={visibility}>
                 <ul>
                     <Link className="menu-link" to="/"><li><i class="fas fa-chart-line"></i><span>Dashboard</span></li></Link>
                     <Link className="menu-link" to="/search"><li><i class="fas fa-search"></i><span>Szukaj</span></li></Link>

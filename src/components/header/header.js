@@ -4,17 +4,11 @@ import { Link } from 'react-router-dom';
 import './header.css'
 import Logo from '../../images/logo_wektor.svg';
 
-
-
 export default class Header extends Component {
-    
-   
-   
-
     render() {
         return (
             <nav class="navbar">
-                <a onClick={this.handleOnClick} className="toggle-menu" to="/">
+                <a onClick={this.props.handleClick} className="toggle-menu" >
                     <i class="fas fa-bars"></i>
                 </a>
                 <Link to ="/" className="brand-name">

@@ -15,12 +15,35 @@ import YourPlaylists from '../../routes/yourPlaylists/yourPlaylists';
 import './layout.css';
 
 class Layout extends PureComponent {
+  constructor(props, context){
+    super(props, context);
+
+    this.state ={
+        visible: false
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this)
+}
+
+handleClick(e){
+this.toggleMenu();
+
+}
+
+toggleMenu() {
+this.setState(
+    {visible: !this.state.visible}
+)
+}
+
+
   render() {
     return (
         <BrowserRouter>
         <Fragment>
-          <Header/>
-          <Menu/>
+          <Header handleClick={this.handleClick}/>
+          <Menu handleClick={this.handleClick} menuVisibility={this.state.visible}/>
           <div className="layout">
             <Switch>
               <Route exact path="/dashboard" component={Dashborad} />

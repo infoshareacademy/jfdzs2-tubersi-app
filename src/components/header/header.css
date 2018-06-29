@@ -43,11 +43,8 @@
     cursor: pointer;
 }
 
-.fa-bars{
-    font-size: 30px;
-    padding: 5px;
-    margin-top: 5px;
-    position: relative;
+.fas.fa-bars{
+    display: none;
 }
 .brand-name:hover{
     text-decoration: none;
@@ -56,4 +53,12 @@
 
 
 
-
+@media only screen and (max-width: 760px) {
+    .fas.fa-bars{
+        display: inline-block;
+        font-size: 30px;
+        padding: 5px;
+        margin-top: 5px;
+        position: relative;
+    }
+}
