@@ -17,17 +17,15 @@
 }
 
 .logo-img {
-    margin: 12px 0 12px 12px;
-    width: 42px;
-    float: left;
+    margin:2px 5px 5px 0 ;
+    width: 50px;
 
 }
 
-.text{
+.brand-name{
     color: whitesmoke;
     display: inline-block;
-    padding: 8px;
-    margin-bottom: 0;
+    padding: 6px;
     font-size: 26px;
     font-weight: 400;
     text-decoration: none;
@@ -35,10 +33,23 @@
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
+    position: absolute;
 }
 
+.toggle-menu{
+    color: whitesmoke;
+    margin: 15px 0 12px 6px;
+    vertical-align: middle;
+    cursor: pointer;
+}
 
-.text:hover{
+.fa-bars{
+    font-size: 30px;
+    padding: 5px;
+    margin-top: 5px;
+    position: relative;
+}
+.brand-name:hover{
     text-decoration: none;
     color:whitesmoke;
 }

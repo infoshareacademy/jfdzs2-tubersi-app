@@ -8,11 +8,19 @@ import Logo from '../../images/logo_wektor.svg';
 
 export default class Header extends Component {
     
+   
+   
+
     render() {
         return (
             <nav class="navbar">
-                <img src={Logo} alt="logo" className="logo-img"/>       
-                <Link className="navbar-left text" to="/">Tubersi</Link>
+                <a onClick={this.handleOnClick} className="toggle-menu" to="/">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <Link to ="/" className="brand-name">
+                    <img src={Logo} alt="logo" className="logo-img"/>       
+                    Tubersi
+                </Link>           
                 <Link to="/" className="btn btn-default navbar-btn"><i class="fas fa-sign-out-alt"></i> Wyloguj </Link>
             </nav>
             

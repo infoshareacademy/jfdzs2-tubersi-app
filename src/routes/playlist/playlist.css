@@ -30,9 +30,9 @@
 
 }
 
-.fab, .fas, .far{
+.fab .fas .far{
     margin-right: 5px;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 iframe{
