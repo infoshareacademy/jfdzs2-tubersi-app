@@ -10,18 +10,40 @@ import Dashborad from '../../routes/dashboard/dashboard';
 import Player from '../../routes/player/player';
 import Playlist from '../../routes/playlist/playlist';
 import Search from '../../routes/search/search';
-import SearchResults from '../../routes/searchResults/searchResults';
 import YourPlaylists from '../../routes/yourPlaylists/yourPlaylists';
 
 import './layout.css';
 
 class Layout extends PureComponent {
+  constructor(props, context){
+    super(props, context);
+
+    this.state ={
+        visible: false
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this)
+}
+
+handleClick(e){
+this.toggleMenu();
+
+}
+
+toggleMenu() {
+this.setState(
+    {visible: !this.state.visible}
+)
+}
+
+
   render() {
     return (
         <BrowserRouter>
         <Fragment>
-          <Header/>
-          <Menu/>
+          <Header handleClick={this.handleClick}/>
+          <Menu handleClick={this.handleClick} menuVisibility={this.state.visible}/>
           <div className="layout">
             <Switch>
               <Route exact path="/dashboard" component={Dashborad} />
@@ -29,7 +51,6 @@ class Layout extends PureComponent {
               <Route path="/player" component={Player} />
               <Route path="/playlist" component={Playlist} />
               <Route path="/search" component={Search} />
-              <Route path="/results" component={SearchResults} />
               <Route path="/yourPlaylists" component={YourPlaylists} />
             </Switch>
           </div> 

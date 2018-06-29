@@ -15,12 +15,13 @@ class App extends Component {
       <BrowserRouter>
           <div className="container-fluid">
             <div className="row">
-              <Switch>
+           <Layout/>
+               {/* <Switch>
                 <Route exact path="/" component={SignUp} /> 
                 <Route path="/signIn" component={SignIn}/>
                 <Route path="/layout" component={Layout}/>
                 <Route path='*' exact={true} component={NotFound} />
-              </Switch>
+              </Switch>  */}
             </div>
           </div>
       </BrowserRouter>
