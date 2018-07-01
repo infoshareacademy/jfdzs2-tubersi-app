@@ -89,7 +89,6 @@ export default class Search extends PureComponent {
     
     render() {
         return (
-
         <Layout>
            <div className="search-content content">
                <div className="row">

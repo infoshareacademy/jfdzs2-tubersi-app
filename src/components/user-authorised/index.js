@@ -7,7 +7,7 @@ const UserAuthorized = ({status}) => {
     return null;    
   }
   return (
-    <Redirect to="/signin" />
+    <Redirect to="/signup" />
   );
 }
 

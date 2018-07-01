@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import UserAuthorized from '../../components/user-authorised';
+
 import './style.css';
 
 export default class NotFound extends Component {
@@ -12,7 +14,9 @@ export default class NotFound extends Component {
     }
 
     render() {
-        return  <div className="error">
+        return  <React.Fragment>
+                <UserAuthorized/>
+                <div className="error">
                     <div className="error-title">
                         <div className="error-title-contain">
                             <p className="error-title-contain-text-404">
@@ -63,6 +67,7 @@ export default class NotFound extends Component {
                     </div>
                     <div className="pop"></div>
                 </div>
+                </React.Fragment>
     }
 }
 

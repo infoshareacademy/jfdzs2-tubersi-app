@@ -11,9 +11,9 @@ class SignUp extends PureComponent {
   constructor(props){
     super(props);
       this.state ={
-        email: 'dorota@op.pl',
-        password: 'aaaaa',
-        name: 'dorota',
+        email: '',
+        password: '',
+        name: '',
       };
   }
 
