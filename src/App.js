@@ -20,9 +20,9 @@ class App extends Component {
                   <Route path='*' exact={true} component={SignUp} />
                 </Switch>
                 :<Switch>
-                  <Route path="*" component={Layout}/>        
+                  <Route path="*" component={Layout}/>
                 </Switch>
-              }    
+              }
             </div>
           </div>
       </BrowserRouter>
