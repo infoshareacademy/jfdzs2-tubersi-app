@@ -3,16 +3,11 @@ import { Link } from 'react-router-dom';
 import './menu.css'
 
 export default class Menu extends Component {
-    
-
     render() {
-    
         var visibility = "menu";
-        
-        if (this.props.menuVisibility){
+        if (this.props.menuVisibility) {
             visibility = "menu menu-mobile"        
         }
-
         return (
             <div 
             onClick={this.props.handleClick}

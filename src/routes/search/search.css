@@ -1,17 +1,155 @@
 
+.search-content-information { 
+    height: 40px;
+    border-radius: 15px;
+    background-color: rgb(45, 46, 50);
+    width: 70%;
+    margin-left: 15%;
+}
+
+.search-content-information-title {
+    color: #f5f5f5;
+    opacity: 0.7;
+    font-size: 12px;
+    line-height: 40px;
+}
+
+.search-content-search {
+    width: 70%;
+    position: relative;
+    margin-left: 15%;
+    margin-top: 15px;
+}
+
+.search-content-search-input {
+    height: 30px;
+    width: 100%;
+    margin: 0px;
+    border: unset;
+    font-size: 12px;
+    border-radius: unset;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
 .search-content-row-form-contain {
     position: absolute;
     top: 0px;
-    height: 30px;
-    width: 30px;
+    height: 15px;
+    width: 15px;
     background-color: #fff;
-    margin-top: 25px;
-    right: 5px;
+    margin-top: 12px;
+    right: 10px;
     z-index: 3;
 }
 
 .search-content-row-form-contain:hover {
     cursor: pointer;
+}
+
+.search-filter-contain {
+    float: left;
+    position: relative;
+    height: 80px;
+    width: 70%;
+    margin-left: 15%;
+    background-color:  rgb(45, 46, 50);
+    transition: 1s;   
+}
+
+.search-filter-contain-title {
+    color: #f5f5f5;
+    opacity: 0.7;
+    margin-top: 5px;
+    position: relative;
+}
+
+.search-filter-contain-checkboxs {
+    margin-top: 15px;
+}
+
+.search-filter-contain-checkbox {
+    width: 15px;
+}
+
+.search-filter-contain-text {
+    color: #f5f5f5;
+    opacity: 0.7;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.search-filter-toggle {
+    float: left;
+    height: 30px;
+    width: 70%;
+    margin-left: 15%;
+    background-color:  #fff;   
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color:  rgb(45, 46, 50);
+    color: #f5f5f5;
+    transition: 1s;
+    line-height: 30px;
+}
+
+.search-filter-toggle:hover {
+    cursor: pointer;
+}
+
+.search-filter-toggle-title {
+    opacity: 0.7;
+}
+
+.search-filter-toggle-arrow-left {
+    margin-right: 5%;
+    transition: 0.5s;
+    opacity: 0.7;
+}
+
+.search-filter-toggle-arrow-right {
+    margin-left: 5%;
+    transition: 0.5s;
+    opacity: 0.7;
+}
+
+.search-show-more {
+    background-color: rgb(221, 221, 221);
+    height: 40px;
+    padding: 0px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .search-content-information { 
+        height: 40px;
+        border-radius: 15px;
+        background-color: rgb(45, 46, 50);
+        width: 40%;
+        margin-left: 30%;
+    }
+    
+    .search-content-information-title {
+        color: white;
+        font-size: 12px;
+        line-height: 40px;
+    }
+    
+    .search-content-search {
+        width: 40%;
+        position: relative;
+        margin-left: 30%;
+        margin-top: 15px;
+    }
+    
+    .search-filter-contain {
+        width: 40%;
+        margin-left: 30%;
+    }
+
+    .search-filter-toggle {
+        width: 40%;
+        margin-left: 30%;
+    }
 }
 
 
