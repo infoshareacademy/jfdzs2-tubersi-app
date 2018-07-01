@@ -2,17 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider} from 'react-redux';
+
 import App from './App'
+import {uploadDataToLocalStorage, downloadStatusFromLocalStorage} from './localStorage.js';
+
 import './index.css';
-import {uploadDataToLocalStorage, downloadDataFromLocalStorage} from './localStorage.js';
 
 const reducer = (
   status = {
-      status: downloadDataFromLocalStorage(),
+      status: downloadStatusFromLocalStorage(),
   }, action) => {
   switch (action.type) {
       case 'ONLINE':
-          uploadDataToLocalStorage(true);
+          uploadDataToLocalStorage(true, action.email);
           return {
               status: true,
           };

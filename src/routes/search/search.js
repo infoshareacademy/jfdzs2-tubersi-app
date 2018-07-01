@@ -3,90 +3,123 @@ import './search.css';
 // import '../playlist/playlist.css';
 
 const API = 'AIzaSyBkYpYX86eK2MmpEYTvcvB8Oth1Qfiwxjc'
-const maxResults = 9;
 const resolution ='high'
 const type = 'video'
 
 export default class Search extends PureComponent {
     constructor(props){
         super(props);
-
         this.state = {
-            resultYoutube: [],
-            searchTitle: ''
+            resultYoutube: null,
+            searchTitle: '',
+            maxResults: 0,
         };
-
-        this.clicked = this.clicked.bind(this);
+        this.searchVideo = this.searchVideo.bind(this);
     }
 
-handleChange = (event) => {
+    componentDidUpdate(prevProps,prevState) {
+        if(prevState.maxResults !== this.state.maxResults) {
+            this.searchVideo();
+        }
+    }
+
+    handleChange = (event) => {
       this.setState({
         searchTitle: event.target.value
       })
-  }
+    }
     
-clicked(){
-    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&part=snippet&maxResults=${maxResults}&q=${this.state.searchTitle}&type=${type}&${type}Definition=${resolution}`)
+  searchVideo() {
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&part=snippet&maxResults=${this.state.maxResults}&q=${this.state.searchTitle}&type=${type}&${type}Definition=${resolution}`)
       .then((response) => response.json())
       .then((responseJson) => {
         // console.log(responseJson);
         const resultYoutube = responseJson.items.map(obj => "https://www.youtube.com/embed/"+obj.id.videoId);
         this.setState({resultYoutube});
-        // console.log(this.state.resultYoutube);
+        console.log(this.state.resultYoutube);
       })
       .catch((error) => {
         console.error(error);
       });
     }
+
+    showMoreVideo = () => {
+        this.setState({
+            maxResults: this.state.maxResults + 9,
+        })
+    }
     
     render() {
         return (
         <Fragment>
-           <div className="content">
+           <div className="search-content content">
                <div className="row">
                    <div className="input-group input-group-lg col-xs-8 col-xs-offset-2">
                         <input
-                            className="form-control"
+                            className="search-content-row-form-input form-control"
                             value={this.state.searchTitle}
                             onChange={this.handleChange}
                             type="text"
                             name="text"
                             placeholder="Szukaj"
+                            onKeyDown={(e) => {
+                                if(e.keyCode === 13) {
+                                    this.setState({
+                                        maxResults: 9,
+                                    })
+                                }
+                            }}  
                         />
-                        <span className="input-group-btn">
-                            <button onClick={this.clicked} className="btn btn-default glyphicon glyphicon-search" type="button"></button>
+                        <span className="search-content-row-form-contain">
+                            <span className="search-content-row-form-contain-icon glyphicon glyphicon-search"
+                                  onClick={() => {
+                                      this.setState({
+                                          maxResults: 9,
+                                      })
+                                  }}     
+                            >
+                            </span>
                         </span>
                    </div>
                </div>
-
                <div className="row">
-
-               {this.state.resultYoutube.map((link, i)=>{
-                        var frame =
-                            <div key={1} className="col-sm-6 col-md-4">
-                                <div className="row">
-                                <div className="col-md-12">
-                                    <div className="playlist-item animated bounceInRight">
-                                    <div className="embed-responsive embed-responsive-4by3">
-                                        <iframe width="560" height="315" src={link} frameBorder="10" allowFullScreen></iframe>
-                                    </div>
-                                    <button
-                                        type="button"
-                                        className="btn btn-default btn-playlist">
-                                        <i class="fas fa-plus"></i>Dodaj
-                                    </button>
-
+                    {this.state.resultYoutube ?
+                        this.state.resultYoutube.map((link, index)=>{
+                        return  <div key={index} className="col-sm-6 col-md-4">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <div className="playlist-item animated bounceInRight">
+                                                <div className="embed-responsive embed-responsive-4by3">
+                                                    <iframe width="560" 
+                                                            height="315" 
+                                                            src={link} 
+                                                            frameBorder="10" 
+                                                            allowFullScreen
+                                                            title={link}
+                                                    >
+                                                    </iframe>
+                                                </div>
+                                                <button className="btn btn-default btn-playlist"
+                                                        type="button"
+                                                >
+                                                    <i className="fas fa-plus"></i>
+                                                    Dodaj
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
-                            </div>
-                        return frame;
                     })
-                    }
-
-                {this.frame}
-
+                    :null}
                 </div>
+                {this.state.resultYoutube ? 
+                     <button className="search-show-more col-lg-4 col-lg-offset-4"
+                             onClick={this.showMoreVideo}
+                     >
+                        Pokaż Więcej
+                     </button>
+                    :null
+                }
             </div>
         </Fragment>
           

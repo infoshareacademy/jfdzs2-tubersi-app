@@ -4,7 +4,6 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Footer from "../footer/footer";
 import Header from "../header/header";
 import Menu from "../menu/menu";
-
 import Chat from '../../routes/chat/chat';
 import Dashborad from '../../routes/dashboard/dashboard';
 import Player from '../../routes/player/player';
@@ -22,15 +21,13 @@ class Layout extends PureComponent {
     this.state ={
         visible: false
     };
-    this.handleClick = this.handleClick.bind(this);
-    this.toggleMenu = this.toggleMenu.bind(this)
 }
 
-handleClick(e){
+handleClick = (e) => {
   this.toggleMenu();
 }
 
-toggleMenu() {
+toggleMenu = () => {
   this.setState(
     {visible: !this.state.visible}
   )

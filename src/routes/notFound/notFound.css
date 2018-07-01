@@ -1,6 +1,9 @@
 /*First Mobile*/
 .error {
-  position: relative;
+    position: fixed;
+    z-index: 11;
+    left: 0px;
+    top: 0px;  
     width: 100%;
     overflow: hidden;
     background-color: rgb(45, 46, 50);
@@ -47,7 +50,7 @@
 }
 
 .error-content-help {
-    margin-top: 50px;
+    margin-top: 20px;
 }
   
 .error-content-help-suggestion {

@@ -1,11 +1,12 @@
-export function uploadDataToLocalStorage(setStatus) {
+export function uploadDataToLocalStorage(status, email) {
     const statusUser = {
-        status: setStatus,
+        status: status,
+        email: email,
     };
     localStorage.setItem('tubersi', JSON.stringify(statusUser));
 }
 
-export function downloadDataFromLocalStorage() {
+export function downloadStatusFromLocalStorage() {
     const retrievedObject = localStorage.getItem('tubersi');
     var statusTubersi = JSON.parse(retrievedObject);
     return statusTubersi ? statusTubersi.status : false; 

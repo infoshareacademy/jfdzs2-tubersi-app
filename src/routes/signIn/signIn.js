@@ -10,11 +10,9 @@ import '../signUp/signUp.css';
 class SignIn extends PureComponent {
   constructor(props){
     super(props);
-      this.handleChange = this.handleChange.bind(this);
-    
       this.state ={
         email: '',
-        password: ''
+        password: '',
       };
   }
 
@@ -27,7 +25,7 @@ class SignIn extends PureComponent {
     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     .then({})
     .then((u)=>{
-      this.props.changeStatus();
+      this.props.changeStatus(this.state.email);
     })
     .catch((error) => {
         console.log(error);
@@ -61,7 +59,11 @@ class SignIn extends PureComponent {
                                value="Zaloguj"
                                onClick={this.tryLogin}
                           /> 
-                        <Link to='/'><button className="">Wroc</button></Link>
+                        <Link to='/'>
+                          <button className="">
+                            Wroc
+                          </button>
+                        </Link>
                     </div>
                   </div>
                 </div>
@@ -77,7 +79,7 @@ const mapStateToProps = status => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      changeStatus: () => dispatch({ type: 'ONLINE'}),
+      changeStatus: (email) => dispatch({ type: 'ONLINE', email}),
   };
 };
 

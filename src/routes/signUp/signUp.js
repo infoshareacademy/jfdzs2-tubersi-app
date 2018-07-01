@@ -23,11 +23,21 @@ class SignUp extends PureComponent {
     e.preventDefault();
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
     }).then((u)=> {
-        this.props.changeStatus();
+        this.props.changeStatus(this.state.email);
+        this.createNewUser();
       })
     .catch((error) => {
         console.log(error);
       })
+  }
+
+  createNewUser(userDataBase) {
+    var usersDatabase = fire.database().ref('users');
+    var data = {
+      name: this.state.name,
+      email: this.state.email,
+    }
+    usersDatabase.push(data);
   }
 
   render() {
@@ -86,7 +96,7 @@ const mapStateToProps = status => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      changeStatus: () => dispatch({ type: 'ONLINE'}),
+      changeStatus: (email) => dispatch({ type: 'ONLINE', email }),
   };
 };
 

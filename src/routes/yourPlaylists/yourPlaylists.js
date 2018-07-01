@@ -17,7 +17,7 @@ class YourPlaylists extends PureComponent {
                     <i className="fab fa-youtube"></i>Przejdź
                   </button>
                   <button type="button" className="btn btn-default btn-playlists">
-                    <i class="fas fa-share-alt"></i>Udostepnij
+                    <i className="fas fa-share-alt"></i>Udostepnij
                   </button>
                   <button type="button" className="btn btn-default btn-playlists">
                     <i className="fas fa-trash-alt"></i>Usuń
@@ -26,7 +26,6 @@ class YourPlaylists extends PureComponent {
               </div>
             </div>
           </div>
-
           <div className="col-xs-12 col-md-6">
             <div className="playlists-item animated zoomIn">
               <div className="playlists-item-box">
@@ -36,7 +35,7 @@ class YourPlaylists extends PureComponent {
                     <i className="fab fa-youtube"></i>Przejdź
                   </button>
                   <button type="button" className="btn btn-default btn-playlists">
-                    <i class="fas fa-share-alt"></i>Udostepnij
+                    <i className="fas fa-share-alt"></i>Udostepnij
                   </button>
                   <button type="button" className="btn btn-default btn-playlists">
                     <i className="fas fa-trash-alt"></i>Usuń
@@ -46,7 +45,6 @@ class YourPlaylists extends PureComponent {
             </div>
           </div>
         </div>
-  
       </div>
     );
   }
