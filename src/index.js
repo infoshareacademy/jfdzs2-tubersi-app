@@ -4,20 +4,23 @@ import { createStore } from 'redux';
 import { Provider} from 'react-redux';
 import App from './App'
 import './index.css';
+import {uploadDataToLocalStorage, downloadDataFromLocalStorage} from './localStorage.js';
 
 const reducer = (
-  state = {
-      status: false,
+  status = {
+      status: downloadDataFromLocalStorage(),
   }, action) => {
   switch (action.type) {
-          case 'ONLINE':
-            return {
+      case 'ONLINE':
+          uploadDataToLocalStorage(true);
+          return {
               status: true,
           };
       case 'OFFLINE':
+          uploadDataToLocalStorage(false);
           window.location = '/';
       default:
-          return state;
+          return status;
   }
 };
 
@@ -29,6 +32,7 @@ window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 ReactDOM.render(
   <Provider store={store}>
     <App/>
-  </Provider>
-    , document.getElementById('root'));
+  </Provider>, document.getElementById('root'));
 
+
+  

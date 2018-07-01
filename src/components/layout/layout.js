@@ -11,6 +11,7 @@ import Player from '../../routes/player/player';
 import Playlist from '../../routes/playlist/playlist';
 import Search from '../../routes/search/search';
 import YourPlaylists from '../../routes/yourPlaylists/yourPlaylists';
+import NotFound from '../../routes/notFound/notFound.js';
 
 import './layout.css';
 
@@ -21,23 +22,19 @@ class Layout extends PureComponent {
     this.state ={
         visible: false
     };
-
     this.handleClick = this.handleClick.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this)
 }
 
 handleClick(e){
-this.toggleMenu();
-
+  this.toggleMenu();
 }
 
 toggleMenu() {
-this.setState(
+  this.setState(
     {visible: !this.state.visible}
-)
+  )
 }
-
-
   render() {
     return (
         <BrowserRouter>
@@ -46,12 +43,14 @@ this.setState(
           <Menu handleClick={this.handleClick} menuVisibility={this.state.visible}/>
           <div className="layout">
             <Switch>
-              <Route exact path="/" component={Dashborad} />
+              <Route exact path="/" component={Dashborad}/>
+              <Route exact path="/signIn" component={Dashborad}/>
               <Route path="/chat" component={Chat} />
               <Route path="/player" component={Player} />
               <Route path="/playlist" component={Playlist} />
               <Route path="/search" component={Search} />
               <Route path="/yourPlaylists" component={YourPlaylists} />
+              <Route path="*" component={NotFound}/>
             </Switch>
           </div> 
         <Footer/>
