@@ -46,7 +46,7 @@ this.setState(
           <Menu handleClick={this.handleClick} menuVisibility={this.state.visible}/>
           <div className="layout">
             <Switch>
-              <Route exact path="/dashboard" component={Dashborad} />
+              <Route exact path="/" component={Dashborad} />
               <Route path="/chat" component={Chat} />
               <Route path="/player" component={Player} />
               <Route path="/playlist" component={Playlist} />
