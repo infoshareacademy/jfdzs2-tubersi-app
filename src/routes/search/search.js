@@ -1,9 +1,10 @@
-import React, { PureComponent, Fragment} from 'react';
 import './search.css';
+
+import React, { Fragment, PureComponent } from 'react';
+import FadeIn from 'react-fade-in';
 // import '../playlist/playlist.css';
 
 const API = 'AIzaSyBkYpYX86eK2MmpEYTvcvB8Oth1Qfiwxjc'
-const resolution ='high'
 const type = 'video'
 
 export default class Search extends PureComponent {
@@ -13,13 +14,22 @@ export default class Search extends PureComponent {
             resultYoutube: null,
             searchTitle: '',
             maxResults: 0,
+            showFiltrQuality: false,
+            qualityHigh: false,
+            qualityStandard: false,
+            qualityAny: true,
+            quality: 'any',
+            newSearch: true,
         };
         this.searchVideo = this.searchVideo.bind(this);
     }
 
-    componentDidUpdate(prevProps,prevState) {
-        if(prevState.maxResults !== this.state.maxResults) {
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.maxResults !== this.state.maxResults || !this.state.newSearch) {
             this.searchVideo();
+            this.setState({
+                newSearch: true,
+            })
         }
     }
 
@@ -30,7 +40,7 @@ export default class Search extends PureComponent {
     }
     
   searchVideo() {
-    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&part=snippet&maxResults=${this.state.maxResults}&q=${this.state.searchTitle}&type=${type}&${type}Definition=${resolution}`)
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&part=snippet&maxResults=${this.state.maxResults}&q=${this.state.searchTitle}&type=${type}&${type}Definition=${this.state.quality}`)
       .then((response) => response.json())
       .then((responseJson) => {
         // console.log(responseJson);
@@ -48,25 +58,55 @@ export default class Search extends PureComponent {
             maxResults: this.state.maxResults + 9,
         })
     }
+
+    setQualityVideo = (e) => {
+        if(e.target.name === "any") {
+            this.setState({
+                qualityHigh: false,
+                qualityStandard: false,
+                qualityAny: true,
+                quality: 'any',
+            })
+        }
+        else if(e.target.name === 'standard') {
+            this.setState({
+                qualityHigh: false,
+                qualityStandard: true,
+                qualityAny: false,
+                quality: 'standard',
+            })
+        }
+        else {
+            this.setState({
+                qualityHigh: true,
+                qualityStandard: false,
+                qualityAny: false,
+                quality: 'high',
+            })
+        } 
+    }
     
     render() {
         return (
         <Fragment>
            <div className="search-content content">
                <div className="row">
-                   <div className="input-group input-group-lg col-xs-8 col-xs-offset-2">
-                        <input
-                            className="search-content-row-form-input form-control"
-                            value={this.state.searchTitle}
-                            onChange={this.handleChange}
-                            type="text"
-                            name="text"
-                            placeholder="Szukaj"
-                            onKeyDown={(e) => {
-                                if(e.keyCode === 13) {
-                                    this.setState({
-                                        maxResults: 9,
-                                    })
+                    <div className="search-content-information">
+                        <p className="search-content-information-title">Znajdź utwór i dodaj go do playlisty!</p>
+                    </div>
+                    <div className="search-content-search">
+                        <input  className="search-content-search-input"
+                                value={this.state.searchTitle}
+                                onChange={this.handleChange}
+                                type="text"
+                                name="text"
+                                placeholder="Szukaj"
+                                onKeyDown={(e) => {
+                                    if(e.keyCode === 13) {
+                                        this.setState({
+                                            maxResults: 9,
+                                            newSearch: false,
+                                        })
                                 }
                             }}  
                         />
@@ -75,10 +115,74 @@ export default class Search extends PureComponent {
                                   onClick={() => {
                                       this.setState({
                                           maxResults: 9,
+                                          newSearch: false,
                                       })
                                   }}     
                             >
                             </span>
+                        </span>
+                   </div>
+                   {this.state.showFiltrQuality ?
+                   <FadeIn>
+                   <div className="search-filter-contain">
+                        <p className="search-filter-contain-title">
+                            Wybierz jakość filmów!
+                        </p>
+                        <div className="search-filter-contain-checkboxs">
+                            <span className="search-filter-contain-text">
+                                Niska
+                            </span> 
+                            <input className="search-filter-contain-checkbox"
+                                    type="checkbox"
+                                    name="any"
+                                    checked={this.state.qualityAny}
+                                    onChange={this.setQualityVideo}
+                             />
+                             <span className="search-filter-contain-text">
+                                Średnia
+                             </span>
+                             <input className="search-filter-contain-checkbox"
+                                    type="checkbox"
+                                    name="standard"
+                                    checked={this.state.qualityStandard}
+                                    onChange={this.setQualityVideo}
+                             />
+                             <span className="search-filter-contain-text">
+                                Wysoka
+                             </span>
+                             <input className="search-filter-contain-checkbox"
+                                    type="checkbox"
+                                    name="high"
+                                    checked={this.state.qualityHigh}
+                                    onChange={this.setQualityVideo}         
+                             />
+                        </div>
+                   </div>
+                   </FadeIn>
+                   :null}
+                   <div className="search-filter-toggle"
+                        onClick={()=>{this.setState({
+                            showFiltrQuality: !this.state.showFiltrQuality,
+                        })}}
+                   >
+                        <span className="search-filter-toggle-arrow-left glyphicon glyphicon-chevron-up"
+                              style={
+                                  this.state.showFiltrQuality ?
+                                  {transform: "rotate(180deg)"}
+                                  :{transform: "rotate(0deg)"}
+                              }
+                        >
+                        </span>          
+                        <span className="search-filter-toggle-title">
+                            Filtry
+                        </span>
+                        <span className="search-filter-toggle-arrow-right glyphicon glyphicon-chevron-up"
+                              style={
+                                 this.state.showFiltrQuality ?
+                                    {transform: "rotate(180deg)"}
+                                    :{transform: "rotate(0deg)"}
+                              }
+                        >
                         </span>
                    </div>
                </div>

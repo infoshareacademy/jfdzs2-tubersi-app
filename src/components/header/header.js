@@ -13,17 +13,18 @@ class Header extends Component {
                     <i className="fas fa-bars"></i>
                 </a>
                 <Link to ="/" className="brand-name">
-                    <img src={Logo} alt="logo" className="logo-img"/>       
+                    <img className="logo-img" 
+                            src={Logo} alt="logo" 
+                    />       
                     Tubersi
-                </Link>           
+                </Link>
                 <button className="btn btn-default navbar-btn"   
                         onClick={this.props.changeStatus}
                 >
                     <i className="fas fa-sign-out-alt"></i> 
                     Wyloguj 
                 </button>
-            </nav>
-            
+            </nav>  
         );
     }
 }
