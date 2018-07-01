@@ -1,9 +1,11 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './header.css'
+import { connect } from 'react-redux';
+
 import Logo from '../../images/logo_wektor.svg';
-import { connect } from 'react-redux'; 
+
+import './style.css'
 
 class Header extends Component {
     render() {
@@ -14,14 +16,15 @@ class Header extends Component {
                 </a>
                 <Link to ="/" className="brand-name">
                     <img className="logo-img" 
-                            src={Logo} alt="logo" 
+                         src={Logo} 
+                         alt="logo" 
                     />       
                     Tubersi
                 </Link>
                 <button className="btn btn-default navbar-btn"   
                         onClick={this.props.changeStatus}
                 >
-                    <i className="fas fa-sign-out-alt"></i> 
+                    <i className="fas fa-sign-out-alt"/>
                     Wyloguj 
                 </button>
             </nav>  
@@ -41,4 +44,4 @@ const mapStateToProps = status => {
     };
   };
   
-  export default connect (mapStateToProps,mapDispatchToProps)(Header);
+  export default connect (mapStateToProps, mapDispatchToProps)(Header);

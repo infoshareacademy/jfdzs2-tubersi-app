@@ -1,7 +1,8 @@
 import React, {PureComponent } from 'react';
-import './yourPlaylists.css';
 
-import Layout from '../../components/layout/layout.js';
+import Layout from '../../components/layout';
+
+import './style.css';
 
 class YourPlaylists extends PureComponent {
   render() {

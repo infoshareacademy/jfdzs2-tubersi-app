@@ -5,8 +5,8 @@ import fire from '../../config/index.js';
 
 import UserNotAuthorized from '../../components/user-not-authorized';
 
-import './signIn.css';
-import '../signUp/signUp.css';
+import './style.css';
+import '../signUp/style.css';
 
 class SignIn extends PureComponent {
   constructor(props){

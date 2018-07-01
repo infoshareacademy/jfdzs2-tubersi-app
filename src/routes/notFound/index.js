@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import './notFound.css';
+import './style.css';
 
 export default class NotFound extends Component {
     constructor(props) {

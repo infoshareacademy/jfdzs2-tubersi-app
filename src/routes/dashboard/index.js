@@ -13,10 +13,10 @@ import { AreaChart,
          PieChart, 
          Pie, 
          Cell } from 'recharts';
-import Layout from '../../components/layout/layout';
+import Layout from '../../components/layout';
 import UserAuthorized from '../../components/user-authorised';
 
-import './dashboard.css';
+import './style.css';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 

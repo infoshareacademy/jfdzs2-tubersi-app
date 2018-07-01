@@ -6,7 +6,6 @@
     min-height: 100%;
 }
 
-
 @media only screen and (max-width: 760px) {
     .layout {
         margin: 55px 0 0 0;

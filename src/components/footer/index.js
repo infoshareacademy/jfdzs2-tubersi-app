@@ -1,8 +1,8 @@
 
 import React, { Component } from 'react';
-import './footer.css';
+import './style.css';
 
-export default class Footer extends Component {
+class Footer extends Component {
     render() {
         return (
             <div className="copyright">
@@ -11,3 +11,5 @@ export default class Footer extends Component {
         );
     }
 }
+
+export default Footer;

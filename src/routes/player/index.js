@@ -1,8 +1,9 @@
 import React, { PureComponent} from 'react';
-import './player.css';
-import Layout from '../../components/layout/layout.js';
+
+import Layout from '../../components/layout';
 import ReactPlayer from 'react-player'
 
+import './style.css';
 
 class Player extends PureComponent {
   render() {

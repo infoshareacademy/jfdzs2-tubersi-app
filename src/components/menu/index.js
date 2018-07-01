@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './menu.css'
+
+import './style.css'
 
 export default class Menu extends Component {
     render() {
@@ -10,7 +11,7 @@ export default class Menu extends Component {
         }
         return (
             <div 
-            onClick={this.props.handleClick}
+                onClick={this.props.handleClick}
                 className={visibility}>
                 <ul>
                     <Link className="menu-link" to="/"><li><i className="fas fa-chart-line"></i><span>Dashboard</span></li></Link>
@@ -18,8 +19,6 @@ export default class Menu extends Component {
                     <Link className="menu-link" to="/your-playlist"><li><i className="fas fa-list"></i><span>Twoje playlisty</span></li></Link>
                     <Link className="menu-link" to="/chat"><li><i className="fas fa-comments"></i><span>Chat</span></li></Link>
                     <Link className="menu-link" to="/playlist"><li><span>Playlista-nazwa</span></li></Link>
-                    {/* Linki ktrore nie beda finalnie wywietlane w menu */}
-
                     <Link className="menu-link" to="/player"><li><span>Player</span></li></Link>
                 </ul> 
             </div>

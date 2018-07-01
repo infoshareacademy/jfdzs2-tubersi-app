@@ -1,9 +1,9 @@
-import './search.css';
-
 import React, { Fragment, PureComponent } from 'react';
 import FadeIn from 'react-fade-in';
 
-import Layout from '../../components/layout/layout';
+import Layout from '../../components/layout';
+
+import './style.css';
 
 const API = 'AIzaSyBkYpYX86eK2MmpEYTvcvB8Oth1Qfiwxjc'
 const type = 'video'

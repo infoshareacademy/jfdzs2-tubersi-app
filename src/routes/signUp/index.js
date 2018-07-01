@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import fire from '../../config/index.js';
 import UserNotAuthorized from '../../components/user-not-authorized';
 
-import './signUp.css';
+import './style.css';
 
 class SignUp extends PureComponent {
   constructor(props){
