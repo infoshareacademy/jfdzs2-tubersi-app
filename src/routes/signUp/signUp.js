@@ -1,7 +1,9 @@
 import React, { PureComponent} from 'react';
 import { Link } from 'react-router-dom';
-import fire from '../../config/index.js';
 import { connect } from 'react-redux'; 
+
+import fire from '../../config/index.js';
+import UserNotAuthorized from '../../components/user-not-authorized';
 
 import './signUp.css';
 
@@ -42,6 +44,8 @@ class SignUp extends PureComponent {
 
   render() {
     return (
+        <React.Fragment>
+        <UserNotAuthorized/>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
@@ -85,6 +89,7 @@ class SignUp extends PureComponent {
             </div>
           </div>
         </div>
+        </React.Fragment>
     );
   }
 }

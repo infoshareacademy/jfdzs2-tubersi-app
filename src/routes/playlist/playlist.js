@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import './playlist.css';
 
+import Layout from '../../components/layout/layout.js';
 
 class Playlist extends PureComponent {
   render() {
     return (
+      <Layout>
       <div className="content">
         <div>
           <h2>Playlista nr 1</h2>
@@ -132,7 +134,7 @@ class Playlist extends PureComponent {
       </div>     
     </div>
         
- 
+ </Layout>
 
     );
   }

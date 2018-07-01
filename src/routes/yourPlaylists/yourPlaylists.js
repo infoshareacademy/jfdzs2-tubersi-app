@@ -1,10 +1,12 @@
 import React, {PureComponent } from 'react';
 import './yourPlaylists.css';
 
+import Layout from '../../components/layout/layout.js';
 
 class YourPlaylists extends PureComponent {
   render() {
     return (
+      <Layout>
       <div className="content-playlists">
         <div className="row">
         <h1>Nazwa playlisty</h1>
@@ -46,6 +48,7 @@ class YourPlaylists extends PureComponent {
           </div>
         </div>
       </div>
+      </Layout>
     );
   }
 }

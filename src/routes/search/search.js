@@ -2,7 +2,8 @@ import './search.css';
 
 import React, { Fragment, PureComponent } from 'react';
 import FadeIn from 'react-fade-in';
-// import '../playlist/playlist.css';
+
+import Layout from '../../components/layout/layout';
 
 const API = 'AIzaSyBkYpYX86eK2MmpEYTvcvB8Oth1Qfiwxjc'
 const type = 'video'
@@ -88,7 +89,8 @@ export default class Search extends PureComponent {
     
     render() {
         return (
-        <Fragment>
+
+        <Layout>
            <div className="search-content content">
                <div className="row">
                     <div className="search-content-information">
@@ -225,7 +227,7 @@ export default class Search extends PureComponent {
                     :null
                 }
             </div>
-        </Fragment>
+        </Layout>
           
         );
     }

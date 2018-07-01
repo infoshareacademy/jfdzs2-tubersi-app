@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import './chat.css';
 
+import Layout from '../../components/layout/layout.js';
 
 class Chat extends PureComponent {
   render() {
     return (
+      <Layout>
       <div className="content container-fluid">
       <div className="row">
         <div className="col-xs-12">
@@ -13,6 +15,7 @@ class Chat extends PureComponent {
         </div>
       </div>
     </div>
+    </Layout>
     );
   }
 }
