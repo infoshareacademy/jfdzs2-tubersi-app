@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './header.css'
 import Logo from '../../images/logo_wektor.svg';
+import { connect } from 'react-redux'; 
 
-export default class Header extends Component {
+class Header extends Component {
     render() {
         return (
             <nav class="navbar">
@@ -15,9 +16,28 @@ export default class Header extends Component {
                     <img src={Logo} alt="logo" className="logo-img"/>       
                     Tubersi
                 </Link>           
-                <Link to="/" className="btn btn-default navbar-btn"><i class="fas fa-sign-out-alt"></i> Wyloguj </Link>
+                <button className="btn btn-default navbar-btn"   
+                        onClick={this.props.changeStatus}
+                >
+                    <i class="fas fa-sign-out-alt"></i> 
+                    Wyloguj 
+                </button>
             </nav>
             
         );
     }
 }
+
+const mapStateToProps = status => {
+    return {
+        status,
+    };
+  };
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+        changeStatus: () => dispatch({ type: 'OFFLINE'}),
+    };
+  };
+  
+  export default connect (mapStateToProps,mapDispatchToProps)(Header);

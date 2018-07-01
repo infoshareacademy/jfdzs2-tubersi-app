@@ -10,14 +10,12 @@ const reducer = (
       status: false,
   }, action) => {
   switch (action.type) {
-            case 'ONLINE':
-          return {
+          case 'ONLINE':
+            return {
               status: true,
           };
       case 'OFFLINE':
-          return {
-            status: false,
-          }
+          window.location = '/';
       default:
           return state;
   }

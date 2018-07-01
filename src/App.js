@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import SignIn from './routes/signIn/signIn';
 import SignUp from "./routes/signUp/signUp";
-import Layout from './components/layout/layout';
+import Layout from './components/layout/layout.js';
 import NotFound from './routes/notFound/notFound.js';
 
 import './App.css';
@@ -15,13 +15,30 @@ class App extends Component {
       <BrowserRouter>
           <div className="container-fluid">
             <div className="row">
-           <Layout/>
-               {/* <Switch>
-                <Route exact path="/" component={SignUp} /> 
-                <Route path="/signIn" component={SignIn}/>
-                <Route path="/layout" component={Layout}/>
-                <Route path='*' exact={true} component={NotFound} />
-              </Switch>  */}
+                <Switch>
+                  <Route exact path="/" render={() => (
+                    this.props.status.status ? (
+                        <Redirect to="/layout"/>
+                      ) : (
+                        <SignUp/>
+                      )
+                  )} /> 
+                  <Route path="/signIn" render={() => (
+                      this.props.status.status ? (
+                        <Redirect to="/layout"/>
+                      ) : (
+                        <SignIn/>
+                      )
+                  )}/>
+                  <Route path='/layout' render={() => (
+                      this.props.status.status ? (
+                        <Layout/>
+                      ) : (
+                        <NotFound/>
+                      )
+                  )}/>
+                  <Route path='*' exact={true} component={NotFound} />
+                </Switch> 
             </div>
           </div>
       </BrowserRouter>
