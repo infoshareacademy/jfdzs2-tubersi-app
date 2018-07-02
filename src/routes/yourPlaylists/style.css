@@ -30,6 +30,23 @@
     background-color: rgb(220, 220, 220);
 }
 
+.playlist-empty {
+    background-color: #2D2E32;
+    opacity: 0.9;
+    float: left;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 50px;
+    border-radius: 5px;
+    height: 200px;
+}
+
+.playlist-empty-text {
+    color: #fff;
+    font-size: 15px;
+    margin-top: 50px;
+}
+
 .playlists-item{
     margin-top: 10px;
     border-radius: 10px; 
@@ -104,4 +121,14 @@
     .content-playlists-options-add {
         width: 50%;
     }
+
+    .playlist-empty  {
+        width: 50%;
+        margin-left: 25%;
+    }
+
+    .playlist-empty-text {
+        font-size: 15px;
+    }
+    
 }

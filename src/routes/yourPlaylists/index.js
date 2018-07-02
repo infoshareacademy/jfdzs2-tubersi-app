@@ -76,7 +76,15 @@ class YourPlaylists extends PureComponent {
                 </div>
               )
             })
-            :null
+            :
+            <div className="playlist-empty">
+              <p className="playlist-empty-text">
+                Aktualnie nie masz żadnej playlisty!
+              </p> 
+              <p className="playlist-empty-text">
+                Dodaj nową playlistę i wczuj się w rytm muzyki!
+              </p>
+            </div>
           :null
         }    
       </div>
