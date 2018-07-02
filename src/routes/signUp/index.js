@@ -2,7 +2,6 @@ import React, { PureComponent} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 
-import fire from '../../config/index.js';
 import UserNotAuthorized from '../../components/user-not-authorized';
 
 import './style.css';
@@ -23,7 +22,7 @@ class SignUp extends PureComponent {
 
   tryRegisterAndLogin = (e) => {
     e.preventDefault();
-    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    this.props.firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
     }).then((u)=> {
         this.props.changeStatus(this.state.email);
         this.createNewUser();
@@ -34,7 +33,7 @@ class SignUp extends PureComponent {
   }
 
   createNewUser(userDataBase) {
-    var usersDatabase = fire.database().ref('users');
+    var usersDatabase = this.props.firebase.database().ref('users');
     var data = {
       name: this.state.name,
       email: this.state.email,

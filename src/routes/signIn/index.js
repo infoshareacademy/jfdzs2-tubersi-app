@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'; 
-import fire from '../../config/index.js';
+
 
 import UserNotAuthorized from '../../components/user-not-authorized';
 
@@ -23,14 +23,14 @@ class SignIn extends PureComponent {
 
   tryLogin = (e) => {
     e.preventDefault();
-    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+    this.props.firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     .then({})
     .then((u)=>{
       this.props.changeStatus(this.state.email);
     })
     .catch((error) => {
         console.log(error);
-      });
+      })
   }
 
   render() {

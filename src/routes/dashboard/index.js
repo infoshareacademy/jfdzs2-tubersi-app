@@ -12,7 +12,8 @@ import { AreaChart,
          BarChart, 
          PieChart, 
          Pie, 
-         Cell } from 'recharts';
+         Cell 
+       } from 'recharts';
 import Layout from '../../components/layout';
 import UserAuthorized from '../../components/user-authorised';
 
@@ -46,107 +47,117 @@ class Dashboard extends PureComponent {
     return (
         <Layout>
             <UserAuthorized />
-      <div className="content container-fluid">
-        <div className="row">
-            <div className="col-xs-12">
-            <h1>dashboard</h1>
-            <p>lorem ibsum ble bl ble ble</p>
-                <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
-                    <LineChart width={500} 
-                            height={300} 
-                            data={this.data}
-                            margin={{
-                                top: 5, 
-                                right: 30, 
-                                left: 20, 
-                                bottom: 5
-                                }}
-                    >
-                        <XAxis dataKey="name"/>
-                        <YAxis/>
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <Tooltip/>
-                        <Legend />
-                        <Line type="monotone" 
-                            dataKey="pv" 
-                            stroke="#8884d8" 
-                            activeDot={{r: 8}}
-                        />
-                        <Line type="monotone" 
-                            dataKey="uv" 
-                            stroke="#82ca9d" 
-                        />
-                    </LineChart>
-                </div>
-                <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
-                    <BarChart width={500} 
-                            height={300} 
-                            data={this.data}
-                            margin={{
-                                top: 5, 
-                                right: 30, 
-                                left: 20, 
-                                bottom: 5
-                                }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <XAxis dataKey="name"/>
-                        <YAxis/>
-                        <Tooltip/>
-                        <Legend />
-                        <Bar dataKey="pv" 
-                            fill="#8884d8" 
-                        />
-                        <Bar dataKey="uv" 
-                            fill="#82ca9d" 
-                        />
-                    </BarChart>
-                </div>
-                <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
-                    <PieChart width={500} 
-                            height={300} 
-                            onMouseEnter={this.onPieEnter} 
-                    >
-                        <Pie
-                            data={this.data2}
-                            cx={250}
-                            cy={110}
-                            outerRadius={100}
-                            fill="#8884d8"
-                            label
-                        >
-                            {
-                                this.data2.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
-                            }
-                        </Pie>
-                    </PieChart>
-                </div>
-                <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
-                    <AreaChart width={500} 
-                            height={300} 
-                            data={this.data}
-                            margin={{
-                                top: 10, 
-                                right: 30, 
-                                left: 0, 
-                                bottom: 0
-                                }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <XAxis dataKey="name"/>
-                        <YAxis/>
-                        <Tooltip/>
-                        <Area type='monotone' 
-                            dataKey='uv' 
-                            stroke='#8884d8' 
-                            fill='#8884d8' 
-                        />
-                    </AreaChart>
+            <div className="content container-fluid">
+                <div className="row">
+                    <div className="col-xs-12">
+                        <h1>dashboard</h1>
+                        <p>lorem ibsum ble bl ble ble</p>
+                        <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
+                            <LineChart 
+                                width={500} 
+                                height={300} 
+                                data={this.data}
+                                margin={{
+                                    top: 5, 
+                                    right: 30, 
+                                    left: 20, 
+                                    bottom: 5
+                                        }}
+                            >
+                                <XAxis dataKey="name"/>
+                                <YAxis/>
+                                <CartesianGrid strokeDasharray="3 3"/>
+                                <Tooltip/>
+                                <Legend />
+                                <Line 
+                                    type="monotone" 
+                                    dataKey="pv" 
+                                    stroke="#8884d8" 
+                                    activeDot={{r: 8}}
+                                />
+                                <Line 
+                                    type="monotone" 
+                                    dataKey="uv" 
+                                    stroke="#82ca9d" 
+                                />
+                            </LineChart>
+                        </div>
+                        <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
+                            <BarChart 
+                                width={500} 
+                                height={300} 
+                                data={this.data}
+                                margin={{
+                                    top: 5, 
+                                    right: 30, 
+                                    left: 20, 
+                                    bottom: 5
+                                        }}
+                            >
+                                <CartesianGrid strokeDasharray="3 3"/>
+                                <XAxis dataKey="name"/>
+                                <YAxis/>
+                                <Tooltip/>
+                                <Legend />
+                                <Bar 
+                                    dataKey="pv" 
+                                    fill="#8884d8" 
+                                />
+                                <Bar 
+                                    dataKey="uv" 
+                                    fill="#82ca9d" 
+                                />
+                            </BarChart>
+                        </div>
+                        <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
+                            <PieChart 
+                                width={500} 
+                                height={300} 
+                                onMouseEnter={this.onPieEnter} 
+                            >
+                                <Pie
+                                    data={this.data2}
+                                    cx={250}
+                                    cy={110}
+                                    outerRadius={100}
+                                    fill="#8884d8"
+                                    label
+                                >
+                                    {
+                                        this.data2.map((entry, index) => 
+                                            <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
+                                    }
+                                </Pie>
+                            </PieChart>
+                        </div>
+                        <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
+                            <AreaChart 
+                                width={500} 
+                                height={300} 
+                                data={this.data}
+                                margin={{
+                                    top: 10, 
+                                    right: 30, 
+                                    left: 0, 
+                                    bottom: 0
+                                        }}
+                            >
+                                <CartesianGrid strokeDasharray="3 3"/>
+                                <XAxis dataKey="name"/>
+                                <YAxis/>
+                                <Tooltip/>
+                                <Area 
+                                    type='monotone' 
+                                    dataKey='uv' 
+                                    stroke='#8884d8' 
+                                    fill='#8884d8' 
+                                />
+                            </AreaChart>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    </Layout>
+        </Layout>
     );
   }
 }

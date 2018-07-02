@@ -10,7 +10,10 @@ class Layout extends PureComponent {
   constructor(props){
     super(props);
     this.state ={
-        visible: false
+        visible: false,
+        firebase: null,
+        database: null,
+        
     };
   }
 
@@ -36,7 +39,7 @@ class Layout extends PureComponent {
           <div className="layout">
             {this.props.children}
           </div> 
-          <Footer/>
+          <Footer />
         </div>
       </div>
     );
