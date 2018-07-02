@@ -95,7 +95,14 @@ class YourPlaylists extends PureComponent {
                 Dodaj nową playlistę i wczuj się w rytm muzyki!
               </p>
             </div>
-          :null
+          :
+          <div className="playlist-loading">
+            <div class="spinner">
+              <div class="double-bounce1"/>
+              <div class="double-bounce2"/>
+            </div>
+            <p className="playlist-loading-text">Wczytuje...</p>
+          </div>
         }    
       </div>
       </Layout>

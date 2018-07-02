@@ -1,3 +1,19 @@
+@-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+  }
+  
+  @keyframes sk-bounce {
+    0%, 100% { 
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+    } 50% { 
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+  }
+
+
 .content-playlists{
     padding: 15px;
     text-align: center;
@@ -7,6 +23,7 @@
     height: 100px;
     width: 80%;
     margin-left: 10%;
+    margin-right: 10%;
     color: #f3f3f3;
     opacity: 0.9;
     border-radius: 5px;
@@ -101,6 +118,52 @@
     padding: 3px;
     background-color: #DCDCDC;
 }
+
+.playlist-loading {
+    width: 80%;
+    height: 100px;
+    margin-left: 10%;
+    float: left;
+    margin-top: 150px;
+}
+
+.playlist-loading-text {
+    color: #fff;
+    background-color: #2D2E32;
+    width: 180px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    border-radius: 5px;
+    opacity: 0.9;
+}
+
+.spinner {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .double-bounce1, .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+  
+  .double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
 
 @media only screen and (min-width: 768px) {
     .content-playlist-title-text {
