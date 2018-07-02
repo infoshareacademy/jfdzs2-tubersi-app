@@ -12,16 +12,26 @@ class YourPlaylists extends PureComponent {
     }
   }
 
+  componentDidMount() {
+    if(this.props.dataBaseUsers) {
+      this.setActuallyUser();
+    }
+  }
+
   componentDidUpdate() {
     if(!this.state.actuallyUser) {
-        const retrievedObject = localStorage.getItem('tubersi');
-        var statusTubersi = JSON.parse(retrievedObject);
-        this.setState({
-          actuallyUser: this.props.dataBaseUsers.find((user) => {
-            return user.email === statusTubersi.email; 
-          })
-        })
+       this.setActuallyUser();
     }
+  }
+
+  setActuallyUser = () => {
+    const retrievedObject = localStorage.getItem('tubersi');
+    var statusTubersi = JSON.parse(retrievedObject);
+    this.setState({
+      actuallyUser: this.props.dataBaseUsers.find((user) => {
+        return user.email === statusTubersi.email; 
+      })
+    })
   }
 
   render() {
