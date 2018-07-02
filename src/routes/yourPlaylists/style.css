@@ -39,29 +39,12 @@
 .content-playlists-options-add {
     margin: 0px;
     margin-top: 4px;
-    width: 50%;
+    width: 200px;
     border: unset;
     height: 30px;
     padding: 0px;
     font-size: 15px;
     background-color: rgb(220, 220, 220);
-}
-
-.playlist-empty {
-    background-color: #2D2E32;
-    opacity: 0.9;
-    float: left;
-    width: 80%;
-    margin-left: 10%;
-    margin-top: 50px;
-    border-radius: 5px;
-    height: 200px;
-}
-
-.playlist-empty-text {
-    color: #fff;
-    font-size: 15px;
-    margin-top: 50px;
 }
 
 .playlists-item{
@@ -119,23 +102,21 @@
     background-color: #DCDCDC;
 }
 
-.playlist-loading {
-    width: 80%;
-    height: 100px;
-    margin-left: 10%;
+.playlist-empty {
+    background-color: #2D2E32;
+    opacity: 0.9;
     float: left;
-    margin-top: 150px;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 50px;
+    border-radius: 5px;
+    height: 200px;
 }
 
-.playlist-loading-text {
+.playlist-empty-text {
     color: #fff;
-    background-color: #2D2E32;
-    width: 180px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px;
-    border-radius: 5px;
-    opacity: 0.9;
+    font-size: 15px;
+    margin-top: 50px;
 }
 
 .spinner {
@@ -165,13 +146,38 @@
     animation-delay: -1.0s;
   }
 
+  .playlist-loading {
+    width: 80%;
+    height: 100px;
+    margin-left: 10%;
+    float: left;
+    margin-top: 150px;
+}
+
+.playlist-loading-text {
+    color: #fff;
+    background-color: #2D2E32;
+    width: 180px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    border-radius: 5px;
+    opacity: 0.9;
+}
+
 @media only screen and (min-width: 768px) {
     .content-playlist-title-text {
       font-size: 30px;
     }
 
-    .content-playlists-options-add {
-        width: 50%;
+    .playlist-empty-text {
+        font-size: 20px;
+    }
+    
+    .playlist-loading-text {
+       padding: 20px;
+       font-size: 20px;
+       margin-top: 10px;
     }
 }
 
@@ -181,10 +187,6 @@
         margin-left: 25%;
     }
 
-    .content-playlists-options-add {
-        width: 50%;
-    }
-
     .playlist-empty  {
         width: 50%;
         margin-left: 25%;
@@ -192,6 +194,10 @@
 
     .playlist-empty-text {
         font-size: 15px;
+    }
+
+    .playlist-empty-text {
+        font-size: 20px;
     }
     
 }
