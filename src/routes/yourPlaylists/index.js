@@ -10,9 +10,9 @@ class YourPlaylists extends PureComponent {
     super(props);
     this.state = {
       popUpAddNewPlayList: false,
-      namePlayList: null,
-      typePlayList: null,
-      descriptionPlayList: null,
+      namePlayList: '',
+      typePlayList: '',
+      descriptionPlayList: '',
     }
     this.addNewPlayList = this.addNewPlayList.bind(this);
   }
@@ -173,11 +173,11 @@ class YourPlaylists extends PureComponent {
                     key={index}
                   >
                     <div className="playlists-item animated zoomIn">
-                      <img className="img img-responsive"
+                      <img
                         src={
                           list.image 
                           ||
-                          require('../../images/empty-playlist.jpg')
+                          require('../../images/iTunes-playlist-purple.png')
                         }
                       />
                       <div className="playlists-item-box">
