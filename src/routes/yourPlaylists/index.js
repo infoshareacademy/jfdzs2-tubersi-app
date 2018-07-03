@@ -96,7 +96,6 @@ class YourPlaylists extends PureComponent {
           </div>
           {this.state.popUpAddNewPlayList ?
             <FadeIn>
-              <React.Fragment>
                 <div 
                   className="content-hide-section"
                   onClick={this.changeViewPopUpAddNewPlayList}
@@ -159,7 +158,6 @@ class YourPlaylists extends PureComponent {
                       </button>
                     </div>
                 </div>
-              </React.Fragment>
             </FadeIn>
             :
             null
@@ -173,16 +171,26 @@ class YourPlaylists extends PureComponent {
                     key={index}
                   >
                     <div className="playlists-item animated zoomIn">
-                      <img
+                      <img 
+                        className="img-responsive"
                         src={
                           list.image 
                           ||
                           require('../../images/iTunes-playlist-purple.png')
                         }
+                        style= {{
+                          marginLeft: "auto",
+                          marginRight: "auto",
+                          marginTop: "50px",
+                          height: "250px",
+                          with: "250px",
+                        }}
                       />
                       <div className="playlists-item-box">
                         <div className="playlists-buttons-hover animated fadeIn">
-                          <h3 className="playlists-title">{list.namePlayList}</h3>
+                          <h6 className="playlists-title">
+                            {list.namePlayList}
+                          </h6>
                           <button 
                             className="btn btn-default btn-playlists"
                             type="button"

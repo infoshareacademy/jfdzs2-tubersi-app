@@ -74,7 +74,10 @@ class App extends Component {
             <Route path="/chat" component={Chat} />
             <Route path="/player" component={Player} />
             <Route path="/playlist" component={Playlist} />
-            <Route path="/search" component={Search} />
+            <Route path="/search"  render={() => <Search 
+              actuallyUser = {this.state.actuallyUser} 
+              firebase = {this.state.firebase}
+            />}  />
             <Route 
               path="/your-playlist" 
               render={() => <YourPlaylists 

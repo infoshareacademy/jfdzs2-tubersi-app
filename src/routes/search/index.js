@@ -1,9 +1,9 @@
+import './style.css';
+
 import React, { Fragment, PureComponent } from 'react';
 import FadeIn from 'react-fade-in';
 
 import Layout from '../../components/layout';
-
-import './style.css';
 
 const API = 'AIzaSyBkYpYX86eK2MmpEYTvcvB8Oth1Qfiwxjc'
 const type = 'video'
@@ -13,6 +13,7 @@ export default class Search extends PureComponent {
         super(props);
         this.state = {
             resultYoutube: null,
+            pictureAvatar: null,
             searchTitle: '',
             maxResults: 0,
             showFiltrQuality: false,
@@ -21,8 +22,12 @@ export default class Search extends PureComponent {
             qualityAny: true,
             quality: 'any',
             newSearch: true,
+            visiblePopUpAddVideo: false,
+            chooseVideo: null,
+            choosePlayList: 0,
         };
         this.searchVideo = this.searchVideo.bind(this);
+        this.addVideoToPlayList = this.addVideoToPlayList.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -32,6 +37,7 @@ export default class Search extends PureComponent {
                 newSearch: true,
             })
         }
+        console.log(this.state.choosePlayList);
     }
 
     handleChange = (event) => {
@@ -44,10 +50,12 @@ export default class Search extends PureComponent {
     fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&part=snippet&maxResults=${this.state.maxResults}&q=${this.state.searchTitle}&type=${type}&${type}Definition=${this.state.quality}`)
       .then((response) => response.json())
       .then((responseJson) => {
-        // console.log(responseJson);
         const resultYoutube = responseJson.items.map(obj => "https://www.youtube.com/embed/"+obj.id.videoId);
-        this.setState({resultYoutube});
-        console.log(this.state.resultYoutube);
+        const pictureAvatar = responseJson.items.map(obj => obj.snippet.thumbnails.high.url);
+        this.setState({
+            resultYoutube,
+            pictureAvatar,
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -86,11 +94,132 @@ export default class Search extends PureComponent {
             })
         } 
     }
+
+    chagneViewPopUpAddVideo = (index) => {
+        this.setState({
+            visiblePopUpAddVideo: !this.state.visiblePopUpAddVideo,
+            chooseVideo: index,
+        });
+    }
+
+    changePlayList = (e) => {
+        this.setState({
+            choosePlayList: e.target.value,
+        });
+    }
+
+    addVideoToPlayList() {
+        let newVideo = this.createDataVideo();
+        let userVideo;
+        let database = this.props.firebase.
+            database().ref('users');
+        if(!this.props.actuallyUser.
+                playList[
+                    this.state.choosePlayList
+                ].music) {
+            database.child(this.props.actuallyUser.id)
+                .child('playList')
+                .child(this.state.choosePlayList)
+                .child('image')
+                .set(this.state.pictureAvatar[
+                    this.state.chooseVideo
+                ]);
+
+            userVideo = [
+                newVideo
+            ]
+        }
+        else {
+            userVideo = this.props.actuallyUser
+                .playList[
+                    this.state.choosePlayList
+                ].music;
+            userVideo.push(newVideo);
+        }
+        
+        database.child(this.props.actuallyUser.id)
+            .child('playList')
+            .child(this.state.choosePlayList)
+            .child('music')
+            .set(userVideo);
+    }
+
+    createDataVideo () {
+        return {
+            avatar: this.state.pictureAvatar [
+                this.state.chooseVideo
+            ],
+            urlVideo: this.state.resultYoutube[
+                this.state.chooseVideo
+            ],
+        }
+    }
     
     render() {
         return (
         <Layout>
            <div className="search-content content">
+               {this.state.visiblePopUpAddVideo ?
+                <FadeIn>
+                    <div 
+                        className="search-hide-content" 
+                        onClick={() => {this.chagneViewPopUpAddVideo(null)}}
+                        />
+                    <div className="search-pop-up-content">
+                        {this.props.actuallyUser.playList ?
+                            <React.Fragment>
+                                <div className="search-pop-up-title">
+                                    Wybierz playlistę:
+                                </div>
+                                <div className="form-group">
+                                    <select 
+                                        className="form-control search-option-playlist" 
+                                        id="exampleSelect1"
+                                        onChange={this.changePlayList}
+                                    >
+                                        {this.props.actuallyUser.
+                                            playList.map((list, index) => {
+                                                return <option 
+                                                            key={index}
+                                                            value={index}
+                                                       >
+                                                            {list.namePlayList}
+                                                       </option>
+                                        })}
+                                    </select>
+                                </div>
+                                <button 
+                                    className="btn btn-success search-button-add-video"
+                                    onClick={this.addVideoToPlayList}>
+                                    Dodaj
+                                </button>
+                                <button className="btn btn-warning search-button-delete-video">
+                                    Usuń
+                                </button>            
+                            </React.Fragment>
+                            :
+                            <React.Fragment>
+                            <div className="search-empty-playlist">
+                                Twoja PLAYLISTA jest pusta przejdź do zakładki : "Twoje playlisty".
+                            </div>
+                            <div className="search-empty-playlist">
+                                A następnie wybierz opcje dodawania i wróć ponownie.
+                            </div>
+                            </React.Fragment>
+                        }
+                        <div className="search-pop-up-exit">
+                            <button 
+                                className="search-pop-up-exit-button"
+                                onClick={() => {this.chagneViewPopUpAddVideo(null)}}
+                            >
+                                Zamknij
+                            </button>
+                        </div>
+                    </div>
+                </FadeIn>
+                :
+                null 
+               } 
                <div className="row">
                     <div className="search-content-information">
                         <p className="search-content-information-title">Znajdź utwór i dodaj go do playlisty!</p>
@@ -189,7 +318,7 @@ export default class Search extends PureComponent {
                </div>
                <div className="row">
                     {this.state.resultYoutube ?
-                        this.state.resultYoutube.map((link, index)=>{
+                        this.state.resultYoutube.map((link, index)=> {
                         return  <div key={index} className="col-sm-6 col-md-4">
                                     <div className="row">
                                         <div className="col-md-12">
@@ -206,6 +335,7 @@ export default class Search extends PureComponent {
                                                 </div>
                                                 <button className="btn btn-default btn-playlist"
                                                         type="button"
+                                                        onClick={() => {this.chagneViewPopUpAddVideo(index)}}
                                                 >
                                                     <i className="fas fa-plus"></i>
                                                     Dodaj
@@ -215,7 +345,8 @@ export default class Search extends PureComponent {
                                     </div>
                                 </div>
                     })
-                    :null}
+                    :
+                    null}
                 </div>
                 {this.state.resultYoutube ? 
                      <button className="search-show-more col-lg-4 col-lg-offset-4"
@@ -223,7 +354,8 @@ export default class Search extends PureComponent {
                      >
                         Pokaż Więcej
                      </button>
-                    :null
+                    :
+                    null
                 }
             </div>
         </Layout>

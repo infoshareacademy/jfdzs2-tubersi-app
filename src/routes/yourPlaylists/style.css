@@ -180,7 +180,7 @@
     border-radius: 5px;
 }
 
-.playlists-item-box:hover{
+.playlists-item-box:hover {
     background:none;
     color:inherit
 }
@@ -202,7 +202,7 @@
 .playlists-title{
     color: #f3f3f3;
     font-size: 25px;
-    padding: 15px;
+    padding: 5px;
 }
 
 .btn-playlists{
