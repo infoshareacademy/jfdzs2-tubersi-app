@@ -12,23 +12,25 @@ export default class Firebase extends Component {
             storageBucket: "tubersi-sign-in-sign-out.appspot.com",
             messagingSenderId: "84643872330"
         });  
+        this.databaseUsers = firebase.database().ref('users');
     }
 
     componentDidMount() {
         this.props.setReferenceFirebase(firebase);
-        let databaseUsers = firebase.database().ref('users');
-        databaseUsers.on("value", this.downloadDatabase, this.errData);
+        this.databaseUsers.on("value", this.downloadDatabase, this.errData);
     }
 
     downloadDatabase = (data) => {
-        const retrievedObject = localStorage.getItem('tubersi');
-        var statusTubersi = JSON.parse(retrievedObject);
         let scores = data.val();
         let keys = Object.keys(scores);
         let allScore = [];
         for(let i = 0; i < keys.length; i++) {
+                if(!scores[keys[i]].id) {
+                    this.databaseUsers.child(keys[i]).child('id').set(keys[i]);
+                }
                allScore.push(scores[keys[i]]);
         }
+        this.setActuallyUser(allScore);
         this.props.loadDataBaseUsers(allScore);
     }
 
@@ -39,4 +41,15 @@ export default class Firebase extends Component {
     render() {
         return null;
     }
+    setActuallyUser = (allScore) => {
+        const retrievedObject = localStorage.getItem('tubersi');
+        var statusTubersi = JSON.parse(retrievedObject);
+        if(statusTubersi) {
+            this.props.setActuallyUser(
+                allScore.find((user) => {
+                  return user.email === statusTubersi.email; 
+                })
+              )
+        }
+      }
 }

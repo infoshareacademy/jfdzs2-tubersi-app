@@ -20,6 +20,7 @@ class App extends Component {
     this.state = {
       firebase: null,
       dataBaseUsers: null,
+      actuallyUser: null,
     }
   }
 
@@ -35,12 +36,19 @@ class App extends Component {
     })
   }
 
+  setActuallyUser = (actuallyUser) => {
+    this.setState({
+      actuallyUser
+    })
+  }
+
   render() {
     return ( 
       <React.Fragment> 
         <Firebase 
           setReferenceFirebase = {this.setReferenceFirebase}
           loadDataBaseUsers = {this.loadDataBaseUsers}
+          setActuallyUser = {this.setActuallyUser}
         />
         <BrowserRouter>
           <Switch>
@@ -50,11 +58,18 @@ class App extends Component {
             />
             <Route 
               exact path="/signin" 
-              render={() => <SignIn firebase = {this.state.firebase} />} 
+              render={() => <SignIn 
+                firebase = {this.state.firebase} 
+                setActuallyUser = {this.setActuallyUser}
+                dataBaseUsers = {this.state.dataBaseUsers}
+              />} 
             />
             <Route 
               exact path="/signup" 
-              render={() => <SignUp firebase = {this.state.firebase} />} 
+              render={() => <SignUp 
+                firebase = {this.state.firebase} 
+                setActuallyUser = {this.setActuallyUser}
+              />} 
             />
             <Route path="/chat" component={Chat} />
             <Route path="/player" component={Player} />
@@ -62,7 +77,10 @@ class App extends Component {
             <Route path="/search" component={Search} />
             <Route 
               path="/your-playlist" 
-              render={() => <YourPlaylists dataBaseUsers = {this.state.dataBaseUsers} />} 
+              render={() => <YourPlaylists 
+                  actuallyUser = {this.state.actuallyUser} 
+                  firebase = {this.state.firebase}
+                />} 
             />
             <Route path="*" component={NotFound} />
           </Switch>

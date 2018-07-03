@@ -27,6 +27,15 @@ class SignIn extends PureComponent {
     .then({})
     .then((u)=>{
       this.props.changeStatus(this.state.email);
+      const retrievedObject = localStorage.getItem('tubersi');
+      var statusTubersi = JSON.parse(retrievedObject);
+      if(statusTubersi) {
+          this.props.setActuallyUser(
+              this.props.dataBaseUsers.find((user) => {
+                return user.email === statusTubersi.email; 
+              })
+            )
+        }
     })
     .catch((error) => {
         console.log(error);

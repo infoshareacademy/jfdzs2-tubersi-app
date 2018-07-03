@@ -21,6 +21,7 @@ const reducer = (
       case 'OFFLINE':
           uploadDataToLocalStorage(false);
           window.location = '/';
+          break;
       default:
           return status;
   }
