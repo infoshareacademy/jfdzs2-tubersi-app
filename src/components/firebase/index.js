@@ -38,9 +38,6 @@ export default class Firebase extends Component {
         console.log(err);
     }
 
-    render() {
-        return null;
-    }
     setActuallyUser = (allScore) => {
         const retrievedObject = localStorage.getItem('tubersi');
         var statusTubersi = JSON.parse(retrievedObject);
@@ -51,5 +48,9 @@ export default class Firebase extends Component {
                 })
               )
         }
-      }
+    }
+
+    render() {
+        return null;
+    }
 }

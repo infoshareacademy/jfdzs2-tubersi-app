@@ -1,6 +1,6 @@
 import './style.css';
 
-import React, { Fragment, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import FadeIn from 'react-fade-in';
 
 import Layout from '../../components/layout';
@@ -14,6 +14,7 @@ export default class Search extends PureComponent {
         this.state = {
             resultYoutube: null,
             pictureAvatar: null,
+            titleVideo: null,
             searchTitle: '',
             maxResults: 0,
             showFiltrQuality: false,
@@ -23,7 +24,6 @@ export default class Search extends PureComponent {
             quality: 'any',
             newSearch: true,
             visiblePopUpAddVideo: false,
-            chooseVideo: null,
             choosePlayList: 0,
         };
         this.searchVideo = this.searchVideo.bind(this);
@@ -37,7 +37,6 @@ export default class Search extends PureComponent {
                 newSearch: true,
             })
         }
-        console.log(this.state.choosePlayList);
     }
 
     handleChange = (event) => {
@@ -52,9 +51,11 @@ export default class Search extends PureComponent {
       .then((responseJson) => {
         const resultYoutube = responseJson.items.map(obj => "https://www.youtube.com/embed/"+obj.id.videoId);
         const pictureAvatar = responseJson.items.map(obj => obj.snippet.thumbnails.high.url);
+        const titleVideo = responseJson.items.map(obj => obj.snippet.title);
         this.setState({
             resultYoutube,
             pictureAvatar,
+            titleVideo,
         });
       })
       .catch((error) => {
@@ -95,26 +96,20 @@ export default class Search extends PureComponent {
         } 
     }
 
-    chagneViewPopUpAddVideo = (index) => {
-        this.setState({
-            visiblePopUpAddVideo: !this.state.visiblePopUpAddVideo,
-            chooseVideo: index,
-        });
-    }
-
     changePlayList = (e) => {
         this.setState({
             choosePlayList: e.target.value,
         });
     }
 
-    addVideoToPlayList() {
-        let newVideo = this.createDataVideo();
+    addVideoToPlayList(index) {
+        let newVideo = this.createDataVideo(index);
         let userVideo;
-        let database = this.props.firebase.
-            database().ref('users');
-        if(!this.props.actuallyUser.
-                playList[
+        let database = 
+            this.props.firebase
+                .database().ref('users');
+        if(!this.props.actuallyUser
+                .playList[
                     this.state.choosePlayList
                 ].music) {
             database.child(this.props.actuallyUser.id)
@@ -122,7 +117,7 @@ export default class Search extends PureComponent {
                 .child(this.state.choosePlayList)
                 .child('image')
                 .set(this.state.pictureAvatar[
-                    this.state.chooseVideo
+                    index
                 ]);
 
             userVideo = [
@@ -144,34 +139,96 @@ export default class Search extends PureComponent {
             .set(userVideo);
     }
 
-    createDataVideo () {
+    deleteVideo(index) {
+        let filterVideoToDelete;
+        let database = 
+            this.props.firebase
+                .database().ref('users');
+        filterVideoToDelete = 
+            this.props.actuallyUser
+            .playList[
+                this.state.choosePlayList
+            ]
+            .music.filter((music) => {
+                return this.state.titleVideo [
+                    index
+                ] !== music.title;
+            })
+        database.child(this.props.actuallyUser.id)
+            .child('playList')
+            .child(this.state.choosePlayList)
+            .child('music')
+            .set(filterVideoToDelete);  
+    }
+
+    createDataVideo(index) {
         return {
             avatar: this.state.pictureAvatar [
-                this.state.chooseVideo
+                index
             ],
-            urlVideo: this.state.resultYoutube[
-                this.state.chooseVideo
+            urlVideo: this.state.resultYoutube [
+                index
+            ],
+            title: this.state.titleVideo [
+                index
             ],
         }
+    }
+
+    renderButonAddVideo(index) {
+        return (
+            <button 
+                className="btn btn-default btn-playlist"
+                type="button"
+                onClick={() => {this.addVideoToPlayList(index)}}
+            >
+                <i className="fas fa-plus"></i>
+                Dodaj
+            </button>
+        )
+    }
+
+    renderButtonRemoveVideo(index) {
+        return (
+            <button 
+                className="btn btn-default btn-playlist"
+                type="button"
+                onClick={() => {this.deleteVideo(index)}}
+            >
+                <i className="fas fa-trash-alt"></i>
+                Usuń
+            </button>
+        )
+    }
+
+    checkAlreadyMusic(index) {
+        return this.props.actuallyUser.playList[
+            this.state.choosePlayList
+        ]
+        .music.find((music) => {
+            return music.title === this.state.titleVideo [
+                index
+            ]
+        }) 
+        ?
+        this.renderButtonRemoveVideo(index)
+        :
+        this.renderButonAddVideo(index);
     }
     
     render() {
         return (
         <Layout>
            <div className="search-content content">
-               {this.state.visiblePopUpAddVideo ?
-                <FadeIn>
-                    <div 
-                        className="search-hide-content" 
-                        onClick={() => {this.chagneViewPopUpAddVideo(null)}}
-                        />
-                    <div className="search-pop-up-content">
-                        {this.props.actuallyUser.playList ?
+               <div className="row">
+                    {this.props.actuallyUser ?
+                        this.props.actuallyUser.playList ?
                             <React.Fragment>
-                                <div className="search-pop-up-title">
-                                    Wybierz playlistę:
+                                <div className="search-content-information">
+                                    <p className="search-content-information-title">Znajdź utwór i dodaj go do playlisty!</p>
                                 </div>
-                                <div className="form-group">
+                                <div className="search-playlist-content">
+                                    <p className="search-playlist-content-text">Wybierz Playlistę:</p>
                                     <select 
                                         className="form-control search-option-playlist" 
                                         id="exampleSelect1"
@@ -188,133 +245,116 @@ export default class Search extends PureComponent {
                                         })}
                                     </select>
                                 </div>
-                                <button 
-                                    className="btn btn-success search-button-add-video"
-                                    onClick={this.addVideoToPlayList}>
-                                    Dodaj
-                                </button>
-                                <button className="btn btn-warning search-button-delete-video">
-                                    Usuń
-                                </button>            
+                                <div className="search-content-search">
+                                    <input  className="search-content-search-input"
+                                            value={this.state.searchTitle}
+                                            onChange={this.handleChange}
+                                            type="text"
+                                            name="text"
+                                            placeholder="Szukaj"
+                                            onKeyDown={(e) => {
+                                                if(e.keyCode === 13) {
+                                                    this.setState({
+                                                        maxResults: 9,
+                                                        newSearch: false,
+                                                    })
+                                            }
+                                        }}  
+                                    />
+                                    <span className="search-content-row-form-contain">
+                                        <span className="search-content-row-form-contain-icon glyphicon glyphicon-search"
+                                            onClick={() => {
+                                                this.setState({
+                                                    maxResults: 9,
+                                                    newSearch: false,
+                                                })
+                                            }}     
+                                        >
+                                        </span>
+                                    </span>
+                                </div>
+                                {this.state.showFiltrQuality ?
+                                    <FadeIn>
+                                    <div className="search-filter-contain">
+                                         <p className="search-filter-contain-title">
+                                             Wybierz jakość filmów!
+                                         </p>
+                                         <div className="search-filter-contain-checkboxs">
+                                             <span className="search-filter-contain-text">
+                                                 Niska
+                                             </span> 
+                                             <input className="search-filter-contain-checkbox"
+                                                     type="checkbox"
+                                                     name="any"
+                                                     checked={this.state.qualityAny}
+                                                     onChange={this.setQualityVideo}
+                                              />
+                                              <span className="search-filter-contain-text">
+                                                 Średnia
+                                              </span>
+                                              <input className="search-filter-contain-checkbox"
+                                                     type="checkbox"
+                                                     name="standard"
+                                                     checked={this.state.qualityStandard}
+                                                     onChange={this.setQualityVideo}
+                                              />
+                                              <span className="search-filter-contain-text">
+                                                 Wysoka
+                                              </span>
+                                              <input className="search-filter-contain-checkbox"
+                                                     type="checkbox"
+                                                     name="high"
+                                                     checked={this.state.qualityHigh}
+                                                     onChange={this.setQualityVideo}         
+                                              />
+                                         </div>
+                                    </div>
+                                    </FadeIn>
+                                    :null}
+                                    <div 
+                                        className="search-filter-toggle"
+                                        onClick={()=>{this.setState({
+                                            showFiltrQuality: !this.state.showFiltrQuality,
+                                        })}}
+                                    >
+                                        <span className="search-filter-toggle-arrow-left glyphicon glyphicon-chevron-up"
+                                            style={
+                                                this.state.showFiltrQuality ?
+                                                {transform: "rotate(180deg)"}
+                                                :{transform: "rotate(0deg)"}
+                                            }
+                                        >
+                                        </span>          
+                                        <span className="search-filter-toggle-title">
+                                            Filtry
+                                        </span>
+                                        <span className="search-filter-toggle-arrow-right glyphicon glyphicon-chevron-up"
+                                            style={
+                                                this.state.showFiltrQuality ?
+                                                    {transform: "rotate(180deg)"}
+                                                    :{transform: "rotate(0deg)"}
+                                            }
+                                        >
+                                        </span>
+                                    </div>
                             </React.Fragment>
                             :
-                            <React.Fragment>
                             <div className="search-empty-playlist">
-                                Twoja PLAYLISTA jest pusta przejdź do zakładki : "Twoje playlisty".
+                                <div className="search-empty-playlist-contain">
+                                    <p className="search-empty-text">
+                                        Aktualnie nie posiadasz playlisty!
+                                    </p>
+                                    <p className="search-empty-text">
+                                        Przejdź do zakładki "Twoja Playlista"
+                                    </p>
+                                    <p className="search-empty-text">
+                                        Utwórz nową a następnie wróć i dodaj muzykę"
+                                    </p>
+                                </div>
                             </div>
-                            <div className="search-empty-playlist">
-                                A następnie wybierz opcje dodawania i wróć ponownie.
-                            </div>
-                            </React.Fragment>
-                        }
-                        <div className="search-pop-up-exit">
-                            <button 
-                                className="search-pop-up-exit-button"
-                                onClick={() => {this.chagneViewPopUpAddVideo(null)}}
-                            >
-                                Zamknij
-                            </button>
-                        </div>
-                    </div>
-                </FadeIn>
-                :
-                null 
-               } 
-               <div className="row">
-                    <div className="search-content-information">
-                        <p className="search-content-information-title">Znajdź utwór i dodaj go do playlisty!</p>
-                    </div>
-                    <div className="search-content-search">
-                        <input  className="search-content-search-input"
-                                value={this.state.searchTitle}
-                                onChange={this.handleChange}
-                                type="text"
-                                name="text"
-                                placeholder="Szukaj"
-                                onKeyDown={(e) => {
-                                    if(e.keyCode === 13) {
-                                        this.setState({
-                                            maxResults: 9,
-                                            newSearch: false,
-                                        })
-                                }
-                            }}  
-                        />
-                        <span className="search-content-row-form-contain">
-                            <span className="search-content-row-form-contain-icon glyphicon glyphicon-search"
-                                  onClick={() => {
-                                      this.setState({
-                                          maxResults: 9,
-                                          newSearch: false,
-                                      })
-                                  }}     
-                            >
-                            </span>
-                        </span>
-                   </div>
-                   {this.state.showFiltrQuality ?
-                   <FadeIn>
-                   <div className="search-filter-contain">
-                        <p className="search-filter-contain-title">
-                            Wybierz jakość filmów!
-                        </p>
-                        <div className="search-filter-contain-checkboxs">
-                            <span className="search-filter-contain-text">
-                                Niska
-                            </span> 
-                            <input className="search-filter-contain-checkbox"
-                                    type="checkbox"
-                                    name="any"
-                                    checked={this.state.qualityAny}
-                                    onChange={this.setQualityVideo}
-                             />
-                             <span className="search-filter-contain-text">
-                                Średnia
-                             </span>
-                             <input className="search-filter-contain-checkbox"
-                                    type="checkbox"
-                                    name="standard"
-                                    checked={this.state.qualityStandard}
-                                    onChange={this.setQualityVideo}
-                             />
-                             <span className="search-filter-contain-text">
-                                Wysoka
-                             </span>
-                             <input className="search-filter-contain-checkbox"
-                                    type="checkbox"
-                                    name="high"
-                                    checked={this.state.qualityHigh}
-                                    onChange={this.setQualityVideo}         
-                             />
-                        </div>
-                   </div>
-                   </FadeIn>
-                   :null}
-                   <div className="search-filter-toggle"
-                        onClick={()=>{this.setState({
-                            showFiltrQuality: !this.state.showFiltrQuality,
-                        })}}
-                   >
-                        <span className="search-filter-toggle-arrow-left glyphicon glyphicon-chevron-up"
-                              style={
-                                  this.state.showFiltrQuality ?
-                                  {transform: "rotate(180deg)"}
-                                  :{transform: "rotate(0deg)"}
-                              }
-                        >
-                        </span>          
-                        <span className="search-filter-toggle-title">
-                            Filtry
-                        </span>
-                        <span className="search-filter-toggle-arrow-right glyphicon glyphicon-chevron-up"
-                              style={
-                                 this.state.showFiltrQuality ?
-                                    {transform: "rotate(180deg)"}
-                                    :{transform: "rotate(0deg)"}
-                              }
-                        >
-                        </span>
-                   </div>
+                        :
+                        null
+                   }
                </div>
                <div className="row">
                     {this.state.resultYoutube ?
@@ -333,13 +373,14 @@ export default class Search extends PureComponent {
                                                     >
                                                     </iframe>
                                                 </div>
-                                                <button className="btn btn-default btn-playlist"
-                                                        type="button"
-                                                        onClick={() => {this.chagneViewPopUpAddVideo(index)}}
-                                                >
-                                                    <i className="fas fa-plus"></i>
-                                                    Dodaj
-                                                </button>
+                                                {this.props.actuallyUser.playList[
+                                                    this.state.choosePlayList
+                                                ].music ?
+                                                    this.checkAlreadyMusic(index)
+                                                    :
+                                                    this.renderButonAddVideo(index)
+                                                }
+                                                
                                             </div>
                                         </div>
                                     </div>

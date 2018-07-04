@@ -1,68 +1,3 @@
-.search-hide-content {
-    position: fixed;
-    opacity: 0.7;
-    top: 0px;
-    right: 0px;
-    height: 100%;
-    width: 100%;
-    z-index: 4;
-    background-color: black;
-}
-
-.search-hide-content:hover {
-    cursor: pointer;
-}
-
-.search-pop-up-content {
-    z-index: 5;
-    position: fixed;
-    top: 15%;
-    right: 10%;
-    height: 70%;
-    width: 80%;
-    background-color: #2D2E32;
-    border-radius: 15px;
-}
-
-.search-pop-up-title {
-    color: #fff;
-    opacity: 0.7;
-    font-size: 25px;
-    margin-top: 25px;
-}
-
-.search-option-playlist {
-    width: 40%;
-    margin-left: 30%;
-    margin-top: 50px;
-}
-
-.search-empty-playlist {
-    color: #fff;
-    opacity: 0.7;
-    font-size: 25px;
-    margin-top: 25px;
-}
-
-.search-button-add-video,
-.search-button-delete-video {
-    margin-top: 20px;
-}
-
-.search-pop-up-exit {
-    position: absolute;
-    bottom: 50px;
-    width: 100%;
-    height: 20px;
-    font-size: 10px;
-    line-height: 0px;
-}
-
-.search-pop-up-exit-button {
-    width: 250px;
-    background-color: rgb(221, 221, 221);
-}
-
 .search-content-information { 
     height: 40px;
     border-radius: 15px;
@@ -76,6 +11,26 @@
     opacity: 0.7;
     font-size: 12px;
     line-height: 40px;
+}
+.search-playlist-content {
+    width: 70%;
+    margin-left: 15%;
+    background-color: rgb(45, 46, 50);
+    margin-top: 25px;
+    border-radius: 15px;
+    height: 100px;
+}
+
+.search-playlist-content-text {
+    color: #fff;
+    opacity: 0.7;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.search-option-playlist {
+    width: 80%;
+    margin-left: 10%;
 }
 
 .search-content-search {
@@ -177,40 +132,51 @@
     opacity: 0.7;
 }
 
+.search-empty-playlist {
+    background-color: rgb(45, 46, 50);
+    width: 80%;
+    height: 400px;
+    margin-top: 25px;
+    margin-left: 10%;
+    color: #fff;
+    opacity: 0.7;
+    font-size: 20px;
+    position: relative;
+    border-radius: 15px;
+}
+
+.search-empty-playlist-contain {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.search-empty-text {
+    margin-top: 50px;
+}
+
 .search-show-more {
     background-color: rgb(221, 221, 221);
     height: 40px;
     padding: 0px;
 }
+
 @media only screen and (min-width: 768px){
+    .search-empty-text {
+        margin-top: 70px;
+    }
+
     .search-empty-playlist {
         margin-top: 150px;
-    }
-
-    .search-pop-up-content {
-        top: 25%;
-        right: 25%;
-        height: 50%;
-        width: 50%;
-    }
-
-    .search-button-add-video,
-    .search-button-delete-video {
-        width: 40%;
     }
 }
 
 @media only screen and (min-width: 1024px) {
-    .search-pop-up-content {
-        top: 25%;
-        right: 25%;
-        height: 50%;
-        width: 50%;
-    }
 
-    .search-button-add-video,
-    .search-button-delete-video {
-        width: 40%;
+    .search-empty-playlist {
+        width: 650px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .search-content-information { 
@@ -219,6 +185,17 @@
         background-color: rgb(45, 46, 50);
         width: 40%;
         margin-left: 30%;
+    }
+
+    .search-playlist-content {
+        width: 40%;
+        margin-left: 30%;
+    }
+
+    .search-option-playlist {
+        width: 320px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .search-content-information-title {
