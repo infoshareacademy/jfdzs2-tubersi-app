@@ -14,8 +14,8 @@ class YourPlaylists extends PureComponent {
       namePlayList: '',
       typePlayList: '',
       descriptionPlayList: '',
-      sectionChosenPlayList: true,
-      numberChoosePlaylist: 2,
+      sectionChosenPlayList: false,
+      numberChoosePlaylist: null,
     }
     this.addNewPlayList = this.addNewPlayList.bind(this);
   }
