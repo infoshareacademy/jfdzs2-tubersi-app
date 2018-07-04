@@ -217,17 +217,21 @@ export default class Search extends PureComponent {
                         this.props.actuallyUser.playList ?
                             <React.Fragment>
                                 <div className="search-content-information">
-                                    <p className="search-content-information-title">Znajdź utwór i dodaj go do playlisty!</p>
+                                    <p className="search-content-information-title">
+                                        Znajdź utwór i dodaj go do playlisty!
+                                    </p>
                                 </div>
                                 <div className="search-playlist-content">
-                                    <p className="search-playlist-content-text">Wybierz Playlistę:</p>
+                                    <p className="search-playlist-content-text">
+                                        Wybierz Playlistę:
+                                    </p>
                                     <select 
                                         className="form-control search-option-playlist" 
                                         id="exampleSelect1"
                                         onChange={this.changePlayList}
                                     >
-                                        {this.props.actuallyUser.
-                                            playList.map((list, index) => {
+                                        {this.props.actuallyUser
+                                            .playList.map((list, index) => {
                                                 return <option 
                                                             key={index}
                                                             value={index}

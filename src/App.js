@@ -6,7 +6,6 @@ import SignUp from "./routes/signUp";
 import Chat from './routes/chat';
 import Dashboard from './routes/dashboard';
 import Player from './routes/player';
-import Playlist from './routes/playlist';
 import Search from './routes/search';
 import YourPlaylists from './routes/yourPlaylists';
 import NotFound from './routes/notFound';
@@ -73,7 +72,6 @@ class App extends Component {
             />
             <Route path="/chat" component={Chat} />
             <Route path="/player" component={Player} />
-            <Route path="/playlist" component={Playlist} />
             <Route path="/search"  render={() => <Search 
               actuallyUser = {this.state.actuallyUser} 
               firebase = {this.state.firebase}

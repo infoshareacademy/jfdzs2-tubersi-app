@@ -4,6 +4,7 @@ import FadeIn from 'react-fade-in';
 import Layout from '../../components/layout';
 
 import './style.css';
+import './playlist-style.css';
 
 class YourPlaylists extends PureComponent {
   constructor(props) {
@@ -13,6 +14,8 @@ class YourPlaylists extends PureComponent {
       namePlayList: '',
       typePlayList: '',
       descriptionPlayList: '',
+      sectionChosenPlayList: false,
+      numberChoosePlaylist: null,
     }
     this.addNewPlayList = this.addNewPlayList.bind(this);
   }
@@ -78,10 +81,82 @@ class YourPlaylists extends PureComponent {
       .set(playList);    
   }
 
+  chosenPlayList = () => {
+    let actuallyPlaylist;
+    if(this.props.actuallyUser) {
+      actuallyPlaylist =
+        this.props.actuallyUser.playList[
+          this.state.numberChoosePlaylist
+        ];
+    }
+
+    return this.props.actuallyUser 
+      ? 
+      <div className="section-playlist">
+        <div 
+          className="section-exit"
+        >
+          <span 
+            className="section-exit-text"
+            onClick={() => {
+              this.setState({
+                sectionChosenPlayList: false,
+                numberChoosePlaylist: null,
+              })
+            }}
+          >
+            Zamknij [
+            <span className="content-exit-icon glyphicon glyphicon-remove"/>
+            ]
+          </span>
+          <div className="content-underline">
+            <div className="content-underline-line"/>
+          </div>  
+        </div>
+        
+        <div className="section-playlist-main">
+            <div className="section-playlist-main-image">
+              <img 
+                className="section-playlist-main-image-avatar"
+                alt="avatar-play-list"
+                src={
+                  actuallyPlaylist.music[
+                    0
+                  ]
+                  .avatar
+                }
+              />
+              <div className="section-playlist-main-image-title">
+                {actuallyPlaylist.typePlayList}
+              </div>   
+            </div>
+            <div className="section-playlist-main-description">
+                <p className="section-playlist-main-description-title">
+                  PLAYLIST
+                </p>
+                <p className="section-playlist-main-description-nameplaylist">
+                  {actuallyPlaylist.namePlayList}
+                </p>
+                <p className="section-playlist-main-description-description">
+                  {actuallyPlaylist.descriptionPlayList}
+                </p>
+                <p className="section-playlist-main-description-information">
+                  Created by: Eryk . 133 songs, 8 hr 13 min
+                </p>
+            </div>
+          </div>
+      </div>
+      :
+      null;
+  }
+
   render() {
     return (
       <Layout>
-        <div className="content-playlists">
+        {this.state.sectionChosenPlayList ?
+          this.chosenPlayList()
+          :
+          <div className="content-playlists">
           <div className="content-playlist-title">
             <h1 className="content-playlist-title-text">
               TWOJA PLAYLISTA
@@ -166,60 +241,67 @@ class YourPlaylists extends PureComponent {
             this.props.actuallyUser.playList ?
               this.props.actuallyUser.playList.map((list, index) => {
                 return (
-                  <div 
-                    className="col-xs-12 col-md-6"
-                    key={index}
-                  >
-                    <div className="playlists-item animated zoomIn">
-                      <img 
-                        className="img-responsive"
-                        src={
-                          list.music ?
-                            list.music[0].avatar
-                            :
-                            null 
-                          ||
-                          require('../../images/iTunes-playlist-purple.png')
-                        }
-                        style= {{
-                          marginLeft: "auto",
-                          marginRight: "auto",
-                          marginTop: "50px",
-                          height: "250px",
-                          with: "250px",
-                        }}
-                      />
-                      <div className="playlists-item-box">
-                        <div className="playlists-buttons-hover animated fadeIn">
-                          <h6 className="playlists-title">
-                            {list.namePlayList}
-                          </h6>
-                          <button 
-                            className="btn btn-default btn-playlists"
-                            type="button"
-                          >
-                            <i className="fab fa-youtube" />
-                            Przejdź
-                          </button>
-                          <button  
-                            className="btn btn-default btn-playlists"
-                            type="button"
-                          >
-                            <i className="fas fa-share-alt" />
-                            Udostepnij
-                          </button>
-                          <button 
-                            className="btn btn-default btn-playlists"
-                            type="button"
-                            onClick={() => {this.deletePlayList(index)}}
-                          >
-                            <i className="fas fa-trash-alt" />
-                            Usuń
-                          </button>
+                      <div 
+                        className="col-xs-12 col-md-6"
+                        key={index}
+                      >
+                        <div className="playlists-item animated zoomIn">
+                          <img 
+                            className="img-responsive"
+                            alt={index + 'avatar'}
+                            src={
+                              list.music ?
+                                list.music[0].avatar
+                                :
+                                null 
+                              ||
+                              require('../../images/iTunes-playlist-purple.png')
+                            }
+                            style= {{
+                              marginLeft: "auto",
+                              marginRight: "auto",
+                              marginTop: "50px",
+                              height: "250px",
+                              with: "250px",
+                            }}
+                          />
+                          <div className="playlists-item-box">
+                            <div className="playlists-buttons-hover animated fadeIn">
+                              <h6 className="playlists-title">
+                                {list.namePlayList}
+                              </h6>
+                              <button 
+                                className="btn btn-default btn-playlists"
+                                type="button"
+                                onClick={() => {
+                                  this.setState({
+                                    sectionChosenPlayList: true,
+                                    numberChoosePlaylist: index,
+                                  })
+                                }}
+                              >
+                                <i className="fab fa-youtube" />
+                                Przejdź
+                              </button>
+                              <button  
+                                className="btn btn-default btn-playlists"
+                                type="button"
+                              >
+                                <i className="fas fa-share-alt" />
+                                Udostępnij
+                              </button>
+                              <button 
+                                className="btn btn-default btn-playlists"
+                                type="button"
+                                onClick={() => {this.deletePlayList(index)}}
+                              >
+                                <i className="fas fa-trash-alt" />
+                                Usuń
+                              </button>
+                            </div>
+                          </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
                 )
               })
               :
@@ -241,6 +323,7 @@ class YourPlaylists extends PureComponent {
             </div>
           }    
         </div>
+        }
       </Layout>
     );
   }

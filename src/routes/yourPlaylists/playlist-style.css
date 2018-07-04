@@ -1,0 +1,142 @@
+.section-playlist {
+    width: 90%;
+    height: 600px;
+    background-color: #2D2E32;
+    position: relative;
+    margin-left: 5%;
+    float: left;
+    margin-top: 50px;
+}
+
+.section-exit {
+    position: relative;
+    color: #fff;
+    float: right;
+    margin-top: 15px;
+    opacity: 0.7;
+    transition: 1s;
+}
+
+.section-exit:hover {
+    opacity: 1;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.section-playlist-main {
+    width: 100%;
+    float: left;
+}
+
+.section-playlist-main-image {
+    float: left;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.section-playlist-main-image-avatar {
+    height: 100px;
+    width: 100px;
+    filter: grayscale(100%);
+    margin-top: 10px;
+}
+
+.section-playlist-main-image-title {
+    color: #fff;
+    position: absolute;
+    height: 100px;
+    width: 100%;
+    line-height: 100px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 20px;
+    top: 10px;
+    left: 0px;
+}
+
+.section-playlist-main-description {
+    height: 100px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    float: left;
+    margin-top: 10px;
+}
+
+.section-playlist-main-description-title,
+.section-playlist-main-description-description,
+.section-playlist-main-description-information {
+    color: #fff;
+    opacity: 0.7;
+    font-weight: 400;
+    text-align: center;
+}
+
+.section-playlist-main-description-nameplaylist {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.section-playlist-main-description-description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+    .section-playlist {
+        height: 600px;
+    }
+
+    .section-playlist-main {
+        height: 200px;
+    }
+
+    .section-playlist-main-image {
+        width: unset;
+    }
+
+    .section-playlist-main-image-avatar {
+        width: 150px;
+        height: 150px;
+        margin-left: 25px;
+    }
+
+    .section-playlist-main-image-title {
+        width: 150px;
+        height: 150px;
+        top: 10px;
+        left: 25px;
+        line-height: 150px;
+        font-size: 25px;
+    }
+
+    .section-playlist-main-description {
+        width: 51%;
+        height: 150px;
+        margin-left: 10px;
+    }
+
+    .section-playlist-main-description-title,
+    .section-playlist-main-description-nameplaylist,
+    .section-playlist-main-description-description,
+    .section-playlist-main-description-information {
+        text-align: left;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .section-playlist {
+        width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        float: unset;
+        top: 100px;
+    }
+
+    .section-playlist-main-description {
+        width: 60%;
+    }
+}
