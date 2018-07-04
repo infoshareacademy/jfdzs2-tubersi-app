@@ -174,7 +174,10 @@ class YourPlaylists extends PureComponent {
                       <img 
                         className="img-responsive"
                         src={
-                          list.image 
+                          list.music ?
+                            list.music[0].avatar
+                            :
+                            null 
                           ||
                           require('../../images/iTunes-playlist-purple.png')
                         }

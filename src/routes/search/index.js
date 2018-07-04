@@ -112,14 +112,6 @@ export default class Search extends PureComponent {
                 .playList[
                     this.state.choosePlayList
                 ].music) {
-            database.child(this.props.actuallyUser.id)
-                .child('playList')
-                .child(this.state.choosePlayList)
-                .child('image')
-                .set(this.state.pictureAvatar[
-                    index
-                ]);
-
             userVideo = [
                 newVideo
             ]

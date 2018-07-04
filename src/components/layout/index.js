@@ -35,7 +35,8 @@ class Layout extends PureComponent {
             handleClick={this.handleClick}/>
           <Menu 
             handleClick={this.handleClick} 
-            menuVisibility={this.state.visible}/>
+            menuVisibility={this.state.visible}
+            actuallyUser = {this.props.actuallyUser}/>
           <div className="layout">
             {this.props.children}
           </div> 
