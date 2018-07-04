@@ -85,6 +85,25 @@
     overflow: hidden;
 }
 
+.section-playlist-empty {
+    height: 400px;
+    float: left;
+    border-radius: 15px;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 50px;
+    background-color: #2D2E32;
+}
+
+.section-playlist-empty-text {
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+    width: 100%;
+    margin-top: 50px;
+}
+
 @media only screen and (min-width: 768px) {
     .section-playlist {
         height: 600px;
@@ -125,6 +144,11 @@
     .section-playlist-main-description-information {
         text-align: left;
     }
+
+    .section-playlist-empty {
+        width: 60%;
+        margin-left: 20%;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -138,5 +162,11 @@
 
     .section-playlist-main-description {
         width: 60%;
+    }
+
+    .section-playlist-empty {
+        width: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
     }
 }

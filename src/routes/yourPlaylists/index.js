@@ -14,8 +14,8 @@ class YourPlaylists extends PureComponent {
       namePlayList: '',
       typePlayList: '',
       descriptionPlayList: '',
-      sectionChosenPlayList: false,
-      numberChoosePlaylist: null,
+      sectionChosenPlayList: true,
+      numberChoosePlaylist: 2,
     }
     this.addNewPlayList = this.addNewPlayList.bind(this);
   }
@@ -91,61 +91,96 @@ class YourPlaylists extends PureComponent {
     }
 
     return this.props.actuallyUser 
-      ? 
-      <div className="section-playlist">
-        <div 
-          className="section-exit"
-        >
-          <span 
-            className="section-exit-text"
-            onClick={() => {
-              this.setState({
-                sectionChosenPlayList: false,
-                numberChoosePlaylist: null,
-              })
-            }}
+      ?
+      this.props.actuallyUser.playList[
+        this.state.numberChoosePlaylist
+      ].music ? 
+         <div className="section-playlist">
+          <div 
+            className="section-exit"
           >
-            Zamknij [
-            <span className="content-exit-icon glyphicon glyphicon-remove"/>
-            ]
-          </span>
-          <div className="content-underline">
-            <div className="content-underline-line"/>
-          </div>  
-        </div>
-        
-        <div className="section-playlist-main">
-            <div className="section-playlist-main-image">
-              <img 
-                className="section-playlist-main-image-avatar"
-                alt="avatar-play-list"
-                src={
-                  actuallyPlaylist.music[
-                    0
-                  ]
-                  .avatar
-                }
-              />
-              <div className="section-playlist-main-image-title">
-                {actuallyPlaylist.typePlayList}
-              </div>   
-            </div>
-            <div className="section-playlist-main-description">
-                <p className="section-playlist-main-description-title">
-                  PLAYLIST
-                </p>
-                <p className="section-playlist-main-description-nameplaylist">
-                  {actuallyPlaylist.namePlayList}
-                </p>
-                <p className="section-playlist-main-description-description">
-                  {actuallyPlaylist.descriptionPlayList}
-                </p>
-                <p className="section-playlist-main-description-information">
-                  Created by: Eryk . 133 songs, 8 hr 13 min
-                </p>
-            </div>
+            <span 
+              className="section-exit-text"
+              onClick={() => {
+                this.setState({
+                  sectionChosenPlayList: false,
+                  numberChoosePlaylist: null,
+                })
+              }}
+            >
+              Zamknij [
+              <span className="content-exit-icon glyphicon glyphicon-remove"/>
+              ]
+            </span>
+            <div className="content-underline">
+              <div className="content-underline-line"/>
+            </div>  
           </div>
-      </div>
+          
+          <div className="section-playlist-main">
+              <div className="section-playlist-main-image">
+                <img 
+                  className="section-playlist-main-image-avatar"
+                  alt="avatar-play-list"
+                  src={
+                    actuallyPlaylist.music[
+                      0
+                    ]
+                    .avatar
+                  }
+                />
+                <div className="section-playlist-main-image-title">
+                  {actuallyPlaylist.typePlayList}
+                </div>   
+              </div>
+              <div className="section-playlist-main-description">
+                  <p className="section-playlist-main-description-title">
+                    PLAYLIST
+                  </p>
+                  <p className="section-playlist-main-description-nameplaylist">
+                    {actuallyPlaylist.namePlayList}
+                  </p>
+                  <p className="section-playlist-main-description-description">
+                    {actuallyPlaylist.descriptionPlayList}
+                  </p>
+                  <p className="section-playlist-main-description-information">
+                    Created by: Eryk . 133 songs, 8 hr 13 min
+                  </p>
+              </div>
+            </div>
+        </div>
+        :
+        <div className="section-playlist-empty">
+          <div 
+          className="section-exit"
+          >
+            <span 
+              className="section-exit-text"
+              onClick={() => {
+                this.setState({
+                  sectionChosenPlayList: false,
+                  numberChoosePlaylist: null,
+                })
+              }}
+            >
+              Zamknij [
+              <span className="content-exit-icon glyphicon glyphicon-remove"/>
+              ]
+            </span>
+            <div className="content-underline">
+              <div className="content-underline-line"/>
+            </div>  
+          </div>
+          <p className="section-playlist-empty-text">
+            Aktualnie nie masz żadnego utworu
+          </p>
+          <p className="section-playlist-empty-text">
+            Przejdź do wyszukiwarki w zakładce "Szukaj"
+          </p>
+          <p className="section-playlist-empty-text">
+            A następnie dodaj muzykę do odpowiedniej playlisty
+          </p>
+        </div>
       :
       null;
   }
