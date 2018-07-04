@@ -5,7 +5,8 @@
     position: relative;
     margin-left: 5%;
     float: left;
-    margin-top: 50px;
+    margin-top: 10px;
+   border-radius: 15px;
 }
 
 .section-exit {
@@ -36,8 +37,8 @@
 }
 
 .section-playlist-main-image-avatar {
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     filter: grayscale(100%);
     margin-top: 10px;
 }
@@ -45,9 +46,9 @@
 .section-playlist-main-image-title {
     color: #fff;
     position: absolute;
-    height: 100px;
+    height: 80px;
     width: 100%;
-    line-height: 100px;
+    line-height: 80px;
     text-align: center;
     font-weight: 900;
     font-size: 20px;
@@ -75,7 +76,7 @@
 
 .section-playlist-main-description-nameplaylist {
     color: #fff;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
     text-align: center;
 }
@@ -104,13 +105,134 @@
     margin-top: 50px;
 }
 
+.section-playlist-options {
+    width: 100%;
+    float: left;
+    margin-top: 25px;
+    text-align: center;
+    height: 40px;
+}
+
+.section-playlist-options-play {
+    background-color: rgb(27, 186, 84);
+    color: #fff;
+    width: 100px;
+    border: unset;
+    font-size: 15px;
+    height: 30px;
+    padding: 0px;
+}
+
+.section-playlist-options-upload {
+    background-color: unset;
+    color: #fff;
+    width: 100px;
+    border: unset;
+    font-size: 15px;
+    height: 30px;
+    padding: 0px;
+    border: 1px solid gray;
+}
+
+.section-playlist-options-extends {
+    background-color: unset;
+    color: #fff;
+    width: 30px;
+    border: unset;
+    font-size: 15px;
+    height: 30px;
+    padding: 0px;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+
+.section-playlist-underline {
+    width: 95%;
+    height: 1px;
+    background-color: #fff;
+    opacity: 0.7;
+    float: left;
+    margin-top: 25px;
+    margin-left: 2.5%;
+}
+
+.section-playlist-music {
+    float: left;
+    width: 95%;
+    max-height: 220px;
+    margin-left: 2.5%;
+    overflow: auto;
+    margin-top: 20px;
+}
+
+.section-playlist-music::-webkit-scrollbar-track
+{
+	border-radius: 10px;
+	background-color: #2D2E32;
+}
+
+.section-playlist-music::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #2D2E32;
+}
+
+.section-playlist-music::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+    background-color: rgb(99, 99, 102);
+}
+
+.section-playlist-music-space,
+.section-playlist-music-legend-last {
+    float: left;
+    height: 25px;
+    color: #fff;
+    opacity: 0.7;
+    width: 20%;
+}
+
+.section-playlist-music-legend-center {
+    float: left;
+    height: 25px;
+    color: #fff;
+    opacity: 0.7;
+    width: 55%;
+    margin-right: 5%;
+    line-height: 25px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.section-playlist-underline-music {
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    opacity: 0.7;
+    float: left;
+    margin-top: 20px;
+}
+
+.section-playlist-music-list {
+    width: 100%;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.section-playlist-music-avatar {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+}
+
 @media only screen and (min-width: 768px) {
     .section-playlist {
         height: 600px;
     }
 
     .section-playlist-main {
-        height: 200px;
+        height: 160px;
     }
 
     .section-playlist-main-image {
@@ -148,6 +270,41 @@
     .section-playlist-empty {
         width: 60%;
         margin-left: 20%;
+    }
+
+    .section-playlist-options { 
+        margin-top: 0px;
+        text-align: left;
+        height: 40px;
+    }
+
+    .section-playlist-options-play {
+        width: 150px;
+        font-size: 20px;
+        height: 40px;
+        margin-left: 25px;
+    }
+    
+    .section-playlist-options-upload {
+        width: 150px;
+        font-size: 20px;
+        height: 40px;
+        margin-left: 25px;
+    }
+    
+    .section-playlist-options-remove {
+        font-size: 40px;
+        top: 10px;
+    }
+
+    .section-playlist-options-extends {
+        height: 40px;
+        width: 40px;
+        font-size: 20px;
+    }
+
+    .section-playlist-music {
+        max-height: 300px;
     }
 }
 

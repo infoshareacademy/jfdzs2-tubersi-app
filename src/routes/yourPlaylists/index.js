@@ -116,7 +116,6 @@ class YourPlaylists extends PureComponent {
               <div className="content-underline-line"/>
             </div>  
           </div>
-          
           <div className="section-playlist-main">
               <div className="section-playlist-main-image">
                 <img 
@@ -147,6 +146,53 @@ class YourPlaylists extends PureComponent {
                     Created by: Eryk . 133 songs, 8 hr 13 min
                   </p>
               </div>
+            </div>
+            <div className="section-playlist-options">
+              <button className="section-playlist-options-play">
+                    Graj
+              </button>
+              <button className="section-playlist-options-upload">
+                    Udostępnij
+              </button>
+              <button className="section-playlist-options-extends" >
+                    <span className="glyphicon glyphicon-option-horizontal"/>
+              </button>
+            </div>
+            <div className="section-playlist-underline" />
+            <div className="section-playlist-music">
+              <div className="section-playlist-music-legend">
+                  <div className="section-playlist-music-space" />
+                  <div className="section-playlist-music-legend-center">
+                    Tytuł:
+                  </div>
+                  <div className="section-playlist-music-legend-last">
+                    Dodano:
+                  </div>
+              </div>
+              <div className="section-playlist-underline-music" />
+              {actuallyPlaylist.music.map((music, index) => {
+                return  <div 
+                          className="section-playlist-music-list" 
+                          key={index}
+                        >
+                          <div className="section-playlist-music-legend">
+                            <div className="section-playlist-music-space">
+                              <img
+                                className="section-playlist-music-avatar"
+                                src={music.avatar}
+                                alt={index + "avatar-playlist"}
+                              />
+                            </div>
+                            <div className="section-playlist-music-legend-center">
+                              {music.title}
+                            </div>
+                            <div className="section-playlist-music-legend-last">
+                              28.08.2019
+                            </div>
+                          </div>
+                          <div className="section-playlist-underline-music" />
+                        </div> 
+              })}      
             </div>
         </div>
         :
