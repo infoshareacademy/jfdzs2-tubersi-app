@@ -5,7 +5,8 @@
   "dependencies": {
     "animate.css": "^3.6.1",
     "firebase": "^5.2.0",
-    "react": "^16.4.0",
+    "react": "^16.4.1",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.4.0",
     "react-fade-in": "^0.1.6",
     "react-player": "^1.6.4",

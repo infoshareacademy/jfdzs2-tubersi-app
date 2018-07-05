@@ -25,7 +25,6 @@ export default class Search extends PureComponent {
             newSearch: true,
             visiblePopUpAddVideo: false,
             choosePlayList: 0,
-            datePublishied: null,
         };
         this.searchVideo = this.searchVideo.bind(this);
         this.addVideoToPlayList = this.addVideoToPlayList.bind(this);

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import FadeIn from 'react-fade-in';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 import Layout from '../../components/layout';
 import {CHARS} from '../../config';
@@ -12,6 +13,7 @@ class YourPlaylists extends PureComponent {
     super(props);
     this.state = {
       popUpAddNewPlayList: false,
+      popUpUploadPlayList: false,
       namePlayList: '',
       typePlayList: '',
       descriptionPlayList: '',
@@ -33,8 +35,8 @@ class YourPlaylists extends PureComponent {
     }
   }
 
-  addNewPlayList () {  
-    let namePlayList = this.setNewDataPlaylist();
+  addNewPlayList(uploadPlayList) {  
+    let namePlayList = uploadPlayList || this.setNewDataPlaylist();
     let playList;
     
     if(!this.props.actuallyUser.playList) {
@@ -119,6 +121,34 @@ class YourPlaylists extends PureComponent {
       .child(this.props.actuallyUser.id)
       .child('playList')
       .set(playList);    
+  }
+
+  deleteVideo(index) {
+    let filterVideoToDelete;
+    let database = 
+        this.props.firebase
+            .database().ref('users');
+    filterVideoToDelete = 
+        this.props.actuallyUser
+        .playList[
+            this.state.numberChoosePlaylist
+        ]
+        .music.filter((music, numberMusic) => {
+            return numberMusic !== index;
+        })  
+    database.child(this.props.actuallyUser.id)
+        .child('playList')
+        .child(this.state.numberChoosePlaylist)
+        .child('music')
+        .set(filterVideoToDelete);    
+  }
+
+  copyTextUniqueNumberToUploadPLayList() {
+    return window.location.href +
+      '/' + 
+      this.props.actuallyUser.playList[
+        this.state.numberChoosePlaylist
+      ].uniqueNumber;
   }
 
   chosenPlayList = () => {
@@ -278,27 +308,6 @@ class YourPlaylists extends PureComponent {
       null;
   }
 
-  deleteVideo(index) {
-    let filterVideoToDelete;
-    let database = 
-        this.props.firebase
-            .database().ref('users');
-    filterVideoToDelete = 
-        this.props.actuallyUser
-        .playList[
-            this.state.numberChoosePlaylist
-        ]
-        .music.filter((music, numberMusic) => {
-            return numberMusic !== index;
-        })  
-    database.child(this.props.actuallyUser.id)
-        .child('playList')
-        .child(this.state.numberChoosePlaylist)
-        .child('music')
-        .set(filterVideoToDelete);
-        
-}
-
   render() {
     return (
       <Layout>
@@ -386,6 +395,54 @@ class YourPlaylists extends PureComponent {
             :
             null
           }
+          {this.state.popUpUploadPlayList ?
+            <FadeIn>
+              <div className="section-upload-hide"/>
+              <div className="section-upload">
+                <div className="section-upload-contain">
+                  <div 
+                    className="content-exit"
+                    style={{
+                      paddingTop: '5px'
+                    }}
+                  >
+                  <span 
+                    className="content-exit-text"
+                    onClick={() => {
+                      this.setState({
+                        popUpUploadPlayList: false,
+                        numberChoosePlaylist: null,
+                      })
+                    }
+                    }
+                  >
+                    Zamknij [
+                    <span className="content-exit-icon glyphicon glyphicon-remove"/>
+                    ]
+                  </span>
+                  </div>
+                  <p className="section-upload-contain-title">
+                    Udostępnij znajomemu twoją playliste
+                  </p>
+                  <div className="section-upload-contain-number">
+                    {window.location.href}/    
+                    {this.props.actuallyUser.playList[
+                        this.state.numberChoosePlaylist
+                      ].uniqueNumber}
+                  </div>
+                  <CopyToClipboard text={this.copyTextUniqueNumberToUploadPLayList()}>
+                  <button 
+                    className="section-upload-contain-copy"
+                    >
+                    Kopiuj
+                  </button>
+                  </CopyToClipboard>
+                </div>
+              </div>
+            </FadeIn>
+            :
+            null
+          }
           {this.props.actuallyUser ?
             this.props.actuallyUser.playList ?
               this.props.actuallyUser.playList.map((list, index) => {
@@ -435,6 +492,12 @@ class YourPlaylists extends PureComponent {
                               <button  
                                 className="btn btn-default btn-playlists"
                                 type="button"
+                                onClick={() => {
+                                  this.setState({
+                                    popUpUploadPlayList: true,
+                                    numberChoosePlaylist: index,
+                                  })
+                                }}
                               >
                                 <i className="fas fa-share-alt" />
                                 Udostępnij
