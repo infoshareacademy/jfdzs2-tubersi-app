@@ -1,10 +1,11 @@
-import React, {PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import FadeIn from 'react-fade-in';
 
 import Layout from '../../components/layout';
+import {CHARS} from '../../config';
 
-import './style.css';
 import './playlist-style.css';
+import './style.css';
 
 class YourPlaylists extends PureComponent {
   constructor(props) {
@@ -35,6 +36,7 @@ class YourPlaylists extends PureComponent {
   addNewPlayList () {  
     let namePlayList = this.setNewDataPlaylist();
     let playList;
+    
     if(!this.props.actuallyUser.playList) {
       playList = [
         namePlayList,
@@ -55,6 +57,7 @@ class YourPlaylists extends PureComponent {
       namePlayList: '',
       typePlayList: '',
       descriptionPlayList: '',
+      popUpAddNewPlayList: false,
     })  
   }
 
@@ -63,7 +66,44 @@ class YourPlaylists extends PureComponent {
       namePlayList: this.state.namePlayList || 'brak',
       typePlayList: this.state.typePlayList || 'brak',
       descriptionPlayList: this.state.descriptionPlayList || 'brak',
+      author: this.props.actuallyUser.name,
+      uniqueNumber: this.getNumberUnique(), 
     }
+  }
+
+  getNumberUnique() {
+    let number;
+    do {
+      number = this.generateNewUniqueNumberPLayList();
+    } while(!this.checkThatUniqueNumberIsUnique(number));
+    
+    return number;
+  }
+
+  generateNewUniqueNumberPLayList() {
+    let uniqueNumber = '';
+    for(let i = 0; i < 16; i++) {
+      uniqueNumber +=
+        CHARS[
+          Math.round(Math.random() * CHARS.length)
+        ]
+    }
+    return uniqueNumber;
+  }
+
+  checkThatUniqueNumberIsUnique(number) {
+    var users = this.props.dataBaseUsers
+    for(let i = 0; i < users.length; i++) {
+      if(users[i].playList) {
+        if(users[i].playList.find((list) => {
+          return number === list.uniqueNumber;
+        }))
+        {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   deletePlayList(numberDelete) {
@@ -143,7 +183,7 @@ class YourPlaylists extends PureComponent {
                     {actuallyPlaylist.descriptionPlayList}
                   </p>
                   <p className="section-playlist-main-description-information">
-                    Created by: Eryk . 133 songs, 8 hr 13 min
+                    Created by: {actuallyPlaylist.author} . utworów {actuallyPlaylist.music.length}, 8 hr 13 min
                   </p>
               </div>
             </div>
@@ -194,7 +234,7 @@ class YourPlaylists extends PureComponent {
                               {music.title}
                             </div>
                             <div className="section-playlist-music-legend-last">
-                              28.08.2019
+                              {music.data}
                             </div>
                           </div>
                           <div className="section-playlist-underline-music" />

@@ -25,6 +25,7 @@ export default class Search extends PureComponent {
             newSearch: true,
             visiblePopUpAddVideo: false,
             choosePlayList: 0,
+            datePublishied: null,
         };
         this.searchVideo = this.searchVideo.bind(this);
         this.addVideoToPlayList = this.addVideoToPlayList.bind(this);
@@ -164,7 +165,18 @@ export default class Search extends PureComponent {
             title: this.state.titleVideo [
                 index
             ],
+            data: this.getData(),
         }
+    }
+
+    getData() {
+        const DATA = new Date();
+        let day = DATA.getDay() + 1;
+        let month = DATA.getMonth() + 1;
+        let year = DATA.getFullYear();
+        day = day < 10 ? '0' + day : day;
+        month = month < 10 ? '0' + month : month;
+        return day + '-' + month + '-' + year;
     }
 
     renderButonAddVideo(index) {

@@ -81,6 +81,7 @@ class App extends Component {
               render={() => <YourPlaylists 
                   actuallyUser = {this.state.actuallyUser} 
                   firebase = {this.state.firebase}
+                  dataBaseUsers = {this.state.dataBaseUsers}
                 />} 
             />
             <Route path="*" component={NotFound} />
