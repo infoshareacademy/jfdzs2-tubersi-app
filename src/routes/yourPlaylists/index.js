@@ -50,9 +50,6 @@ class YourPlaylists extends PureComponent {
   addNewPlayList(uploadPlayList) {  
     let namePlayList = uploadPlayList || this.setNewDataPlaylist();
     let playList;
-
-    console.log(namePlayList)
-    
     if(!this.props.actuallyUser.playList) {
       playList = [
         namePlayList,
