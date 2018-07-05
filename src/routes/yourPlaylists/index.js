@@ -182,6 +182,13 @@ class YourPlaylists extends PureComponent {
                                 src={music.avatar}
                                 alt={index + "avatar-playlist"}
                               />
+                              <span 
+                                className="delete-any-music-playlist glyphicon glyphicon-trash" 
+                                onClick={() => {this.deleteVideo(index)}}
+                                style={{
+                                  marginLeft: "15px",
+                                }}
+                              />
                             </div>
                             <div className="section-playlist-music-legend-center">
                               {music.title}
@@ -230,6 +237,27 @@ class YourPlaylists extends PureComponent {
       :
       null;
   }
+
+  deleteVideo(index) {
+    let filterVideoToDelete;
+    let database = 
+        this.props.firebase
+            .database().ref('users');
+    filterVideoToDelete = 
+        this.props.actuallyUser
+        .playList[
+            this.state.numberChoosePlaylist
+        ]
+        .music.filter((music, numberMusic) => {
+            return numberMusic !== index;
+        })  
+    database.child(this.props.actuallyUser.id)
+        .child('playList')
+        .child(this.state.numberChoosePlaylist)
+        .child('music')
+        .set(filterVideoToDelete);
+        
+}
 
   render() {
     return (
