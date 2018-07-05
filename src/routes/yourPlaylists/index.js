@@ -50,6 +50,8 @@ class YourPlaylists extends PureComponent {
   addNewPlayList(uploadPlayList) {  
     let namePlayList = uploadPlayList || this.setNewDataPlaylist();
     let playList;
+
+    console.log(namePlayList)
     
     if(!this.props.actuallyUser.playList) {
       playList = [
@@ -452,7 +454,7 @@ class YourPlaylists extends PureComponent {
                     <div>
                       <button
                         className="content-pop-up-submit"
-                        onClick={this.addNewPlayList}
+                        onClick={() => {this.addNewPlayList()}}
                       >
                         Dodaj
                       </button>
