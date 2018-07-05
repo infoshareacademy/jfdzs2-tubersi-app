@@ -19,8 +19,20 @@ class YourPlaylists extends PureComponent {
       descriptionPlayList: '',
       sectionChosenPlayList: false,
       numberChoosePlaylist: null,
+      checkLink: true,
     }
     this.addNewPlayList = this.addNewPlayList.bind(this);
+  }
+
+  componentDidUpdate() {
+    if(this.props.actuallyUser && 
+       this.props.dataBaseUsers &&
+       this.state.checkLink) {
+        this.setState({
+          checkLink: false,
+        });
+        this.addVideoWhenUpload();
+    }
   }
 
   handleChange = (e) => {
@@ -61,6 +73,61 @@ class YourPlaylists extends PureComponent {
       descriptionPlayList: '',
       popUpAddNewPlayList: false,
     })  
+  }
+
+  addVideoWhenUpload(){
+    let uniqueNumberUpload = window.location.href.substr(-16);
+    if(this.checkExistingUniqueNumber(uniqueNumberUpload)) {
+      if(!this.checkThatNewUniqueNumberIsAlready(uniqueNumberUpload)) {
+        this.addNewPlayList(
+          this.getPlayListUpload(uniqueNumberUpload)
+        )
+      }
+    }
+  }
+
+  checkExistingUniqueNumber(number) {
+    let database = this.props.dataBaseUsers;
+    for(let i = 0; i < database.length; i++) {
+      if(database[i].playList) {
+        if(database[i].playList.find((list) =>{
+          return list.uniqueNumber === number;
+        }))
+        {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  checkThatNewUniqueNumberIsAlready(number) {
+    let actuallyUser = this.props.actuallyUser;
+    if(!actuallyUser.playList) {
+      return false;
+    }
+    if(actuallyUser.playList.find((list) => {
+       return list.uniqueNumber === number; 
+    }))
+    {
+      return true;
+    }
+    return false;
+  }
+
+  getPlayListUpload(number) {
+    let playList;
+    let database = this.props.dataBaseUsers;
+    for(let i = 0; i < database.length; i++) {
+      if(database[i].playList) {
+        playList = database[i].playList.find((list) => {
+          return list.uniqueNumber === number;
+        })
+        if(playList) {
+          return playList;
+        }
+      }
+    }
   }
 
   setNewDataPlaylist() {
