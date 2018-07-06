@@ -20,6 +20,7 @@ class YourPlaylists extends PureComponent {
       sectionChosenPlayList: false,
       numberChoosePlaylist: null,
       checkLink: true,
+      showMessageWhenCopyLink: false,
     }
     this.addNewPlayList = this.addNewPlayList.bind(this);
   }
@@ -32,6 +33,13 @@ class YourPlaylists extends PureComponent {
           checkLink: false,
         });
         this.addVideoWhenUpload();
+    }
+    if(this.state.showMessageWhenCopyLink) {
+      setTimeout(() => {
+        this.setState({
+          showMessageWhenCopyLink: false,
+        })
+      },2000);
     }
   }
 
@@ -464,6 +472,18 @@ class YourPlaylists extends PureComponent {
           {this.state.popUpUploadPlayList ?
             <FadeIn>
               <div className="section-upload-hide"/>
+              <div 
+                className="section-complete-copy"
+                style={
+                  this.state.showMessageWhenCopyLink ?
+                  {right: "50px"}
+                  :
+                  {right: "-200px"}
+                }
+              >
+                SKOPIOWANO
+                <span className="section-complete-copy-ok glyphicon glyphicon-ok"/>
+              </div>
               <div className="section-upload">
                 <div className="section-upload-contain">
                   <div 
@@ -499,6 +519,11 @@ class YourPlaylists extends PureComponent {
                   <CopyToClipboard text={this.copyTextUniqueNumberToUploadPLayList()}>
                   <button 
                     className="section-upload-contain-copy"
+                    onClick={() => {
+                      this.setState({
+                        showMessageWhenCopyLink: true,
+                      })
+                    }}
                     >
                     Kopiuj
                   </button>

@@ -297,7 +297,7 @@
 
 .section-upload-contain {
     width: 350px;
-    height: 180px;
+    height: 200px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -335,6 +335,26 @@
     margin-top: 15px;
     background-color: rgb(51, 122, 183);
     color: white;
+}
+
+.section-complete-copy {
+    background-color: #2D2E32;
+    position: fixed;
+    z-index: 4;
+    height: 50px;
+    width: 200px;
+    border-radius: 10px;
+    color: #fff;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    transition: 0.5s;
+    bottom: 50px;
+}
+
+.section-complete-copy-ok {
+    margin-left: 5px;
+    color: green;
 }
 
 @media only screen and (min-width: 768px) {
