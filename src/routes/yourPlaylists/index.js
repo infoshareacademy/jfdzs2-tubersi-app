@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 import FadeIn from 'react-fade-in';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
@@ -266,6 +267,79 @@ class YourPlaylists extends PureComponent {
       ].uniqueNumber;
   }
 
+  countFullTimeVideo(playList) {
+    let seconds = 0;
+    let minutes = 0;
+    let hours = 0;
+    playList.music.forEach((music) => {
+      if(parseInt(music.duration.substr(-3))) {
+        seconds += parseInt(music.duration.substr(-3));
+      } 
+      else {
+        seconds += parseInt(music.duration.substr(-2));
+      }
+      minutes += this.getMinute(music.duration);
+      hours += this.getHours(music.duration);
+    })
+    seconds = this.countTime(seconds);
+    minutes += seconds.timeAdd;
+    seconds = seconds.time;
+    minutes = this.countTime(minutes);
+    hours += minutes.timeAdd;
+    minutes = minutes.time;
+    return this.formatTimeDurationAllVideo(seconds, minutes, hours);
+  }
+
+  formatTimeDurationAllVideo(seconds, minutes, hours) {
+    if(hours !== 0) {
+      return `${hours}h ${minutes}m ${seconds}s`;
+    }
+    else if(minutes !== 0) {
+      return `${minutes}m ${seconds}s`;
+    }
+
+    else {
+      return `${seconds}s`;
+    }
+  }
+
+  countTime(time) {
+    let timeAdd = time;
+    time %= 60;
+    timeAdd -= time;
+    timeAdd /= 60;
+    return {
+      time,
+      timeAdd,
+    }
+  }
+
+  getMinute(duration) {
+    let indexStartMinute = duration.indexOf('M');
+    if(indexStartMinute !== -1) {
+      if(parseInt(duration.substr(indexStartMinute - 2))) {
+        return parseInt(duration.substr(indexStartMinute - 2));
+      } 
+      else {
+        return parseInt(duration.substr(indexStartMinute - 1));
+      }
+    }
+    return 0;
+  }
+
+  getHours(duration) {
+    let indexStartHours = duration.indexOf('H');
+    if(indexStartHours !== -1) {
+      if(parseInt(duration.substr(indexStartHours - 2))) {
+        return parseInt(duration.substr(indexStartHours - 2));
+      } 
+      else {
+        return parseInt(duration.substr(indexStartHours - 1));
+      }
+    }
+    return 0;
+  }
+
   chosenPlayList = () => {
     let actuallyPlaylist;
     if(this.props.actuallyUser) {
@@ -327,7 +401,9 @@ class YourPlaylists extends PureComponent {
                     {actuallyPlaylist.descriptionPlayList}
                   </p>
                   <p className="section-playlist-main-description-information">
-                    Created by: {actuallyPlaylist.author} . utworów {actuallyPlaylist.music.length}, 8 hr 13 min
+                    Created by: {actuallyPlaylist.author} 
+                    . utworów {actuallyPlaylist.music.length}, 
+                    całkowity czas {this.countFullTimeVideo(actuallyPlaylist)}
                   </p>
               </div>
             </div>

@@ -13,6 +13,7 @@ export default class Search extends PureComponent {
         super(props);
         this.state = {
             resultYoutube: null,
+            idVideos: null,
             pictureAvatar: null,
             titleVideo: null,
             searchTitle: '',
@@ -25,9 +26,12 @@ export default class Search extends PureComponent {
             newSearch: true,
             visiblePopUpAddVideo: false,
             choosePlayList: 0,
+            durationVideo: [],
+            sortVideo: false,
         };
         this.searchVideo = this.searchVideo.bind(this);
         this.addVideoToPlayList = this.addVideoToPlayList.bind(this);
+        this.getTimeAllVideo = this.getTimeAllVideo.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -37,6 +41,33 @@ export default class Search extends PureComponent {
                 newSearch: true,
             })
         }
+        if(this.state.durationVideo.length !== 0) {
+           if(this.state.durationVideo.length === this.state.maxResults && 
+              this.state.sortVideo) {
+               this.sortVideo();
+           }
+        }
+    }
+
+    sortVideo = () => {
+        let idVideos = this.state.idVideos;
+        let mixedDuration = this.state.durationVideo;
+        let sortsVideo = [];
+        idVideos.forEach((video) => {
+            sortsVideo.push(
+                mixedDuration.find((mixVideo) => {
+                    return video === mixVideo.id;
+                })
+            )
+        })
+        let durationVideo = 
+            sortsVideo.map((video) => {
+                return video.duration;
+        })
+        this.setState({
+            sortVideo: false,
+            durationVideo,
+        })
     }
 
     handleChange = (event) => {
@@ -45,22 +76,43 @@ export default class Search extends PureComponent {
       })
     }
     
-  searchVideo() {
-    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&part=snippet&maxResults=${this.state.maxResults}&q=${this.state.searchTitle}&type=${type}&${type}Definition=${this.state.quality}`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        const resultYoutube = responseJson.items.map(obj => "https://www.youtube.com/embed/"+obj.id.videoId);
-        const pictureAvatar = responseJson.items.map(obj => obj.snippet.thumbnails.high.url);
-        const titleVideo = responseJson.items.map(obj => obj.snippet.title);
-        this.setState({
-            resultYoutube,
-            pictureAvatar,
-            titleVideo,
+    searchVideo() {
+        fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&part=snippet&maxResults=${this.state.maxResults}&q=${this.state.searchTitle}&type=${type}&${type}Definition=${this.state.quality}`)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            const resultYoutube = responseJson.items.map(obj => "https://www.youtube.com/embed/"+obj.id.videoId);
+            const pictureAvatar = responseJson.items.map(obj => obj.snippet.thumbnails.high.url);
+            const titleVideo = responseJson.items.map(obj => obj.snippet.title);
+            const idVideos = responseJson.items.map(obj => obj.id.videoId);
+            this.setState({
+                resultYoutube,
+                pictureAvatar,
+                titleVideo,
+                durationVideo: [],
+                idVideos,
+                sortVideo: true,
+            });
+            responseJson.items.map(obj => this.getTimeAllVideo(obj.id.videoId));
+        })
+        .catch((error) => {
+            console.error(error);
         });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    }
+
+    getTimeAllVideo(videoId) {
+        fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${API}&part=contentDetails`)
+            .then((response)=> response.json())
+            .then((responseJson) => {
+                this.setState({
+                    durationVideo : [
+                        ...this.state.durationVideo, 
+                        {
+                            duration: responseJson.items[0].contentDetails.duration,
+                            id: responseJson.items[0].id,
+                        }
+                    ]
+                })
+        })
     }
 
     showMoreVideo = () => {
@@ -162,6 +214,9 @@ export default class Search extends PureComponent {
                 index
             ],
             title: this.state.titleVideo [
+                index
+            ],
+            duration: this.state.durationVideo [
                 index
             ],
             data: this.getData(),
