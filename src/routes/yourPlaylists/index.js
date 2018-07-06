@@ -22,8 +22,11 @@ class YourPlaylists extends PureComponent {
       checkLink: true,
       showMessageWhenCreatePlaylist: false,
       showMessageWhenCopyLink: false,
+      showMessageWhenUniqueNumberIsNotSucces: false,
+      messageWhenUploadPlayList: '',
     }
     this.addNewPlayList = this.addNewPlayList.bind(this);
+    this.addVideoWhenUpload = this.addVideoWhenUpload.bind(this);
   }
 
   componentDidUpdate() {
@@ -92,13 +95,44 @@ class YourPlaylists extends PureComponent {
 
   addVideoWhenUpload(){
     let uniqueNumberUpload = window.location.href.substr(-16);
-    if(this.checkExistingUniqueNumber(uniqueNumberUpload)) {
-      if(!this.checkThatNewUniqueNumberIsAlready(uniqueNumberUpload)) {
-        this.addNewPlayList(
-          this.getPlayListUpload(uniqueNumberUpload)
-        )
+    if(this.checkCorectUniqueNumber(uniqueNumberUpload)) {
+      if(this.checkExistingUniqueNumber(uniqueNumberUpload)) {
+        if(!this.checkThatNewUniqueNumberIsAlready(uniqueNumberUpload)) {
+          this.addNewPlayList(
+            this.getPlayListUpload(uniqueNumberUpload)
+          )
+          this.setState({
+            showMessageWhenUniqueNumberIsNotSucces: true,
+            messageWhenUploadPlayList: 'Pobrano nową Playliste!',
+          })  
+        }
+        else {
+          this.setState({
+            showMessageWhenUniqueNumberIsNotSucces: true,
+            messageWhenUploadPlayList: 'Playlista o danym numerze istnieje!',
+          })  
+        }
+      }
+      else {
+        this.setState({
+          showMessageWhenUniqueNumberIsNotSucces: true,
+          messageWhenUploadPlayList: 'Playlista o danym numerze nie istnieje!',
+        })
       }
     }
+   
+  }
+
+  checkCorectUniqueNumber(number) {
+    for(let i = 0; i < number.length; i++) {
+      if(!CHARS.find((char) => {
+        return number.charAt(i) === char     
+      }))
+      {
+        return false;
+      }
+    }
+    return true;
   }
 
   checkExistingUniqueNumber(number) {
@@ -396,6 +430,29 @@ class YourPlaylists extends PureComponent {
           this.chosenPlayList()
           :
           <div className="content-playlists">
+            {this.state.showMessageWhenUniqueNumberIsNotSucces ?
+              <FadeIn>
+                <div className="content-when-donwload-link-upload" />
+                <div className="content-when-download-link-contain">
+                  <div className="content-when-download-link-table">
+                    {this.state.messageWhenUploadPlayList}
+                    <button 
+                      className="content-when-download-link-table-button"
+                      onClick={() => {
+                        this.setState({
+                          showMessageWhenUniqueNumberIsNotSucces: false,
+                          messageWhenUploadPlayList: '',
+                        })
+                      }}
+                    >
+                      OK
+                    </button>
+                  </div>
+                </div>
+              </FadeIn>
+              :
+              null
+            }
             <div 
               className="content-playlist-create-new-playlist"
               style={
