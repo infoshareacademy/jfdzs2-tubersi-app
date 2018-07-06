@@ -20,6 +20,7 @@ class YourPlaylists extends PureComponent {
       sectionChosenPlayList: false,
       numberChoosePlaylist: null,
       checkLink: true,
+      showMessageWhenCreatePlaylist: false,
       showMessageWhenCopyLink: false,
     }
     this.addNewPlayList = this.addNewPlayList.bind(this);
@@ -38,6 +39,13 @@ class YourPlaylists extends PureComponent {
       setTimeout(() => {
         this.setState({
           showMessageWhenCopyLink: false,
+        })
+      },2000);
+    }
+    if(this.state.showMessageWhenCreatePlaylist) {
+      setTimeout(() => {
+        this.setState({
+          showMessageWhenCreatePlaylist: false,
         })
       },2000);
     }
@@ -234,8 +242,7 @@ class YourPlaylists extends PureComponent {
         ];
     }
 
-    return this.props.actuallyUser 
-      ?
+    return this.props.actuallyUser ?
       this.props.actuallyUser.playList[
         this.state.numberChoosePlaylist
       ].music ? 
@@ -389,243 +396,261 @@ class YourPlaylists extends PureComponent {
           this.chosenPlayList()
           :
           <div className="content-playlists">
-          <div className="content-playlist-title">
-            <h1 className="content-playlist-title-text">
-              TWOJA PLAYLISTA
-            </h1>
-            <button 
-              className="content-playlists-options-add"
-              onClick={this.changeViewPopUpAddNewPlayList}
+            <div 
+              className="content-playlist-create-new-playlist"
+              style={
+                this.state.showMessageWhenCreatePlaylist ?
+                {bottom: "50px"}
+                :
+                {bottom: "-200px"}
+              }
             >
-              <i className="fas fa-plus" />
-              Dodaj
-            </button>
-          </div>
-          {this.state.popUpAddNewPlayList ?
-            <FadeIn>
-                <div 
-                  className="content-hide-section"
-                  onClick={this.changeViewPopUpAddNewPlayList}
-                />
-                <div className="content-pop-up">
+              <span className="content-playlist-create-new-playlist-icon glyphicon glyphicon-music"/>
+              STWORZONO NOWĄ PLAYLISTE
+              <span className="content-playlist-create-new-playlist-icon glyphicon glyphicon-music"/>
+            </div>
+            <div className="content-playlist-title">
+              <h1 className="content-playlist-title-text">
+                TWOJA PLAYLISTA
+              </h1>
+              <button 
+                className="content-playlists-options-add"
+                onClick={this.changeViewPopUpAddNewPlayList}
+              >
+                <i className="fas fa-plus" />
+                Dodaj
+              </button>
+            </div>
+            {this.state.popUpAddNewPlayList ?
+              <FadeIn>
                   <div 
-                    className="content-exit"
-                  >
+                    className="content-hide-section"
+                    onClick={this.changeViewPopUpAddNewPlayList}
+                  />
+                  <div className="content-pop-up">
+                    <div 
+                      className="content-exit"
+                    >
+                      <span 
+                        className="content-exit-text"
+                        onClick={this.changeViewPopUpAddNewPlayList}
+                      >
+                        Zamknij [
+                        <span className="content-exit-icon glyphicon glyphicon-remove"/>
+                        ]
+                      </span>
+                    </div>
+                    <div className="content-underline">
+                      <div className="content-underline-line"/>
+                    </div>  
+                      <div className="content-pop-up-title">
+                        <p className="content-pop-up-title-text">
+                          Dodawanie Nowej Playlisty
+                        </p>
+                      </div>
+                      <div className="content-pop-up-name">
+                        Podaj Nazwę :
+                      </div>
+                      <input
+                        className="content-pop-up-input"
+                        name="namePlayList"
+                        onChange={this.handleChange}
+                        value={this.state.namePlayList}
+                      />
+                      <div className="content-pop-up-name">
+                        Podaj Gatunek :
+                      </div>
+                      <input
+                        className="content-pop-up-input"
+                        name="typePlayList"
+                        onChange={this.handleChange}
+                        value={this.state.typePlayList}
+                      />
+                      <div className="content-pop-up-name">
+                        Podaj Opis (opcjonalnie)* :
+                      </div>
+                      <textarea
+                        className="content-pop-up-description"
+                        row="2"
+                        name="descriptionPlayList"
+                        onChange={this.handleChange}
+                        value={this.state.descriptionPlayList}
+                      />
+                      <div>
+                        <button
+                          className="content-pop-up-submit"
+                          onClick={() => {
+                            this.addNewPlayList();
+                            this.setState({
+                              showMessageWhenCreatePlaylist: true,
+                            })  
+                          }}
+                        >
+                          Dodaj
+                        </button>
+                      </div>
+                  </div>
+              </FadeIn>
+              :
+              null
+            }
+            {this.state.popUpUploadPlayList ?
+              <FadeIn>
+                <div className="section-upload-hide"/>
+                <div 
+                  className="section-complete-copy"
+                  style={
+                    this.state.showMessageWhenCopyLink ?
+                    {right: "50px"}
+                    :
+                    {right: "-200px"}
+                  }
+                >
+                  SKOPIOWANO
+                  <span className="section-complete-copy-ok glyphicon glyphicon-ok"/>
+                </div>
+                <div className="section-upload">
+                  <div className="section-upload-contain">
+                    <div 
+                      className="content-exit"
+                      style={{
+                        paddingTop: '5px'
+                      }}
+                    >
                     <span 
                       className="content-exit-text"
-                      onClick={this.changeViewPopUpAddNewPlayList}
+                      onClick={() => {
+                        this.setState({
+                          popUpUploadPlayList: false,
+                          numberChoosePlaylist: null,
+                        })
+                      }
+                      }
                     >
                       Zamknij [
                       <span className="content-exit-icon glyphicon glyphicon-remove"/>
                       ]
                     </span>
-                  </div>
-                  <div className="content-underline">
-                    <div className="content-underline-line"/>
-                  </div>  
-                    <div className="content-pop-up-title">
-                      <p className="content-pop-up-title-text">
-                        Dodawanie Nowej Playlisty
-                      </p>
                     </div>
-                    <div className="content-pop-up-name">
-                      Podaj Nazwę :
+                    <p className="section-upload-contain-title">
+                      Udostępnij znajomemu twoją playliste
+                    </p>
+                    <div className="section-upload-contain-number">
+                      {window.location.href}/    
+                      {this.props.actuallyUser.playList[
+                          this.state.numberChoosePlaylist
+                        ].uniqueNumber}
                     </div>
-                    <input
-                      className="content-pop-up-input"
-                      name="namePlayList"
-                      onChange={this.handleChange}
-                      value={this.state.namePlayList}
-                    />
-                    <div className="content-pop-up-name">
-                      Podaj Gatunek :
-                    </div>
-                    <input
-                      className="content-pop-up-input"
-                      name="typePlayList"
-                      onChange={this.handleChange}
-                      value={this.state.typePlayList}
-                    />
-                    <div className="content-pop-up-name">
-                      Podaj Opis (opcjonalnie)* :
-                    </div>
-                    <textarea
-                      className="content-pop-up-description"
-                      row="2"
-                      name="descriptionPlayList"
-                      onChange={this.handleChange}
-                      value={this.state.descriptionPlayList}
-                    />
-                    <div>
-                      <button
-                        className="content-pop-up-submit"
-                        onClick={() => {this.addNewPlayList()}}
+                    <CopyToClipboard text={this.copyTextUniqueNumberToUploadPLayList()}>
+                    <button 
+                      className="section-upload-contain-copy"
+                      onClick={() => {
+                        this.setState({
+                          showMessageWhenCopyLink: true,
+                        })
+                      }}
                       >
-                        Dodaj
-                      </button>
-                    </div>
-                </div>
-            </FadeIn>
-            :
-            null
-          }
-          {this.state.popUpUploadPlayList ?
-            <FadeIn>
-              <div className="section-upload-hide"/>
-              <div 
-                className="section-complete-copy"
-                style={
-                  this.state.showMessageWhenCopyLink ?
-                  {right: "50px"}
-                  :
-                  {right: "-200px"}
-                }
-              >
-                SKOPIOWANO
-                <span className="section-complete-copy-ok glyphicon glyphicon-ok"/>
-              </div>
-              <div className="section-upload">
-                <div className="section-upload-contain">
-                  <div 
-                    className="content-exit"
-                    style={{
-                      paddingTop: '5px'
-                    }}
-                  >
-                  <span 
-                    className="content-exit-text"
-                    onClick={() => {
-                      this.setState({
-                        popUpUploadPlayList: false,
-                        numberChoosePlaylist: null,
-                      })
-                    }
-                    }
-                  >
-                    Zamknij [
-                    <span className="content-exit-icon glyphicon glyphicon-remove"/>
-                    ]
-                  </span>
+                      Kopiuj
+                    </button>
+                    </CopyToClipboard>
                   </div>
-                  <p className="section-upload-contain-title">
-                    Udostępnij znajomemu twoją playliste
-                  </p>
-                  <div className="section-upload-contain-number">
-                    {window.location.href}/    
-                    {this.props.actuallyUser.playList[
-                        this.state.numberChoosePlaylist
-                      ].uniqueNumber}
-                  </div>
-                  <CopyToClipboard text={this.copyTextUniqueNumberToUploadPLayList()}>
-                  <button 
-                    className="section-upload-contain-copy"
-                    onClick={() => {
-                      this.setState({
-                        showMessageWhenCopyLink: true,
-                      })
-                    }}
-                    >
-                    Kopiuj
-                  </button>
-                  </CopyToClipboard>
                 </div>
-              </div>
-            </FadeIn>
-            :
-            null
-          }
-          {this.props.actuallyUser ?
-            this.props.actuallyUser.playList ?
-              this.props.actuallyUser.playList.map((list, index) => {
-                return (
-                      <div 
-                        className="col-xs-12 col-md-6"
-                        key={index}
-                      >
-                        <div className="playlists-item animated zoomIn">
-                          <img 
-                            className="img-responsive"
-                            alt={index + 'avatar'}
-                            src={
-                              list.music ?
-                                list.music[0].avatar
-                                :
-                                null 
-                              ||
-                              require('../../images/iTunes-playlist-purple.png')
-                            }
-                            style= {{
-                              marginLeft: "auto",
-                              marginRight: "auto",
-                              marginTop: "50px",
-                              height: "250px",
-                              with: "250px",
-                            }}
-                          />
-                          <div className="playlists-item-box">
-                            <div className="playlists-buttons-hover animated fadeIn">
-                              <h6 className="playlists-title">
-                                {list.namePlayList}
-                              </h6>
-                              <button 
-                                className="btn btn-default btn-playlists"
-                                type="button"
-                                onClick={() => {
-                                  this.setState({
-                                    sectionChosenPlayList: true,
-                                    numberChoosePlaylist: index,
-                                  })
-                                }}
-                              >
-                                <i className="fab fa-youtube" />
-                                Przejdź
-                              </button>
-                              <button  
-                                className="btn btn-default btn-playlists"
-                                type="button"
-                                onClick={() => {
-                                  this.setState({
-                                    popUpUploadPlayList: true,
-                                    numberChoosePlaylist: index,
-                                  })
-                                }}
-                              >
-                                <i className="fas fa-share-alt" />
-                                Udostępnij
-                              </button>
-                              <button 
-                                className="btn btn-default btn-playlists"
-                                type="button"
-                                onClick={() => {this.deletePlayList(index)}}
-                              >
-                                <i className="fas fa-trash-alt" />
-                                Usuń
-                              </button>
+              </FadeIn>
+              :
+              null
+            }
+            {this.props.actuallyUser ?
+              this.props.actuallyUser.playList ?
+                this.props.actuallyUser.playList.map((list, index) => {
+                  return (
+                        <div 
+                          className="col-xs-12 col-md-6"
+                          key={index}
+                        >
+                          <div className="playlists-item animated zoomIn">
+                            <img 
+                              className="img-responsive"
+                              alt={index + 'avatar'}
+                              src={
+                                list.music ?
+                                  list.music[0].avatar
+                                  :
+                                  null 
+                                ||
+                                require('../../images/iTunes-playlist-purple.png')
+                              }
+                              style= {{
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                marginTop: "50px",
+                                height: "250px",
+                                with: "250px",
+                              }}
+                            />
+                            <div className="playlists-item-box">
+                              <div className="playlists-buttons-hover animated fadeIn">
+                                <h6 className="playlists-title">
+                                  {list.namePlayList}
+                                </h6>
+                                <button 
+                                  className="btn btn-default btn-playlists"
+                                  type="button"
+                                  onClick={() => {
+                                    this.setState({
+                                      sectionChosenPlayList: true,
+                                      numberChoosePlaylist: index,
+                                    })
+                                  }}
+                                >
+                                  <i className="fab fa-youtube" />
+                                  Przejdź
+                                </button>
+                                <button  
+                                  className="btn btn-default btn-playlists"
+                                  type="button"
+                                  onClick={() => {
+                                    this.setState({
+                                      popUpUploadPlayList: true,
+                                      numberChoosePlaylist: index,
+                                    })
+                                  }}
+                                >
+                                  <i className="fas fa-share-alt" />
+                                  Udostępnij
+                                </button>
+                                <button 
+                                  className="btn btn-default btn-playlists"
+                                  type="button"
+                                  onClick={() => {this.deletePlayList(index)}}
+                                >
+                                  <i className="fas fa-trash-alt" />
+                                  Usuń
+                                </button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                    </div>
-                )
-              })
+                      </div>
+                  )
+                })
+                :
+                <div className="playlist-empty">
+                  <p className="playlist-empty-text">
+                    Aktualnie nie masz żadnej playlisty!
+                  </p> 
+                  <p className="playlist-empty-text">
+                    Dodaj nową playlistę i wczuj się w rytm muzyki!
+                  </p>
+                </div>
               :
-              <div className="playlist-empty">
-                <p className="playlist-empty-text">
-                  Aktualnie nie masz żadnej playlisty!
-                </p> 
-                <p className="playlist-empty-text">
-                  Dodaj nową playlistę i wczuj się w rytm muzyki!
-                </p>
+              <div className="playlist-loading">
+                <div className="spinner">
+                  <div className="double-bounce1"/>
+                  <div className="double-bounce2"/>
+                </div>
+                <p className="playlist-loading-text">Wczytuje...</p>
               </div>
-            :
-            <div className="playlist-loading">
-              <div className="spinner">
-                <div className="double-bounce1"/>
-                <div className="double-bounce2"/>
-              </div>
-              <p className="playlist-loading-text">Wczytuje...</p>
-            </div>
-          }    
-        </div>
+            }    
+          </div>
         }
       </Layout>
     );
