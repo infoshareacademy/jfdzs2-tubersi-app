@@ -120,7 +120,6 @@ class YourPlaylists extends PureComponent {
         })
       }
     }
-   
   }
 
   checkCorectUniqueNumber(number) {
@@ -335,9 +334,6 @@ class YourPlaylists extends PureComponent {
             <div className="section-playlist-options">
               <button className="section-playlist-options-play">
                     Graj
-              </button>
-              <button className="section-playlist-options-upload">
-                    Udostępnij
               </button>
               <button className="section-playlist-options-extends" >
                     <span className="glyphicon glyphicon-option-horizontal"/>
