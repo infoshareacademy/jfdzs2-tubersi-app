@@ -20,6 +20,7 @@ class App extends Component {
       firebase: null,
       dataBaseUsers: null,
       actuallyUser: null,
+      dataBaseChat: null,
     }
   }
 
@@ -41,6 +42,12 @@ class App extends Component {
     })
   }
 
+  loadDataBaseChat = (dataBaseChat) => {
+    this.setState({
+      dataBaseChat,
+    })
+  }
+
   render() {
     return ( 
       <React.Fragment> 
@@ -48,6 +55,7 @@ class App extends Component {
           setReferenceFirebase = {this.setReferenceFirebase}
           loadDataBaseUsers = {this.loadDataBaseUsers}
           setActuallyUser = {this.setActuallyUser}
+          loadDataBaseChat = {this.loadDataBaseChat}
         />
         <BrowserRouter>
           <Switch>
@@ -70,12 +78,18 @@ class App extends Component {
                 setActuallyUser = {this.setActuallyUser}
               />} 
             />
-            <Route path="/chat" component={Chat} />
+            <Route path="/chat" render={() => <Chat  
+              firebase = {this.state.firebase}
+              dataBaseChat = {this.state.dataBaseChat}
+              actuallyUser = {this.state.actuallyUser}
+              />}   
+            />
             <Route path="/player" component={Player} />
             <Route path="/search"  render={() => <Search 
               actuallyUser = {this.state.actuallyUser} 
               firebase = {this.state.firebase}
-            />}  />
+              />}  
+            />
             <Route 
               path="/your-playlist" 
               render={() => <YourPlaylists 

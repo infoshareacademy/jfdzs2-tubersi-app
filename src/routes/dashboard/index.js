@@ -52,7 +52,7 @@ class Dashboard extends PureComponent {
                     <div className="col-xs-12">
                         <h1>dashboard</h1>
                         <p>lorem ibsum ble bl ble ble</p>
-                        <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
+                        <div className="chartbackground col-xs-12 col-md-6 col-md-offset-2 col-lg-5 col-lg-offset-1">
                             <LineChart 
                                 width={500} 
                                 height={300} 
@@ -82,7 +82,7 @@ class Dashboard extends PureComponent {
                                 />
                             </LineChart>
                         </div>
-                        <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
+                        <div className="chartbackground col-xs-12 col-md-6 col-md-offset-2 col-lg-5 col-lg-offset-1">
                             <BarChart 
                                 width={500} 
                                 height={300} 
@@ -109,7 +109,7 @@ class Dashboard extends PureComponent {
                                 />
                             </BarChart>
                         </div>
-                        <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
+                        <div className="chartbackground col-xs-12 col-md-6 col-md-offset-2 col-lg-5 col-lg-offset-1">
                             <PieChart 
                                 width={500} 
                                 height={300} 
@@ -130,7 +130,7 @@ class Dashboard extends PureComponent {
                                 </Pie>
                             </PieChart>
                         </div>
-                        <div className="chartbackground col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
+                        <div className="chartbackground col-xs-12 col-md-6 col-md-offset-2 col-lg-5 col-lg-offset-1">
                             <AreaChart 
                                 width={500} 
                                 height={300} 

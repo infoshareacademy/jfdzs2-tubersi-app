@@ -109,7 +109,7 @@ class YourPlaylists extends PureComponent {
         else {
           this.setState({
             showMessageWhenUniqueNumberIsNotSucces: true,
-            messageWhenUploadPlayList: 'Playlista o danym numerze istnieje!',
+            messageWhenUploadPlayList: 'Playlista o danym numerze już istnieje!',
           })  
         }
       }

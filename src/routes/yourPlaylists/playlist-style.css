@@ -82,7 +82,7 @@
 }
 
 .section-playlist-main-description-description {
-    text-overflow: ellipsis;
+    overflow-wrap: break-word;
     overflow: hidden;
 }
 
