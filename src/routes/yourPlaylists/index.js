@@ -348,7 +348,6 @@ class YourPlaylists extends PureComponent {
           this.state.numberChoosePlaylist
         ];
     }
-
     return this.props.actuallyUser ?
       this.props.actuallyUser.playList[
         this.state.numberChoosePlaylist
@@ -408,8 +407,34 @@ class YourPlaylists extends PureComponent {
               </div>
             </div>
             <div className="section-playlist-options">
-              <button className="section-playlist-options-play">
-                    Graj
+              <button 
+                className="section-playlist-options-play"
+                onClick={() => {
+                  this.props.playListActually ?
+                    this.props.playListActually.uniqueNumber === actuallyPlaylist.uniqueNumber ?
+                      this.props.activeVideoAndSetPlayList(false, null)
+                      :
+                      this.props.activeVideoAndSetPlayList(true, actuallyPlaylist)
+                    :
+                    this.props.activeVideoAndSetPlayList(true, actuallyPlaylist)
+                }}
+                style={this.props.playListActually ?
+                        this.props.playListActually.uniqueNumber === actuallyPlaylist.uniqueNumber ?
+                          {backgroundColor: "rgb(217, 83, 79)"}
+                          :
+                          {backgroundColor: "rgb(27, 186, 84)"}
+                        :
+                        {backgroundColor: "rgb(27, 186, 84)"}  
+                }
+                >
+                  {this.props.playListActually ?
+                    this.props.playListActually.uniqueNumber === actuallyPlaylist.uniqueNumber ?
+                      'Zatrzymaj'
+                      :
+                      'Graj'
+                    :
+                    'Graj'
+                  }    
               </button>
               <button className="section-playlist-options-extends" >
                     <span className="glyphicon glyphicon-option-horizontal"/>

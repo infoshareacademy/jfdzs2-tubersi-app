@@ -16,6 +16,16 @@ class Chat extends PureComponent {
     this.inputMessage = null;
   }
 
+  componentDidMount() {
+    if(this.props.firebase && !this.state.messageReference) {
+      this.setState({
+        messageReference: this.props.firebase
+        .database()
+        .ref('chat')
+      })
+    }
+  }
+
   componentDidUpdate() {
     if(this.props.firebase && !this.state.messageReference) {
       this.setState({
@@ -24,7 +34,6 @@ class Chat extends PureComponent {
         .ref('chat')
       })
     }
-   
   }
 
   scrollToBottom = (messagesEnd) => {
@@ -48,7 +57,7 @@ class Chat extends PureComponent {
       message: this.message,
     }
     let allMessage = [...this.props.dataBaseChat, newMessage];
-
+    console.log(this.state.messageReference)
     this.state.messageReference
       .set(allMessage);
     this.inputMessage.value = '';  

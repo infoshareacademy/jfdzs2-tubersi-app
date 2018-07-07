@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import FadeIn from 'react-fade-in';
 
 import SignIn from './routes/signIn';
 import SignUp from "./routes/signUp";
@@ -21,6 +22,8 @@ class App extends Component {
       dataBaseUsers: null,
       actuallyUser: null,
       dataBaseChat: null,
+      playerAcitve: false,
+      playListActually: null,
     }
   }
 
@@ -48,9 +51,25 @@ class App extends Component {
     })
   }
 
+  activeVideoAndSetPlayList = (playerAcitve, playListActually) => {
+    this.setState({
+      playerAcitve, 
+      playListActually,
+    })
+  }
+
   render() {
     return ( 
       <React.Fragment> 
+        {this.state.playerAcitve ?
+          <FadeIn>
+            <Player
+              playListActually = {this.state.playListActually}
+            />
+          </FadeIn>
+          :
+          null
+        }
         <Firebase 
           setReferenceFirebase = {this.setReferenceFirebase}
           loadDataBaseUsers = {this.loadDataBaseUsers}
@@ -84,7 +103,6 @@ class App extends Component {
               actuallyUser = {this.state.actuallyUser}
               />}   
             />
-            <Route path="/player" component={Player} />
             <Route path="/search"  render={() => <Search 
               actuallyUser = {this.state.actuallyUser} 
               firebase = {this.state.firebase}
@@ -96,6 +114,8 @@ class App extends Component {
                   actuallyUser = {this.state.actuallyUser} 
                   firebase = {this.state.firebase}
                   dataBaseUsers = {this.state.dataBaseUsers}
+                  activeVideoAndSetPlayList = {this.activeVideoAndSetPlayList}
+                  playListActually = {this.state.playListActually}
                 />} 
             />
             <Route path="*" component={NotFound} />
