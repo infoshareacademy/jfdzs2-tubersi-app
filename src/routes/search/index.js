@@ -219,6 +219,9 @@ export default class Search extends PureComponent {
             duration: this.state.durationVideo [
                 index
             ],
+            idVideo: this.state.idVideos [
+                index
+            ],
             data: this.getData(),
         }
     }
