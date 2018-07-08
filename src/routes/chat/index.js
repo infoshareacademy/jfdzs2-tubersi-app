@@ -83,7 +83,7 @@ class Chat extends PureComponent {
                         >
                           <div className="chat-contain-message-contains">
                             <div className="chat-contain-message-contain-name-contents">
-                              Użytkownik: {message.name}
+                              {message.name}
                             </div>
                           </div>
                           <div className="chat-contain-message-contains"></div>
