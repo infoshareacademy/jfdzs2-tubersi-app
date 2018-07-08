@@ -51,7 +51,15 @@ class Player extends PureComponent {
      let timeActually = Math.floor(this.controlVideo.getCurrentTime());
      this.formatNumberToTime(timeDurationEnd, 'duration');
      this.formatNumberToTime(timeActually, 'actually');
+     this.setProgressBarInputChange(timeDurationEnd, timeActually);
     }
+  }
+
+  setProgressBarInputChange = (durationTime, actuallyTime) => {
+    let time = actuallyTime / durationTime * 100;
+    this.setState({
+        rangeValue: Math.floor(time),
+    })
   }
 
   formatNumberToTime = (numberToFormat, timeSet) => {
@@ -148,6 +156,7 @@ class Player extends PureComponent {
     else {
       this.setState({
         musicNumber: this.state.musicNumber + 1,
+        playerState: false,
        })
     }
   }
@@ -185,6 +194,7 @@ class Player extends PureComponent {
         else {
             this.setState({
               musicNumber: 0,
+              playerState: false,
             })
         }
     }
@@ -195,11 +205,13 @@ class Player extends PureComponent {
         if(this.state.musicNumber === 0) {
             this.setState({
                 musicNumber: this.props.playListActually.music.length - 1,
+                playerState: false,
             })
         }
         else {
             this.setState({
                 musicNumber: this.state.musicNumber - 1,
+                playerState: false,
             })
         }
     }
@@ -228,10 +240,15 @@ class Player extends PureComponent {
       }
   }
 
-    seekVideo(e) {
-      this.setState({
-          rangeValue: e.target.value,
-      })
+    seekVideo = (e) => {
+      if(this.controlVideo) {
+          this.setState({
+              rangeValue: e.target.value,
+          })
+          let timeDuration = Math.floor(this.controlVideo.getDuration());
+          let counter = e.target.value / 100;
+          this.controlVideo.seekTo(Math.floor(timeDuration * counter));
+      }
     }
 
   render() {
