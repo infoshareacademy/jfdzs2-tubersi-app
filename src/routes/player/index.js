@@ -11,6 +11,7 @@ class Player extends PureComponent {
       positionTitle: '105%',
       visibilityTitle: 'visible',
       musicNumber: 0,
+      playerState: false,
     }
     this.controlVideo = null;
     this.setPosition = null;
@@ -178,6 +179,22 @@ class Player extends PureComponent {
     }
   }
 
+  playOrPauseVideo = () => {
+    this.setState({
+      playerState: !this.state.playerState,
+    })
+    if(!this.state.playerState) {
+      if(this.controlVideo) {
+        this.controlVideo.pauseVideo();
+      }
+    }
+    else {
+      if(this.controlVideo) {
+        this.controlVideo.playVideo();
+      }
+    }
+  }
+
   render() {
     return (
       <div className="content-player">
@@ -221,8 +238,27 @@ class Player extends PureComponent {
             {this.timeActually} / {this.durationTime}
           </p>
         </div>
-        <div className="content-player-title-music">
-          
+        <div className="content-player-controls">
+            <span 
+              className="content-player-controls-icons glyphicon glyphicon-step-backward" 
+            />
+            <span 
+              className="content-player-controls-icons glyphicon glyphicon-backward" 
+            />
+            <span 
+              onClick={this.playOrPauseVideo}
+              className={this.state.playerState ?
+                          "content-player-controls-icons glyphicon glyphicon-play"
+                          :
+                          "content-player-controls-icons glyphicon glyphicon-pause"
+                        }
+            />
+            <span 
+              className="content-player-controls-icons glyphicon glyphicon-forward" 
+            />
+            <span 
+              className="content-player-controls-icons glyphicon glyphicon-step-forward" 
+            />
         </div>
       </div>
     );
