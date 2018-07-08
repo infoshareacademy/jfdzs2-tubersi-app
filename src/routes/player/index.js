@@ -18,6 +18,8 @@ class Player extends PureComponent {
     this.getTime = null;
     this.durationTime = '0:00';
     this.timeActually = '0:00';
+    this.widthDivTitlePlayer = null;
+    this.widthDivText = null;
   }
 
   componentDidMount() {
@@ -193,6 +195,36 @@ class Player extends PureComponent {
     }
   }
 
+  playNextVideo = () => {
+    if(this.controlVideo) {
+        if(this.props.playListActually.music.length - 1 > this.state.musicNumber) {
+          this.setState({
+              musicNumber: this.state.musicNumber + 1,
+          })
+        }
+        else {
+            this.setState({
+              musicNumber: 0,
+            })
+        }
+    }
+  }
+
+  playPreviousVideo = () => {
+    if(this.controlVideo) {
+        if(this.state.musicNumber === 0) {
+            this.setState({
+                musicNumber: this.props.playListActually.music.length - 1,
+            })
+        }
+        else {
+            this.setState({
+                musicNumber: this.state.musicNumber - 1,
+            })
+        }
+    }
+  }
+
   render() {
     return (
       <div className="content-player">
@@ -217,7 +249,9 @@ class Player extends PureComponent {
           onError={this.whenError}
         />
         <div className="content-player-underline" />
-        <div className="content-player-actually-music-title">
+        <div
+            className="content-player-actually-music-title"
+        >
           <p 
             className="content-player-actually-music-title-text"
             style={{
@@ -238,7 +272,8 @@ class Player extends PureComponent {
         </div>
         <div className="content-player-controls">
             <span 
-              className="content-player-controls-icons glyphicon glyphicon-step-backward" 
+              className="content-player-controls-icons glyphicon glyphicon-step-backward"
+              onClick={this.playPreviousVideo}
             />
             <span 
               className="content-player-controls-icons glyphicon glyphicon-backward" 
@@ -255,7 +290,8 @@ class Player extends PureComponent {
               className="content-player-controls-icons glyphicon glyphicon-forward" 
             />
             <span 
-              className="content-player-controls-icons glyphicon glyphicon-step-forward" 
+              className="content-player-controls-icons glyphicon glyphicon-step-forward"
+              onClick={this.playNextVideo}
             />
         </div>
       </div>
@@ -266,7 +302,6 @@ class Player extends PureComponent {
 const opts = {
   playerVars: { 
     autoplay: 1,
-    //controls: 0,
   }
 };
 
