@@ -105,7 +105,7 @@ class Player extends PureComponent {
         textTime += minutes + ':';
       } 
       else {
-        textTime += '0' + minutes;
+        textTime += '0' + minutes + ':';
       }
 
       if(seconds > 9) {
