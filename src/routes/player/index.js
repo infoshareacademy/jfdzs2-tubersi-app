@@ -8,22 +8,19 @@ class Player extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      positionTitle: '105%',
-      visibilityTitle: 'visible',
       musicNumber: 0,
       playerState: false,
+      durationTime: '0:00',
+      timeActually: '0:00',
+      rangeValue: 0,
     }
     this.controlVideo = null;
     this.setPosition = null;
     this.getTime = null;
-    this.durationTime = '0:00';
-    this.timeActually = '0:00';
-    this.widthDivTitlePlayer = null;
-    this.widthDivText = null;
+
   }
 
   componentDidMount() {
-   this.setPosition = setInterval(this.setPositionTitle, 250);
     this.getTime = setInterval(this.getDurationTimeVideo, 1000);
   }
 
@@ -48,34 +45,16 @@ class Player extends PureComponent {
     event.target.playVideo();
   }
 
-  setPositionTitle = () => {
-    let positionTitle = parseInt(this.state.positionTitle, 10);
-    let visibilityTitle;
-    if(positionTitle < - 85) {
-      visibilityTitle = 'hidden';
-    }
-    if(positionTitle < - 87) {
-      positionTitle = 120;
-    }
-    else {
-      positionTitle -= 1;
-    }
-    this.setState({
-      positionTitle: positionTitle + '%',
-      visibilityTitle,
-    })
-  }
-
   getDurationTimeVideo = () => {
     if(this.controlVideo) {
      let timeDurationEnd = Math.floor(this.controlVideo.getDuration());
      let timeActually = Math.floor(this.controlVideo.getCurrentTime());
      this.formatNumberToTime(timeDurationEnd, 'duration');
-     this.formatNumberToTime(timeActually, 'actually'); 
+     this.formatNumberToTime(timeActually, 'actually');
     }
   }
 
-  formatNumberToTime(numberToFormat, timeSet) {
+  formatNumberToTime = (numberToFormat, timeSet) => {
     let times;
     let seconds = 0;
     let minutes = 0;
@@ -93,10 +72,14 @@ class Player extends PureComponent {
     }
     seconds = numberToFormat;
     if(timeSet === 'duration') {
-      this.durationTime = this.setFormatTime(seconds, minutes, hours);
+      this.setState({
+        durationTime: this.setFormatTime(seconds, minutes, hours),
+      })
     }
     else {
-      this.timeActually = this.setFormatTime(seconds, minutes, hours);
+      this.setState({
+          timeActually: this.setFormatTime(seconds, minutes, hours),
+      })
     }
   }
 
@@ -165,7 +148,6 @@ class Player extends PureComponent {
     else {
       this.setState({
         musicNumber: this.state.musicNumber + 1,
-        positionTitle: '105%',
        })
     }
   }
@@ -198,9 +180,7 @@ class Player extends PureComponent {
   playNextVideo = () => {
     if(this.controlVideo) {
         if(this.props.playListActually.music.length - 1 > this.state.musicNumber) {
-          this.setState({
-              musicNumber: this.state.musicNumber + 1,
-          })
+          this.checkNextVideo();
         }
         else {
             this.setState({
@@ -224,6 +204,35 @@ class Player extends PureComponent {
         }
     }
   }
+
+  seekToNext = () => {
+      let timeDurationEnd = Math.floor(this.controlVideo.getDuration());
+      let timeActually = Math.floor(this.controlVideo.getCurrentTime());
+
+      if(timeActually + 5 < timeDurationEnd) {
+        this.controlVideo.seekTo(timeActually + 5);
+      }
+      else {
+        this.playNextVideo();
+      }
+  }
+
+  seekToPrevious = () => {
+      let timeActually = Math.floor(this.controlVideo.getCurrentTime());
+
+      if(timeActually - 5 > 0) {
+          this.controlVideo.seekTo(timeActually - 5);
+      }
+      else {
+          this.playPreviousVideo();
+      }
+  }
+
+    seekVideo(e) {
+      this.setState({
+          rangeValue: e.target.value,
+      })
+    }
 
   render() {
     return (
@@ -249,25 +258,20 @@ class Player extends PureComponent {
           onError={this.whenError}
         />
         <div className="content-player-underline" />
+          <div className="content-player-actually-marquee">
+            <marquee
+                direction="left"
+                scrollamount="2"
+                scrolldelay="1"
+            >
+                {this.props.playListActually.music[this.state.musicNumber].title}
+            </marquee>
+          </div>
         <div
             className="content-player-actually-music-title"
         >
-          <p 
-            className="content-player-actually-music-title-text"
-            style={{
-              left: this.state.positionTitle,
-              visibility: this.state.visibilityTitle,
-            }}
-          >
-            {this.props.playListActually.music[this.state.musicNumber].title.substr(0,16)}
-            {this.props.playListActually.music[this.state.musicNumber].title.length > 16 ?
-              ' .......'
-              :
-              ''
-            }
-          </p>
           <p className="content-player-actually-music-title-time">
-            {this.timeActually} / {this.durationTime}
+            {this.state.timeActually} / {this.state.durationTime}
           </p>
         </div>
         <div className="content-player-controls">
@@ -276,7 +280,8 @@ class Player extends PureComponent {
               onClick={this.playPreviousVideo}
             />
             <span 
-              className="content-player-controls-icons glyphicon glyphicon-backward" 
+              className="content-player-controls-icons glyphicon glyphicon-backward"
+              onClick={this.seekToPrevious}
             />
             <span 
               onClick={this.playOrPauseVideo}
@@ -287,11 +292,18 @@ class Player extends PureComponent {
                         }
             />
             <span 
-              className="content-player-controls-icons glyphicon glyphicon-forward" 
+              className="content-player-controls-icons glyphicon glyphicon-forward"
+              onClick={this.seekToNext}
             />
             <span 
               className="content-player-controls-icons glyphicon glyphicon-step-forward"
               onClick={this.playNextVideo}
+            />
+            <input
+                className="content-player-controls-progress"
+                type="range"
+                value={this.state.rangeValue}
+                onChange={this.seekVideo}
             />
         </div>
       </div>
