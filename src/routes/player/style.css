@@ -8,11 +8,51 @@
     width: 350px;
     top: 15%;
     border-radius: 15px;
+    border: 0.5px solid rgb(99, 99, 102);
+}
+
+.content-player-options {
+    position: relative;
+    height: 25px;
+    margin-top: 5px;
+    width: 100%;
+    text-align: right;
+    color: #fff;
+}
+
+.content-player-options-hide {
+    opacity: 0.5;
+    transition: 1s;
+    margin-right: 10px;
+}
+
+
+.content-player-options-close {
+    opacity: 0.5;
+    transition: 1s;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.content-player-options-hide:hover,
+.content-player-options-close:hover {
+    opacity: 1;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.content-player-options-underline {
+    height: 1.5px;
+    background-color: #fff;
+    opacity: 0.2;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .player {
     width: 150px;
-    margin-top: 40px;
+    margin-top: 15px;
     height: 100px;
     float: left;
     margin-left: 100px;
@@ -23,7 +63,7 @@
     float: left;
     margin-left: 5%;
     margin-right: 5%;
-    height: 0.5px;
+    height: 1.5px;
     opacity: 0.2;
     background-color: white;
     margin-top: 5px;
@@ -34,7 +74,7 @@
     width: 80%;
     margin-left: 10%;
     position: relative;
-    height: 50px;
+    height: 60px;
     margin-top: 5px;
     color: #fff;
     opacity: 0.7;
@@ -46,4 +86,61 @@
 .content-player-actually-music-title-text {
     position: absolute;
     transition: 0.25s linear;
+}
+
+.content-player-actually-music-title-time {
+    position: relative;
+    margin-top: 25px;
+    text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+    .content-player {
+        height: 700px;
+        top: 75px;
+        width: 550px;
+    }
+    
+    .content-player-options-underline {
+        margin-top: 5px;
+    }
+    
+    .player {
+       height: 200px;
+       width: 350px;
+    }
+    
+    .content-player-underline {
+       margin-top: 10px;
+    }
+    
+    .content-player-actually-music-title {
+       font-size: 18px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .content-player {
+        height: 800px;
+        width: 800px;
+    }
+    
+    .content-player-options-underline {
+        margin-top: 5px;
+    }
+    
+    .player {
+       height: 200px;
+       width: 60%;
+       margin-left: 20%;
+       margin-right: 20%
+    }
+    
+    .content-player-underline {
+       margin-top: 10px;
+    }
+    
+    .content-player-actually-music-title {
+       font-size: 18px;
+    }
 }

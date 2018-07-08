@@ -65,6 +65,7 @@ class App extends Component {
           <FadeIn>
             <Player
               playListActually = {this.state.playListActually}
+              activeVideoAndSetPlayList = {this.activeVideoAndSetPlayList}
             />
           </FadeIn>
           :
