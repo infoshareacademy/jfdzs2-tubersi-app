@@ -723,7 +723,7 @@ class YourPlaylists extends PureComponent {
                         >
                           <div className="playlists-item animated zoomIn">
                             <img 
-                              className="img-responsive"
+                              className="image-playlist img-responsive"
                               alt={index + 'avatar'}
                               src={
                                 list.music ?

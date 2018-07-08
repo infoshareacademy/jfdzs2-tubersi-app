@@ -180,17 +180,15 @@ class Player extends PureComponent {
   }
 
   playOrPauseVideo = () => {
-    this.setState({
-      playerState: !this.state.playerState,
-    })
-    if(!this.state.playerState) {
-      if(this.controlVideo) {
+    if(this.controlVideo) {
+      this.setState({
+        playerState: !this.state.playerState,
+      })
+      if(!this.state.playerState) {
         this.controlVideo.pauseVideo();
       }
-    }
-    else {
-      if(this.controlVideo) {
-        this.controlVideo.playVideo();
+      else {
+       this.controlVideo.playVideo(); 
       }
     }
   }

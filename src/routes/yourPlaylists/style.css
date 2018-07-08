@@ -222,16 +222,17 @@
 .playlists-item {
     margin-top: 10px;
     border-radius: 10px; 
-    border: 3px solid #2D2E32;
+    border: 3px solid rgb(99, 99, 102);
     height: 400px;
     position: relative;
     background-repeat: no-repeat;
     background-position: 100%;
     background-size: cover;
+    background-color: #2D2E32;
 }
 
 .playlists-item-box{
-    background-color: rgba(220,220,220, 0.4);
+    background-color: rgba(220,220,220, 0.1);
     position: absolute;
     top: 0;
     left: 0;
