@@ -1,7 +1,9 @@
+/* eslint-disable */
 import React, { PureComponent} from 'react';
 import YouTube from 'react-youtube';
 
 import './style.css';
+import './list-music-player.css';
 
 class Player extends PureComponent {
   
@@ -66,8 +68,8 @@ class Player extends PureComponent {
 
   getDurationTimeVideo = () => {
     if(this.controlVideo) {
-     let timeDurationEnd = Math.floor(this.controlVideo.getDuration());
-     let timeActually = Math.floor(this.controlVideo.getCurrentTime());
+     let timeDurationEnd = Math.round(this.controlVideo.getDuration());
+     let timeActually = Math.round(this.controlVideo.getCurrentTime());
      this.formatNumberToTime(timeDurationEnd, 'duration');
      this.formatNumberToTime(timeActually, 'actually');
      this.setProgressBarInputChange(timeDurationEnd, timeActually);
@@ -103,10 +105,13 @@ class Player extends PureComponent {
         durationTime: this.setFormatTime(seconds, minutes, hours),
       })
     }
-    else {
+    else if(timeSet === 'actually') {
       this.setState({
           timeActually: this.setFormatTime(seconds, minutes, hours),
       })
+    }
+    else {
+      return this.setFormatTime(seconds, minutes, hours);
     }
   }
 
@@ -259,46 +264,46 @@ class Player extends PureComponent {
       }
   }
 
-    seekVideo = (e) => {
-      if(this.controlVideo) {
-          this.setState({
-              rangeValue: e.target.value,
-          })
-          let timeDuration = Math.floor(this.controlVideo.getDuration());
-          let counter = e.target.value / 100;
-          this.controlVideo.seekTo(Math.floor(timeDuration * counter));
-      }
-    }
-
-    setSound = (e) => {
-      if(this.controlVideo) {
+  seekVideo = (e) => {
+    if(this.controlVideo) {
         this.setState({
-          soundValue: e.target.value,
+            rangeValue: e.target.value,
         })
-        if(e.target.value > 0) {
+        let timeDuration = Math.floor(this.controlVideo.getDuration());
+        let counter = e.target.value / 100;
+        this.controlVideo.seekTo(Math.floor(timeDuration * counter));
+    }
+  }
+
+  setSound = (e) => {
+    if(this.controlVideo) {
+      this.setState({
+        soundValue: e.target.value,
+      })
+      if(e.target.value > 0) {
+        this.controlVideo.unMute();
+      }
+      else {
+        this.controlVideo.mute();
+      }
+      this.controlVideo.setVolume(e.target.value);
+    }
+  }
+
+  setMuteSound = (e) => {
+    if(e.target.className === 'content-player-controls-sound glyphicon glyphicon-volume-off' ||
+       e.target.className === 'content-player-controls-sound glyphicon glyphicon-volume-down' ||
+       e.target.className === 'content-player-controls-sound glyphicon glyphicon-volume-up') {
+       if(this.controlVideo) {
+       if(this.controlVideo.isMuted()) {
           this.controlVideo.unMute();
-        }
+        }      
         else {
           this.controlVideo.mute();
         }
-        this.controlVideo.setVolume(e.target.value);
       }
     }
-
-    setMuteSound = (e) => {
-      if(e.target.className === 'content-player-controls-sound glyphicon glyphicon-volume-off' ||
-         e.target.className === 'content-player-controls-sound glyphicon glyphicon-volume-down' ||
-         e.target.className === 'content-player-controls-sound glyphicon glyphicon-volume-up') {
-        if(this.controlVideo) {
-          if(this.controlVideo.isMuted()) {
-            this.controlVideo.unMute();
-          }      
-          else {
-            this.controlVideo.mute();
-          }
-        }
-      }
-    }
+  }
 
   checkStatusSound = () => {
     if(this.controlVideo) {
@@ -328,6 +333,65 @@ class Player extends PureComponent {
         return this.state.soundValue;
       }
     }
+  }
+
+  breakDurationOnNumber(duration) {
+    let seconds = 0;
+    let minutes = 0;
+    let hours = 0;
+    
+    if(parseInt(duration.substr(-3))) {
+      seconds += parseInt(duration.substr(-3));
+    } 
+    else {
+      seconds += parseInt(duration.substr(-2));
+    }
+    minutes += this.getMinute(duration);
+    hours += this.getHours(duration);
+    seconds = this.countTime(seconds);
+    minutes += seconds.timeAdd;
+    seconds = seconds.time;
+    minutes = this.countTime(minutes);
+    hours += minutes.timeAdd;
+    minutes = minutes.time;
+    return this.formatNumberToTime(hours * 3600 + minutes * 60 + seconds, null);
+  }
+
+  countTime(time) {
+    let timeAdd = time;
+    time %= 60;
+    timeAdd -= time;
+    timeAdd /= 60;
+    return {
+      time,
+      timeAdd,
+    }
+  }
+
+  getMinute(duration) {
+    let indexStartMinute = duration.indexOf('M');
+    if(indexStartMinute !== -1) {
+      if(parseInt(duration.substr(indexStartMinute - 2))) {
+        return parseInt(duration.substr(indexStartMinute - 2));
+      } 
+      else {
+        return parseInt(duration.substr(indexStartMinute - 1));
+      }
+    }
+    return 0;
+  }
+
+  getHours(duration) {
+    let indexStartHours = duration.indexOf('H');
+    if(indexStartHours !== -1) {
+      if(parseInt(duration.substr(indexStartHours - 2))) {
+        return parseInt(duration.substr(indexStartHours - 2));
+      } 
+      else {
+        return parseInt(duration.substr(indexStartHours - 1));
+      }
+    }
+    return 0;
   }
 
   render() {
@@ -418,6 +482,42 @@ class Player extends PureComponent {
                 value={this.state.rangeValue}
                 onChange={this.seekVideo}
             />
+        </div>
+        <div className="content-player-playlist">
+             {this.props.playListActually.music.map((music, index) => {
+               let time = this.breakDurationOnNumber(music.duration);
+               return (
+                 <div 
+                  className="content-player-playlist-list"
+                  key={index}
+                  onClick={() => {
+                    this.setState({
+                      musicNumber: index,
+                    })
+                  }}
+                  style={
+                    this.state.musicNumber === index ?
+                      {backgroundColor: "rgb(45,46,50)"}
+                      :
+                      {opacity: 0.5}
+                  }
+                 >
+                   <div className="content-player-playlist-list-contain"> 
+                    <img
+                        className="content-player-playlist-list-containt-avatar"
+                        src={music.avatar}
+                        alt={index + "avatar-music"}
+                      />
+                    </div>
+                  <div className="content-player-playlist-list-title">
+                    {music.title}
+                  </div>
+                  <div className="content-player-playlist-list-time">
+                    {time}
+                  </div>
+                 </div>
+                )
+             })}
         </div>
       </div>
     );

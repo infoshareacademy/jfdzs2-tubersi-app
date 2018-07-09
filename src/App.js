@@ -52,9 +52,9 @@ class App extends Component {
   }
 
   activeVideoAndSetPlayList = (playerAcitve, playListActually) => {
-    this.setState({
-      playerAcitve, 
+    this.setState({ 
       playListActually,
+      playerAcitve,
     })
   }
 
