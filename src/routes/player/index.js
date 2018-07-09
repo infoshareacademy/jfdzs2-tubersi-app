@@ -13,6 +13,7 @@ class Player extends PureComponent {
       durationTime: '0:00',
       timeActually: '0:00',
       rangeValue: 0,
+      soundValue: 0,
     }
     this.controlVideo = null;
     this.setPosition = null;
@@ -24,11 +25,18 @@ class Player extends PureComponent {
     this.getTime = setInterval(this.getDurationTimeVideo, 1000);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if(prevProps.playListActually !== this.props.playListActually) {
       this.setState({
         musicNumber: 0,
       })
+    }
+    if(this.controlVideo) {
+      if(this.controlVideo.getVolume() !== this.state.soundValue && !this.controlVideo.isMuted) {
+        this.setState({
+          soundValue: this.controlVideo.getVolume(),
+        })
+      }
     }
   }
 
@@ -43,6 +51,17 @@ class Player extends PureComponent {
   onReady = (event) => {
     this.controlVideo = event.target;
     event.target.playVideo();
+    if(this.controlVideo.isMuted()) {
+      this.setState({
+        soundValue: 0,
+      })
+    }
+    else {
+      this.setState({
+        soundValue: this.controlVideo.getVolume(),
+      })
+    }
+   
   }
 
   getDurationTimeVideo = () => {
@@ -251,10 +270,74 @@ class Player extends PureComponent {
       }
     }
 
+    setSound = (e) => {
+      if(this.controlVideo) {
+        this.setState({
+          soundValue: e.target.value,
+        })
+        if(e.target.value > 0) {
+          this.controlVideo.unMute();
+        }
+        else {
+          this.controlVideo.mute();
+        }
+        this.controlVideo.setVolume(e.target.value);
+      }
+    }
+
+    setMuteSound = (e) => {
+      if(e.target.className === 'content-player-controls-sound glyphicon glyphicon-volume-off' ||
+         e.target.className === 'content-player-controls-sound glyphicon glyphicon-volume-down' ||
+         e.target.className === 'content-player-controls-sound glyphicon glyphicon-volume-up') {
+        if(this.controlVideo) {
+          if(this.controlVideo.isMuted()) {
+            this.controlVideo.unMute();
+          }      
+          else {
+            this.controlVideo.mute();
+          }
+        }
+      }
+    }
+
+  checkStatusSound = () => {
+    if(this.controlVideo) {
+      if(this.controlVideo.isMuted()) {
+        return "content-player-controls-sound glyphicon glyphicon-volume-off";
+      }
+      else {
+        if(this.state.soundValue === 0) {
+          return "content-player-controls-sound glyphicon glyphicon-volume-off";
+        }
+        else if(this.state.soundValue < 50) {
+          return "content-player-controls-sound glyphicon glyphicon-volume-down";
+        }
+        else {
+          return "content-player-controls-sound glyphicon glyphicon-volume-up";
+        }
+      }
+    }
+  }
+
+  getValueSound() {
+    if(this.controlVideo) {
+      if(this.controlVideo.isMuted()){
+        return 0;
+      }
+      else {
+        return this.state.soundValue;
+      }
+    }
+  }
+
   render() {
     return (
       <div className="content-player">
         <div className="content-player-options">
+          <span className="content-player-controls-fullscreen">
+            FULLSCREEN {" "}
+            <span className="glyphicon glyphicon-fullscreen"/>
+          </span>   
           <span className="content-player-options-hide glyphicon glyphicon-minus" />
           <span 
             className="content-player-options-close glyphicon glyphicon-remove" 
@@ -316,6 +399,19 @@ class Player extends PureComponent {
               className="content-player-controls-icons glyphicon glyphicon-step-forward"
               onClick={this.playNextVideo}
             />
+            <div 
+              className={this.checkStatusSound()}
+              onClick={this.setMuteSound}
+              >
+                <div className="content-player-controls-sound-contain">
+                  <input 
+                    className="content-player-controls-sound-input"
+                    type="range"
+                    value={this.getValueSound()}
+                    onChange={this.setSound}
+                  />      
+                </div>
+            </div>
             <input
                 className="content-player-controls-progress"
                 type="range"
@@ -331,6 +427,7 @@ class Player extends PureComponent {
 const opts = {
   playerVars: { 
     autoplay: 1,
+    controls: 0,
   }
 };
 
