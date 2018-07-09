@@ -62,4 +62,9 @@
         margin-top: 5px;
         position: relative;
     }
+    .navbar-btn{
+        display: none;
+    }
+
+
 }
