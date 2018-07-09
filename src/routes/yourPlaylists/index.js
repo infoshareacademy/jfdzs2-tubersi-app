@@ -565,8 +565,13 @@ class YourPlaylists extends PureComponent {
             </div>
             <div className="content-playlist-title">
               <h1 className="content-playlist-title-text">
-                TWOJA PLAYLISTA
+              Playlisty
               </h1>
+              <h4>Tutaj znajdują się wszystkie Twoje playlisty. <br/>
+              Klikając przycisk DODAJ możesz stworzy własną playlistę np. ulubione.<br/>
+              Gdy już to zrobisz przejdz zakładki SZUKAJ by rozpoczać muzyczną przygodę.<br/>
+              Po najechaniu na konkretny box z playlistą możesz ją włączyć, udostępnić znajomemu lub usunąć.
+             </h4>
               <button 
                 className="content-playlists-options-add"
                 onClick={this.changeViewPopUpAddNewPlayList}
@@ -718,12 +723,13 @@ class YourPlaylists extends PureComponent {
                 this.props.actuallyUser.playList.map((list, index) => {
                   return (
                         <div 
-                          className="col-xs-12 col-md-6"
+                          className="col-xs-12 col-sm-12 col-md-12 col-lg-6"
                           key={index}
                         >
-                          <div className="playlists-item animated zoomIn">
+                          <div className="playlists-item animated zoomIn"
+>
                             <img 
-                              className="image-playlist img-responsive"
+                              className="playlist-img img-responsive"
                               alt={index + 'avatar'}
                               src={
                                 list.music ?
@@ -733,13 +739,6 @@ class YourPlaylists extends PureComponent {
                                 ||
                                 require('../../images/iTunes-playlist-purple.png')
                               }
-                              style= {{
-                                marginLeft: "auto",
-                                marginRight: "auto",
-                                marginTop: "50px",
-                                height: "250px",
-                                with: "250px",
-                              }}
                             />
                             <div className="playlists-item-box">
                               <div className="playlists-buttons-hover animated fadeIn">
