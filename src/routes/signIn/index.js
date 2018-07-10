@@ -38,7 +38,16 @@ class SignIn extends PureComponent {
         }
     })
     .catch((error) => {
-        console.log(error);
+      var errorCode = error.code;
+      // var errorMessage = error.message;
+      if (errorCode === 'auth/wrong-password') {
+        alert('Hasło jest niepoprawne');
+      } else if (errorCode ==='auth/invalid-email'){
+        alert('Adres mailowy jest źle podany')
+      } else {
+        alert('Nie ma takiego użytkownika - już do rejestracji');
+      }
+      console.log(error);
       })
   }
 

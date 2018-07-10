@@ -28,7 +28,14 @@ class SignUp extends PureComponent {
         this.createNewUser();
       })
     .catch((error) => {
-        console.log(error);
+      var errorCode = error.code;
+      // var errorMessage = error.message;
+      if (errorCode === 'auth/weak-password') {
+        alert('Bez jaj - masz  słabe hasło');
+      } else if (errorCode ==='auth/invalid-email'){
+        alert('Adres mailowy jest źle podany');
+      } 
+      console.log(error);
       })
   }
 
