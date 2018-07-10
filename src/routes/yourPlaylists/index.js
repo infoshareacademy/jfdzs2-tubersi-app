@@ -563,17 +563,19 @@ class YourPlaylists extends PureComponent {
               STWORZONO NOWĄ PLAYLISTE
               <span className="content-playlist-create-new-playlist-icon glyphicon glyphicon-music"/>
             </div>
-            <div className="content-playlist-title">
+            <div className="content-playlist-title animated bounceInRight">
               <h1 className="content-playlist-title-text">
-              Playlisty
+              Twoje Playlisty
               </h1>
-              <h4>Tutaj znajdują się wszystkie Twoje playlisty. <br/>
-              Klikając przycisk DODAJ możesz stworzy własną playlistę np. ulubione.<br/>
-              Gdy już to zrobisz przejdz zakładki SZUKAJ by rozpoczać muzyczną przygodę.<br/>
-              Po najechaniu na konkretny box z playlistą możesz ją włączyć, udostępnić znajomemu lub usunąć.
-             </h4>
+              <i class="fas fa-info-circle"></i>
+              <div className="content-playlist-info">
+                <p>Tutaj znajdują się wszystkie Twoje playlisty. </p>
+                <p>Klikając przycisk DODAJ możesz stworzyć playlistę np. ulubione.</p>
+                <p>Gdy już to zrobisz przejdz do zakładki SZUKAJ i rozpocznij muzyczną przygodę</p>
+                <p>Po najechaniu na konkretny box z playlistą możesz ją włączyć, udostępnić znajomemu lub usunąć.</p>
+             </div>
               <button 
-                className="content-playlists-options-add"
+                className=" btn btn-default btn-playlists"
                 onClick={this.changeViewPopUpAddNewPlayList}
               >
                 <i className="fas fa-plus" />
@@ -787,6 +789,7 @@ class YourPlaylists extends PureComponent {
                 })
                 :
                 <div className="playlist-empty">
+                  <i class="fas fa-exclamation-circle"></i>
                   <p className="playlist-empty-text">
                     Aktualnie nie masz żadnej playlisty!
                   </p> 

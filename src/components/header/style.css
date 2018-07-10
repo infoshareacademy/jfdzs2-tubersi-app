@@ -14,7 +14,7 @@
     float: right;
     font-size: 18px;
     background-color:#DCDCDC;
-    width: 200px;
+    width: 140px;
 }
 
 .logo-img {
@@ -46,6 +46,9 @@
 
 .fas.fa-bars{
     display: none;
+}
+.fas.fa-sign-out-alt{
+    margin-right: 10px; 
 }
 .brand-name:hover{
     text-decoration: none;

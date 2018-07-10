@@ -404,13 +404,17 @@ export default class Search extends PureComponent {
                                     </div>
                             </React.Fragment>
                             :
-                            <div className="search-empty-playlist">
+                            <div className="search-empty-playlist animated bounceInRight">
                                 <div className="search-empty-playlist-contain">
+                                    <i class="fas fa-info-circle"></i>
                                     <p className="search-empty-text">
-                                        Aktualnie nie posiadasz playlisty!
+                                        Aby skorzystać z wyszukiwarki musisz miec playlistę
                                     </p>
                                     <p className="search-empty-text">
-                                        Przejdź do zakładki "Twoja Playlista"
+                                        Aktualnie nie posiadasz żadnej playlisty!
+                                    </p>
+                                    <p className="search-empty-text">
+                                        Przejdź do zakładki PLAYLISTY
                                     </p>
                                     <p className="search-empty-text">
                                         Utwórz nową a następnie wróć i dodaj muzykę"
