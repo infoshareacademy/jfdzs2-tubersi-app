@@ -85,6 +85,21 @@
     margin-top: 5px;
 }
 
+.content-player-title-play {
+    text-align: center;
+    float: left;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: #fff;
+    opacity: 0.5;
+    font-weight: 900;
+}
+
 .content-player-actually-music-title {
     float: left;
     width: 80%;
@@ -101,7 +116,7 @@
 .content-player-control-video {
     z-index: 11;
     position: fixed;
-    height: 200px;
+    height: 250px;
     width: 350px;
     background: linear-gradient(#2D2E32, black);
     opacity: 1;
@@ -320,6 +335,7 @@
 	border-radius: 10px;
     background-color: rgb(99, 99, 102);
 }
+
 .content-player-hide-player {
     background: linear-gradient(#2D2E32, black);
     height: 50px;
@@ -327,8 +343,24 @@
     position: fixed;
     z-index: 11;
     right: 15px;
-    top: 100px;
+    transition: 1s;
     border-radius: 10px;
+    border: 1.5px solid rgb(99, 99, 102);
+    text-align: center;
+}
+
+.content-player-hide-player-icon {
+    color: #fff;
+    line-height: 50px;
+    font-size: 25px;
+    filter: blur(1px);
+    transition: 1s;
+}
+
+.content-player-hide-player-icon:hover {
+    cursor: pointer;
+    filter: unset;
+    transition: 1s;
 }
 
 @media only screen and (min-width: 768px) {
@@ -339,6 +371,10 @@
     
     .content-player-options-underline {
         margin-top: 5px;
+    }
+
+    .content-player-title-play {
+        margin-top: 50px;
     }
     
     .player {
@@ -386,6 +422,11 @@
     .content-player-hide-player {
         width: 100px;
         height: 100px;
+    }
+
+    .content-player-hide-player-icon {
+        font-size: 50px;
+        line-height: 100px;
     }
 }
 

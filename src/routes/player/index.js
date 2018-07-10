@@ -17,6 +17,7 @@ class Player extends PureComponent {
       rangeValue: 0,
       soundValue: 0,
       visibleAlbumPlaylist: true,
+      visiblePlayer: true,
     }
     this.controlVideo = null;
     this.setPosition = null;
@@ -438,6 +439,11 @@ class Player extends PureComponent {
           onError={this.whenError}
         />
         <div className="content-player-underline" />
+        <div className="content-player-title-play">
+          {this.props.playListActually.music[
+            this.state.musicNumber
+          ].title}
+        </div>
         <div className="content-player-playlist">
              {this.props.playListActually.music.map((music, index) => {
                let time = this.breakDurationOnNumber(music.duration);
@@ -477,7 +483,7 @@ class Player extends PureComponent {
       </div>
       <div 
         className="content-player-control-video"
-        style={!this.state.visibleAlbumPlaylist ?
+        style={!this.state.visibleAlbumPlaylist && this.state.visiblePlayer ?
           {top: "75px"}
           :
           {top: "-100%"}
@@ -494,6 +500,11 @@ class Player extends PureComponent {
         />
       <span 
         className="content-player-options-hide glyphicon glyphicon-minus"
+        onClick={() => {
+          this.setState({
+            visiblePlayer: false,
+          })
+        }}
       />
       <span 
         className="content-player-options-close glyphicon glyphicon-remove" 
@@ -563,8 +574,20 @@ class Player extends PureComponent {
               />
           </div>
         </div>
-        <div className="content-player-hide-player">
-        
+        <div 
+          className="content-player-hide-player"
+          style={!this.state.visiblePlayer ?
+                  {top: "100px"}
+                  :
+                  {top: "-100%"}
+                }
+          onClick={() => {
+              this.setState({
+                visiblePlayer: true,
+              })
+            }}      
+        >
+           <span className="content-player-hide-player-icon glyphicon glyphicon-music" />
         </div>
       </React.Fragment>
     );
