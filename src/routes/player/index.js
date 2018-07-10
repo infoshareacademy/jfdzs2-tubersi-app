@@ -16,6 +16,7 @@ class Player extends PureComponent {
       timeActually: '0:00',
       rangeValue: 0,
       soundValue: 0,
+      visibleAlbumPlaylist: true,
     }
     this.controlVideo = null;
     this.setPosition = null;
@@ -396,13 +397,28 @@ class Player extends PureComponent {
 
   render() {
     return (
-      <div className="content-player">
+      <React.Fragment>
+      <div 
+        className="content-player"
+        style={this.state.visibleAlbumPlaylist ?
+                {top: "75px"}
+                :
+                {top: "-100%"}
+              }
+      >
         <div className="content-player-options">
           <span className="content-player-controls-fullscreen">
             FULLSCREEN {" "}
             <span className="glyphicon glyphicon-fullscreen"/>
           </span>   
-          <span className="content-player-options-hide glyphicon glyphicon-minus" />
+          <span 
+            className="content-player-options-hide glyphicon glyphicon-minus"
+            onClick={() => {
+              this.setState({
+                visibleAlbumPlaylist: false,
+              })
+            }} 
+          />
           <span 
             className="content-player-options-close glyphicon glyphicon-remove" 
             onClick={()=>{this.props.activeVideoAndSetPlayList(false, null)}}
@@ -422,67 +438,7 @@ class Player extends PureComponent {
           onError={this.whenError}
         />
         <div className="content-player-underline" />
-          <div className="content-player-actually-marquee">
-            <marquee
-                direction="left"
-                scrollamount="2"
-                scrolldelay="1"
-            >
-                {this.props.playListActually.music[this.state.musicNumber].title}
-            </marquee>
-          </div>
-        <div
-            className="content-player-actually-music-title"
-        >
-          <p className="content-player-actually-music-title-time">
-            {this.state.timeActually} / {this.state.durationTime}
-          </p>
-        </div>
-        <div className="content-player-controls">
-            <span 
-              className="content-player-controls-icons glyphicon glyphicon-step-backward"
-              onClick={this.playPreviousVideo}
-            />
-            <span 
-              className="content-player-controls-icons glyphicon glyphicon-backward"
-              onClick={this.seekToPrevious}
-            />
-            <span 
-              onClick={this.playOrPauseVideo}
-              className={this.state.playerState ?
-                          "content-player-controls-icons glyphicon glyphicon-play"
-                          :
-                          "content-player-controls-icons glyphicon glyphicon-pause"
-                        }
-            />
-            <span 
-              className="content-player-controls-icons glyphicon glyphicon-forward"
-              onClick={this.seekToNext}
-            />
-            <span 
-              className="content-player-controls-icons glyphicon glyphicon-step-forward"
-              onClick={this.playNextVideo}
-            />
-            <div 
-              className={this.checkStatusSound()}
-              onClick={this.setMuteSound}
-              >
-                <div className="content-player-controls-sound-contain">
-                  <input 
-                    className="content-player-controls-sound-input"
-                    type="range"
-                    value={this.getValueSound()}
-                    onChange={this.setSound}
-                  />      
-                </div>
-            </div>
-            <input
-                className="content-player-controls-progress"
-                type="range"
-                value={this.state.rangeValue}
-                onChange={this.seekVideo}
-            />
-        </div>
+          
         <div className="content-player-playlist">
              {this.props.playListActually.music.map((music, index) => {
                let time = this.breakDurationOnNumber(music.duration);
@@ -520,6 +476,95 @@ class Player extends PureComponent {
              })}
         </div>
       </div>
+      <div 
+        className="content-player-control-video"
+        style={!this.state.visibleAlbumPlaylist ?
+          {top: "75px"}
+          :
+          {top: "-100%"}
+        }       
+      >
+      <div className="content-player-options">
+      <span 
+        className="content-player-options-list glyphicon glyphicon-th-list" 
+        onClick={() => {
+          this.setState({
+            visibleAlbumPlaylist: true,
+          })
+        }}
+        />
+      <span 
+        className="content-player-options-hide glyphicon glyphicon-minus"
+      />
+      <span 
+        className="content-player-options-close glyphicon glyphicon-remove" 
+        onClick={()=>{this.props.activeVideoAndSetPlayList(false, null)}}
+        />
+      <div className="content-player-options-underline" />
+    </div>  
+        <div className="content-player-actually-marquee">
+              <marquee
+                  direction="left"
+                  scrollamount="2"
+                  scrolldelay="1"
+              >
+                  {this.props.playListActually.music[this.state.musicNumber].title}
+              </marquee>
+            </div>
+          <div
+              className="content-player-actually-music-title"
+          >
+            <p className="content-player-actually-music-title-time">
+              {this.state.timeActually} / {this.state.durationTime}
+            </p>
+          </div>
+          <div className="content-player-controls">
+              <span 
+                className="content-player-controls-icons glyphicon glyphicon-step-backward"
+                onClick={this.playPreviousVideo}
+              />
+              <span 
+                className="content-player-controls-icons glyphicon glyphicon-backward"
+                onClick={this.seekToPrevious}
+              />
+              <span 
+                onClick={this.playOrPauseVideo}
+                className={this.state.playerState ?
+                            "content-player-controls-icons glyphicon glyphicon-play"
+                            :
+                            "content-player-controls-icons glyphicon glyphicon-pause"
+                          }
+              />
+              <span 
+                className="content-player-controls-icons glyphicon glyphicon-forward"
+                onClick={this.seekToNext}
+              />
+              <span 
+                className="content-player-controls-icons glyphicon glyphicon-step-forward"
+                onClick={this.playNextVideo}
+              />
+              <div 
+                className={this.checkStatusSound()}
+                onClick={this.setMuteSound}
+                >
+                  <div className="content-player-controls-sound-contain">
+                    <input 
+                      className="content-player-controls-sound-input"
+                      type="range"
+                      value={this.getValueSound()}
+                      onChange={this.setSound}
+                    />      
+                  </div>
+              </div>
+              <input
+                  className="content-player-controls-progress"
+                  type="range"
+                  value={this.state.rangeValue}
+                  onChange={this.seekVideo}
+              />
+          </div>
+        </div>
+      </React.Fragment>
     );
   }
 }
