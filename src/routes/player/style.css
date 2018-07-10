@@ -320,6 +320,16 @@
 	border-radius: 10px;
     background-color: rgb(99, 99, 102);
 }
+.content-player-hide-player {
+    background: linear-gradient(rgb(255,0,0), gray);
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    z-index: 11;
+    right: 15px;
+    top: 100px;
+    border-radius: 10px;
+}
 
 @media only screen and (min-width: 768px) {
     .content-player {
@@ -371,6 +381,11 @@
     .content-player-playlist {
         margin-top: 60px;
         height: 200px;
+    }
+
+    .content-player-hide-player {
+        width: 100px;
+        height: 100px;
     }
 }
 

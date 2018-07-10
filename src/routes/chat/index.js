@@ -42,7 +42,7 @@ class Chat extends PureComponent {
     }
   }
 
-  sendMessage(e) {
+  sendMessage = (e) => {
     if(e) {
       if(!this.inputMessage) {
         this.inputMessage = e.target;
@@ -57,10 +57,9 @@ class Chat extends PureComponent {
       message: this.message,
     }
     let allMessage = [...this.props.dataBaseChat, newMessage];
-    console.log(this.state.messageReference)
     this.state.messageReference
       .set(allMessage);
-    this.inputMessage.value = '';  
+    this.message = '';  
 
   }
 

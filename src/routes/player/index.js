@@ -438,7 +438,6 @@ class Player extends PureComponent {
           onError={this.whenError}
         />
         <div className="content-player-underline" />
-          
         <div className="content-player-playlist">
              {this.props.playListActually.music.map((music, index) => {
                let time = this.breakDurationOnNumber(music.duration);
@@ -563,6 +562,9 @@ class Player extends PureComponent {
                   onChange={this.seekVideo}
               />
           </div>
+        </div>
+        <div className="content-player-hide-player">
+        
         </div>
       </React.Fragment>
     );
