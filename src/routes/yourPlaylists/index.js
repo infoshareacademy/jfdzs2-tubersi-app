@@ -565,7 +565,7 @@ class YourPlaylists extends PureComponent {
             </div>
             <div className="content-playlist-title animated bounceInRight">
               <h1 className="content-playlist-title-text">
-              Twoje Playlisty
+              <i class="fas fa-list"></i>Twoje Playlisty
               </h1>
               <i class="fas fa-info-circle"></i>
               <div className="content-playlist-info">

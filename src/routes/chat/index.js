@@ -67,7 +67,10 @@ class Chat extends PureComponent {
     return (
       <Layout>
         <div className="chat-contain ">
-          <p className="chat-contain-title">Chat użytkowników aplikacji</p>
+          <p className="chat-contain-title">
+            <i class="fas fa-comments"></i>
+            Chat użytkowników aplikacji
+          </p>
           <div 
             className="chat-contain-message"
             ref={(e) => {this.scrollToBottom(e);}}

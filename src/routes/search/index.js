@@ -280,17 +280,15 @@ export default class Search extends PureComponent {
     render() {
         return (
         <Layout>
-           <div className="search-content content">
+           <div className="search-content content animated bounceInRight">
                <div className="row">
                     {this.props.actuallyUser ?
                         this.props.actuallyUser.playList ?
                             <React.Fragment>
                                 <div className="search-content-information">
-                                    <p className="search-content-information-title">
-                                        Znajdź utwór i dodaj go do playlisty!
-                                    </p>
-                                </div>
-                                <div className="search-playlist-content">
+                                    <h2 className="search-content-information-title">
+                                        <i class="fas fa-search"></i>Znajdź utwór i dodaj go do playlisty!
+                                    </h2>
                                     <p className="search-playlist-content-text">
                                         Wybierz Playlistę:
                                     </p>
@@ -309,8 +307,8 @@ export default class Search extends PureComponent {
                                                        </option>
                                         })}
                                     </select>
-                                </div>
-                                <div className="search-content-search">
+
+                                    <div className="search-content-search">
                                     <input  className="search-content-search-input"
                                             value={this.state.searchTitle}
                                             onChange={this.handleChange}
@@ -342,7 +340,7 @@ export default class Search extends PureComponent {
                                     <FadeIn>
                                     <div className="search-filter-contain">
                                          <p className="search-filter-contain-title">
-                                             Wybierz jakość filmów!
+                                             Wybierz jakość!
                                          </p>
                                          <div className="search-filter-contain-checkboxs">
                                              <span className="search-filter-contain-text">
@@ -402,6 +400,7 @@ export default class Search extends PureComponent {
                                         >
                                         </span>
                                     </div>
+                                </div>
                             </React.Fragment>
                             :
                             <div className="search-empty-playlist animated bounceInRight">
