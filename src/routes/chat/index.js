@@ -60,7 +60,7 @@ class Chat extends PureComponent {
     this.state.messageReference
       .set(allMessage);
     this.message = '';  
-
+    this.inputMessage.value = '';
   }
 
   render() {
