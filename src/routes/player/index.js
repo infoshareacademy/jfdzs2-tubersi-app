@@ -577,7 +577,7 @@ class Player extends PureComponent {
         <div 
           className="content-player-hide-player"
           style={!this.state.visiblePlayer ?
-                  {top: "100px"}
+                  {top: "40%"}
                   :
                   {top: "-100%"}
                 }
@@ -588,6 +588,13 @@ class Player extends PureComponent {
             }}      
         >
            <span className="content-player-hide-player-icon glyphicon glyphicon-music" />
+           <marquee
+                  direction="left"
+                  scrollamount="2"
+                  scrolldelay="1"
+              >
+                  {this.props.playListActually.music[this.state.musicNumber].title}
+              </marquee>
         </div>
       </React.Fragment>
     );
