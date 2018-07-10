@@ -18,18 +18,21 @@ class Player extends PureComponent {
       soundValue: 0,
       visibleAlbumPlaylist: true,
       visiblePlayer: true,
+      keySterringVideo: false,
+      animateInformationOnActiveKey: false,
     }
     this.controlVideo = null;
     this.setPosition = null;
     this.getTime = null;
-
+    this.animateWhenActiveOrUnactiveKey = null;
   }
 
   componentDidMount() {
     this.getTime = setInterval(this.getDurationTimeVideo, 1000);
+    window.addEventListener("keydown", this.controlPLayerForKeyBoard);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if(prevProps.playListActually !== this.props.playListActually) {
       this.setState({
         musicNumber: 0,
@@ -42,6 +45,21 @@ class Player extends PureComponent {
         })
       }
     }
+    if(this.state.keySterringVideo !== prevState.keySterringVideo) {
+      this.setState({
+        animateInformationOnActiveKey: true,
+      })
+      if(this.animateWhenActiveOrUnactiveKey) {
+        clearTimeout(this.animateWhenActiveOrUnactiveKey);
+      }
+      this.animateWhenActiveOrUnactiveKey = setTimeout(() => {
+        this.setState({
+          animateInformationOnActiveKey: false,
+        })
+        this.animateWhenActiveOrUnactiveKey = null;
+      }, 2000);
+    
+    }
   }
 
   componentWillUnmount() {
@@ -49,6 +67,45 @@ class Player extends PureComponent {
     clearInterval(this.getTime);
     if(this.controlVideo) {
       this.controlVideo.clearVideo();
+    }
+    window.removeEventListener("keypress", this.controlPLayerForKeyBoard);
+  }
+
+  controlPLayerForKeyBoard = (e) => {
+    if(e.keyCode === 36) { 
+      this.setState({
+        keySterringVideo: !this.state.keySterringVideo,
+       })
+    }
+    if(this.state.keySterringVideo) {
+      if(this.controlVideo) {
+        if(e.keyCode === 38) {
+          if(this.controlVideo.getVolume() + 10 < 100) {
+            this.setSound(null , this.controlVideo.getVolume() + 10);
+          }
+          else {
+            this.setSound(null , 100);
+          }
+        }
+        else if(e.keyCode === 40) {
+           this.setSound(null , this.controlVideo.getVolume() - 10);  
+        }
+        else if(e.keyCode === 39) {
+          this.seekToNext();
+        }
+        else if(e.keyCode === 37) {
+          this.seekToPrevious();
+        }
+        else if(e.keyCode === 32) {
+          this.playOrPauseVideo();
+        }
+        else if(e.keyCode === 33) {
+          this.playNextVideo();
+        }
+        else if(e.keyCode === 34) {
+          this.playPreviousVideo();
+        }
+      }
     }
   }
 
@@ -246,7 +303,6 @@ class Player extends PureComponent {
   seekToNext = () => {
       let timeDurationEnd = Math.floor(this.controlVideo.getDuration());
       let timeActually = Math.floor(this.controlVideo.getCurrentTime());
-
       if(timeActually + 5 < timeDurationEnd) {
         this.controlVideo.seekTo(timeActually + 5);
       }
@@ -277,18 +333,18 @@ class Player extends PureComponent {
     }
   }
 
-  setSound = (e) => {
+  setSound = (e, value) => {
     if(this.controlVideo) {
       this.setState({
-        soundValue: e.target.value,
+        soundValue: e ? e.target.value : value,
       })
-      if(e.target.value > 0) {
+      if(e ? e.target.value : value > 0) {
         this.controlVideo.unMute();
       }
       else {
         this.controlVideo.mute();
       }
-      this.controlVideo.setVolume(e.target.value);
+      this.controlVideo.setVolume(e ? e.target.value : value);
     }
   }
 
@@ -399,6 +455,37 @@ class Player extends PureComponent {
   render() {
     return (
       <React.Fragment>
+      <div 
+        className="information-user-active-unactive-key"
+        style={this.state.animateInformationOnActiveKey ? 
+                {right: "50px"}
+                :
+                {right: "-350px"}
+              }
+        >
+        <span 
+          style={{
+           color: "#fff",
+           opacity: 0.5, 
+  
+         }}
+        >
+          Sterowanie Playerem:
+        </span>
+        <span
+          style={this.state.keySterringVideo ?
+                {color: "rgb(92,184,92)"}
+                :
+                {color: "rgb(217,83,79)"}
+                }
+        >
+          {this.state.keySterringVideo ?
+            " Aktywne"
+            :
+            " Nieaktywne"
+          }
+        </span>
+      </div>
       <div 
         className="content-player"
         style={this.state.visibleAlbumPlaylist ?
