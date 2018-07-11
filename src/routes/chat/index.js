@@ -113,6 +113,14 @@ class Chat extends PureComponent {
             </button>
           </div>
         </div>
+        <div 
+          className="playlist-empty-contain"
+          style={{
+            height: "100px",
+            width: "100%",
+            float: "left"
+          }}
+        />
     </Layout>
     );
   }

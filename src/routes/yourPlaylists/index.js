@@ -3,9 +3,9 @@ import React, { PureComponent } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import FadeIn from 'react-fade-in';
 
+import ShowConfirmationWindowClose from '../../components/confirmation-close-window';
 import Layout from '../../components/layout';
 import { CHARS } from '../../config';
-import ShowConfirmationWindowClose from '../../components/confirmation-close-window';
 
 import './playlist-style.css';
 import './style.css';
@@ -168,7 +168,7 @@ class YourPlaylists extends PureComponent {
         .filter((list, index) => {
           return this.numberDelete !== index;
         });
-
+        
     this.props.firebase
       .database()
       .ref('users')
@@ -479,9 +479,6 @@ class YourPlaylists extends PureComponent {
                     'Graj'
                   }    
               </button>
-              <button className="section-playlist-options-extends" >
-                    <span className="glyphicon glyphicon-option-horizontal"/>
-              </button>
             </div>
             <div className="section-playlist-underline" />
             <div className="section-playlist-music">
@@ -528,37 +525,35 @@ class YourPlaylists extends PureComponent {
             </div>
         </div>
         :
-        <div className="section-playlist-empty">
-          <div 
-          className="section-exit"
-          >
-            <span 
-              className="section-exit-text"
-              onClick={() => {
-                this.setState({
-                  sectionChosenPlayList: false,
-                  numberChoosePlaylist: null,
-                })
-              }}
-            >
-              Zamknij [
-              <span className="content-exit-icon glyphicon glyphicon-remove"/>
-              ]
-            </span>
-            <div className="content-underline">
-              <div className="content-underline-line"/>
-            </div>  
+        <div 
+          className="content-playlist-title animated bounceInRight"
+          style={{
+            textAlign: "center",
+            marginTop: "75px",
+            paddingTop: "30px",
+            paddingBottom: "30px"
+          }}
+        >  
+          <i className="fas fa-exclamation-circle" aria-hidden="true"/>
+          <div className="content-playlist-info">
+            <p>Aktualnie nie masz utworu.</p>
+            <p>Przejdź do zakładki "Szukaj".</p>
+            <p>Gdy już to zrobisz, wpisz muzykę ktróra cię interesuje.</p>
+            <p>W ostatnim kroku, dodaj muzykę do odpowiedniej swojej playlisty.</p>
           </div>
-          <p className="section-playlist-empty-text">
-            Aktualnie nie masz żadnego utworu
-          </p>
-          <p className="section-playlist-empty-text">
-            Przejdź do wyszukiwarki w zakładce "Szukaj"
-          </p>
-          <p className="section-playlist-empty-text">
-            A następnie dodaj muzykę do odpowiedniej playlisty
-          </p>
-        </div>
+          <button 
+            className=" btn btn-default btn-playlists"
+            onClick={() => {
+              this.setState({
+                sectionChosenPlayList: false,
+                numberChoosePlaylist: null,
+              })
+            }}
+          >
+          <i className="fas fa-times-circle" />
+              Zamknij
+          </button>
+      </div>
       :
       null;
   }
@@ -627,19 +622,25 @@ class YourPlaylists extends PureComponent {
               }
             >
               <span className="content-playlist-create-new-playlist-icon glyphicon glyphicon-music"/>
-              STWORZONO NOWĄ PLAYLISTE
+                STWORZONO NOWĄ PLAYLISTE
               <span className="content-playlist-create-new-playlist-icon glyphicon glyphicon-music"/>
             </div>
-            <div className="content-playlist-title animated bounceInRight">
+            <div 
+              className="content-playlist-title animated bounceInRight"
+              style={{
+                paddingBottom: "30px",
+              }}
+              >
               <h1 className="content-playlist-title-text">
-              <i className="fas fa-list"></i>Twoje Playlisty
+              <i className="fas fa-list" />
+              Twoje Playlisty
               </h1>
               <i className="fas fa-info-circle"></i>
               <div className="content-playlist-info">
                 <p>Tutaj znajdują się wszystkie Twoje playlisty. </p>
-                <p>Klikając przycisk DODAJ możesz stworzyć playlistę np. ulubione.</p>
-                <p>Gdy już to zrobisz przejdz do zakładki SZUKAJ i rozpocznij muzyczną przygodę</p>
-                <p>Po najechaniu na konkretny box z playlistą możesz ją włączyć, udostępnić znajomemu lub usunąć.</p>
+                <p>Klikając przycisk DODAJ, możesz stworzyć playlistę np. ulubione.</p>
+                <p>Gdy już to zrobisz, przejdz do zakładki SZUKAJ i rozpocznij muzyczną przygodę</p>
+                <p>Po najechaniu na konkretny box z playlistą, możesz ją włączyć, udostępnić znajomemu lub usunąć.</p>
              </div>
               <button 
                 className=" btn btn-default btn-playlists"
@@ -695,7 +696,7 @@ class YourPlaylists extends PureComponent {
                         value={this.state.typePlayList}
                       />
                       <div className="content-pop-up-name">
-                        Podaj Opis (opcjonalnie)* :
+                        Podaj Opis (opcjonalnie *) :
                       </div>
                       <textarea
                         className="content-pop-up-description"
@@ -879,6 +880,14 @@ class YourPlaylists extends PureComponent {
             }    
           </div>
         }
+        <div 
+          className="playlist-empty-contain"
+          style={{
+            height: "200px",
+            width: "100%",
+            float: "left"
+          }}
+        />
       </Layout>
     );
   }

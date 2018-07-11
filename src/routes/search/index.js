@@ -287,7 +287,7 @@ export default class Search extends PureComponent {
                             <React.Fragment>
                                 <div className="search-content-information">
                                     <h2 className="search-content-information-title">
-                                        <i class="fas fa-search"></i>Znajdź utwór i dodaj go do playlisty!
+                                        <i className="fas fa-search"></i>Znajdź utwór i dodaj go do playlisty!
                                     </h2>
                                     <p className="search-playlist-content-text">
                                         Wybierz Playlistę:
@@ -309,20 +309,21 @@ export default class Search extends PureComponent {
                                     </select>
 
                                     <div className="search-content-search">
-                                    <input  className="search-content-search-input"
-                                            value={this.state.searchTitle}
-                                            onChange={this.handleChange}
-                                            type="text"
-                                            name="text"
-                                            placeholder="Szukaj"
-                                            onKeyDown={(e) => {
+                                    <input  
+                                        className="search-content-search-input"
+                                        value={this.state.searchTitle}
+                                        onChange={this.handleChange}
+                                        type="text"
+                                        name="text"
+                                        placeholder="Szukaj"
+                                        onKeyDown={(e) => {
                                                 if(e.keyCode === 13) {
                                                     this.setState({
                                                         maxResults: 9,
                                                         newSearch: false,
                                                     })
-                                            }
-                                        }}  
+                                                }
+                                            }}  
                                     />
                                     <span className="search-content-row-form-contain">
                                         <span className="search-content-row-form-contain-icon glyphicon glyphicon-search"
@@ -405,7 +406,7 @@ export default class Search extends PureComponent {
                             :
                             <div className="search-empty-playlist animated bounceInRight">
                                 <div className="search-empty-playlist-contain">
-                                    <i class="fas fa-info-circle"></i>
+                                    <i className="fas fa-info-circle"></i>
                                     <p className="search-empty-text">
                                         Aby skorzystać z wyszukiwarki musisz miec playlistę
                                     </p>
@@ -427,32 +428,33 @@ export default class Search extends PureComponent {
                <div className="row">
                     {this.state.resultYoutube ?
                         this.state.resultYoutube.map((link, index)=> {
-                        return  <div key={index} className="col-sm-6 col-md-4">
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                            <div className="playlist-item animated bounceInRight">
-                                                <div className="embed-responsive embed-responsive-4by3">
-                                                    <iframe width="560" 
-                                                            height="315" 
-                                                            src={link} 
-                                                            frameBorder="10" 
-                                                            allowFullScreen
-                                                            title={link}
-                                                    >
-                                                    </iframe>
-                                                </div>
-                                                {this.props.actuallyUser.playList[
-                                                    this.state.choosePlayList
+                        return (
+                            <div key={index} className="col-sm-6 col-md-4">
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <div className="playlist-item animated bounceInRight">
+                                            <div className="embed-responsive embed-responsive-4by3">
+                                                <iframe 
+                                                    width="560" 
+                                                    height="315" 
+                                                    src={link} 
+                                                    frameBorder="10" 
+                                                    allowFullScreen
+                                                    title={link}
+                                                />
+                                            </div>
+                                            {this.props.actuallyUser.playList[
+                                                this.state.choosePlayList
                                                 ].music ?
                                                     this.checkAlreadyMusic(index)
                                                     :
                                                     this.renderButonAddVideo(index)
-                                                }
-                                                
-                                            </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        ) 
                     })
                     :
                     null}
@@ -467,8 +469,7 @@ export default class Search extends PureComponent {
                     null
                 }
             </div>
-        </Layout>
-          
+        </Layout>  
         );
     }
 }

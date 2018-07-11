@@ -1,0 +1,101 @@
+.keyboard-controls-contain {
+    margin-top: 50px;
+    width: 90%;
+    height: 700px;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #2D2E32;
+    opacity: 0.7;
+    float: left;
+    position: relative;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.keyboard-controls-contain-title {
+    float: left;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.keyboard-controls-contain-section-left,
+.keyboard-controls-contain-section-right {
+    width: 90%;
+    float: left;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 300px;
+}
+
+.keyboard-icon-contain {
+    float: left;
+    width: 100%;
+    height: 70px;
+    overflow-y: hidden;
+}
+
+.keyboard-controls-contain-section-left-home,
+.keyboard-controls-contain-section-left-space,
+.keyboard-controls-contain-section-right-arrow-up,
+.keyboard-controls-contain-section-right-arrow-down,
+.keyboard-controls-contain-section-right-arrow-left,
+.keyboard-controls-contain-section-right-arrow-right {
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    line-height: 60px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    margin: 10px;
+    float: left;
+}
+
+.keyboard-controls-contain-section-left-page-up,
+.keyboard-controls-contain-section-left-page-down {
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    margin: 10px;
+    float: left;
+}
+
+.keyboard-controls-contain-section-right-text {
+    float: left;
+    margin-top: 32px;
+    overflow-wrap: break-word;
+}
+
+.keyboard-controls-contain-underline {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    height: 1px;
+    background-color: #fff;
+    float: left;
+    opacity: 0.3;
+}
+
+@media only screen and (min-width: 768px) {
+    .keyboard-controls-contain {
+        height: 700px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .keyboard-controls-contain {
+        margin: unset;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 700px;
+        margin-top: 50px;
+    }
+}

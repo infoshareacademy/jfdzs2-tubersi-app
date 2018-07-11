@@ -11,6 +11,7 @@ import Search from './routes/search';
 import YourPlaylists from './routes/yourPlaylists';
 import NotFound from './routes/notFound';
 import Firebase from './components/firebase';
+import KeyboardControls from './routes/keyboard-controls';
 
 import './App.css';
 
@@ -118,6 +119,10 @@ class App extends Component {
                   activeVideoAndSetPlayList = {this.activeVideoAndSetPlayList}
                   playListActually = {this.state.playListActually}
                 />} 
+            />
+            <Route 
+              exact path="/keyboard-controls"  
+              render={() => <KeyboardControls />} 
             />
             <Route path="*" component={NotFound} />
           </Switch>
