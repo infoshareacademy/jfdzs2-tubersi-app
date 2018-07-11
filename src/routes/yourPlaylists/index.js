@@ -176,6 +176,9 @@ class YourPlaylists extends PureComponent {
       .child('playList')
       .set(playList);    
       this.numberDelete = null;
+      this.setState({
+        showConfirmationWhenDeletePlaylist: false,
+      })
   }
 
   checkCorectUniqueNumber(number) {
@@ -563,6 +566,30 @@ class YourPlaylists extends PureComponent {
   render() {
     return (
       <Layout>
+        {this.state.showConfirmationWhenDeletePlaylist ?
+          <ShowConfirmationWindowClose
+            description = {
+              "Czy jesteś pewny, że chcesz usunąć aktualna playlistę? Ta akcja spowoduje, że dana playlista, zostanie usunięta."
+            }
+            closeConfirmation = {this.closeConfirmation}
+            acceptedConfirm = {this.deletePlayList}
+          />
+          :
+          null
+        }
+        {this.state.showConfirmationWhenCreatePlaylist ?
+          <FadeIn>
+            <ShowConfirmationWindowClose
+              description = {
+                "Czy jesteś pewny, że chcesz zakończyć dodawanie playlisty? Ta akcja spowoduje, że dane wprowadzone, zostaną usunięte."
+              }
+              closeConfirmation = {this.closeConfirmation}
+              acceptedConfirm = {this.acceptedConfirmWhenFormNotEmpty}
+            />
+          </FadeIn>
+          :
+          null
+        }
         {this.state.sectionChosenPlayList ?
           this.chosenPlayList()
           :
@@ -632,19 +659,6 @@ class YourPlaylists extends PureComponent {
                     <div 
                       className="content-exit"
                     >
-                      {this.state.showConfirmationWhenCreatePlaylist ?
-                        <FadeIn>
-                          <ShowConfirmationWindowClose
-                            description = {
-                              "Czy jesteś pewny, że chcesz zakończyć dodawanie playlisty? Ta akcja spowoduje, że dane wprowadzone, zostaną usunięte."
-                            }
-                            closeConfirmation = {this.closeConfirmation}
-                            acceptedConfirm = {this.acceptedConfirmWhenFormNotEmpty}
-                          />
-                        </FadeIn>
-                        :
-                        null
-                      }
                       <span 
                         className="content-exit-text"
                         onClick={this.changeViewPopUpAddNewPlayList}
@@ -838,17 +852,6 @@ class YourPlaylists extends PureComponent {
                                   <i className="fas fa-trash-alt" />
                                   Usuń
                                 </button>
-                                {this.state.showConfirmationWhenDeletePlaylist && this.numberDelete === index ?
-                                  <ShowConfirmationWindowClose
-                                    description = {
-                                      "Czy jesteś pewny, że chcesz usunąć aktualna playlistę? Ta akcja spowoduje, że dana playlista, zostanie usunięta."
-                                    }
-                                    closeConfirmation = {this.closeConfirmation}
-                                    acceptedConfirm = {this.deletePlayList}
-                                  />
-                                  :
-                                  null
-                                }
                               </div>
                             </div>
                           </div>
