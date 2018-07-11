@@ -1,6 +1,9 @@
 /* eslint-disable */
 import React, { PureComponent} from 'react';
 import YouTube from 'react-youtube';
+import FadeIn from 'react-fade-in';
+
+import ShowConfirmationWindowClose from '../../components/confirmation-close-window';
 
 import './style.css';
 import './list-music-player.css';
@@ -20,6 +23,7 @@ class Player extends PureComponent {
       visiblePlayer: true,
       keySterringVideo: false,
       animateInformationOnActiveKey: false,
+      showConfirmationCloseVideo: false,
     }
     this.controlVideo = null;
     this.setPosition = null;
@@ -452,9 +456,32 @@ class Player extends PureComponent {
     return 0;
   }
 
+  closeVideo = () => {
+    this.props.activeVideoAndSetPlayList(false, null);
+  }
+
+  closeConfirmation = () => {
+    this.setState({
+      showConfirmationCloseVideo: false,
+    })
+  }
+
   render() {
     return (
       <React.Fragment>
+      {this.state.showConfirmationCloseVideo ?
+        <FadeIn>
+          <ShowConfirmationWindowClose
+            description = {
+              "Czy jesteś pewny, że chcesz zakończyć słuchanie playlisty? Ta akcja spowoduje, że playlista przestanie grać."
+            }
+            closeConfirmation = {this.closeConfirmation}
+            acceptedConfirm = {this.closeVideo}
+          />
+        </FadeIn>
+        :
+        null
+      }
       <div 
         className="information-user-active-unactive-key"
         style={this.state.animateInformationOnActiveKey ? 
@@ -509,7 +536,11 @@ class Player extends PureComponent {
           />
           <span 
             className="content-player-options-close glyphicon glyphicon-remove" 
-            onClick={()=>{this.props.activeVideoAndSetPlayList(false, null)}}
+            onClick={()=>{
+              this.setState({
+                showConfirmationCloseVideo: true,
+              })
+            }}
             />
           <div className="content-player-options-underline" />
         </div>
@@ -595,7 +626,11 @@ class Player extends PureComponent {
       />
       <span 
         className="content-player-options-close glyphicon glyphicon-remove" 
-        onClick={()=>{this.props.activeVideoAndSetPlayList(false, null)}}
+        onClick={()=>{
+          this.setState({
+            showConfirmationCloseVideo: true,
+          })
+        }}
         />
       <div className="content-player-options-underline" />
     </div>  

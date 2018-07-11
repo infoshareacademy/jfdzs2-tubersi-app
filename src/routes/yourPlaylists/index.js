@@ -1,10 +1,11 @@
 /* eslint-disable */
 import React, { PureComponent } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import FadeIn from 'react-fade-in';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 import Layout from '../../components/layout';
-import {CHARS} from '../../config';
+import { CHARS } from '../../config';
+import ShowConfirmationWindowClose from '../../components/confirmation-close-window';
 
 import './playlist-style.css';
 import './style.css';
@@ -18,6 +19,9 @@ class YourPlaylists extends PureComponent {
       namePlayList: '',
       typePlayList: '',
       descriptionPlayList: '',
+      showConfirmationWhenCreatePlaylist: false,
+      showConfirmationWhenDeletePlaylist: false,
+      ShowConfirmation: false,
       sectionChosenPlayList: false,
       numberChoosePlaylist: null,
       checkLink: true,
@@ -28,6 +32,7 @@ class YourPlaylists extends PureComponent {
     }
     this.addNewPlayList = this.addNewPlayList.bind(this);
     this.addVideoWhenUpload = this.addVideoWhenUpload.bind(this);
+    this.numberDelete = null;
   }
 
   componentDidUpdate() {
@@ -61,10 +66,44 @@ class YourPlaylists extends PureComponent {
 
   changeViewPopUpAddNewPlayList = () => {
     if(this.props.actuallyUser) {
-      this.setState({
-        popUpAddNewPlayList: !this.state.popUpAddNewPlayList,
-      });
+      if(this.state.popUpAddNewPlayList) {
+        if(this.state.namePlayList !== '' ||
+           this.state.typePlayList !== '' ||
+           this.state.descriptionPlayList !== '') {
+            this.setState({
+              showConfirmationWhenCreatePlaylist: true,
+            })
+        }
+        else {
+          this.setState({
+            popUpAddNewPlayList: !this.state.popUpAddNewPlayList,
+          });
+        }
+      }
+      else {
+        this.setState({
+          popUpAddNewPlayList: !this.state.popUpAddNewPlayList,
+        });
+      }
     }
+  }
+
+  closeConfirmation = () => {
+    this.setState({
+      showConfirmationWhenCreatePlaylist: false,
+      showConfirmationWhenDeletePlaylist: false,
+    })
+    this.numberDelete = null;
+  }
+
+  acceptedConfirmWhenFormNotEmpty = () => {
+    this.setState({
+      showConfirmationWhenCreatePlaylist: false,
+      popUpAddNewPlayList: false,
+      namePlayList: '',
+      typePlayList: '',
+      descriptionPlayList: '',
+    })
   }
 
   addNewPlayList(uploadPlayList) {  
@@ -121,6 +160,22 @@ class YourPlaylists extends PureComponent {
         })
       }
     }
+  }
+
+  deletePlayList = () => {
+    let playList = 
+      this.props.actuallyUser.playList
+        .filter((list, index) => {
+          return this.numberDelete !== index;
+        });
+
+    this.props.firebase
+      .database()
+      .ref('users')
+      .child(this.props.actuallyUser.id)
+      .child('playList')
+      .set(playList);    
+      this.numberDelete = null;
   }
 
   checkCorectUniqueNumber(number) {
@@ -222,21 +277,6 @@ class YourPlaylists extends PureComponent {
       }
     }
     return true;
-  }
-
-  deletePlayList(numberDelete) {
-    let playList = 
-      this.props.actuallyUser.playList
-        .filter((list, index) => {
-          return numberDelete !== index;
-        });
-
-    this.props.firebase
-      .database()
-      .ref('users')
-      .child(this.props.actuallyUser.id)
-      .child('playList')
-      .set(playList);    
   }
 
   deleteVideo(index) {
@@ -565,9 +605,9 @@ class YourPlaylists extends PureComponent {
             </div>
             <div className="content-playlist-title animated bounceInRight">
               <h1 className="content-playlist-title-text">
-              <i class="fas fa-list"></i>Twoje Playlisty
+              <i className="fas fa-list"></i>Twoje Playlisty
               </h1>
-              <i class="fas fa-info-circle"></i>
+              <i className="fas fa-info-circle"></i>
               <div className="content-playlist-info">
                 <p>Tutaj znajdują się wszystkie Twoje playlisty. </p>
                 <p>Klikając przycisk DODAJ możesz stworzyć playlistę np. ulubione.</p>
@@ -592,6 +632,19 @@ class YourPlaylists extends PureComponent {
                     <div 
                       className="content-exit"
                     >
+                      {this.state.showConfirmationWhenCreatePlaylist ?
+                        <FadeIn>
+                          <ShowConfirmationWindowClose
+                            description = {
+                              "Czy jesteś pewny, że chcesz zakończyć dodawanie playlisty? Ta akcja spowoduje, że dane wprowadzone, zostaną usunięte."
+                            }
+                            closeConfirmation = {this.closeConfirmation}
+                            acceptedConfirm = {this.acceptedConfirmWhenFormNotEmpty}
+                          />
+                        </FadeIn>
+                        :
+                        null
+                      }
                       <span 
                         className="content-exit-text"
                         onClick={this.changeViewPopUpAddNewPlayList}
@@ -647,7 +700,7 @@ class YourPlaylists extends PureComponent {
                             })  
                           }}
                         >
-                          Dodaj
+                          Stwórz
                         </button>
                       </div>
                   </div>
@@ -728,8 +781,7 @@ class YourPlaylists extends PureComponent {
                           className="col-xs-12 col-sm-12 col-md-12 col-lg-6"
                           key={index}
                         >
-                          <div className="playlists-item animated zoomIn"
->
+                          <div className="playlists-item animated zoomIn">                           
                             <img 
                               className="playlist-img img-responsive"
                               alt={index + 'avatar'}
@@ -776,11 +828,27 @@ class YourPlaylists extends PureComponent {
                                 <button 
                                   className="btn btn-default btn-playlists"
                                   type="button"
-                                  onClick={() => {this.deletePlayList(index)}}
+                                  onClick={() => {
+                                    this.setState({
+                                      showConfirmationWhenDeletePlaylist: true,
+                                    })
+                                    this.numberDelete = index;
+                                  }}
                                 >
                                   <i className="fas fa-trash-alt" />
                                   Usuń
                                 </button>
+                                {this.state.showConfirmationWhenDeletePlaylist && this.numberDelete === index ?
+                                  <ShowConfirmationWindowClose
+                                    description = {
+                                      "Czy jesteś pewny, że chcesz usunąć aktualna playlistę? Ta akcja spowoduje, że dana playlista, zostanie usunięta."
+                                    }
+                                    closeConfirmation = {this.closeConfirmation}
+                                    acceptedConfirm = {this.deletePlayList}
+                                  />
+                                  :
+                                  null
+                                }
                               </div>
                             </div>
                           </div>
