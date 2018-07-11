@@ -11,8 +11,8 @@ import { AreaChart,
          Bar, 
          BarChart, 
          PieChart, 
-         Pie, 
-         Cell 
+         Pie,
+         Cell
        } from 'recharts';
 import Layout from '../../components/layout';
 import UserAuthorized from '../../components/user-authorised';
@@ -47,43 +47,41 @@ class Dashboard extends PureComponent {
     return (
         <Layout>
             <UserAuthorized />
-            <div className="content container-fluid">
+            <div className="content container">
                 <div className="row">
                     <div className="col-xs-12">
-                        <h1>dashboard</h1>
-                        <p>lorem ibsum ble bl ble ble</p>
-                        <div className="chartbackground col-xs-12 col-md-6 col-md-offset-2 col-lg-5 col-lg-offset-1">
-                            <LineChart 
-                                width={500} 
-                                height={300} 
-                                data={this.data}
-                                margin={{
-                                    top: 5, 
-                                    right: 30, 
-                                    left: 20, 
-                                    bottom: 5
-                                        }}
-                            >
-                                <XAxis dataKey="name"/>
-                                <YAxis/>
-                                <CartesianGrid strokeDasharray="3 3"/>
-                                <Tooltip/>
-                                <Legend />
-                                <Line 
-                                    type="monotone" 
-                                    dataKey="pv" 
-                                    stroke="#8884d8" 
-                                    activeDot={{r: 8}}
-                                />
-                                <Line 
-                                    type="monotone" 
-                                    dataKey="uv" 
-                                    stroke="#82ca9d" 
-                                />
-                            </LineChart>
+                        <div className="chartbackground col-xs-12">
+                                <LineChart
+                                    width={500}
+                                    height={300}
+                                    data={this.data}
+                                    margin={{
+                                        top: 5,
+                                        right: 30,
+                                        left: 20,
+                                        bottom: 5
+                                            }}
+                                >
+                                    <XAxis dataKey="name"/>
+                                    <YAxis/>
+                                    <CartesianGrid strokeDasharray="3 3"/>
+                                    <Tooltip/>
+                                    <Legend />
+                                    <Line
+                                        type="monotone"
+                                        dataKey="pv"
+                                        stroke="#8884d8"
+                                        activeDot={{r: 8}}
+                                    />
+                                    <Line
+                                        type="monotone"
+                                        dataKey="uv"
+                                        stroke="#82ca9d"
+                                    />
+                                </LineChart>
                         </div>
-                        <div className="chartbackground col-xs-12 col-md-6 col-md-offset-2 col-lg-5 col-lg-offset-1">
-                            <BarChart 
+                        <div className="chartbackground col-xs-12 ">
+                            <BarChart
                                 width={500} 
                                 height={300} 
                                 data={this.data}
@@ -109,17 +107,14 @@ class Dashboard extends PureComponent {
                                 />
                             </BarChart>
                         </div>
-                        <div className="chartbackground col-xs-12 col-md-6 col-md-offset-2 col-lg-5 col-lg-offset-1">
-                            <PieChart 
+                        <div className="chartbackground col-xs-12 ">
+                            <PieChart
                                 width={500} 
                                 height={300} 
                                 onMouseEnter={this.onPieEnter} 
                             >
                                 <Pie
                                     data={this.data2}
-                                    cx={250}
-                                    cy={110}
-                                    outerRadius={100}
                                     fill="#8884d8"
                                     label
                                 >
@@ -130,8 +125,8 @@ class Dashboard extends PureComponent {
                                 </Pie>
                             </PieChart>
                         </div>
-                        <div className="chartbackground col-xs-12 col-md-6 col-md-offset-2 col-lg-5 col-lg-offset-1">
-                            <AreaChart 
+                        <div className="chartbackground col-xs-12">
+                            <AreaChart
                                 width={500} 
                                 height={300} 
                                 data={this.data}
