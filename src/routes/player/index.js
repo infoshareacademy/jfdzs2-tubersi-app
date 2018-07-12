@@ -673,7 +673,7 @@ class Player extends PureComponent {
         }}
       >
         <CloudInformationHelp 
-          text="Przycisk ukrywa widok odtwarzacza wideo oraz wyświetla ikonkę z prawej stony z aktualnym tytułem" 
+          text="Przycisk ukrywa widok odtwarzacza wideo oraz wyświetla ikonkę z prawej stony z aktualnym tytułem." 
           styleCloud={{
             left: "-50px",
             top: "35px",
@@ -772,7 +772,7 @@ class Player extends PureComponent {
             }}      
         >
           <CloudInformationHelp 
-            text="Przycisk ukrywa widok ikonki wideo oraz przywraca widok odtwarzacza widedo" 
+            text="Przycisk ukrywa widok ikonki nutki oraz przywraca widok odtwarzacza wideo." 
             styleCloud={{
               left: this.state.setStyleIcon ? "-100px" : "-100px",
               top: this.state.setStyleIcon ? "90px" : "140px",

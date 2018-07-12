@@ -38,6 +38,7 @@
     opacity: 0.5;
     transition: 1s;
     margin-right: 10px;
+    z-index: 3;
 }
 
 .content-player-options-hide:hover .cloud-help,
@@ -68,6 +69,7 @@
     opacity: 0.5;
     transition: 1s;
     margin-right: 10px;
+    z-index: 3;
 }
 
 .content-player-options-hide:hover,
@@ -227,10 +229,42 @@
 
 .content-player-controls-sound-input {
     padding: 0px;
-    margin: 0px;
-    margin-top: 5px;
+    margin-top: 0px;
+    position: absolute;
+    top: 13px;
+    left: 0px;
 }
 
+.content-player-controls-sound-input {
+    -webkit-appearance: none;
+    width: 100%;
+}
+
+.content-player-controls-sound-input:focus {
+    outline: none;
+}
+
+.content-player-controls-sound-input::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 3.4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: #ffffff;
+    border-radius: 1.3px;
+    border: 0.2px solid #010101;
+}
+
+.content-player-controls-sound-input::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 15px;
+    width: 6px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -6px;
+} 
 
 .content-player-controls-progress {
     -webkit-appearance: none;
@@ -428,11 +462,12 @@
     .content-player-controls-sound-contain {
         left: 41px;
         height: 41px;
-        width: 70px;
+        width: 30px;
     }
 
     .content-player-controls-sound-input {
         margin-top: 10px;
+        top: 8px;
     }
 
     .content-player-playlist {
@@ -476,4 +511,22 @@
     .content-player-playlist {
         height: 350px;
     }
+
+    .content-player-controls-sound-contain {
+        width: 70px;
+    }
+
+    .content-player-controls-sound-input {
+        top: 9px;
+    }
+
+    .content-player-controls-sound-input::-webkit-slider-runnable-track {
+        height: 5.4px;
+    }
+    
+    .content-player-controls-sound-input::-webkit-slider-thumb {
+        height: 25px;
+        width: 12px;
+        margin-top: -10px;
+    } 
 }
