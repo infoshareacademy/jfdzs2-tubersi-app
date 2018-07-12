@@ -29,13 +29,13 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 class Dashboard extends PureComponent {
 
     data = [
-        {name: 'Page A', zielony: 4000, fiolet: 2400, amt: 2400},
-        {name: 'Page B', zielony: 3000, fiolet: 1398, amt: 2210},
-        {name: 'Page C', zielony: 2000, fiolet: 9800, amt: 2290},
-        {name: 'Page D', zielony: 2780, fiolet: 3908, amt: 2000},
-        {name: 'Page E', zielony: 1890, fiolet: 4800, amt: 2181},
-        {name: 'Page F', zielony: 2390, fiolet: 3800, amt: 2500},
-        {name: 'Page G', zielony: 3490, fiolet: 4300, amt: 2100},
+        {name: '2018', Logowania: 4000, Rejestracja: 2400, amt: 2400},
+        {name: '2019', Logowania: 3000, Rejestracja: 1398, amt: 2210},
+        {name: '2020', Logowania: 2000, Rejestracja: 9800, amt: 2290},
+        {name: '2021', Logowania: 2780, Rejestracja: 3908, amt: 2000},
+        {name: '2022', Logowania: 1890, Rejestracja: 4800, amt: 2181},
+        {name: '2023', Logowania: 2390, Rejestracja: 3800, amt: 2500},
+        {name: '2024', Logowania: 3490, Rejestracja: 4300, amt: 2100},
     ];
 
     data2 = [
@@ -69,13 +69,13 @@ class Dashboard extends PureComponent {
                                     <Legend />
                                     <Line
                                         type="monotone"
-                                        dataKey="fiolet"
+                                        dataKey="Rejestracja"
                                         stroke="#8884d8"
                                         activeDot={{r: 8}}
                                     />
                                     <Line
                                         type="monotone"
-                                        dataKey="zielony"
+                                        dataKey="Logowania"
                                         stroke="#82ca9d"
                                     />
                                 </LineChart>
@@ -100,11 +100,11 @@ class Dashboard extends PureComponent {
                                 <Tooltip/>
                                 <Legend />
                                 <Bar 
-                                    dataKey="fiolet"
+                                    dataKey="Rejestracja"
                                     fill="#8884d8" 
                                 />
                                 <Bar 
-                                    dataKey="zielony"
+                                    dataKey="Logowania"
                                     fill="#82ca9d" 
                                 />
                             </BarChart>
@@ -115,12 +115,13 @@ class Dashboard extends PureComponent {
                             <PieChart
                                 width={450}
                                 height={250}
-                                onMouseEnter={this.onPieEnter} 
+                                onMouseEnter={this.onPieEnter}
                             >
                                 <Pie
                                     data={this.data2}
                                     fill="#8884d8"
                                     label
+                                    dataKey="value" 
                                 >
                                     {
                                         this.data2.map((entry, index) => 
@@ -149,7 +150,7 @@ class Dashboard extends PureComponent {
                                 <Tooltip/>
                                 <Area 
                                     type='monotone' 
-                                    dataKey='zielony'
+                                    dataKey='Logowania'
                                     stroke='#8884d8' 
                                     fill='#8884d8' 
                                 />

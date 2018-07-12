@@ -36,7 +36,6 @@
     float: left;
     width: 100%;
     height: 70px;
-    overflow-y: hidden;
 }
 
 .keyboard-controls-contain-section-left-home,
@@ -71,7 +70,7 @@
 .keyboard-controls-contain-section-right-text {
     float: left;
     margin-top: 32px;
-    overflow-wrap: break-word;
+    overflow-wrap: inherit;
 }
 
 .keyboard-controls-contain-underline {

@@ -68,7 +68,7 @@ class Chat extends PureComponent {
       <Layout>
         <div className="chat-contain ">
           <p className="chat-contain-title">
-            <i class="fas fa-comments"></i>
+            <i className="fas fa-comments"></i>
             Chat użytkowników aplikacji
           </p>
           <div 

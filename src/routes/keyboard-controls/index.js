@@ -18,7 +18,7 @@ class KeyboardControls extends PureComponent {
                                 Home
                             </div>
                             <p className="keyboard-controls-contain-section-right-text">
-                                - Uruchomienie sterowania odtwarzacza za pomocą klawiszy.
+                                - Uruchomienie sterowania odtwarzacza.
                              </p>
                         </div>
                         <div className="keyboard-icon-contain">
