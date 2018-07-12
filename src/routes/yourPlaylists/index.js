@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import FadeIn from 'react-fade-in';
@@ -315,11 +314,11 @@ class YourPlaylists extends PureComponent {
     let minutes = 0;
     let hours = 0;
     playList.music.forEach((music) => {
-      if(parseInt(music.duration.substr(-3))) {
-        seconds += parseInt(music.duration.substr(-3));
+      if(parseInt(music.duration.substr(-3), 10)) {
+        seconds += parseInt(music.duration.substr(-3), 10);
       } 
       else {
-        seconds += parseInt(music.duration.substr(-2));
+        seconds += parseInt(music.duration.substr(-2), 10);
       }
       minutes += this.getMinute(music.duration);
       hours += this.getHours(music.duration);
@@ -360,11 +359,11 @@ class YourPlaylists extends PureComponent {
   getMinute(duration) {
     let indexStartMinute = duration.indexOf('M');
     if(indexStartMinute !== -1) {
-      if(parseInt(duration.substr(indexStartMinute - 2))) {
-        return parseInt(duration.substr(indexStartMinute - 2));
+      if(parseInt(duration.substr(indexStartMinute - 2), 10)) {
+        return parseInt(duration.substr(indexStartMinute - 2), 10);
       } 
       else {
-        return parseInt(duration.substr(indexStartMinute - 1));
+        return parseInt(duration.substr(indexStartMinute - 1), 10);
       }
     }
     return 0;
@@ -373,11 +372,11 @@ class YourPlaylists extends PureComponent {
   getHours(duration) {
     let indexStartHours = duration.indexOf('H');
     if(indexStartHours !== -1) {
-      if(parseInt(duration.substr(indexStartHours - 2))) {
-        return parseInt(duration.substr(indexStartHours - 2));
+      if(parseInt(duration.substr(indexStartHours - 2), 10)) {
+        return parseInt(duration.substr(indexStartHours - 2), 10);
       } 
       else {
-        return parseInt(duration.substr(indexStartHours - 1));
+        return parseInt(duration.substr(indexStartHours - 1), 10);
       }
     }
     return 0;

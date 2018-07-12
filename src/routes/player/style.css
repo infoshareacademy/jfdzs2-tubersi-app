@@ -40,6 +40,14 @@
     margin-right: 10px;
 }
 
+.content-player-options-hide:hover .cloud-help,
+.content-player-controls-sound-contain:hover .cloud-help,
+.content-player-hide-player:hover .cloud-help,
+.content-player-options-list:hover .cloud-help {
+    visibility: visible;
+    opacity: 1;
+}
+
 
 .content-player-options-close {
     opacity: 0.5;
@@ -107,7 +115,7 @@
     margin-right: 10%;
     height: 20px;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     margin-top: 20px;
     color: #fff;
     opacity: 0.5;

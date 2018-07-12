@@ -1,9 +1,9 @@
-/* eslint-disable */
 import React, { PureComponent} from 'react';
 import YouTube from 'react-youtube';
 import FadeIn from 'react-fade-in';
 
 import ShowConfirmationWindowClose from '../../components/confirmation-close-window';
+import CloudInformationHelp from '../../components/cloud-information-help';
 
 import './style.css';
 import './list-music-player.css';
@@ -24,6 +24,7 @@ class Player extends PureComponent {
       keySterringVideo: false,
       animateInformationOnActiveKey: false,
       showConfirmationCloseVideo: false,
+      setStyleIcon: window.innerWidth < 768 ? true : false,
     }
     this.controlVideo = null;
     this.setPosition = null;
@@ -34,6 +35,7 @@ class Player extends PureComponent {
   componentDidMount() {
     this.getTime = setInterval(this.getDurationTimeVideo, 1000);
     window.addEventListener("keydown", this.controlPLayerForKeyBoard);
+    window.addEventListener("resize", this.setStyleIconWhenResize);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -73,6 +75,7 @@ class Player extends PureComponent {
       this.controlVideo.clearVideo();
     }
     window.removeEventListener("keypress", this.controlPLayerForKeyBoard);
+    window.removeEventListener("resize", this.setStyleIconWhenResize);
   }
 
   controlPLayerForKeyBoard = (e) => {
@@ -109,6 +112,23 @@ class Player extends PureComponent {
         else if(e.keyCode === 34) {
           this.playPreviousVideo();
         }
+      }
+    }
+  }
+
+  setStyleIconWhenResize = () => {
+    if(window.innerWidth < 768) {
+      if(!this.state.setStyleIcon){
+        this.setState({
+          setStyleIcon: true,
+        })
+      }
+    }
+    else {
+      if(this.state.setStyleIcon){
+        this.setState({
+          setStyleIcon: false,
+        })
       }
     }
   }
@@ -402,11 +422,11 @@ class Player extends PureComponent {
     let minutes = 0;
     let hours = 0;
     
-    if(parseInt(duration.substr(-3))) {
-      seconds += parseInt(duration.substr(-3));
+    if(parseInt(duration.substr(-3), 10)) {
+      seconds += parseInt(duration.substr(-3), 10);
     } 
     else {
-      seconds += parseInt(duration.substr(-2));
+      seconds += parseInt(duration.substr(-2), 10);
     }
     minutes += this.getMinute(duration);
     hours += this.getHours(duration);
@@ -433,11 +453,11 @@ class Player extends PureComponent {
   getMinute(duration) {
     let indexStartMinute = duration.indexOf('M');
     if(indexStartMinute !== -1) {
-      if(parseInt(duration.substr(indexStartMinute - 2))) {
-        return parseInt(duration.substr(indexStartMinute - 2));
+      if(parseInt(duration.substr(indexStartMinute - 2), 10)) {
+        return parseInt(duration.substr(indexStartMinute - 2), 10);
       } 
       else {
-        return parseInt(duration.substr(indexStartMinute - 1));
+        return parseInt(duration.substr(indexStartMinute - 1), 10);
       }
     }
     return 0;
@@ -446,11 +466,11 @@ class Player extends PureComponent {
   getHours(duration) {
     let indexStartHours = duration.indexOf('H');
     if(indexStartHours !== -1) {
-      if(parseInt(duration.substr(indexStartHours - 2))) {
-        return parseInt(duration.substr(indexStartHours - 2));
+      if(parseInt(duration.substr(indexStartHours - 2), 10)) {
+        return parseInt(duration.substr(indexStartHours - 2), 10);
       } 
       else {
-        return parseInt(duration.substr(indexStartHours - 1));
+        return parseInt(duration.substr(indexStartHours - 1), 10);
       }
     }
     return 0;
@@ -533,7 +553,21 @@ class Player extends PureComponent {
                 visibleAlbumPlaylist: false,
               })
             }} 
-          />
+          >
+            <CloudInformationHelp 
+              text="Przycisk ukrywa widok aktualnej odtwarzanej playlisty oraz przełącza na odtwarzacz wideo" 
+              styleCloud={{
+                left: "-50px",
+                top: "32px",
+              }}
+              styleIndicator={{
+                top: "-22px",
+                left: "55px",
+                transform: "rotate(270deg)",
+
+              }}
+              />
+          </span>
           <span 
             className="content-player-options-close glyphicon glyphicon-remove" 
             onClick={()=>{
@@ -615,7 +649,21 @@ class Player extends PureComponent {
             visibleAlbumPlaylist: true,
           })
         }}
+      >
+        <CloudInformationHelp 
+            text="Przycisk przywraca widok odtwarzanej playlisty oraz chowa odtwarzacz wideo." 
+            styleCloud={{
+              left: "-50px",
+              top: "35px",
+            }}
+            styleIndicator={{
+              top: "-22px",
+              left: "55px",
+              transform: "rotate(270deg)",
+
+            }}
         />
+      </span>
       <span 
         className="content-player-options-hide glyphicon glyphicon-minus"
         onClick={() => {
@@ -623,7 +671,21 @@ class Player extends PureComponent {
             visiblePlayer: false,
           })
         }}
-      />
+      >
+        <CloudInformationHelp 
+          text="Przycisk ukrywa widok odtwarzacza wideo oraz wyświetla ikonkę z prawej stony z aktualnym tytułem" 
+          styleCloud={{
+            left: "-50px",
+            top: "35px",
+          }}
+          styleIndicator={{
+            top: "-22px",
+            left: "55px",
+            transform: "rotate(270deg)",
+
+          }}
+        />
+      </span>
       <span 
         className="content-player-options-close glyphicon glyphicon-remove" 
         onClick={()=>{
@@ -635,13 +697,13 @@ class Player extends PureComponent {
       <div className="content-player-options-underline" />
     </div>  
         <div className="content-player-actually-marquee">
-              <marquee
-                  direction="left"
-                  scrollamount="2"
-                  scrolldelay="1"
-              >
-                  {this.props.playListActually.music[this.state.musicNumber].title}
-              </marquee>
+          <marquee
+                direction="left"
+                scrollamount="2"
+                scrolldelay="1"
+          >
+              {this.props.playListActually.music[this.state.musicNumber].title}
+          </marquee>
             </div>
           <div
               className="content-player-actually-music-title"
@@ -709,6 +771,18 @@ class Player extends PureComponent {
               })
             }}      
         >
+          <CloudInformationHelp 
+            text="Przycisk ukrywa widok ikonki wideo oraz przywraca widok odtwarzacza widedo" 
+            styleCloud={{
+              left: this.state.setStyleIcon ? "-100px" : "-100px",
+              top: this.state.setStyleIcon ? "90px" : "140px",
+            }}
+            styleIndicator={{
+              top: this.state.setStyleIcon ? "-23px" : "-24px",
+              left: this.state.setStyleIcon ? "120px" : "150px",
+              transform: "rotate(270deg)",
+            }}
+           />
            <span className="content-player-hide-player-icon glyphicon glyphicon-music" />
            <marquee
                   direction="left"
