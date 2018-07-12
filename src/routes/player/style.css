@@ -12,6 +12,30 @@
     z-index: 12;
 }
 
+.player-content-fullscreen-show-more-options {
+    position: fixed;
+    z-index: 20;
+    background-color: #2D2E32;
+    opacity: 0.7;
+    height: 100px;
+    transition: 1s;
+    border-radius: 5px;
+    transform: translate(-50%, 0);
+    left: 50%;
+    width: 400px;
+    color: #fff;
+    line-height: 100px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.player-content-fullscreen-show-more-options-text {
+    border: 1px solid white;
+    padding: 15px 5px 15px 5px;
+    border-radius: 2px;
+    margin-left: 5px;
+}   
+
 .content-player {
     position: fixed;
     z-index: 11;
@@ -23,6 +47,17 @@
     border-radius: 15px;
     transition: 1s;
     border: 0.5px solid rgb(99, 99, 102);
+}
+
+.content-player-fullscreen {
+    position: fixed;
+    z-index: 11;
+    left: 0px;
+    height: 500px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    transition: 0.25s linear;
 }
 
 .content-player-options {
@@ -98,6 +133,13 @@
     margin-left: 100px;
 }
 
+.player-fullscreen {
+    width: 90%;
+    height: 400px;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
 .content-player-underline {
     width: 90%;
     float: left;
@@ -140,14 +182,9 @@
 .content-player-control-video {
     z-index: 11;
     position: fixed;
-    height: 250px;
-    width: 350px;
-    background: linear-gradient(#2D2E32, black);
     opacity: 1;
-    border-radius: 15px;
     left: 50%;
     transform: translate(-50%, 0);
-    border: 0.5px solid rgb(99, 99, 102);
     transition: 1s;
 }
 
@@ -268,7 +305,7 @@
 
 .content-player-controls-progress {
     -webkit-appearance: none;
-    background-color: #2D2E32;
+    background-color: unset;
     margin: 10px 0;
     width: 100%;
     border: unset;
@@ -285,7 +322,7 @@
     cursor: pointer;
     animate: 0.2s;
     box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-    background: #DCDCDC;
+    background: rgb(187, 187, 188);
     border-radius: 5px;
     border: 0px solid #000101;
 }
@@ -295,70 +332,10 @@
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    background: #fff;
+    background: rgb(187, 187, 188);
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -5.6px;
-
-}
-
-.content-player-controls-progress:focus::-webkit-slider-runnable-track {
-    background: #DCDCDC;
-}
-
-.content-player-controls-progress::-moz-range-track {
-    width: 100%;
-    height: 8.8px;
-    cursor: pointer;
-    animate: 0.2s;
-    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-    background: #DCDCDC;
-    border-radius: 5px;
-    border: 0px solid #000101;
-}
-
-.content-player-controls-progress::-moz-range-thumb {
-    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-    border: 0px solid #000000;
-    height: 15px;
-    width: 15px;
-    border-radius: 7px;
-    background: #65001c;
-    cursor: pointer;
-}
-
-.content-player-controls-progress::-ms-track {
-    width: 100%;
-    height: 8.8px;
-    cursor: pointer;
-    animate: 0.2s;
-    background: transparent;
-    border-color: transparent;
-    border-width: 39px 0;
-    color: transparent;
-}
-
-.content-player-controls-progress::-ms-fill-lower {
-    background: #DCDCDC;
-    border: 0px solid #000101;
-    border-radius: 5px;
-    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-}
-
-.content-player-controls-progress::-ms-fill-upper {
-    background: #DCDCDC;
-    border: 0px solid #000101;
-    border-radius: 5px;
-    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-}
-
-.content-player-controls-progress::-ms-thumb {
-    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-    border: 0px solid #000000;
-    height: 10px;
-    width: 19px;
-    border-radius: 7px;
-    cursor: pointer;
 }
 
 .content-player-playlist {
@@ -423,6 +400,10 @@
         height: 700px;
         width: 550px;
     }
+
+    .player-fullscreen { 
+        height: 600px;
+    }
     
     .content-player-options-underline {
         margin-top: 5px;
@@ -443,11 +424,6 @@
     
     .content-player-actually-music-title {
        font-size: 18px;
-    }
-
-    .content-player-control-video {
-        width: 400px;
-        height: 250px;
     }
 
     .content-player-actually-marquee {
@@ -529,4 +505,5 @@
         width: 12px;
         margin-top: -10px;
     } 
+
 }

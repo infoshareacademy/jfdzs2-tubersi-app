@@ -80,6 +80,7 @@ export default class Search extends PureComponent {
         fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&part=snippet&maxResults=${this.state.maxResults}&q=${this.state.searchTitle}&type=${type}&${type}Definition=${this.state.quality}`)
         .then((response) => response.json())
         .then((responseJson) => {
+            console.log(responseJson);
             const resultYoutube = responseJson.items.map(obj => "https://www.youtube.com/embed/"+obj.id.videoId);
             const pictureAvatar = responseJson.items.map(obj => obj.snippet.thumbnails.high.url);
             const titleVideo = responseJson.items.map(obj => obj.snippet.title);

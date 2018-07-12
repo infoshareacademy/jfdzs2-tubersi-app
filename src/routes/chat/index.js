@@ -5,7 +5,6 @@ import './style.css';
 import Layout from '../../components/layout';
 
 class Chat extends PureComponent {
-  
   constructor(props){
     super(props);
     this.state = {
@@ -68,7 +67,7 @@ class Chat extends PureComponent {
       <Layout>
         <div className="chat-contain ">
           <p className="chat-contain-title">
-            <i className="fas fa-comments"></i>
+            <i className="fas fa-comments" />
             Chat użytkowników aplikacji
           </p>
           <div 
@@ -77,20 +76,22 @@ class Chat extends PureComponent {
           >
             {this.props.dataBaseChat ?
               this.props.dataBaseChat.map((message, index) => {
-                return  <div 
-                          className="chat-contain-message-contain"
-                          key={index}
-                        >
-                          <div className="chat-contain-message-contains">
-                            <div className="chat-contain-message-contain-name-contents">
-                              {message.name}
-                            </div>
-                          </div>
-                          <div className="chat-contain-message-contains"></div>
-                          <div className="chat-contain-message-contain-contents">
-                            {message.message}
-                          </div>
-                        </div>
+                return(
+                  <div 
+                    className="chat-contain-message-contain"
+                    key={index}
+                  >
+                    <div className="chat-contain-message-contains">
+                      <div className="chat-contain-message-contain-name-contents">
+                        {message.name}
+                      </div>
+                    </div>
+                    <div className="chat-contain-message-contains"/>
+                    <div className="chat-contain-message-contain-contents">
+                      {message.message}
+                    </div>
+                  </div>
+                )  
               })
               :
               null

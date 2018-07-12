@@ -25,11 +25,14 @@ class Player extends PureComponent {
       animateInformationOnActiveKey: false,
       showConfirmationCloseVideo: false,
       setStyleIcon: window.innerWidth < 768 ? true : false,
+      fullscreen: false,
+      showMoreOptionsWhenFullScreen: false,
     }
     this.controlVideo = null;
     this.setPosition = null;
     this.getTime = null;
     this.animateWhenActiveOrUnactiveKey = null;
+    this.animateWhenActiveFullScreen = null;
   }
 
   componentDidMount() {
@@ -64,7 +67,21 @@ class Player extends PureComponent {
         })
         this.animateWhenActiveOrUnactiveKey = null;
       }, 2000);
-    
+    }
+    if(this.state.fullscreen && this.state.fullscreen !== prevState.fullscreen) {
+        this.setState({
+          showMoreOptionsWhenFullScreen: true,
+        })
+        this.animateWhenActiveFullScreen = setTimeout(() => {
+          this.setState({
+            showMoreOptionsWhenFullScreen: false,
+          })  
+        },4000);
+    }
+    else if(!this.state.fullscreen && this.state.fullscreen !== prevState.fullscreen) {
+      this.setState({
+        showMoreOptionsWhenFullScreen: false,
+      })
     }
   }
 
@@ -83,6 +100,11 @@ class Player extends PureComponent {
       this.setState({
         keySterringVideo: !this.state.keySterringVideo,
        })
+    }
+    if(e.keyCode === 27) {
+      this.setState({
+        fullscreen: false,
+      })
     }
     if(this.state.keySterringVideo) {
       if(this.controlVideo) {
@@ -488,20 +510,31 @@ class Player extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
-      {this.state.showConfirmationCloseVideo ?
-        <FadeIn>
-          <ShowConfirmationWindowClose
-            description = {
-              "Czy jesteś pewny, że chcesz zakończyć słuchanie playlisty? Ta akcja spowoduje, że playlista przestanie grać."
-            }
-            closeConfirmation = {this.closeConfirmation}
-            acceptedConfirm = {this.closeVideo}
-          />
-        </FadeIn>
-        :
-        null
-      }
+      <div>
+        <div 
+          className="player-content-fullscreen-show-more-options"
+          style={{
+            top: this.state.showMoreOptionsWhenFullScreen ? "50px" : "-100%",
+          }}  
+        > 
+          Aby zamknąć pełny ekran, wciśnij {" "} 
+          <span className="player-content-fullscreen-show-more-options-text">
+            Esc
+          </span>       
+        </div>
+        {this.state.showConfirmationCloseVideo ?
+          <FadeIn>
+            <ShowConfirmationWindowClose
+              description = {
+                "Czy jesteś pewny, że chcesz zakończyć słuchanie playlisty? Ta akcja spowoduje, że playlista przestanie grać."
+              }
+              closeConfirmation = {this.closeConfirmation}
+              acceptedConfirm = {this.closeVideo}
+            />
+          </FadeIn>
+          :
+          null
+        }
       <div 
         className="information-user-active-unactive-key"
         style={this.state.animateInformationOnActiveKey ? 
@@ -534,52 +567,74 @@ class Player extends PureComponent {
         </span>
       </div>
       <div 
-        className="content-player"
-        style={this.state.visibleAlbumPlaylist ?
-                {top: "75px"}
+        className={!this.state.fullscreen ?
+                    "content-player"
+                    :
+                    "content-player-fullscreen"
+                  }
+        style={!this.state.fullscreen ?
+                this.state.visibleAlbumPlaylist ?
+                  {top: "75px"}
+                  :
+                  {top: "-100%"}
                 :
-                {top: "-100%"}
+                null
               }
       >
-        <div className="content-player-options">
-          <span className="content-player-controls-fullscreen">
-            FULLSCREEN {" "}
-            <span className="glyphicon glyphicon-fullscreen"/>
-          </span>   
-          <span 
-            className="content-player-options-hide glyphicon glyphicon-minus"
-            onClick={() => {
-              this.setState({
-                visibleAlbumPlaylist: false,
-              })
-            }} 
-          >
-            <CloudInformationHelp 
-              text="Przycisk ukrywa widok aktualnej odtwarzanej playlisty oraz przełącza na odtwarzacz wideo" 
-              styleCloud={{
-                left: "-50px",
-                top: "32px",
+        {!this.state.fullscreen ?
+          <div className="content-player-options">
+            <span 
+              className="content-player-controls-fullscreen"
+              onClick={() => {
+                this.setState({
+                  fullscreen: true,
+                })
               }}
-              styleIndicator={{
-                top: "-22px",
-                left: "55px",
-                transform: "rotate(270deg)",
+              >
+              FULLSCREEN {" "}
+              <span className="glyphicon glyphicon-fullscreen"/>
+            </span>   
+            <span 
+              className="content-player-options-hide glyphicon glyphicon-minus"
+              onClick={() => {
+                this.setState({
+                  visibleAlbumPlaylist: false,
+                })
+              }} 
+            >
+              <CloudInformationHelp 
+                text="Przycisk ukrywa widok aktualnej odtwarzanej playlisty oraz przełącza na odtwarzacz wideo" 
+                styleCloud={{
+                  left: "-50px",
+                  top: "32px",
+                }}
+                styleIndicator={{
+                  top: "-22px",
+                  left: "55px",
+                  transform: "rotate(270deg)",
 
+                }}
+                />
+            </span>
+            <span 
+              className="content-player-options-close glyphicon glyphicon-remove" 
+              onClick={()=>{
+                this.setState({
+                  showConfirmationCloseVideo: true,
+                })
               }}
               />
-          </span>
-          <span 
-            className="content-player-options-close glyphicon glyphicon-remove" 
-            onClick={()=>{
-              this.setState({
-                showConfirmationCloseVideo: true,
-              })
-            }}
-            />
-          <div className="content-player-options-underline" />
-        </div>
+            <div className="content-player-options-underline" />
+          </div>
+          :
+          null
+        }
         <YouTube
-          className="player"
+          className={this.state.fullscreen ?
+                      "player-fullscreen"
+                      :
+                      "player"
+                    }
           videoId={
             this.props.playListActually.music[
               this.state.musicNumber
@@ -590,17 +645,19 @@ class Player extends PureComponent {
           onEnd={this.checkNextVideo}
           onError={this.whenError}
         />
-        <div className="content-player-underline" />
-        <div className="content-player-title-play">
-          {this.props.playListActually.music[
-            this.state.musicNumber
-          ].title}
-        </div>
-        <div className="content-player-playlist">
-             {this.props.playListActually.music.map((music, index) => {
-               let time = this.breakDurationOnNumber(music.duration);
-               return (
-                 <div 
+        {!this.state.fullscreen ?
+          <React.Fragment>
+            <div className="content-player-underline" />
+            <div className="content-player-title-play">
+              {this.props.playListActually.music[
+                this.state.musicNumber
+              ].title}
+            </div>
+            <div className="content-player-playlist">
+              {this.props.playListActually.music.map((music, index) => {
+                let time = this.breakDurationOnNumber(music.duration);
+                return (
+                  <div 
                   className="content-player-playlist-list"
                   key={index}
                   onClick={() => {
@@ -614,8 +671,8 @@ class Player extends PureComponent {
                       :
                       {opacity: 0.5}
                   }
-                 >
-                   <div className="content-player-playlist-list-contain"> 
+                  >
+                    <div className="content-player-playlist-list-contain"> 
                     <img
                         className="content-player-playlist-list-containt-avatar"
                         src={music.avatar}
@@ -628,75 +685,91 @@ class Player extends PureComponent {
                   <div className="content-player-playlist-list-time">
                     {time}
                   </div>
-                 </div>
+                  </div>
                 )
-             })}
-        </div>
+              })}
+            </div>
+          </React.Fragment>
+          :
+          null
+        }
       </div>
       <div 
         className="content-player-control-video"
-        style={!this.state.visibleAlbumPlaylist && this.state.visiblePlayer ?
-          {top: "75px"}
+        style={(!this.state.visibleAlbumPlaylist && this.state.visiblePlayer) || this.state.fullscreen ?
+          {bottom: this.state.fullscreen ? "0px" : "50px",
+           height: this.state.fullscreen ? "180px" : "250px",
+           border: this.state.fullscreen ? "unset" : "0.5px solid rgb(99, 99, 102)",
+           borderRadius: this.state.fullscreen ? "unset" : "15px",
+           background: this.state.fullscreen ? "unset" : "linear-gradient(#2D2E32, black)",
+           width: this.state.fullscreen ? "100%" : window.innerWidth < 768 ?
+                                                      "350px" : "600px"
+          }
           :
-          {top: "-100%"}
+          {bottom: "-100%",
+           height: "180px",
+
+          }
         }       
       >
-      <div className="content-player-options">
-      <span 
-        className="content-player-options-list glyphicon glyphicon-th-list" 
-        onClick={() => {
-          this.setState({
-            visibleAlbumPlaylist: true,
-          })
-        }}
-      >
-        <CloudInformationHelp 
-            text="Przycisk przywraca widok odtwarzanej playlisty oraz chowa odtwarzacz wideo." 
-            styleCloud={{
-              left: "-50px",
-              top: "35px",
-            }}
-            styleIndicator={{
-              top: "-22px",
-              left: "55px",
-              transform: "rotate(270deg)",
-
-            }}
-        />
-      </span>
-      <span 
-        className="content-player-options-hide glyphicon glyphicon-minus"
-        onClick={() => {
-          this.setState({
-            visiblePlayer: false,
-          })
-        }}
-      >
-        <CloudInformationHelp 
-          text="Przycisk ukrywa widok odtwarzacza wideo oraz wyświetla ikonkę z prawej stony z aktualnym tytułem." 
-          styleCloud={{
-            left: "-50px",
-            top: "35px",
-          }}
-          styleIndicator={{
-            top: "-22px",
-            left: "55px",
-            transform: "rotate(270deg)",
-
-          }}
-        />
-      </span>
-      <span 
-        className="content-player-options-close glyphicon glyphicon-remove" 
-        onClick={()=>{
-          this.setState({
-            showConfirmationCloseVideo: true,
-          })
-        }}
-        />
-      <div className="content-player-options-underline" />
-    </div>  
-        <div className="content-player-actually-marquee">
+      {!this.state.fullscreen ?
+        <React.Fragment>
+          <div className="content-player-options">
+            <span 
+              className="content-player-options-list glyphicon glyphicon-th-list" 
+              onClick={() => {
+                this.setState({
+                  visibleAlbumPlaylist: true,
+                })
+              }}
+            >
+              <CloudInformationHelp 
+                  text="Przycisk przywraca widok odtwarzanej playlisty oraz chowa odtwarzacz wideo." 
+                  styleCloud={{
+                    left: "-50px",
+                    top: "35px",
+                  }}
+                  styleIndicator={{
+                    top: "-22px",
+                    left: "55px",
+                    transform: "rotate(270deg)",
+      
+                  }}
+              />
+            </span>
+            <span 
+              className="content-player-options-hide glyphicon glyphicon-minus"
+              onClick={() => {
+                this.setState({
+                  visiblePlayer: false,
+                })
+              }}
+            >
+              <CloudInformationHelp 
+                text="Przycisk ukrywa widok odtwarzacza wideo oraz wyświetla ikonkę z prawej stony z aktualnym tytułem." 
+                styleCloud={{
+                  left: "-50px",
+                  top: "35px",
+                }}
+                styleIndicator={{
+                  top: "-22px",
+                  left: "55px",
+                  transform: "rotate(270deg)",
+      
+                }}
+              />
+            </span>
+            <span 
+              className="content-player-options-close glyphicon glyphicon-remove" 
+              onClick={()=>{
+                this.setState({
+                  showConfirmationCloseVideo: true,
+                })
+              }}
+              />
+            <div className="content-player-options-underline" />
+          </div>  
+          <div className="content-player-actually-marquee">
           <marquee
                 direction="left"
                 scrollamount="2"
@@ -704,10 +777,15 @@ class Player extends PureComponent {
           >
               {this.props.playListActually.music[this.state.musicNumber].title}
           </marquee>
-            </div>
-          <div
-              className="content-player-actually-music-title"
-          >
+        </div>
+        </React.Fragment>
+        :
+        null
+      }
+        
+        <div
+            className="content-player-actually-music-title"
+        >
             <p className="content-player-actually-music-title-time">
               {this.state.timeActually} / {this.state.durationTime}
             </p>
@@ -792,7 +870,7 @@ class Player extends PureComponent {
                   {this.props.playListActually.music[this.state.musicNumber].title}
               </marquee>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
