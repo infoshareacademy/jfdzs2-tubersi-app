@@ -41,50 +41,50 @@ class Player extends PureComponent {
     this.getTime = setInterval(this.getDurationTimeVideo, 1000);
     window.addEventListener("keydown", this.controlPLayerForKeyBoard);
     window.addEventListener("resize", this.setStyleIconWhenResize);
-    window.addEventListener("mousemove",  this.showOptionPlayerVideoWhenMosueMove)
+    window.addEventListener("mousemove",  this.showOptionPlayerVideoWhenMosueMove);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.playListActually !== this.props.playListActually) {
       this.setState({
         musicNumber: 0,
-      })
+      });
     }
     if(this.controlVideo) {
       if(this.controlVideo.getVolume() !== this.state.soundValue && !this.controlVideo.isMuted) {
         this.setState({
           soundValue: this.controlVideo.getVolume(),
-        })
+        });
       }
     }
     if(this.state.keySterringVideo !== prevState.keySterringVideo) {
       this.setState({
         animateInformationOnActiveKey: true,
-      })
+      });
       if(this.animateWhenActiveOrUnactiveKey) {
         clearTimeout(this.animateWhenActiveOrUnactiveKey);
       }
       this.animateWhenActiveOrUnactiveKey = setTimeout(() => {
         this.setState({
           animateInformationOnActiveKey: false,
-        })
+        });
         this.animateWhenActiveOrUnactiveKey = null;
       }, 2000);
     }
     if(this.state.fullscreen && this.state.fullscreen !== prevState.fullscreen) {
         this.setState({
           showMoreOptionsWhenFullScreen: true,
-        })
+        });
         this.animateWhenActiveFullScreen = setTimeout(() => {
           this.setState({
             showMoreOptionsWhenFullScreen: false,
-          })  
+          });  
         },4000);
     }
     else if(!this.state.fullscreen && this.state.fullscreen !== prevState.fullscreen) {
       this.setState({
         showMoreOptionsWhenFullScreen: false,
-      }) 
+      });
     }
   }
 
@@ -96,19 +96,19 @@ class Player extends PureComponent {
     }
     window.removeEventListener("keypress", this.controlPLayerForKeyBoard);
     window.removeEventListener("resize", this.setStyleIconWhenResize);
-    window.removeEventListener("mousemove", this.showOptionPlayerVideoWhenMosueMove)
+    window.removeEventListener("mousemove", this.showOptionPlayerVideoWhenMosueMove);
   }
 
   controlPLayerForKeyBoard = (e) => {
     if(e.keyCode === 36) { 
       this.setState({
         keySterringVideo: !this.state.keySterringVideo,
-       })
+       });
     }
     if(e.keyCode === 27) {
       this.setState({
         fullscreen: false,
-      })
+      });
     }
     if(this.state.keySterringVideo || this.state.fullscreen) {
       if(this.controlVideo) {
@@ -137,7 +137,7 @@ class Player extends PureComponent {
           if(this.controlVideo) {
             this.setState({
               playerState: !this.state.playerState,
-            })
+            });
             if(this.state.playerState) {
               this.controlVideo.pauseVideo();
             }
@@ -163,7 +163,7 @@ class Player extends PureComponent {
     if(!this.state.showOptionsPlayer) {
       this.setState({
         showOptionsPlayer: true,
-      })
+      });
       if(this.animateWhenMouseMove) {
         clearTimeout(this.animateWhenMouseMove);
       }
@@ -180,14 +180,14 @@ class Player extends PureComponent {
       if(!this.state.setStyleIcon){
         this.setState({
           setStyleIcon: true,
-        })
+        });
       }
     }
     else {
       if(this.state.setStyleIcon){
         this.setState({
           setStyleIcon: false,
-        })
+        });
       }
     }
   }
@@ -198,14 +198,13 @@ class Player extends PureComponent {
     if(this.controlVideo.isMuted()) {
       this.setState({
         soundValue: 0,
-      })
+      });
     }
     else {
       this.setState({
         soundValue: this.controlVideo.getVolume(),
-      })
+      });
     }
-   
   }
 
   getDurationTimeVideo = () => {
@@ -222,7 +221,7 @@ class Player extends PureComponent {
     let time = actuallyTime / durationTime * 100;
     this.setState({
         rangeValue: Math.floor(time),
-    })
+    });
   }
 
   formatNumberToTime = (numberToFormat, timeSet) => {
@@ -245,12 +244,12 @@ class Player extends PureComponent {
     if(timeSet === 'duration') {
       this.setState({
         durationTime: this.setFormatTime(seconds, minutes, hours),
-      })
+      });
     }
     else if(timeSet === 'actually') {
       this.setState({
           timeActually: this.setFormatTime(seconds, minutes, hours),
-      })
+      });
     }
     else {
       return this.setFormatTime(seconds, minutes, hours);
@@ -300,7 +299,6 @@ class Player extends PureComponent {
         textTime += '0' + seconds;
       } 
     }
-
     return textTime;
   }
 
@@ -323,7 +321,7 @@ class Player extends PureComponent {
       this.setState({
         musicNumber: this.state.musicNumber + 1,
         playerState: false,
-       })
+       });
     }
   }
 
@@ -334,7 +332,7 @@ class Player extends PureComponent {
     else {
       this.setState({
         musicNumber: this.state.musicNumber + 1,
-       })
+       });
     }
   }
 
@@ -342,7 +340,7 @@ class Player extends PureComponent {
     if(this.controlVideo) {
       this.setState({
         playerState: !this.state.playerState,
-      })
+      });
       if(!this.state.playerState) {
         this.controlVideo.pauseVideo();
       }
@@ -361,7 +359,7 @@ class Player extends PureComponent {
             this.setState({
               musicNumber: 0,
               playerState: false,
-            })
+            });
         }
     }
   }
@@ -372,13 +370,13 @@ class Player extends PureComponent {
             this.setState({
                 musicNumber: this.props.playListActually.music.length - 1,
                 playerState: false,
-            })
+            });
         }
         else {
             this.setState({
                 musicNumber: this.state.musicNumber - 1,
                 playerState: false,
-            })
+            });
         }
     }
   }
@@ -409,7 +407,7 @@ class Player extends PureComponent {
     if(this.controlVideo) {
         this.setState({
             rangeValue: e.target.value,
-        })
+        });
         let timeDuration = Math.floor(this.controlVideo.getDuration());
         let counter = e.target.value / 100;
         this.controlVideo.seekTo(Math.floor(timeDuration * counter));
@@ -420,7 +418,7 @@ class Player extends PureComponent {
     if(this.controlVideo) {
       this.setState({
         soundValue: e ? e.target.value : value,
-      })
+      });
       if(e ? e.target.value : value > 0) {
         this.controlVideo.unMute();
       }
@@ -467,7 +465,7 @@ class Player extends PureComponent {
 
   getValueSound() {
     if(this.controlVideo) {
-      if(this.controlVideo.isMuted()){
+      if(this.controlVideo.isMuted()) {
         return 0;
       }
       else {
@@ -542,7 +540,7 @@ class Player extends PureComponent {
   closeConfirmation = () => {
     this.setState({
       showConfirmationCloseVideo: false,
-    })
+    });
   }
 
   render() {
@@ -577,269 +575,268 @@ class Player extends PureComponent {
           :
           null
         }
-      <div 
-        className="information-user-active-unactive-key"
-        style={this.state.animateInformationOnActiveKey ? 
+        <div 
+          className="information-user-active-unactive-key"
+          style={this.state.animateInformationOnActiveKey ? 
                 {right: "50px"}
                 :
                 {right: "-350px"}
               }
         >
-        <span 
-          style={{
-           color: "#fff",
-           opacity: 0.5, 
-  
-         }}
-        >
-          Sterowanie Playerem:
-        </span>
-        <span
-          style={this.state.keySterringVideo ?
-                {color: "rgb(92,184,92)"}
-                :
-                {color: "rgb(217,83,79)"}
+          <span 
+            style={{
+            color: "#fff",
+            opacity: 0.5, 
+    
+          }}
+          >
+            Sterowanie Playerem:
+          </span>
+          <span
+            style={this.state.keySterringVideo ?
+                  {color: "rgb(92,184,92)"}
+                  :
+                  {color: "rgb(217,83,79)"}
+                  }
+          >
+            {this.state.keySterringVideo ?
+              " Aktywne"
+              :
+              " Nieaktywne"
+            }
+          </span>
+        </div>
+        <div 
+          className={!this.state.fullscreen ?
+                      "content-player"
+                      :
+                      "content-player-fullscreen"
+                    }
+          style={!this.state.fullscreen ?
+                  this.state.visibleAlbumPlaylist ?
+                    {top: "75px"}
+                    :
+                    {top: "-100%"}
+                  :
+                  null
                 }
         >
-          {this.state.keySterringVideo ?
-            " Aktywne"
-            :
-            " Nieaktywne"
-          }
-        </span>
-      </div>
-      <div 
-        className={!this.state.fullscreen ?
-                    "content-player"
-                    :
-                    "content-player-fullscreen"
-                  }
-        style={!this.state.fullscreen ?
-                this.state.visibleAlbumPlaylist ?
-                  {top: "75px"}
-                  :
-                  {top: "-100%"}
-                :
-                null
-              }
-      >
-        {!this.state.fullscreen ?
-          <div className="content-player-options">
-            <span 
-              className="content-player-controls-fullscreen"
-              onClick={() => {
-                this.setState({
-                  fullscreen: true,
-                })
-              }}
+          {!this.state.fullscreen ?
+            <div className="content-player-options">
+              <span 
+                className="content-player-controls-fullscreen"
+                onClick={() => {
+                  this.setState({
+                    fullscreen: true,
+                  })
+                }}
+                >
+                FULLSCREEN {" "}
+                <span className="glyphicon glyphicon-fullscreen"/>
+              </span>   
+              <span 
+                className="content-player-options-hide glyphicon glyphicon-minus"
+                onClick={() => {
+                  this.setState({
+                    visibleAlbumPlaylist: false,
+                  })
+                }} 
               >
-              FULLSCREEN {" "}
-              <span className="glyphicon glyphicon-fullscreen"/>
-            </span>   
-            <span 
-              className="content-player-options-hide glyphicon glyphicon-minus"
-              onClick={() => {
-                this.setState({
-                  visibleAlbumPlaylist: false,
-                })
-              }} 
-            >
-              <CloudInformationHelp 
-                text="Przycisk ukrywa widok aktualnej odtwarzanej playlisty oraz przełącza na odtwarzacz wideo" 
-                styleCloud={{
-                  left: "-50px",
-                  top: "32px",
-                }}
-                styleIndicator={{
-                  top: "-22px",
-                  left: "55px",
-                  transform: "rotate(270deg)",
-
-                }}
-                />
-            </span>
-            <span 
-              className="content-player-options-close glyphicon glyphicon-remove" 
-              onClick={()=>{
-                this.setState({
-                  showConfirmationCloseVideo: true,
-                })
-              }}
-              />
-            <div className="content-player-options-underline" />
-          </div>
-          :
-          null
-        }
-        <YouTube
-          className={this.state.fullscreen ?
-                      "player-fullscreen"
-                      :
-                      "player"
-                    }
-          videoId={
-            this.props.playListActually.music[
-              this.state.musicNumber
-            ].idVideo
-          }
-          opts={opts}
-          onReady={this.onReady}
-          onEnd={this.checkNextVideo}
-          onError={this.whenError}
-        />
-        {!this.state.fullscreen ?
-          <React.Fragment>
-            <div className="content-player-underline" />
-            <div className="content-player-title-play">
-              {this.props.playListActually.music[
-                this.state.musicNumber
-              ].title}
-            </div>
-            <div className="content-player-playlist">
-              {this.props.playListActually.music.map((music, index) => {
-                let time = this.breakDurationOnNumber(music.duration);
-                return (
-                  <div 
-                  className="content-player-playlist-list"
-                  key={index}
-                  onClick={() => {
-                    this.setState({
-                      musicNumber: index,
-                    })
-                  }}
-                  style={
-                    this.state.musicNumber === index ?
-                      {backgroundColor: "rgb(45,46,50)"}
-                      :
-                      {opacity: 0.5}
-                  }
-                  >
-                    <div className="content-player-playlist-list-contain"> 
-                    <img
-                        className="content-player-playlist-list-containt-avatar"
-                        src={music.avatar}
-                        alt={index + "avatar-music"}
-                      />
-                    </div>
-                  <div className="content-player-playlist-list-title">
-                    {music.title}
-                  </div>
-                  <div className="content-player-playlist-list-time">
-                    {time}
-                  </div>
-                  </div>
-                )
-              })}
-            </div>
-          </React.Fragment>
-          :
-          null
-        }
-      </div>
-      <div 
-        className="content-player-control-video"
-        style={(!this.state.visibleAlbumPlaylist && this.state.visiblePlayer) || this.state.fullscreen ?
-          {bottom: this.state.fullscreen ? 
-            this.state.showOptionsPlayer || this.controlVideo.getPlayerState() !== 1 ? 
-              "0px" 
-              : 
-              "-100%" 
-            : 
-            "50px",
-           height: this.state.fullscreen ? "180px" : "250px",
-           border: this.state.fullscreen ? "unset" : "0.5px solid rgb(99, 99, 102)",
-           borderRadius: this.state.fullscreen ? "unset" : "15px",
-           background: this.state.fullscreen ? "unset" : "linear-gradient(#2D2E32, black)",
-           width: this.state.fullscreen ? 
-            "100%" 
-            : 
-            window.innerWidth < 768 ?
-              "400px" 
-              : 
-              "700px"
-          }
-          :
-          {bottom: "-100%",
-           height: "180px",
-
-          }
-        }       
-      >
-      {!this.state.fullscreen ?
-        <React.Fragment>
-          <div className="content-player-options">
-            <span 
-              className="content-player-options-list glyphicon glyphicon-th-list" 
-              onClick={() => {
-                this.setState({
-                  visibleAlbumPlaylist: true,
-                })
-              }}
-            >
-              <CloudInformationHelp 
-                  text="Przycisk przywraca widok odtwarzanej playlisty oraz chowa odtwarzacz wideo." 
+                <CloudInformationHelp 
+                  text="Przycisk ukrywa widok aktualnej odtwarzanej playlisty oraz przełącza na odtwarzacz wideo" 
                   styleCloud={{
                     left: "-50px",
-                    top: "35px",
+                    top: "32px",
                   }}
                   styleIndicator={{
                     top: "-22px",
                     left: "55px",
                     transform: "rotate(270deg)",
-      
+
                   }}
-              />
-            </span>
-            <span 
-              className="content-player-options-hide glyphicon glyphicon-minus"
-              onClick={() => {
-                this.setState({
-                  visiblePlayer: false,
-                })
-              }}
-            >
-              <CloudInformationHelp 
-                text="Przycisk ukrywa widok odtwarzacza wideo oraz wyświetla ikonkę z prawej stony z aktualnym tytułem." 
-                styleCloud={{
-                  left: "-50px",
-                  top: "35px",
+                  />
+              </span>
+              <span 
+                className="content-player-options-close glyphicon glyphicon-remove" 
+                onClick={()=>{
+                  this.setState({
+                    showConfirmationCloseVideo: true,
+                  })
                 }}
-                styleIndicator={{
-                  top: "-22px",
-                  left: "55px",
-                  transform: "rotate(270deg)",
-      
-                }}
-              />
-            </span>
-            <span 
-              className="content-player-options-close glyphicon glyphicon-remove" 
-              onClick={()=>{
-                this.setState({
-                  showConfirmationCloseVideo: true,
-                })
-              }}
-              />
-            <div className="content-player-options-underline" />
-          </div>  
-          <div className="content-player-actually-marquee">
-          <marquee
-                direction="left"
-                scrollamount="2"
-                scrolldelay="1"
-          >
-              {this.props.playListActually.music[this.state.musicNumber].title}
-          </marquee>
+                />
+              <div className="content-player-options-underline" />
+            </div>
+            :
+            null
+          }
+          <YouTube
+            className={this.state.fullscreen ?
+                        "player-fullscreen"
+                        :
+                        "player"
+                      }
+            videoId={
+              this.props.playListActually.music[
+                this.state.musicNumber
+              ].idVideo
+            }
+            opts={opts}
+            onReady={this.onReady}
+            onEnd={this.checkNextVideo}
+            onError={this.whenError}
+          />
+          {!this.state.fullscreen ?
+            <React.Fragment>
+              <div className="content-player-underline" />
+              <div className="content-player-title-play">
+                {this.props.playListActually.music[
+                  this.state.musicNumber
+                ].title}
+              </div>
+              <div className="content-player-playlist">
+                {this.props.playListActually.music.map((music, index) => {
+                  let time = this.breakDurationOnNumber(music.duration);
+                  return (
+                    <div 
+                    className="content-player-playlist-list"
+                    key={index}
+                    onClick={() => {
+                      this.setState({
+                        musicNumber: index,
+                      })
+                    }}
+                    style={
+                      this.state.musicNumber === index ?
+                        {backgroundColor: "rgb(45,46,50)"}
+                        :
+                        {opacity: 0.5}
+                    }
+                    >
+                      <div className="content-player-playlist-list-contain"> 
+                      <img
+                          className="content-player-playlist-list-containt-avatar"
+                          src={music.avatar}
+                          alt={index + "avatar-music"}
+                        />
+                      </div>
+                    <div className="content-player-playlist-list-title">
+                      {music.title}
+                    </div>
+                    <div className="content-player-playlist-list-time">
+                      {time}
+                    </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </React.Fragment>
+            :
+            null
+          }
         </div>
-        </React.Fragment>
-        :
-        null
-      }
-        
-        <div
-            className="content-player-actually-music-title"
+        <div 
+          className="content-player-control-video"
+          style={(!this.state.visibleAlbumPlaylist && this.state.visiblePlayer) || this.state.fullscreen ?
+            {bottom: this.state.fullscreen ? 
+              this.state.showOptionsPlayer || this.controlVideo.getPlayerState() !== 1 ? 
+                "0px" 
+                : 
+                "-100%" 
+              : 
+              "50px",
+            height: this.state.fullscreen ? "180px" : "250px",
+            border: this.state.fullscreen ? "unset" : "0.5px solid rgb(99, 99, 102)",
+            borderRadius: this.state.fullscreen ? "unset" : "15px",
+            background: this.state.fullscreen ? "unset" : "linear-gradient(#2D2E32, black)",
+            width: this.state.fullscreen ? 
+              "100%" 
+              : 
+              window.innerWidth < 768 ?
+                "400px" 
+                : 
+                "700px"
+            }
+            :
+            {bottom: "-100%",
+            height: "180px",
+
+            }
+          }       
         >
-            <p className="content-player-actually-music-title-time">
+          {!this.state.fullscreen ?
+            <React.Fragment>
+              <div className="content-player-options">
+                <span 
+                  className="content-player-options-list glyphicon glyphicon-th-list" 
+                  onClick={() => {
+                    this.setState({
+                      visibleAlbumPlaylist: true,
+                    })
+                  }}
+                >
+                  <CloudInformationHelp 
+                      text="Przycisk przywraca widok odtwarzanej playlisty oraz chowa odtwarzacz wideo." 
+                      styleCloud={{
+                        left: "-50px",
+                        top: "35px",
+                      }}
+                      styleIndicator={{
+                        top: "-22px",
+                        left: "55px",
+                        transform: "rotate(270deg)",
+          
+                      }}
+                  />
+                </span>
+                <span 
+                  className="content-player-options-hide glyphicon glyphicon-minus"
+                  onClick={() => {
+                    this.setState({
+                      visiblePlayer: false,
+                    })
+                  }}
+                >
+                  <CloudInformationHelp 
+                    text="Przycisk ukrywa widok odtwarzacza wideo oraz wyświetla ikonkę z prawej stony z aktualnym tytułem." 
+                    styleCloud={{
+                      left: "-50px",
+                      top: "35px",
+                    }}
+                    styleIndicator={{
+                      top: "-22px",
+                      left: "55px",
+                      transform: "rotate(270deg)",
+          
+                    }}
+                  />
+                </span>
+                <span 
+                  className="content-player-options-close glyphicon glyphicon-remove" 
+                  onClick={()=>{
+                    this.setState({
+                      showConfirmationCloseVideo: true,
+                    })
+                  }}
+                  />
+                <div className="content-player-options-underline" />
+              </div>
+              <div className="content-player-actually-marquee">
+                <marquee
+                      direction="left"
+                      scrollamount="2"
+                      scrolldelay="1"
+                >
+                    {this.props.playListActually.music[this.state.musicNumber].title}
+                </marquee>
+              </div>
+            </React.Fragment>
+            :
+            null
+          }
+          <div
+              className="content-player-actually-music-title"
+          >
+          <p className="content-player-actually-music-title-time">
               {this.state.timeActually} / {this.state.durationTime}
             </p>
           </div>
@@ -859,7 +856,7 @@ class Player extends PureComponent {
                             :
                             "content-player-controls-icons glyphicon glyphicon-pause"
                           }
-              />
+                />
               <span 
                 className="content-player-controls-icons glyphicon glyphicon-forward"
                 onClick={this.seekToNext}
@@ -871,15 +868,15 @@ class Player extends PureComponent {
               <div 
                 className={this.checkStatusSound()}
                 onClick={this.setMuteSound}
-                >
-                  <div className="content-player-controls-sound-contain">
+              >
+                <div className="content-player-controls-sound-contain">
                     <input 
                       className="content-player-controls-sound-input"
                       type="range"
                       value={this.getValueSound()}
                       onChange={this.setSound}
                     />      
-                  </div>
+                </div>
               </div>
               {this.state.fullscreen ?
                 <span 
