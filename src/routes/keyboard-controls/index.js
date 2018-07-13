@@ -91,7 +91,7 @@ class KeyboardControls extends PureComponent {
                     width: "100%",
                     float: "left"
                     }}
-              />
+                />
             </Layout>
         )
     }

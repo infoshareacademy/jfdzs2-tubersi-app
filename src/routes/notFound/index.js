@@ -14,8 +14,9 @@ export default class NotFound extends Component {
     }
 
     render() {
-        return <React.Fragment>
-                    <UserAuthorized/>
+        return (
+            <React.Fragment>
+                <UserAuthorized/>
                     <div className="error">
                         <div className="error-title">
                             <div className="error-title-contain">
@@ -25,13 +26,12 @@ export default class NotFound extends Component {
                                      alt="error-404"
                                 />
                                 ERROR 404
-                            </p>
-                            <p className="error-title-contain-text-alert">
-                                Strona której aktualnie szukasz, nie istnieje lub nie jest dostępna.
-                            </p>
+                                </p>
+                                <p className="error-title-contain-text-alert">
+                                    Strona której aktualnie szukasz, nie istnieje lub nie jest dostępna.
+                                </p>
+                            </div>
                         </div>
-                        </div>
-                        <div className="error-content col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4"></div>
                         <div className="error-content-help col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                             <p className="error-content-help-suggestion col-xs-12 col-sm-2">
                                 Kontakt
@@ -65,7 +65,8 @@ export default class NotFound extends Component {
                             </div>
                         </div>
                     </div>
-                </React.Fragment>
+            </React.Fragment>
+        )
     }
 }
 

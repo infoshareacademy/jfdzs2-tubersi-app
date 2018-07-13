@@ -21,7 +21,7 @@ class Chat extends PureComponent {
         messageReference: this.props.firebase
         .database()
         .ref('chat')
-      })
+      });
     }
   }
 
@@ -31,7 +31,7 @@ class Chat extends PureComponent {
         messageReference: this.props.firebase
         .database()
         .ref('chat')
-      })
+      });
     }
   }
 
