@@ -9,7 +9,7 @@ import './style.css';
 class SignUp extends PureComponent {
   constructor(props){
     super(props);
-      this.state ={
+      this.state = {
         email: '',
         password: '',
         name: '',
@@ -17,25 +17,32 @@ class SignUp extends PureComponent {
   }
 
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value});
+    this.setState({ 
+      [e.target.name]: e.target.value
+    });
   }
 
   tryRegisterAndLogin = (e) => {
     e.preventDefault();
-    this.props.firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-    }).then((u)=> {
+    this.props.firebase.auth()
+      .createUserWithEmailAndPassword(
+        this.state.email, this.state.password
+      )
+      .then((u)=> {})
+      .then((u)=> {
         this.props.changeStatus(this.state.email);
         this.createNewUser();
       })
-    .catch((error) => {
-      var errorCode = error.code;
-      // var errorMessage = error.message;
-      if (errorCode === 'auth/weak-password') {
-        alert('Bez jaj - masz  słabe hasło');
-      } else if (errorCode ==='auth/invalid-email'){
-        alert('Adres mailowy jest źle podany');
-      } 
-      console.log(error);
+      .catch((error) => {
+        var errorCode = error.code;
+        // var errorMessage = error.message;
+        if (errorCode === 'auth/weak-password') {
+          alert('Bez jaj - masz  słabe hasło');
+        } 
+        else if (errorCode ==='auth/invalid-email') {
+          alert('Adres mailowy jest źle podany');
+        } 
+        console.log(error);
       })
   }
 
@@ -51,50 +58,57 @@ class SignUp extends PureComponent {
   render() {
     return (
         <React.Fragment>
-        <UserNotAuthorized/>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-6 col-md-offset-3">
-              <h1 className="page-title">Witaj Tubersie !</h1>  
-              <div className="box-sign-up animated zoomIn">
-                    <h2>Zarejestruj się</h2>
-                    <input type="text" 
-                           name="name" 
-                           placeholder="Imię" 
-                           required 
-                           value={this.state.name}
-                           onChange={this.handleChange}
-                        />
-                    <input type="email" 
-                           name="email" 
-                           placeholder="Adres mailowy" 
-                           required 
-                           valute={this.state.email}
-                           onChange={this.handleChange}
-                        />
-                    <input type="password" 
-                           name="password" 
-                           placeholder="Hasło"  
-                           required 
-                           value={this.state.password}
-                           onChange={this.handleChange}
-                        />
-                    <button className="input-submit" 
-                            type="submit" 
-                            value="Zarejestruj się"
-                            onClick={this.tryRegisterAndLogin}
-                        >
-                        Zarejestruj
-                    </button> 
-                    <Link to='/signIn'>
-                          <button className="">
-                              Mam już konto
-                          </button>
-                    </Link>
+          <UserNotAuthorized/>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-md-6 col-md-offset-3"> 
+                <div 
+                  className="box-sign-up animated zoomIn"
+                  style={{marginTop: "50px"}}
+                  >
+                  <h2>Zarejestruj się</h2>
+                  <input 
+                    type="text" 
+                    name="name" 
+                    placeholder="Imię" 
+                    required 
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                  />
+                  <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Adres mailowy" 
+                    required 
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                  />
+                  <input 
+                    type="password" 
+                    name="password" 
+                    placeholder="Hasło"  
+                    required 
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                  />
+                  <button 
+                    className="input-submit" 
+                    type="submit" 
+                    value="Zarejestruj się"
+                    onClick={this.tryRegisterAndLogin}
+                  >
+                    Zarejestruj
+                  </button> 
+                  <Link to='/signIn'>
+                    <button style={{backgroundColor: "rgb(203, 204, 203)"}}
+                    >
+                      Mam już konto
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </React.Fragment>
     );
   }
