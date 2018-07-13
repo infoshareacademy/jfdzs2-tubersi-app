@@ -45,7 +45,7 @@ class SignIn extends PureComponent {
       .catch((error) => {
         var errorCode = error.code;
         // var errorMessage = error.message;
-
+        
         if (errorCode === 'auth/wrong-password') {
           alert('Hasło jest niepoprawne');
         } 

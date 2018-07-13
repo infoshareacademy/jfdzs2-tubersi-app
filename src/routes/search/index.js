@@ -39,11 +39,11 @@ export default class Search extends PureComponent {
             this.searchVideo();
             this.setState({
                 newSearch: true,
-            })
+            });
         }
+        
         if(this.state.durationVideo.length !== 0) {
-           if(this.state.durationVideo.length === this.state.maxResults && 
-              this.state.sortVideo) {
+           if(this.state.durationVideo.length === this.state.maxResults && this.state.sortVideo) {
                this.sortVideo();
            }
         }
@@ -67,13 +67,13 @@ export default class Search extends PureComponent {
         this.setState({
             sortVideo: false,
             durationVideo,
-        })
+        });
     }
 
     handleChange = (event) => {
       this.setState({
         searchTitle: event.target.value
-      })
+      });
     }
     
     searchVideo() {
@@ -112,14 +112,14 @@ export default class Search extends PureComponent {
                             id: responseJson.items[0].id,
                         }
                     ]
-                })
-        })
+                });
+            });
     }
 
     showMoreVideo = () => {
         this.setState({
             maxResults: this.state.maxResults + 9,
-        })
+        });
     }
 
     setQualityVideo = (e) => {
@@ -129,7 +129,7 @@ export default class Search extends PureComponent {
                 qualityStandard: false,
                 qualityAny: true,
                 quality: 'any',
-            })
+            });
         }
         else if(e.target.name === 'standard') {
             this.setState({
@@ -137,7 +137,7 @@ export default class Search extends PureComponent {
                 qualityStandard: true,
                 qualityAny: false,
                 quality: 'standard',
-            })
+            });
         }
         else {
             this.setState({
@@ -145,7 +145,7 @@ export default class Search extends PureComponent {
                 qualityStandard: false,
                 qualityAny: false,
                 quality: 'high',
-            })
+            });
         } 
     }
 
@@ -244,7 +244,7 @@ export default class Search extends PureComponent {
                 type="button"
                 onClick={() => {this.addVideoToPlayList(index)}}
             >
-                <i className="fas fa-plus"></i>
+                <i className="fas fa-plus" />
                 Dodaj
             </button>
         )
@@ -257,7 +257,7 @@ export default class Search extends PureComponent {
                 type="button"
                 onClick={() => {this.deleteVideo(index)}}
             >
-                <i className="fas fa-trash-alt"></i>
+                <i className="fas fa-trash-alt" />
                 Usuń
             </button>
         )
@@ -271,24 +271,21 @@ export default class Search extends PureComponent {
             return music.title === this.state.titleVideo [
                 index
             ]
-        }) 
-        ?
-        this.renderButtonRemoveVideo(index)
-        :
-        this.renderButonAddVideo(index);
+        }) ? this.renderButtonRemoveVideo(index) : this.renderButonAddVideo(index);
     }
     
     render() {
         return (
         <Layout>
-           <div className="search-content content animated bounceInRight">
+            <div className="search-content content animated bounceInRight">
                <div className="row">
                     {this.props.actuallyUser ?
                         this.props.actuallyUser.playList ?
                             <React.Fragment>
                                 <div className="search-content-information">
                                     <h2 className="search-content-information-title">
-                                        <i className="fas fa-search"></i>Znajdź utwór i dodaj go do playlisty!
+                                        <i className="fas fa-search" />
+                                        Znajdź utwór i dodaj go do playlisty!
                                     </h2>
                                     <p className="search-playlist-content-text">
                                         Wybierz Playlistę:
@@ -308,106 +305,110 @@ export default class Search extends PureComponent {
                                                        </option>
                                         })}
                                     </select>
-
                                     <div className="search-content-search">
-                                    <input  
-                                        className="search-content-search-input"
-                                        value={this.state.searchTitle}
-                                        onChange={this.handleChange}
-                                        type="text"
-                                        name="text"
-                                        placeholder="Szukaj"
-                                        onKeyDown={(e) => {
-                                                if(e.keyCode === 13) {
+                                        <input  
+                                            className="search-content-search-input"
+                                            value={this.state.searchTitle}
+                                            onChange={this.handleChange}
+                                            type="text"
+                                            name="text"
+                                            placeholder="Szukaj"
+                                            onKeyDown={(e) => {
+                                                    if(e.keyCode === 13) {
+                                                        this.setState({
+                                                            maxResults: 9,
+                                                            newSearch: false,
+                                                        })
+                                                    }
+                                                }}  
+                                        />
+                                        <span className="search-content-row-form-contain">
+                                            <span className="search-content-row-form-contain-icon glyphicon glyphicon-search"
+                                                onClick={() => {
                                                     this.setState({
                                                         maxResults: 9,
                                                         newSearch: false,
                                                     })
-                                                }
-                                            }}  
-                                    />
-                                    <span className="search-content-row-form-contain">
-                                        <span className="search-content-row-form-contain-icon glyphicon glyphicon-search"
-                                            onClick={() => {
-                                                this.setState({
-                                                    maxResults: 9,
-                                                    newSearch: false,
-                                                })
-                                            }}     
-                                        >
+                                                }}     
+                                            >
+                                            </span>
                                         </span>
-                                    </span>
-                                </div>
-                                {this.state.showFiltrQuality ?
-                                    <FadeIn>
-                                    <div className="search-filter-contain">
-                                         <p className="search-filter-contain-title">
-                                             Wybierz jakość!
-                                         </p>
-                                         <div className="search-filter-contain-checkboxs">
-                                             <span className="search-filter-contain-text">
-                                                 Niska
-                                             </span> 
-                                             <input className="search-filter-contain-checkbox"
-                                                     type="checkbox"
-                                                     name="any"
-                                                     checked={this.state.qualityAny}
-                                                     onChange={this.setQualityVideo}
-                                              />
-                                              <span className="search-filter-contain-text">
-                                                 Średnia
-                                              </span>
-                                              <input className="search-filter-contain-checkbox"
-                                                     type="checkbox"
-                                                     name="standard"
-                                                     checked={this.state.qualityStandard}
-                                                     onChange={this.setQualityVideo}
-                                              />
-                                              <span className="search-filter-contain-text">
-                                                 Wysoka
-                                              </span>
-                                              <input className="search-filter-contain-checkbox"
-                                                     type="checkbox"
-                                                     name="high"
-                                                     checked={this.state.qualityHigh}
-                                                     onChange={this.setQualityVideo}         
-                                              />
-                                         </div>
                                     </div>
-                                    </FadeIn>
-                                    :null}
+                                    {this.state.showFiltrQuality ?
+                                        <FadeIn>
+                                            <div className="search-filter-contain">
+                                                <p className="search-filter-contain-title">
+                                                    Wybierz jakość!
+                                                </p>
+                                                <div className="search-filter-contain-checkboxs">
+                                                    <span className="search-filter-contain-text">
+                                                        Niska
+                                                    </span> 
+                                                    <input 
+                                                        className="search-filter-contain-checkbox"
+                                                        type="checkbox"
+                                                        name="any"
+                                                        checked={this.state.qualityAny}
+                                                        onChange={this.setQualityVideo}
+                                                    />
+                                                    <span className="search-filter-contain-text">
+                                                        Średnia
+                                                    </span>
+                                                    <input 
+                                                        className="search-filter-contain-checkbox"
+                                                        type="checkbox"
+                                                        name="standard"
+                                                        checked={this.state.qualityStandard}
+                                                        onChange={this.setQualityVideo}
+                                                    />
+                                                    <span className="search-filter-contain-text">
+                                                        Wysoka
+                                                    </span>
+                                                    <input 
+                                                        className="search-filter-contain-checkbox"
+                                                        type="checkbox"
+                                                        name="high"
+                                                        checked={this.state.qualityHigh}
+                                                        onChange={this.setQualityVideo}         
+                                                    />
+                                                </div>
+                                            </div>
+                                        </FadeIn>
+                                        :
+                                        null
+                                    }
                                     <div 
                                         className="search-filter-toggle"
                                         onClick={()=>{this.setState({
                                             showFiltrQuality: !this.state.showFiltrQuality,
                                         })}}
                                     >
-                                        <span className="search-filter-toggle-arrow-left glyphicon glyphicon-chevron-up"
+                                        <span 
+                                            className="search-filter-toggle-arrow-left glyphicon glyphicon-chevron-up"
                                             style={
                                                 this.state.showFiltrQuality ?
                                                 {transform: "rotate(180deg)"}
                                                 :{transform: "rotate(0deg)"}
                                             }
-                                        >
-                                        </span>          
+                                        />          
                                         <span className="search-filter-toggle-title">
                                             Filtry
                                         </span>
-                                        <span className="search-filter-toggle-arrow-right glyphicon glyphicon-chevron-up"
+                                        <span 
+                                            className="search-filter-toggle-arrow-right glyphicon glyphicon-chevron-up"
                                             style={
                                                 this.state.showFiltrQuality ?
                                                     {transform: "rotate(180deg)"}
                                                     :{transform: "rotate(0deg)"}
                                             }
-                                        >
-                                        </span>
+                                        />
                                     </div>
                                 </div>
                             </React.Fragment>
                             :
                             <div className="search-empty-playlist animated bounceInRight">
                                 <div className="search-empty-playlist-contain">
-                                    <i className="fas fa-info-circle"></i>
+                                    <i className="fas fa-info-circle" />
                                     <p className="search-empty-text">
                                         Aby skorzystać z wyszukiwarki musisz miec playlistę
                                     </p>
@@ -430,7 +431,10 @@ export default class Search extends PureComponent {
                     {this.state.resultYoutube ?
                         this.state.resultYoutube.map((link, index)=> {
                         return (
-                            <div key={index} className="col-sm-6 col-md-4">
+                            <div 
+                                className="col-sm-6 col-md-4"
+                                key={index} 
+                            >
                                 <div className="row">
                                     <div className="col-md-12">
                                         <div className="playlist-item animated bounceInRight">
@@ -455,14 +459,16 @@ export default class Search extends PureComponent {
                                     </div>
                                 </div>
                             </div>
-                        ) 
-                    })
-                    :
-                    null}
+                            ) 
+                        })
+                        :
+                        null
+                    }
                 </div>
                 {this.state.resultYoutube ? 
-                     <button className="search-show-more col-lg-4 col-lg-offset-4"
-                             onClick={this.showMoreVideo}
+                     <button 
+                        className="search-show-more col-lg-4 col-lg-offset-4"
+                        onClick={this.showMoreVideo}
                      >
                         Pokaż Więcej
                      </button>
