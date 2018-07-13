@@ -60,7 +60,9 @@ class YourPlaylists extends PureComponent {
   }
 
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value});
+    this.setState({ 
+      [e.target.name]: e.target.value
+    });
   }
 
   changeViewPopUpAddNewPlayList = () => {
@@ -71,7 +73,7 @@ class YourPlaylists extends PureComponent {
            this.state.descriptionPlayList !== '') {
             this.setState({
               showConfirmationWhenCreatePlaylist: true,
-            })
+            });
         }
         else {
           this.setState({
@@ -91,7 +93,7 @@ class YourPlaylists extends PureComponent {
     this.setState({
       showConfirmationWhenCreatePlaylist: false,
       showConfirmationWhenDeletePlaylist: false,
-    })
+    });
     this.numberDelete = null;
   }
 
@@ -102,7 +104,7 @@ class YourPlaylists extends PureComponent {
       namePlayList: '',
       typePlayList: '',
       descriptionPlayList: '',
-    })
+    });
   }
 
   addNewPlayList(uploadPlayList) {  
@@ -129,7 +131,7 @@ class YourPlaylists extends PureComponent {
       typePlayList: '',
       descriptionPlayList: '',
       popUpAddNewPlayList: false,
-    })  
+    });  
   }
 
   addVideoWhenUpload(){
@@ -143,20 +145,20 @@ class YourPlaylists extends PureComponent {
           this.setState({
             showMessageWhenUniqueNumberIsNotSucces: true,
             messageWhenUploadPlayList: 'Pobrano nową Playliste!',
-          })  
+          }); 
         }
         else {
           this.setState({
             showMessageWhenUniqueNumberIsNotSucces: true,
             messageWhenUploadPlayList: 'Playlista o danym numerze już istnieje!',
-          })  
+          }) ; 
         }
       }
       else {
         this.setState({
           showMessageWhenUniqueNumberIsNotSucces: true,
           messageWhenUploadPlayList: 'Playlista o danym numerze nie istnieje!',
-        })
+        });
       }
     }
   }
@@ -177,7 +179,7 @@ class YourPlaylists extends PureComponent {
       this.numberDelete = null;
       this.setState({
         showConfirmationWhenDeletePlaylist: false,
-      })
+      });
   }
 
   checkCorectUniqueNumber(number) {
@@ -214,8 +216,7 @@ class YourPlaylists extends PureComponent {
     }
     if(actuallyUser.playList.find((list) => {
        return list.uniqueNumber === number; 
-    }))
-    {
+    })) {
       return true;
     }
     return false;
@@ -394,7 +395,7 @@ class YourPlaylists extends PureComponent {
       this.props.actuallyUser.playList[
         this.state.numberChoosePlaylist
       ].music ? 
-         <div className="section-playlist">
+        <div className="section-playlist">
           <div 
             className="section-exit"
           >
@@ -492,34 +493,36 @@ class YourPlaylists extends PureComponent {
               </div>
               <div className="section-playlist-underline-music" />
               {actuallyPlaylist.music.map((music, index) => {
-                return  <div 
-                          className="section-playlist-music-list" 
-                          key={index}
-                        >
-                          <div className="section-playlist-music-legend">
-                            <div className="section-playlist-music-space">
-                              <img
-                                className="section-playlist-music-avatar"
-                                src={music.avatar}
-                                alt={index + "avatar-playlist"}
-                              />
-                              <span 
-                                className="delete-any-music-playlist glyphicon glyphicon-trash" 
-                                onClick={() => {this.deleteVideo(index)}}
-                                style={{
-                                  marginLeft: "15px",
-                                }}
-                              />
-                            </div>
-                            <div className="section-playlist-music-legend-center">
-                              {music.title}
-                            </div>
-                            <div className="section-playlist-music-legend-last">
-                              {music.data}
-                            </div>
-                          </div>
-                          <div className="section-playlist-underline-music" />
-                        </div> 
+                return (
+                  <div 
+                    className="section-playlist-music-list" 
+                    key={index}
+                  >
+                    <div className="section-playlist-music-legend">
+                      <div className="section-playlist-music-space">
+                        <img
+                          className="section-playlist-music-avatar"
+                          src={music.avatar}
+                          alt={index + "avatar-playlist"}
+                        />
+                        <span 
+                          className="delete-any-music-playlist glyphicon glyphicon-trash" 
+                          onClick={() => {this.deleteVideo(index)}}
+                          style={{
+                            marginLeft: "15px",
+                          }}
+                        />
+                      </div>
+                      <div className="section-playlist-music-legend-center">
+                        {music.title}
+                      </div>
+                      <div className="section-playlist-music-legend-last">
+                        {music.data}
+                      </div>
+                    </div>
+                    <div className="section-playlist-underline-music" />
+                </div> 
+                ) 
               })}      
             </div>
         </div>
@@ -552,7 +555,7 @@ class YourPlaylists extends PureComponent {
           <i className="fas fa-times-circle" />
               Zamknij
           </button>
-      </div>
+        </div>
       :
       null;
   }
@@ -855,8 +858,8 @@ class YourPlaylists extends PureComponent {
                               </div>
                             </div>
                           </div>
-                      </div>
-                  )
+                        </div>
+                    )
                 })
                 :
                 <div className="playlist-empty">
