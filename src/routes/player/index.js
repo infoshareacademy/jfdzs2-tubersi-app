@@ -28,6 +28,7 @@ class Player extends PureComponent {
       fullscreen: false,
       showMoreOptionsWhenFullScreen: false,
       showOptionsPlayer: false,
+      enterMouseOnPlayerWhenFullscreen: false,
     }
     this.controlVideo = null;
     this.setPosition = null;
@@ -41,7 +42,7 @@ class Player extends PureComponent {
     this.getTime = setInterval(this.getDurationTimeVideo, 1000);
     window.addEventListener("keydown", this.controlPLayerForKeyBoard);
     window.addEventListener("resize", this.setStyleIconWhenResize);
-    window.addEventListener("mousemove",  this.showOptionPlayerVideoWhenMosueMove);
+    window.addEventListener("mousemove",  this.showOptionPlayerVideoWhenMouseMove);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -96,7 +97,7 @@ class Player extends PureComponent {
     }
     window.removeEventListener("keypress", this.controlPLayerForKeyBoard);
     window.removeEventListener("resize", this.setStyleIconWhenResize);
-    window.removeEventListener("mousemove", this.showOptionPlayerVideoWhenMosueMove);
+    window.removeEventListener("mousemove", this.showOptionPlayerVideoWhenMouseMove);
   }
 
   controlPLayerForKeyBoard = (e) => {
@@ -119,19 +120,19 @@ class Player extends PureComponent {
           else {
             this.setSound(null , 100);
           }
-          this.showOptionPlayerVideoWhenMosueMove();
+          this.showOptionPlayerVideoWhenMouseMove();
         }
         else if(e.keyCode === 40) {
            this.setSound(null , this.controlVideo.getVolume() - 10);  
-           this.showOptionPlayerVideoWhenMosueMove();
+           this.showOptionPlayerVideoWhenMouseMove();
         }
         else if(e.keyCode === 39) {
           this.seekToNext();
-          this.showOptionPlayerVideoWhenMosueMove();
+          this.showOptionPlayerVideoWhenMouseMove();
         }
         else if(e.keyCode === 37) {
           this.seekToPrevious();
-          this.showOptionPlayerVideoWhenMosueMove();
+          this.showOptionPlayerVideoWhenMouseMove();
         }
         else if(e.keyCode === 32) {
           if(this.controlVideo) {
@@ -144,34 +145,41 @@ class Player extends PureComponent {
             else {
              this.controlVideo.playVideo(); 
             }
-            this.showOptionPlayerVideoWhenMosueMove();
+            this.showOptionPlayerVideoWhenMouseMove();
           }
         }
         else if(e.keyCode === 33) {
           this.playNextVideo();
-          this.showOptionPlayerVideoWhenMosueMove();
+          this.showOptionPlayerVideoWhenMouseMove();
         }
         else if(e.keyCode === 34) {
           this.playPreviousVideo();
-          this.showOptionPlayerVideoWhenMosueMove();
+          this.showOptionPlayerVideoWhenMouseMove();
         }
       }
     }
   }
 
-  showOptionPlayerVideoWhenMosueMove = () => {
-    if(!this.state.showOptionsPlayer) {
-      this.setState({
-        showOptionsPlayer: true,
-      });
+  showOptionPlayerVideoWhenMouseMove = () => {
+    if(!this.state.enterMouseOnPlayerWhenFullscreen) {
+      if(!this.state.showOptionsPlayer) {
+        this.setState({
+          showOptionsPlayer: true,
+        });
+        if(this.animateWhenMouseMove) {
+          clearTimeout(this.animateWhenMouseMove);
+        }
+        this.animateWhenMouseMove = setTimeout(() => {
+          this.setState({
+            showOptionsPlayer: false,
+          })
+        },5000);
+      }
+    }
+    else {
       if(this.animateWhenMouseMove) {
         clearTimeout(this.animateWhenMouseMove);
       }
-      this.animateWhenMouseMove = setTimeout(() => {
-        this.setState({
-          showOptionsPlayer: false,
-        })
-      },5000);
     }
   }
 
@@ -736,6 +744,21 @@ class Player extends PureComponent {
         </div>
         <div 
           className="content-player-control-video"
+          onMouseEnter={()=> {
+            if(!this.state.enterMouseOnPlayerWhenFullscreen){
+              this.setState({
+                enterMouseOnPlayerWhenFullscreen: true,
+              })
+            }
+          }}
+          onMouseLeave={()=> {
+            if(this.state.enterMouseOnPlayerWhenFullscreen){
+              this.setState({
+                enterMouseOnPlayerWhenFullscreen: false,
+                showOptionsPlayer: false,
+              })
+            }
+          }}
           style={(!this.state.visibleAlbumPlaylist && this.state.visiblePlayer) || this.state.fullscreen ?
             {bottom: this.state.fullscreen ? 
               this.state.showOptionsPlayer || this.controlVideo.getPlayerState() !== 1 ? 
