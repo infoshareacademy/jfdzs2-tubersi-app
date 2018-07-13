@@ -1,6 +1,6 @@
 .confirmation-hide {
     position: fixed;
-    z-index: 12;
+    z-index: 20;
     height: 100vh;
     width: 100%;
     top: 0px;
@@ -15,7 +15,7 @@
     top: 20%;
     background-color: rgb(186, 185, 185);
     position: fixed;
-    z-index: 13;
+    z-index: 21;
     border-radius: 5px;
     left: 50%;
     transform: translateX(-50%);

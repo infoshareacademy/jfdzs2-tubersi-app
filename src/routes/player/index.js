@@ -27,18 +27,21 @@ class Player extends PureComponent {
       setStyleIcon: window.innerWidth < 768 ? true : false,
       fullscreen: false,
       showMoreOptionsWhenFullScreen: false,
+      showOptionsPlayer: false,
     }
     this.controlVideo = null;
     this.setPosition = null;
     this.getTime = null;
     this.animateWhenActiveOrUnactiveKey = null;
     this.animateWhenActiveFullScreen = null;
+    this.animateWhenMouseMove = null;
   }
 
   componentDidMount() {
     this.getTime = setInterval(this.getDurationTimeVideo, 1000);
     window.addEventListener("keydown", this.controlPLayerForKeyBoard);
     window.addEventListener("resize", this.setStyleIconWhenResize);
+    window.addEventListener("mousemove",  this.showOptionPlayerVideoWhenMosueMove)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -81,7 +84,7 @@ class Player extends PureComponent {
     else if(!this.state.fullscreen && this.state.fullscreen !== prevState.fullscreen) {
       this.setState({
         showMoreOptionsWhenFullScreen: false,
-      })
+      }) 
     }
   }
 
@@ -93,6 +96,7 @@ class Player extends PureComponent {
     }
     window.removeEventListener("keypress", this.controlPLayerForKeyBoard);
     window.removeEventListener("resize", this.setStyleIconWhenResize);
+    window.removeEventListener("mousemove", this.showOptionPlayerVideoWhenMosueMove)
   }
 
   controlPLayerForKeyBoard = (e) => {
@@ -106,7 +110,7 @@ class Player extends PureComponent {
         fullscreen: false,
       })
     }
-    if(this.state.keySterringVideo) {
+    if(this.state.keySterringVideo || this.state.fullscreen) {
       if(this.controlVideo) {
         if(e.keyCode === 38) {
           if(this.controlVideo.getVolume() + 10 < 100) {
@@ -115,26 +119,59 @@ class Player extends PureComponent {
           else {
             this.setSound(null , 100);
           }
+          this.showOptionPlayerVideoWhenMosueMove();
         }
         else if(e.keyCode === 40) {
            this.setSound(null , this.controlVideo.getVolume() - 10);  
+           this.showOptionPlayerVideoWhenMosueMove();
         }
         else if(e.keyCode === 39) {
           this.seekToNext();
+          this.showOptionPlayerVideoWhenMosueMove();
         }
         else if(e.keyCode === 37) {
           this.seekToPrevious();
+          this.showOptionPlayerVideoWhenMosueMove();
         }
         else if(e.keyCode === 32) {
-          this.playOrPauseVideo();
+          if(this.controlVideo) {
+            this.setState({
+              playerState: !this.state.playerState,
+            })
+            if(this.state.playerState) {
+              this.controlVideo.pauseVideo();
+            }
+            else {
+             this.controlVideo.playVideo(); 
+            }
+            this.showOptionPlayerVideoWhenMosueMove();
+          }
         }
         else if(e.keyCode === 33) {
           this.playNextVideo();
+          this.showOptionPlayerVideoWhenMosueMove();
         }
         else if(e.keyCode === 34) {
           this.playPreviousVideo();
+          this.showOptionPlayerVideoWhenMosueMove();
         }
       }
+    }
+  }
+
+  showOptionPlayerVideoWhenMosueMove = () => {
+    if(!this.state.showOptionsPlayer) {
+      this.setState({
+        showOptionsPlayer: true,
+      })
+      if(this.animateWhenMouseMove) {
+        clearTimeout(this.animateWhenMouseMove);
+      }
+      this.animateWhenMouseMove = setTimeout(() => {
+        this.setState({
+          showOptionsPlayer: false,
+        })
+      },5000);
     }
   }
 
@@ -511,6 +548,11 @@ class Player extends PureComponent {
   render() {
     return (
       <div>
+        {this.state.fullscreen ?
+          <div className="hide-option-youtube-when-fullscreen" />
+          :
+          null
+        }
         <div 
           className="player-content-fullscreen-show-more-options"
           style={{
@@ -697,13 +739,24 @@ class Player extends PureComponent {
       <div 
         className="content-player-control-video"
         style={(!this.state.visibleAlbumPlaylist && this.state.visiblePlayer) || this.state.fullscreen ?
-          {bottom: this.state.fullscreen ? "0px" : "50px",
+          {bottom: this.state.fullscreen ? 
+            this.state.showOptionsPlayer || this.controlVideo.getPlayerState() !== 1 ? 
+              "0px" 
+              : 
+              "-100%" 
+            : 
+            "50px",
            height: this.state.fullscreen ? "180px" : "250px",
            border: this.state.fullscreen ? "unset" : "0.5px solid rgb(99, 99, 102)",
            borderRadius: this.state.fullscreen ? "unset" : "15px",
            background: this.state.fullscreen ? "unset" : "linear-gradient(#2D2E32, black)",
-           width: this.state.fullscreen ? "100%" : window.innerWidth < 768 ?
-                                                      "350px" : "600px"
+           width: this.state.fullscreen ? 
+            "100%" 
+            : 
+            window.innerWidth < 768 ?
+              "400px" 
+              : 
+              "700px"
           }
           :
           {bottom: "-100%",
@@ -828,6 +881,18 @@ class Player extends PureComponent {
                     />      
                   </div>
               </div>
+              {this.state.fullscreen ?
+                <span 
+                  className="content-player-hide-fullscreen glyphicon glyphicon-fullscreen" 
+                  onClick={() => {
+                    this.setState({
+                      fullscreen: false,
+                    })
+                  }}
+                />
+                :
+                null
+              }
               <input
                   className="content-player-controls-progress"
                   type="range"
@@ -879,6 +944,10 @@ const opts = {
   playerVars: { 
     autoplay: 1,
     controls: 0,
+    rel: 0,
+    enablejsapi: 0,
+    iv_load_policy: 3,
+    showinfo: 0,
   }
 };
 
