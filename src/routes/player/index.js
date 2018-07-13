@@ -557,6 +557,11 @@ class Player extends PureComponent {
         {this.state.fullscreen ?
           <div className="hide-option-youtube-when-fullscreen" 
             onClick={this.playOrPauseVideo}
+            onDoubleClick={()=>{
+              this.setState({
+              fullscreen: false,                
+              })
+            }}
           />
           :
           null
@@ -633,6 +638,15 @@ class Player extends PureComponent {
         >
           {!this.state.fullscreen ?
             <div className="content-player-options">
+              <div 
+                className="content-player-options-hide-options-youtube" 
+                onClick={this.playOrPauseVideo}
+                onDoubleClick={() => {
+                  this.setState({
+                    fullscreen: true,                
+                    })
+                }}
+              />
               <span 
                 className="content-player-controls-fullscreen"
                 onClick={() => {

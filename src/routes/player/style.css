@@ -21,6 +21,10 @@
     height: 100%;
 }
 
+.hide-option-youtube-when-fullscreen:hover {
+    cursor: pointer;
+}
+
 .player-content-fullscreen-show-more-options {
     position: fixed;
     z-index: 14;
@@ -76,6 +80,19 @@
     width: 100%;
     text-align: right;
     color: #fff;
+}
+
+.content-player-options-hide-options-youtube {
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.content-player-options-hide-options-youtube:hover {
+    cursor: pointer;
 }
 
 .content-player-options-hide {
@@ -432,6 +449,11 @@
     
     .content-player-options-underline {
         margin-top: 5px;
+    }
+
+    .content-player-options-hide-options-youtube {
+        height: 200px;
+        width: 480px;
     }
 
     .content-player-title-play {
