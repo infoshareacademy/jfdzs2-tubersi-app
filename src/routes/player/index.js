@@ -555,7 +555,9 @@ class Player extends PureComponent {
     return (
       <div>
         {this.state.fullscreen ?
-          <div className="hide-option-youtube-when-fullscreen" />
+          <div className="hide-option-youtube-when-fullscreen" 
+            onClick={this.playOrPauseVideo}
+          />
           :
           null
         }
