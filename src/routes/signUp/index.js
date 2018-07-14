@@ -14,12 +14,14 @@ class SignUp extends PureComponent {
         password: '',
         name: '',
       };
+      this.errorContain = null;
   }
 
   handleChange = (e) => {
     this.setState({ 
       [e.target.name]: e.target.value
     });
+    this.errorContain.innerHTML = '';
   }
 
   tryRegisterAndLogin = (e) => {
@@ -35,13 +37,12 @@ class SignUp extends PureComponent {
       })
       .catch((error) => {
         var errorCode = error.code;
-        var errroInfo = document.querySelector('.error-info')
         if (errorCode === 'auth/weak-password') {
-          errroInfo.innerHTML = 'Hasło powinno mieć min. 6 znaków'
+          this.errorContain.innerHTML = 'Hasło powinno mieć min. 6 znaków'
         } else if (errorCode ==='auth/invalid-email') {
-          errroInfo.innerHTML = 'Adres mailowy jest źle podany'
+            this.errorContain.innerHTML = 'Adres mailowy jest źle podany'
         } else if (errorCode === 'auth/email-already-in-use'){
-          errroInfo.innerHTML = 'Jest już taki użytkownik'
+            this.errorContain.innerHTML = 'Jest już taki użytkownik'
         }
         console.log(error);
       })
@@ -94,7 +95,10 @@ class SignUp extends PureComponent {
                     value={this.state.password}
                     onChange={this.handleChange}
                   />
-                  <div className="error-info"></div>
+                  <div
+                      className="error-info"
+                      ref={(e) => {this.errorContain = e;}}
+                  />
                   <button 
                     className="input-submit" 
                     type="submit" 

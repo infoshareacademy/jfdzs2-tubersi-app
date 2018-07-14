@@ -8,18 +8,20 @@ import UserNotAuthorized from '../../components/user-not-authorized';
 import './style.css';
 
 class SignIn extends PureComponent {
-  constructor(props){
-    super(props);
+  constructor(props) {
+      super(props);
       this.state = {
-        email: '',
-        password: '',
+          email: '',
+          password: '',
       };
+      this.errorContain = null;
   }
 
   handleChange = (e) => {
     this.setState({ 
       [e.target.name]: e.target.value
     });
+    this.errorContain.innerHTML = '';
   }
 
   tryLogin = (e) => {
@@ -44,15 +46,14 @@ class SignIn extends PureComponent {
       })
       .catch((error) => {
         var errorCode = error.code;
-        var errroInfo = document.querySelector('.error-info')
         if (errorCode === 'auth/wrong-password') {
-          errroInfo.innerHTML = 'Hasło jest niepoprawne'
+          this.errorContain.innerHTML = 'Hasło jest niepoprawne'
         } 
         else if (errorCode ==='auth/invalid-email'){
-          errroInfo.innerHTML = 'Adres mailowy jest źle podany'
-        } 
+            this.errorContain.innerHTML = 'Adres mailowy jest źle podany'
+        }
         else {
-          errroInfo.innerHTML = 'Nie ma takiego użytkownika - już do rejestracji'
+            this.errorContain.innerHTML = 'Nie ma takiego użytkownika - już do rejestracji'
         }
         console.log(error);
       })
@@ -90,7 +91,10 @@ class SignIn extends PureComponent {
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
-                <div className="error-info"></div>
+                <div
+                    className="error-info"
+                    ref={(e) => {this.errorContain = e;}}
+                />
                 <input 
                   className="input-submit" 
                   type="submit" 
