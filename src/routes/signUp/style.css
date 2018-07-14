@@ -55,14 +55,18 @@ button{
 
 
 input:required:invalid, input:focus:invalid {
-    background-image: url(../../images/invalid.png);
-    background-position: right center;
+    background-image: url(../../images/times-solid.svg);
+    background-position-x: 95%;
+    background-position-y: 50%;
+    background-size: 2%;
     background-repeat: no-repeat;
   }
 
 input:required:valid {
-    background-image: url(../../images/valid.png);
-    background-position: right center;
+    background-image: url(../../images/check-solid.svg);
+    background-position-x: 95%;
+    background-position-y: 50%;
+    background-size: 3%;
     background-repeat: no-repeat;
   }
 
@@ -71,3 +75,15 @@ input:required:valid {
     font-size: 16px;
     color: red;
 }
+
+
+@media only screen and (max-width: 768px) {
+    button,
+    input,
+    .box-sign-up,
+    .box-sign-in,
+    .input-submit{
+        width: 100%;
+    }
+}
+
