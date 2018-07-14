@@ -12,6 +12,7 @@ import YourPlaylists from './routes/yourPlaylists';
 import NotFound from './routes/notFound';
 import Firebase from './components/firebase';
 import KeyboardControls from './routes/keyboard-controls';
+import SkCircle from './components/sk-circle';
 
 import './App.css';
 
@@ -25,6 +26,7 @@ class App extends Component {
       dataBaseChat: null,
       playerAcitve: false,
       playListActually: null,
+      showLoadingVideo: false,
     }
   }
 
@@ -59,9 +61,25 @@ class App extends Component {
     })
   }
 
+  setShowLoadingVideo = (showLoadingVideo) => {
+    this.setState({
+      showLoadingVideo
+    })
+  }
+
   render() {
     return ( 
       <React.Fragment> 
+        {this.state.showLoadingVideo ?
+          <React.Fragment>
+            <div className="search-hide-blur-when-loading" />
+            <div className="search-hide-circle">
+              <SkCircle/>
+            </div>
+          </React.Fragment>
+          :
+          null
+        }
         {this.state.playerAcitve ?
           <FadeIn>
             <Player
@@ -108,6 +126,8 @@ class App extends Component {
             <Route path="/search"  render={() => <Search 
               actuallyUser = {this.state.actuallyUser} 
               firebase = {this.state.firebase}
+              showLoadingVideo = {this.state.showLoadingVideo}
+              setShowLoadingVideo = {this.setShowLoadingVideo}
               />}  
             />
             <Route 

@@ -1,9 +1,10 @@
-import './style.css';
-
 import React, { PureComponent } from 'react';
 import FadeIn from 'react-fade-in';
 
 import Layout from '../../components/layout';
+
+import './style.css';
+
 
 const API = 'AIzaSyBkYpYX86eK2MmpEYTvcvB8Oth1Qfiwxjc'
 const type = 'video'
@@ -18,6 +19,7 @@ export default class Search extends PureComponent {
             titleVideo: null,
             searchTitle: '',
             maxResults: 0,
+            loadAllResultsVideo: 0,
             showFiltrQuality: false,
             qualityHigh: false,
             qualityStandard: false,
@@ -34,6 +36,10 @@ export default class Search extends PureComponent {
         this.getTimeAllVideo = this.getTimeAllVideo.bind(this);
     }
 
+    componentDidMount() {
+        window.addEventListener("scroll", this.showMoreWhenScrollPositionDown);
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if(prevState.maxResults !== this.state.maxResults || !this.state.newSearch) {
             this.searchVideo();
@@ -46,6 +52,28 @@ export default class Search extends PureComponent {
            if(this.state.durationVideo.length === this.state.maxResults && this.state.sortVideo) {
                this.sortVideo();
            }
+        }
+
+        if(!this.props.showLoadingVideo 
+            && this.state.maxResults !== this.state.loadAllResultsVideo) {
+            this.props.setShowLoadingVideo(true);
+        }
+        else if(this.props.showLoadingVideo 
+                && this.state.maxResults === this.state.loadAllResultsVideo) {
+            this.props.setShowLoadingVideo(false);
+        }
+        if(this.state.loadAllResultsVideo > this.state.maxResults) {
+            this.setState({
+                loadAllResultsVideo: this.state.maxResults,
+            })
+        }
+    }
+
+    showMoreWhenScrollPositionDown = () => {
+        if(this.state.maxResults === this.state.loadAllResultsVideo) {
+            if(window.scrollY + 100 > document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+                this.showMoreVideo();
+            }
         }
     }
 
@@ -80,7 +108,6 @@ export default class Search extends PureComponent {
         fetch(`https://www.googleapis.com/youtube/v3/search?key=${API}&part=snippet&maxResults=${this.state.maxResults}&q=${this.state.searchTitle}&type=${type}&${type}Definition=${this.state.quality}`)
         .then((response) => response.json())
         .then((responseJson) => {
-            console.log(responseJson);
             const resultYoutube = responseJson.items.map(obj => "https://www.youtube.com/embed/"+obj.id.videoId);
             const pictureAvatar = responseJson.items.map(obj => obj.snippet.thumbnails.high.url);
             const titleVideo = responseJson.items.map(obj => obj.snippet.title);
@@ -117,9 +144,11 @@ export default class Search extends PureComponent {
     }
 
     showMoreVideo = () => {
-        this.setState({
-            maxResults: this.state.maxResults + 9,
-        });
+        if(this.state.maxResults < 36) {
+            this.setState({
+                maxResults: this.state.maxResults + 9,
+            });
+        }
     }
 
     setQualityVideo = (e) => {
@@ -318,21 +347,27 @@ export default class Search extends PureComponent {
                                             name="text"
                                             placeholder="Szukaj"
                                             onKeyDown={(e) => {
-                                                    if(e.keyCode === 13) {
-                                                        this.setState({
-                                                            maxResults: 9,
-                                                            newSearch: false,
-                                                        })
+                                                    if(this.state.loadAllResultsVideo === this.state.maxResults) {
+                                                        if(e.keyCode === 13) {
+                                                            this.setState({
+                                                                maxResults: 9,
+                                                                newSearch: false,
+                                                                loadAllResultsVideo: 0,
+                                                            })
+                                                        }
                                                     }
                                                 }}  
                                         />
                                         <span className="search-content-row-form-contain">
                                             <span className="search-content-row-form-contain-icon glyphicon glyphicon-search"
                                                 onClick={() => {
-                                                    this.setState({
-                                                        maxResults: 9,
-                                                        newSearch: false,
-                                                    })
+                                                    if(this.state.loadAllResultsVideo === this.state.maxResults) {
+                                                        this.setState({
+                                                            maxResults: 9,
+                                                            newSearch: false,
+                                                            loadAllResultsVideo: 0,
+                                                        })
+                                                    }
                                                 }}     
                                             >
                                             </span>
@@ -450,6 +485,11 @@ export default class Search extends PureComponent {
                                                     frameBorder="10" 
                                                     allowFullScreen
                                                     title={link}
+                                                    onLoad={()=>{
+                                                       this.setState({
+                                                           loadAllResultsVideo: this.state.loadAllResultsVideo + 1,
+                                                       })
+                                                    }}
                                                 />
                                             </div>
                                             {this.props.actuallyUser.playList[
@@ -469,16 +509,6 @@ export default class Search extends PureComponent {
                         null
                     }
                 </div>
-                {this.state.resultYoutube ? 
-                     <button 
-                        className="search-show-more col-lg-4 col-lg-offset-4"
-                        onClick={this.showMoreVideo}
-                     >
-                        Pokaż Więcej
-                     </button>
-                    :
-                    null
-                }
             </div>
         </Layout>  
         );
