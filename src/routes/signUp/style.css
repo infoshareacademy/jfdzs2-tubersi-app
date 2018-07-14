@@ -52,3 +52,22 @@ button{
     border: 1px solid black;
     border-radius: 10px;
 }
+
+
+input:required:invalid, input:focus:invalid {
+    background-image: url(../../images/invalid.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+  }
+
+input:required:valid {
+    background-image: url(../../images/valid.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+  }
+
+
+.error-info{
+    font-size: 16px;
+    color: red;
+}

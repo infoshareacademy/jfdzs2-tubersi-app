@@ -35,13 +35,14 @@ class SignUp extends PureComponent {
       })
       .catch((error) => {
         var errorCode = error.code;
-        // var errorMessage = error.message;
+        var errroInfo = document.querySelector('.error-info')
         if (errorCode === 'auth/weak-password') {
-          alert('Bez jaj - masz  słabe hasło');
-        } 
-        else if (errorCode ==='auth/invalid-email') {
-          alert('Adres mailowy jest źle podany');
-        } 
+          errroInfo.innerHTML = 'Hasło powinno mieć min. 6 znaków'
+        } else if (errorCode ==='auth/invalid-email') {
+          errroInfo.innerHTML = 'Adres mailowy jest źle podany'
+        } else if (errorCode === 'auth/email-already-in-use'){
+          errroInfo.innerHTML = 'Jest już taki użytkownik'
+        }
         console.log(error);
       })
   }
@@ -80,17 +81,20 @@ class SignUp extends PureComponent {
                     name="email" 
                     placeholder="Adres mailowy" 
                     required 
+                    pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                     value={this.state.email}
                     onChange={this.handleChange}
                   />
                   <input 
                     type="password" 
                     name="password" 
-                    placeholder="Hasło"  
+                    placeholder="Hasło min. 6 znaków"  
                     required 
+                    pattern=".{6,}"
                     value={this.state.password}
                     onChange={this.handleChange}
                   />
+                  <div className="error-info"></div>
                   <button 
                     className="input-submit" 
                     type="submit" 

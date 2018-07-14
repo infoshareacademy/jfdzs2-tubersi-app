@@ -44,16 +44,15 @@ class SignIn extends PureComponent {
       })
       .catch((error) => {
         var errorCode = error.code;
-        // var errorMessage = error.message;
-        
+        var errroInfo = document.querySelector('.error-info')
         if (errorCode === 'auth/wrong-password') {
-          alert('Hasło jest niepoprawne');
+          errroInfo.innerHTML = 'Hasło jest niepoprawne'
         } 
         else if (errorCode ==='auth/invalid-email'){
-          alert('Adres mailowy jest źle podany')
+          errroInfo.innerHTML = 'Adres mailowy jest źle podany'
         } 
         else {
-          alert('Nie ma takiego użytkownika - już do rejestracji');
+          errroInfo.innerHTML = 'Nie ma takiego użytkownika - już do rejestracji'
         }
         console.log(error);
       })
@@ -78,6 +77,7 @@ class SignIn extends PureComponent {
                   name="email" 
                   placeholder="Podaj login lub email" 
                   required
+                  pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                   value={this.state.email}
                   onChange={this.handleChange} 
                 />
@@ -86,9 +86,11 @@ class SignIn extends PureComponent {
                   name="password" 
                   placeholder="Podaj hasło"  
                   required 
+                  pattern=".{6,}"
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
+                <div className="error-info"></div>
                 <input 
                   className="input-submit" 
                   type="submit" 
