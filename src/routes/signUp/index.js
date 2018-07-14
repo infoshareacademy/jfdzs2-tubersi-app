@@ -108,8 +108,7 @@ class SignUp extends PureComponent {
                     Zarejestruj
                   </button> 
                   <Link to='/signIn'>
-                    <button style={{backgroundColor: "rgb(203, 204, 203)"}}
-                    >
+                    <button style={{backgroundColor: "rgb(203, 204, 203)"}}>
                       Mam już konto
                     </button>
                   </Link>

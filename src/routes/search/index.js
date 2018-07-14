@@ -256,6 +256,10 @@ export default class Search extends PureComponent {
                 className="btn btn-default btn-playlist"
                 type="button"
                 onClick={() => {this.deleteVideo(index)}}
+                style={{
+                    backgroundColor: "red",
+                    color: "white",
+                }}
             >
                 <i className="fas fa-trash-alt" />
                 Usuń
