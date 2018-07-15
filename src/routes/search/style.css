@@ -1,0 +1,246 @@
+.content{
+    text-align: center;
+    bottom: 100px;
+    margin-bottom: 150px;
+}
+
+.playlist-item{
+    padding: 20px;
+    margin: 5px;
+    background: #2D2E32;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 50px -4px rgba(0,0,0,0.75);
+    max-height: 600px;
+}
+
+.btn-playlist-head{
+    font-size: 18px;
+    padding: 3px;
+    width: 200px;
+    background-color: #DCDCDC;
+}
+
+.btn-playlist{
+    font-size: 18px;
+    padding: 3px;
+    width: 100px;
+    background-color: #DCDCDC;
+
+}
+
+.fab .fas .far{
+    margin-right: 5px;
+    font-size: 22px;
+}
+
+iframe{
+    border: 0;
+}
+
+.search-content-information { 
+    background-color: #2D2E32;
+    opacity: 0.9;
+    padding: 10px;
+    border-radius: 10px;
+    border-radius: 15px;
+    width: 70%;
+    margin-left: 15%;
+    height: 360px;
+}
+
+.search-content-information-title {
+    color: #f3f3f3;
+    font-size: 25px;
+    padding: 5px;
+    opacity: 0.7;
+}
+.search-playlist-content {
+    width: 70%;
+    margin-left: 15%;
+    background-color: #2D2E32;
+    margin-top: 25px;
+    border-radius: 15px;
+    height: 120px;
+}
+
+.search-playlist-content-text {
+    color: #fff;
+    font-size: 25px;
+    letter-spacing: 0.05em;
+    padding: 10px;
+
+}
+
+.search-option-playlist {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.search-content-search {
+    width: 80%;
+    position: relative;
+    margin-left: 10%;
+    margin-top: 15px;
+}
+
+.search-content-search-input {
+    height: 30px;
+    width: 100%;
+    margin: 0px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.search-content-row-form-contain {
+    position: absolute;
+    top: 0px;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    margin-top: 12px;
+    right: 10px;
+    z-index: 3;
+}
+
+.search-content-row-form-contain:hover {
+    cursor: pointer;
+}
+
+.search-filter-contain {
+    float: left;
+    position: relative;
+    height: 80px;
+    width: 70%;
+    margin-left: 15%;
+    background-color:  rgb(45, 46, 50);
+    transition: 1s;   
+}
+
+.search-filter-contain-title {
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    margin-top: 20px;
+}
+
+.search-filter-contain-checkboxs {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.search-filter-contain-checkbox {
+    width: 15px;
+}
+
+.search-filter-contain-text {
+    color: #f5f5f5;
+    opacity: 0.7;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.search-empty-playlist {
+    background-color: #2D2E32;
+    padding: 20px;
+    width: 80%;
+    height: 300px;
+    margin-top: 25px;
+    margin-left: 10%;
+    color: #fff;
+    opacity: 0.9;
+    font-size: 20px;
+    position: relative;
+    border-radius: 15px;
+    letter-spacing: 0.05em;
+    font-weight: 400; 
+}
+
+.search-empty-playlist-contain {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.search-show-more {
+    background-color: rgb(221, 221, 221);
+    height: 40px;
+    padding: 0px;
+}
+
+@media only screen and (min-width: 768px){
+    .search-empty-text {
+        margin-top: 15px;
+    }
+
+    .search-empty-playlist {
+        margin-top: 150px;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .search-content-information,
+    .search-playlist-content,
+    .search-option-playlist{
+        width: 90%;
+        margin: auto;
+        margin-top: 20px;
+    }
+    .search-content-search{
+        width: 89%;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    .search-filter-toggle,
+    .search-filter-contain{
+        float: none;
+        width: 89%;
+        margin: auto;
+    }
+
+    .search-content-information { 
+        height: 400px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .search-content-information-title {
+        font-size: 30px;
+    }
+
+    .search-empty-playlist {
+        width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .search-playlist-content {
+        width: 60%;
+        margin-left: 30%;
+    }
+
+    .search-option-playlist {
+        width: 50%;
+        position: relative;
+        margin-left: 25%;
+        margin-top: 15px;
+    }
+    
+    .search-content-search {
+        width: 50%;
+        position: relative;
+        margin-left: 25%;
+        margin-top: 25px;
+    }
+    
+    .search-filter-contain {
+        width: 40%;
+        margin-left: 30%;
+    }
+
+    .search-filter-toggle {
+        width: 40%;
+        margin-left: 30%;
+    }
+}

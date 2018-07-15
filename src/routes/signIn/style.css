@@ -1,0 +1,25 @@
+
+.box-sign-in{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 60px;
+    padding: 20px;
+    background: #2D2E32;
+    border: 3px solid #2D2E32;
+    box-shadow: 14px -5px 5px 0px rgba(0,0,0,0.75);
+    opacity: 0.9;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.box-sign-in h1{
+    color: #fff;
+    opacity: 0.9;
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.box-sign-in-logo{
+    width: 70px;
+}

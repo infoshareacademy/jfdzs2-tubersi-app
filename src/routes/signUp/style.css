@@ -1,0 +1,132 @@
+
+.page-title, h2 {
+    font-size: 2em;
+    text-decoration: none;
+    color: whitesmoke;
+    text-align: center;
+}
+
+.sign-up-title {
+    text-align: center;
+
+    width: 80%;
+    padding: 20px;
+    margin: auto;
+    margin-top: 10px;
+
+}
+
+.box-sign-up h1{
+    color: #fff;
+    opacity: 0.9;
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.box-sign-up-logo{
+    width: 70px;
+}
+
+
+.box-sign-up{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 60px;
+    padding: 20px;
+    background: #2D2E32;
+    border: 3px solid #2D2E32;
+    box-shadow: 14px -5px 5px 0px rgba(0,0,0,0.75);
+    /*opacity: 0.9;*/
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+input{
+    align-content: center;
+    width: 80%;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.input-submit{
+    width: 80%;
+    background:whitesmoke;
+
+}
+
+input.input-submit{
+    color: #2D2E32;
+    font-size: 1.4em;
+    font-weight: solid;
+}
+
+button{
+    color: #2D2E32;
+    font-size: 1.4em;
+    width: 80%;
+    align-content: center;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+
+input:required:invalid, input:focus:invalid {
+    background-image: url(../../images/times-solid.svg);
+    background-position-x: 95%;
+    background-position-y: 50%;
+    background-size: 2%;
+    background-repeat: no-repeat;
+  }
+
+input:required:valid {
+    background-image: url(../../images/check-solid.svg);
+    background-position-x: 95%;
+    background-position-y: 50%;
+    background-size: 3%;
+    background-repeat: no-repeat;
+  }
+
+.sign-in-underline {
+    width: 80%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 0.5px;
+    background-color: #fff;
+    opacity:0.7;
+}
+
+.error-info{
+    font-size: 16px;
+    color: red;
+}
+
+
+@media only screen and (max-width: 767px) {
+    button,
+    input,
+    .box-sign-up,
+    .box-sign-in,
+    .input-submit,
+    .sign-up-title,
+    .sign-in-underline{
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px)  {
+    button,
+    input,
+    .box-sign-up,
+    .box-sign-in,
+    .input-submit,
+    .sign-up-title,
+    .sign-in-underline {
+        width: 90%;
+    }
+}

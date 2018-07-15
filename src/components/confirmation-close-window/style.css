@@ -1,0 +1,127 @@
+.confirmation-hide {
+    position: fixed;
+    z-index: 20;
+    height: 100vh;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: black;
+    opacity: 0.9;
+}
+
+.confirmation-content {
+    width: 350px;
+    height: 140px;
+    top: 20%;
+    background-color: rgb(186, 185, 185);
+    position: fixed;
+    z-index: 21;
+    border-radius: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.confirmation-content-title {
+    width: 100%;
+    float: left;
+    background-color: #2D2E32;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.confirmation-content-title-text {
+    color: #fff;
+    opacity: 0.7;
+    float: left;
+    margin-left: 15px;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.confirmation-content-title-exit {
+    float: right;
+    color: rgb(203, 203, 203);
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.confirmation-content-contain {
+    float: left;
+    width: 100%;
+    text-align: left;
+    background-color: #2D2E32;
+}
+
+.confirmation-content-contain-text {
+    color: #fff;
+    opacity: 0.7;
+    font-size: 10px;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.confirmation-content-options {
+    float: left;
+    width: 100%;
+    font-size: 8px;    
+    text-align: right;
+}
+
+.confirmation-content-options-cancel {
+    height: 25px;
+    padding: 0px;
+    width: 100px;  
+    border: unset;
+    background-color: rgb(221, 221, 221);
+    margin-top: 15px;
+}
+
+.confirmation-content-options-confirm {
+    height: 25px;
+    padding: 0px;
+    width: 100px;
+    border: unset;
+    background-color: rgb(217, 83, 79);
+    color: white;
+}
+
+.confirmation-hide:hover,
+.confirmation-content-title-exit:hover {
+    cursor: pointer;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .confirmation-content {
+        width: 500px;
+        height: 200px;
+        top: 20%;
+    }
+    
+    .confirmation-content-title-text {
+        font-size: 25px;
+    }
+    
+    .confirmation-content-contain-text {
+       font-size: 15px;
+    }
+    
+    .confirmation-content-options-cancel,
+    .confirmation-content-options-confirm {
+        height: 35px;
+        width: 200px;
+        font-size: 15px;  
+        margin-top: 25px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .confirmation-content {
+        width: 700px;
+        height: 200px;
+        top: 20%;
+    }
+}
+

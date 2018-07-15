@@ -1,0 +1,73 @@
+.navbar{
+    height: 55px;
+    background: #2D2E32;
+    border: none;
+    margin-bottom: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+}
+
+.navbar-btn{
+    margin: 8px;
+    float: right;
+    font-size: 18px;
+    background-color:#DCDCDC;
+    width: 140px;
+}
+
+.logo-img {
+    margin:2px 5px 5px 0 ;
+    width: 50px;
+
+}
+
+.brand-name{
+    color: whitesmoke;
+    display: inline-block;
+    padding: 6px;
+    font-size: 26px;
+    font-weight: 400;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    position: absolute;
+}
+
+.toggle-menu{
+    color: whitesmoke;
+    margin: 15px 0 12px 6px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.fas.fa-bars{
+    display: none;
+}
+.fas.fa-sign-out-alt{
+    margin-right: 10px; 
+}
+.brand-name:hover{
+    text-decoration: none;
+    color:whitesmoke;
+}
+
+
+
+@media only screen and (max-width: 760px) {
+    .fas.fa-bars{
+        display: inline-block;
+        font-size: 30px;
+        padding: 5px;
+        margin-top: 5px;
+        position: relative;
+    }
+    .navbar-btn{
+        display: none;
+    }
+
+
+}
