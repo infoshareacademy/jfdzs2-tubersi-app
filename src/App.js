@@ -27,6 +27,7 @@ class App extends Component {
       playerAcitve: false,
       playListActually: null,
       showLoadingVideo: false,
+      nextLoadingVideo: true,
     }
   }
 
@@ -67,6 +68,12 @@ class App extends Component {
     })
   }
 
+  setNextLoadingVideo = (nextLoadingVideo) => {
+    this.setState({
+      nextLoadingVideo,
+    })
+  }
+
   render() {
     return ( 
       <React.Fragment> 
@@ -85,6 +92,7 @@ class App extends Component {
             <Player
               playListActually = {this.state.playListActually}
               activeVideoAndSetPlayList = {this.activeVideoAndSetPlayList}
+              setNextLoadingVideo = {this.setNextLoadingVideo}
             />
           </FadeIn>
           :
@@ -128,6 +136,7 @@ class App extends Component {
               firebase = {this.state.firebase}
               showLoadingVideo = {this.state.showLoadingVideo}
               setShowLoadingVideo = {this.setShowLoadingVideo}
+              nextLoadingVideo = {this.state.nextLoadingVideo}
               />}  
             />
             <Route 

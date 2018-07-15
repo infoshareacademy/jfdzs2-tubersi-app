@@ -1,30 +1,10 @@
 import React, { PureComponent} from 'react';
-import { AreaChart, 
-         Area, 
-         LineChart, 
-         Line, 
-         XAxis, 
-         YAxis, 
-         CartesianGrid, 
-         Tooltip, 
-         Legend, 
-         Bar, 
-         BarChart, 
-         PieChart, 
-         Pie,
-         Cell
-       } from 'recharts';
+import {AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, BarChart, PieChart, Pie,Cell} from 'recharts';
+
 import Layout from '../../components/layout';
 import UserAuthorized from '../../components/user-authorised';
 
 import './style.css';
-
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-
-// const RADIAN = Math.PI / 180;
-
-// var apiHost = "https://tubersi-score-game.firebaseio.com";
-// nie mam dostępu!
 
 class Dashboard extends PureComponent {
 
@@ -163,6 +143,8 @@ class Dashboard extends PureComponent {
     );
   }
 }
+
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 
 export default Dashboard;

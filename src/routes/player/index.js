@@ -88,6 +88,10 @@ class Player extends PureComponent {
         showMoreOptionsWhenFullScreen: false,
       });
     }
+    
+    if(this.state.fullscreen !== prevState.fullscreen) {
+      this.props.setNextLoadingVideo(!this.state.fullscreen);
+    }
   }
 
   componentWillUnmount() {

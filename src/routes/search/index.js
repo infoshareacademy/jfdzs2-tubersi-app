@@ -137,7 +137,7 @@ export default class Search extends PureComponent {
     }
 
     showMoreVideo = () => {
-        if(this.state.maxResults < 36) {
+        if(this.state.maxResults < 36 && this.props.nextLoadingVideo) {
             this.setState({
                 maxResults: this.state.maxResults + 9,
             });
