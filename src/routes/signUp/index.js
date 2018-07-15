@@ -75,8 +75,7 @@ class SignUp extends PureComponent {
                            src={Logo}
                            alt="logo"
                   /> Tubersi</h1>
-
-
+                  <div className="sign-in-underline"/>
                   <h2>Zarejestruj się</h2>
                   <input 
                     type="text" 

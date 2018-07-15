@@ -90,7 +90,14 @@ input:required:valid {
     background-size: 3%;
     background-repeat: no-repeat;
   }
-
+.sign-in-underline {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 0.5px;
+    background-color: #fff;
+    opacity:0.7;
+}
 
 .error-info{
     font-size: 16px;
@@ -104,7 +111,8 @@ input:required:valid {
     .box-sign-up,
     .box-sign-in,
     .input-submit,
-    .sign-up-title{
+    .sign-up-title,
+    .sign-in-underline{
         width: 100%;
     }
 }
@@ -115,7 +123,8 @@ input:required:valid {
     .box-sign-up,
     .box-sign-in,
     .input-submit,
-    .sign-up-title{
+    .sign-up-title,
+    .sign-in-underline {
         width: 90%;
     }
 }

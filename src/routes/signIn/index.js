@@ -76,7 +76,7 @@ class SignIn extends PureComponent {
                          src={Logo}
                          alt="logo"
                 /> Tubersi</h1>
-
+                <div className="sign-in-underline"/>
                 <h2>
                   Zaloguj się
                 </h2>
@@ -110,7 +110,7 @@ class SignIn extends PureComponent {
                 /> 
                 <Link to='/signup'>
                   <button style={{backgroundColor: "rgb(203, 204, 203)"}}>
-                    Wroc
+                    Załóż konto
                   </button>
                 </Link>
               </div>
