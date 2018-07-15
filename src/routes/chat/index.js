@@ -1,8 +1,9 @@
-import './style.css';
-
+import { Link } from 'react-router-dom';
 import React, { PureComponent } from 'react';
 
 import Layout from '../../components/layout';
+
+import './style.css';
 
 class Chat extends PureComponent {
   constructor(props){
@@ -62,6 +63,19 @@ class Chat extends PureComponent {
     this.inputMessage.value = '';
   }
 
+  renderMessageWhenLink = (message) => {
+    let text;
+    text = message.split(" ");
+    return text.map((text) => {
+      if(text.indexOf("http://") !== -1) {
+        return <a href={'/your-playlist/'+text.substr(-16)}>{text + ' '}</a>
+      }
+      else {
+        return <span>{text + ' '}</span>
+      }
+    })
+  }
+
   render() {
     return (
       <Layout>
@@ -88,7 +102,12 @@ class Chat extends PureComponent {
                     </div>
                     <div className="chat-contain-message-contains"/>
                     <div className="chat-contain-message-contain-contents">
-                      {message.message}
+                        {message.message.indexOf("http://") !== -1 ?
+                            this.renderMessageWhenLink(message.message)
+                            :
+                            message.message
+                        }
+
                     </div>
                   </div>
                 )  
