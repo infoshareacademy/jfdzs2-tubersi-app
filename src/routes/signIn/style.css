@@ -11,6 +11,15 @@
     border-radius: 10px;
     text-align: center;
     vertical-align: middle;
-  
+}
 
+.box-sign-in h1{
+    color: #fff;
+    opacity: 0.9;
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.box-sign-in-logo{
+    width: 70px;
 }

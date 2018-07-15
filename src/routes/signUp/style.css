@@ -1,11 +1,32 @@
 
-.page-title, h2{
+.page-title, h2 {
     font-size: 2em;
     text-decoration: none;
     color: whitesmoke;
     text-align: center;
+}
+
+.sign-up-title {
+    text-align: center;
+
+    width: 80%;
+    padding: 20px;
+    margin: auto;
+    margin-top: 10px;
 
 }
+
+.box-sign-up h1{
+    color: #fff;
+    opacity: 0.9;
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.box-sign-up-logo{
+    width: 70px;
+}
+
 
 .box-sign-up{
     width: 80%;
@@ -15,7 +36,7 @@
     background: #2D2E32;
     border: 3px solid #2D2E32;
     box-shadow: 14px -5px 5px 0px rgba(0,0,0,0.75);
-    opacity: 0.9;
+    /*opacity: 0.9;*/
     border-radius: 10px;
     text-align: center;
     vertical-align: middle;
@@ -33,7 +54,7 @@ input{
 .input-submit{
     width: 80%;
     background:whitesmoke;
-    
+
 }
 
 input.input-submit{
@@ -77,13 +98,24 @@ input:required:valid {
 }
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     button,
     input,
     .box-sign-up,
     .box-sign-in,
-    .input-submit{
+    .input-submit,
+    .sign-up-title{
         width: 100%;
     }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 1024px)  {
+    button,
+    input,
+    .box-sign-up,
+    .box-sign-in,
+    .input-submit,
+    .sign-up-title{
+        width: 90%;
+    }
+}

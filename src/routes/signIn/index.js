@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
+import Logo from '../../images/logo_wektor.svg';
 
 
 import UserNotAuthorized from '../../components/user-not-authorized';
@@ -70,6 +71,12 @@ class SignIn extends PureComponent {
                 className="box-sign-in animated zoomIn"
                 style={{marginTop: "50px"}}
               >
+                <h1>Witamy w aplikacji </h1>
+                <h1><img className="box-sign-in-logo"
+                         src={Logo}
+                         alt="logo"
+                /> Tubersi</h1>
+
                 <h2>
                   Zaloguj się
                 </h2>

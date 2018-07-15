@@ -1,6 +1,7 @@
 import React, { PureComponent} from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
+import Logo from '../../images/logo_wektor.svg';
 
 import UserNotAuthorized from '../../components/user-not-authorized';
 
@@ -63,11 +64,19 @@ class SignUp extends PureComponent {
           <UserNotAuthorized/>
           <div className="container-fluid">
             <div className="row">
-              <div className="col-md-6 col-md-offset-3"> 
+              <div className="col-md-6 col-md-offset-3">
                 <div 
                   className="box-sign-up animated zoomIn"
-                  style={{marginTop: "50px"}}
+                  style={{marginTop: "20px"}}
                   >
+
+                  <h1>Witamy w aplikacji </h1>
+                  <h1><img className="box-sign-up-logo"
+                           src={Logo}
+                           alt="logo"
+                  /> Tubersi</h1>
+
+
                   <h2>Zarejestruj się</h2>
                   <input 
                     type="text" 
@@ -113,6 +122,7 @@ class SignUp extends PureComponent {
                     </button>
                   </Link>
                 </div>
+
               </div>
             </div>
           </div>
