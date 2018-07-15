@@ -62,11 +62,6 @@ export default class Search extends PureComponent {
                 && this.state.maxResults === this.state.loadAllResultsVideo) {
             this.props.setShowLoadingVideo(false);
         }
-        if(this.state.loadAllResultsVideo > this.state.maxResults) {
-            this.setState({
-                loadAllResultsVideo: this.state.maxResults,
-            })
-        }
     }
 
     showMoreWhenScrollPositionDown = () => {
@@ -486,9 +481,11 @@ export default class Search extends PureComponent {
                                                     allowFullScreen
                                                     title={link}
                                                     onLoad={()=>{
-                                                       this.setState({
-                                                           loadAllResultsVideo: this.state.loadAllResultsVideo + 1,
-                                                       })
+                                                       if(index >= this.state.maxResults - 9) {
+                                                        this.setState({
+                                                            loadAllResultsVideo: this.state.loadAllResultsVideo + 1,
+                                                        })
+                                                       } 
                                                     }}
                                                 />
                                             </div>
