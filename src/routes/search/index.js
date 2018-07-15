@@ -32,6 +32,7 @@ export default class Search extends PureComponent {
         this.searchVideo = this.searchVideo.bind(this);
         this.addVideoToPlayList = this.addVideoToPlayList.bind(this);
         this.getTimeAllVideo = this.getTimeAllVideo.bind(this);
+        this.nameSearch = '';
     }
 
     componentDidMount() {
@@ -340,6 +341,7 @@ export default class Search extends PureComponent {
                                             name="text"
                                             placeholder="Szukaj"
                                             onKeyDown={(e) => {
+                                                if(this.state.searchTitle !== '' && this.state.searchTitle.toLowerCase() !== this.nameSearch.toLowerCase()) {
                                                     if(this.state.loadAllResultsVideo === this.state.maxResults) {
                                                         if(e.keyCode === 13) {
                                                             this.setState({
@@ -347,21 +349,26 @@ export default class Search extends PureComponent {
                                                                 newSearch: false,
                                                                 loadAllResultsVideo: 0,
                                                             })
+                                                            this.nameSearch = this.state.searchTitle;
                                                         }
                                                     }
-                                                }}  
+                                                }
+                                            }}
                                         />
                                         <span className="search-content-row-form-contain">
                                             <span className="search-content-row-form-contain-icon glyphicon glyphicon-search"
-                                                onClick={() => {
-                                                    if(this.state.loadAllResultsVideo === this.state.maxResults) {
-                                                        this.setState({
-                                                            maxResults: 9,
-                                                            newSearch: false,
-                                                            loadAllResultsVideo: 0,
-                                                        })
-                                                    }
-                                                }}     
+                                                  onClick={() => {
+                                                      if(this.state.searchTitle !== '' && this.state.searchTitle.toLowerCase() !== this.nameSearch.toLowerCase()) {
+                                                          if(this.state.loadAllResultsVideo === this.state.maxResults) {
+                                                              this.setState({
+                                                                  maxResults: 9,
+                                                                  newSearch: false,
+                                                                  loadAllResultsVideo: 0,
+                                                              })
+                                                              this.nameSearch = this.state.searchTitle;
+                                                          }
+                                                      }
+                                                  }}
                                             >
                                             </span>
                                         </span>
