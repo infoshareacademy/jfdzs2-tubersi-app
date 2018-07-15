@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import FadeIn from 'react-fade-in';
 
 import Layout from '../../components/layout';
 
@@ -20,7 +19,6 @@ export default class Search extends PureComponent {
             searchTitle: '',
             maxResults: 0,
             loadAllResultsVideo: 0,
-            showFiltrQuality: false,
             qualityHigh: false,
             qualityStandard: false,
             qualityAny: true,
@@ -367,75 +365,43 @@ export default class Search extends PureComponent {
                                             >
                                             </span>
                                         </span>
-                                    </div>
-                                    {this.state.showFiltrQuality ?
-                                        <FadeIn>
-                                            <div className="search-filter-contain">
-                                                <p className="search-filter-contain-title">
-                                                    Wybierz jakość!
-                                                </p>
-                                                <div className="search-filter-contain-checkboxs">
-                                                    <span className="search-filter-contain-text">
-                                                        Niska
-                                                    </span> 
-                                                    <input 
-                                                        className="search-filter-contain-checkbox"
-                                                        type="checkbox"
-                                                        name="any"
-                                                        checked={this.state.qualityAny}
-                                                        onChange={this.setQualityVideo}
-                                                    />
-                                                    <span className="search-filter-contain-text">
-                                                        Średnia
-                                                    </span>
-                                                    <input 
-                                                        className="search-filter-contain-checkbox"
-                                                        type="checkbox"
-                                                        name="standard"
-                                                        checked={this.state.qualityStandard}
-                                                        onChange={this.setQualityVideo}
-                                                    />
-                                                    <span className="search-filter-contain-text">
-                                                        Wysoka
-                                                    </span>
-                                                    <input 
-                                                        className="search-filter-contain-checkbox"
-                                                        type="checkbox"
-                                                        name="high"
-                                                        checked={this.state.qualityHigh}
-                                                        onChange={this.setQualityVideo}         
-                                                    />
-                                                </div>
-                                            </div>
-                                        </FadeIn>
-                                        :
-                                        null
-                                    }
-                                    <div 
-                                        className="search-filter-toggle"
-                                        onClick={()=>{this.setState({
-                                            showFiltrQuality: !this.state.showFiltrQuality,
-                                        })}}
-                                    >
-                                        <span 
-                                            className="search-filter-toggle-arrow-left glyphicon glyphicon-chevron-up"
-                                            style={
-                                                this.state.showFiltrQuality ?
-                                                {transform: "rotate(180deg)"}
-                                                :{transform: "rotate(0deg)"}
-                                            }
-                                        />          
-                                        <span className="search-filter-toggle-title">
-                                            Filtry
-                                        </span>
-                                        <span 
-                                            className="search-filter-toggle-arrow-right glyphicon glyphicon-chevron-up"
-                                            style={
-                                                this.state.showFiltrQuality ?
-                                                    {transform: "rotate(180deg)"}
-                                                    :{transform: "rotate(0deg)"}
-                                            }
-                                        />
+                                    </div>    
+                                    <div className="search-filter-contain">
+                                        <p className="search-filter-contain-title">
+                                            Wybierz jakość!
+                                        </p>
+                                        <div className="search-filter-contain-checkboxs">
+                                            <span className="search-filter-contain-text">
+                                                Niska
+                                            </span> 
+                                            <input 
+                                                className="search-filter-contain-checkbox"
+                                                type="checkbox"
+                                                name="any"
+                                                checked={this.state.qualityAny}
+                                                onChange={this.setQualityVideo}
+                                            />
+                                            <span className="search-filter-contain-text">
+                                                Średnia
+                                            </span>
+                                            <input 
+                                                className="search-filter-contain-checkbox"
+                                                type="checkbox"
+                                                name="standard"
+                                                checked={this.state.qualityStandard}
+                                                onChange={this.setQualityVideo}
+                                            />
+                                            <span className="search-filter-contain-text">
+                                                Wysoka
+                                            </span>
+                                            <input 
+                                                className="search-filter-contain-checkbox"
+                                                type="checkbox"
+                                                name="high"
+                                                checked={this.state.qualityHigh}
+                                                onChange={this.setQualityVideo}         
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </React.Fragment>

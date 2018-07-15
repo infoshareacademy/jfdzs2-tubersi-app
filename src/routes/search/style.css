@@ -66,7 +66,7 @@ iframe{
 
 .search-playlist-content-text {
     color: #fff;
-    font-size: 18px;
+    font-size: 25px;
     letter-spacing: 0.05em;
     padding: 10px;
 
@@ -138,40 +138,6 @@ iframe{
     opacity: 0.7;
     margin-right: 10px;
     margin-left: 10px;
-}
-
-.search-filter-toggle {
-    float: left;
-    height: 30px;
-    width: 70%;
-    margin-left: 15%;
-    background-color:  #fff;   
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    background-color:  rgb(45, 46, 50);
-    color: #f5f5f5;
-    transition: 1s;
-    line-height: 30px;
-}
-
-.search-filter-toggle:hover {
-    cursor: pointer;
-}
-
-.search-filter-toggle-title {
-    opacity: 0.7;
-}
-
-.search-filter-toggle-arrow-left {
-    margin-right: 5%;
-    transition: 0.5s;
-    opacity: 0.7;
-}
-
-.search-filter-toggle-arrow-right {
-    margin-left: 5%;
-    transition: 0.5s;
-    opacity: 0.7;
 }
 
 .search-empty-playlist {

@@ -33,6 +33,7 @@ class Player extends PureComponent {
     this.controlVideo = null;
     this.setPosition = null;
     this.getTime = null;
+    this.oldValueSound = null;
     this.animateWhenActiveOrUnactiveKey = null;
     this.animateWhenActiveFullScreen = null;
     this.animateWhenMouseMove = null;
@@ -424,14 +425,18 @@ class Player extends PureComponent {
 
   setSound = (e, value) => {
     if(this.controlVideo) {
-      this.setState({
-        soundValue: e ? e.target.value : value,
-      });
-      if(e ? e.target.value : value > 0) {
+      if(e ? e.target.value > 0 : value > 0) {
         this.controlVideo.unMute();
+        this.setState({
+          soundValue: e ? e.target.value : value,
+        })
       }
       else {
         this.controlVideo.mute();
+        this.setState({
+          soundValue: 0,
+        })
+
       }
       this.controlVideo.setVolume(e ? e.target.value : value);
     }
@@ -444,40 +449,17 @@ class Player extends PureComponent {
        if(this.controlVideo) {
        if(this.controlVideo.isMuted()) {
           this.controlVideo.unMute();
+          this.setState({
+            soundValue: this.oldValueSound,
+          })
         }      
         else {
           this.controlVideo.mute();
+          this.oldValueSound = this.state.soundValue;
+          this.setState({
+            soundValue: 0,
+          })
         }
-      }
-    }
-  }
-
-  checkStatusSound = () => {
-    if(this.controlVideo) {
-      if(this.controlVideo.isMuted()) {
-        return "content-player-controls-sound glyphicon glyphicon-volume-off";
-      }
-      else {
-        if(this.state.soundValue === 0) {
-          return "content-player-controls-sound glyphicon glyphicon-volume-off";
-        }
-        else if(this.state.soundValue < 50) {
-          return "content-player-controls-sound glyphicon glyphicon-volume-down";
-        }
-        else {
-          return "content-player-controls-sound glyphicon glyphicon-volume-up";
-        }
-      }
-    }
-  }
-
-  getValueSound() {
-    if(this.controlVideo) {
-      if(this.controlVideo.isMuted()) {
-        return 0;
-      }
-      else {
-        return this.state.soundValue;
       }
     }
   }
@@ -905,14 +887,21 @@ class Player extends PureComponent {
                 onClick={this.playNextVideo}
               />
               <div 
-                className={this.checkStatusSound()}
+                className={this.state.soundValue === 0 ?
+                            "content-player-controls-sound glyphicon glyphicon-volume-off"
+                            :
+                            this.state.soundValue < 50 ? 
+                              "content-player-controls-sound glyphicon glyphicon-volume-down"
+                              :
+                              "content-player-controls-sound glyphicon glyphicon-volume-up"
+                          }
                 onClick={this.setMuteSound}
               >
                 <div className="content-player-controls-sound-contain">
                     <input 
                       className="content-player-controls-sound-input"
                       type="range"
-                      value={this.getValueSound()}
+                      value={this.state.soundValue}
                       onChange={this.setSound}
                     />      
                 </div>
