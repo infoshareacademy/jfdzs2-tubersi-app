@@ -90,8 +90,10 @@ input:required:valid {
     background-size: 3%;
     background-repeat: no-repeat;
   }
+
 .sign-in-underline {
     width: 80%;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     height: 0.5px;
