@@ -363,6 +363,7 @@
     padding: 5px;
     border-radius: 5px;
     opacity: 0.9;
+    margin-top: 15px;    
 }
 
 .section-upload-hide {
@@ -479,11 +480,21 @@
     .playlist-empty-text {
         font-size: 18px;
     }
+
+    .spinner {
+        width: 200px;
+        height: 200px;
+    }
+
+    .playlist-loading {
+        margin-top: 50px;
+    }
     
     .playlist-loading-text {
        padding: 20px;
-       font-size: 20px;
+       font-size: 25px;
        margin-top: 10px;
+       width: 380px;
     }
 
     .section-upload-contain {
