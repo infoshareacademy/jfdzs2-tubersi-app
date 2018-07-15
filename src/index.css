@@ -1,5 +1,15 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+/* @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700&subset=latin,latin-ext); */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+html,body {
+  font-family:'Source Sans Pro', sans-serif;
+  margin:0;
+  padding:0;
+
+
+  background-image: url("./images//background.jpg");
+  background-position: center;
+  background-attachment: fixed;
+  background-image: no-repeat;
+ 
+  background-size: cover;
 }

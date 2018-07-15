@@ -1,4 +1,5 @@
-# "Tubersi"
+
+# "Tubersi" - APP
 
 W tym miejscu powstaje aplikacja webowa która ma ułatwić życie wszystkim melomanom na świecie. 
 Każdy kto zaloguje się do niej będzie mógł tworzyć playlisty w dowolnych konfiguracjach ze swojej ulubionej muzyki. 
@@ -23,3 +24,6 @@ Każdy kto zaloguje się do niej będzie mógł tworzyć playlisty w dowolnych k
 - obsługiwane przeglądarki / Chrome i FF najnowsze i 5-10 wersji w dół
 - optymalizacja pod kątem SEO
 - code review (edited)
+
+app-view
+
