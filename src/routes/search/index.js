@@ -17,8 +17,8 @@ export default class Search extends PureComponent {
             pictureAvatar: null,
             titleVideo: null,
             searchTitle: '',
-            maxResults: 0,
-            loadAllResultsVideo: 0,
+            maxResults: null,
+            loadAllResultsVideo: null,
             qualityHigh: false,
             qualityStandard: false,
             qualityAny: true,
@@ -28,6 +28,7 @@ export default class Search extends PureComponent {
             choosePlayList: 0,
             durationVideo: [],
             sortVideo: false,
+            beginSearch: false,
         };
         this.searchVideo = this.searchVideo.bind(this);
         this.addVideoToPlayList = this.addVideoToPlayList.bind(this);
@@ -36,7 +37,12 @@ export default class Search extends PureComponent {
     }
 
     componentDidMount() {
-        window.addEventListener("scroll", this.showMoreWhenScrollPositionDown);
+        window.addEventListener("scroll", this.showMoreWhenScrollPositionDown); 
+        window.scrollTo(0,0);    
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.showMoreWhenScrollPositionDown);  
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -61,12 +67,22 @@ export default class Search extends PureComponent {
                 && this.state.maxResults === this.state.loadAllResultsVideo) {
             this.props.setShowLoadingVideo(false);
         }
+        if(this.state.resultYoutube) {
+            if(this.state.resultYoutube.length % 9 !== 0 || this.state.resultYoutube.length === 0) {
+                this.setState({
+                    maxResults: 0,
+                    loadAllResultsVideo: 0,
+                })
+            }
+        }
     }
 
     showMoreWhenScrollPositionDown = () => {
-        if(this.state.maxResults === this.state.loadAllResultsVideo) {
-            if(window.scrollY + 100 > document.documentElement.scrollHeight - document.documentElement.clientHeight) {
-                this.showMoreVideo();
+        if(this.state.beginSearch) {
+            if(this.state.maxResults === this.state.loadAllResultsVideo) {
+                if(window.scrollY + 100 > document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+                    this.showMoreVideo();
+                }
             }
         }
     }
@@ -348,6 +364,8 @@ export default class Search extends PureComponent {
                                                                 maxResults: 9,
                                                                 newSearch: false,
                                                                 loadAllResultsVideo: 0,
+                                                                beginSearch: true,
+                                                                resultYoutube: null,
                                                             })
                                                             this.nameSearch = this.state.searchTitle;
                                                         }
@@ -364,6 +382,8 @@ export default class Search extends PureComponent {
                                                                   maxResults: 9,
                                                                   newSearch: false,
                                                                   loadAllResultsVideo: 0,
+                                                                  beginSearch: true,
+                                                                  resultYoutube: null,
                                                               })
                                                               this.nameSearch = this.state.searchTitle;
                                                           }
