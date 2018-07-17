@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import React, { PureComponent } from 'react';
 
 import Layout from '../../components/layout';
@@ -68,7 +67,6 @@ class Chat extends PureComponent {
     text = message.split(" ");
     return text.map((text) => {
       if(text.indexOf("http://") !== -1) {
-        let indexHttpText = text.indexOf("http://");
         if(text.substr(0,7) === "http://") {
             return <a href={'/your-playlist/'+text.substr(-16)}>{text + ' '}</a>
         }
